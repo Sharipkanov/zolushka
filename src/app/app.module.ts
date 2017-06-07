@@ -10,6 +10,7 @@ import { PanelComponent } from './components/panel/panel.component';
 import { PageNotFoundComponent } from './routes/page-not-found/page-not-found.component';
 import { PageHomeComponent } from './routes/page-home/page-home.component';
 import { DownloadBoxComponent } from './components/download-box/download-box.component';
+import { GiftBoxComponent } from './components/gift-box/gift-box.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DownloadBoxComponent } from './components/download-box/download-box.com
     PanelComponent,
     PageNotFoundComponent,
     PageHomeComponent,
-    DownloadBoxComponent
+    DownloadBoxComponent,
+    GiftBoxComponent
   ],
   imports: [
     BrowserModule,
