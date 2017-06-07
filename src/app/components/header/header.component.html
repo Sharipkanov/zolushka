@@ -1,25 +1,27 @@
-<!-- .header -->
-<header class="header {{(expanded) ? 'header--expanded' : ''}}">
+<header class="header {{(expanded) ? 'header--expanded' : ''}} fw-pt-20 fw-pb-20">
   <div class="container">
-    <div class="header__grid grid">
-      <div class="grid__item">
-        <img src="/assets/images/logo.svg" alt="" class="header__logo">
+    <div class="fw-flex fw-flex-space-between fw-flex-middle">
+      <div class="fw-flex-grow fw-flex">
+        <img src="/assets/images/logo.svg" alt="" class="fw-mr-20">
 
-        <app-download-box></app-download-box>
+        <div class="fw-flex fw-flex-middle fw-pt-6 fw-pb-6 fw-pr-12 fw-pl-12 fw-bw-1 fw-bc-white fw-br-5 fw-bw-1 fw-bs-solid fw-br-5">
+          <p class="fw-fz-12 fw-fw-300 fw-text-uppercase fw-mr-20">Установить <br>приложение</p>
+          <a href="#" class="fw-mr-20"><i class="icon-appstore-white"></i></a>
+          <a href="#"><i class="icon-googleplay-white"></i></a>
+        </div>
       </div>
-      <div class="grid__item">
+      <div class="fw-flex-shrink-no">
         right
       </div>
     </div>
-    <div *ngIf='expanded'>
-      <div class="header__grid grid">
-        <div class="grid__item">
-          <p>Лучший on-line сервис по поиску <br> содержанок и спонсоров</p>
-        </div>
-        <div class="grid__item">
-          <app-gift-box></app-gift-box>
-        </div>
+    <div *ngIf='expanded' class="fw-flex fw-flex-space-between fw-flex-middle fw-mt-20">
+      <div class="fw-flex-grow-0">
+        <p class="fw-fz-26 fw-fw-300 fw-ls-less-5">Лучший on-line сервис по поиску <br> содержанок и спонсоров</p>
+      </div>
+      <div class="fw-flex-grow-0 fw-flex">
+        <p class="fw-flex-shrink-no fw-badge"><span class="fw-badge__text">1</span><i class="icon-gift-big-white"></i></p>
+        <p class="fw-flex-grow fw-ml-20">Дарим 36 часов премиум доступа <br> Всем мужчинам прошедшим регистрацию</p>
       </div>
     </div>
   </div>
-</header><!-- .header end -->
+</header>

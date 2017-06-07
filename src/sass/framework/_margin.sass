@@ -1,0 +1,34 @@
+.fw-m-auto
+  margin: auto
+
+.fw-mt-auto
+  margin-top: auto
+
+.fw-mr-auto
+  margin-right: auto
+
+.fw-mb-auto
+  margin-bottom: auto
+
+.fw-ml-auto
+  margin-left: auto
+
+@each $margin-top in 5, 10, 15, 20, 25, 30, 35, 40, 50, 65, 73, 74
+  .fw-mt-#{$margin-top}
+    margin-top: #{$margin-top}px
+
+@each $margin-top-inverse in 20
+  .fw-mt-#{$margin-top-inverse}-inverse
+    margin-top: -#{$margin-top-inverse}px
+
+@each $margin-right in 3, 5, 10, 15, 20, 25, 30, 40
+  .fw-mr-#{$margin-right}
+    margin-right: #{$margin-right}px
+
+@each $margin-bottom in 5, 10, 15, 20, 25, 30, 40, 50, 120
+  .fw-mb-#{$margin-bottom}
+    margin-bottom: #{$margin-bottom}px
+
+@each $margin-left in 5, 8, 15, 20, 30, 40
+  .fw-ml-#{$margin-left}
+    margin-left: #{$margin-left}px

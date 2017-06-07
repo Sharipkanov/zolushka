@@ -1,0 +1,5 @@
+@import "retina_sprites"
+
+@each $name in appstore-white, googleplay-white, gift-white, gift-big-white
+  .icon-#{$name}
+    +sprite(icon-#{$name})

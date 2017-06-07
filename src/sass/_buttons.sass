@@ -1,0 +1,92 @@
+button.button,
+a.button
+  height: 40px
+  border-radius: 3px
+  display: inline-block
+  border: 1px solid $colorGrey
+  background: $colorGrey
+  line-height: 38px
+  padding: 0 20px
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  font-weight: 600
+  text-align: center
+  color: $colorWhite
+  transition: all .3s ease-in-out
+  cursor: pointer
+  vertical-align: middle
+
+  &:hover
+    border-color: $colorGreyDark
+    background: $colorGreyDark
+    color: $colorWhite
+
+  &.button-small
+    height: 32px
+    line-height: 30px
+    padding: 0 14px
+
+  &.button--default
+    color: $colorPurple
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1)
+    border-color: $colorGrey
+    background: $colorWhite
+
+    &:hover
+      color: $colorPurple
+      border-color: rgba($colorPurple, .5)
+      box-shadow: 0 1px 5px 0 rgba($colorPurple, 0.5)
+
+  &.button--transparent
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1)
+    border-color: $colorGrey
+    background: transparent
+    position: relative
+    &:before
+      transition: all .3s ease-in-out
+      width: 0
+      height: 100%
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 50%
+      background: #fff
+      content: ''
+      display: block
+
+    .button--transparent__text
+      position: relative
+      color: $colorWhite
+      transition: all .3s ease-in-out
+      z-index: 1
+
+    &:hover
+      color: $colorBlue
+      border-color: rgba($colorPurple, .5)
+      box-shadow: 0 1px 5px 0 rgba($colorPurple, 0.5)
+      &:before
+        width: 100%
+        left: 0
+
+      .button--transparent__text
+        color: $colorBlue
+
+
+  &.button--primary
+    border-color: $colorVioletDark
+    background: linear-gradient(to top, $colorVioletDark, $colorPurple)
+    box-shadow: 0 1px 3px 0 $colorVioletDark, inset 0 0 1px 0 rgba(0, 0, 0, 0.07)
+
+    &:hover
+      background: linear-gradient(to top, $colorVioletDark, $colorPurple)
+      box-shadow: 0 1px 3px 0 $colorViolet, inset 0 0 1px 0 rgba(0, 0, 0, 0.07), inset 0 0 0 500px rgba(0, 0, 0, 0.2)
+
+  &.button--success
+    border-color: $colorGreen
+    background: $colorGreen
+    box-shadow: 0 1px 4px 0 rgba(0, 204, 143, 0.2)
+
+    &:hover
+      border-color: $colorGreenDark
+      background: $colorGreenDark
