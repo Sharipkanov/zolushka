@@ -1,0 +1,25 @@
+<!-- .header -->
+<header class="header {{(expanded) ? 'header--expanded' : ''}}">
+  <div class="container">
+    <div class="header__grid grid">
+      <div class="grid__item">
+        <img src="/assets/images/logo.svg" alt="" class="header__logo">
+
+        <app-download-box></app-download-box>
+      </div>
+      <div class="grid__item">
+        right
+      </div>
+    </div>
+    <div *ngIf='expanded'>
+      <div class="header__grid grid">
+        <div class="grid__item">
+          <p>Лучший on-line сервис по поиску <br> содержанок и спонсоров</p>
+        </div>
+        <div class="grid__item">
+          <p>Дарим 36 часов премиум доступа <br> Всем мужчинам прошедшим регистрацию</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header><!-- .header end -->
