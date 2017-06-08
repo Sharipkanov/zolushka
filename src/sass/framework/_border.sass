@@ -13,3 +13,10 @@
 @each $border-radius in 5
   .fw-br-#{$border-radius}
     border-radius: #{$border-radius}px
+
+@each $border-radius in 50%
+  .fw-brp-#{str_replace('#{$border-radius}', '%', '')}
+    border-radius: #{$border-radius}
+
+.fw-bc-white
+  border-color: $colorWhite

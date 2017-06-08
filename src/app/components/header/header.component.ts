@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.sass']
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  @Input() expanded: boolean;
+  @Input() expanded: boolean = false;
+  @Input() logged: boolean = false;
 
   constructor() { }
 

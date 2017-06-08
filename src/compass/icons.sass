@@ -1,5 +1,9 @@
 @import "retina_sprites"
 
-@each $name in appstore-white, googleplay-white, gift-white, gift-big-white
+@each $name in appstore-white, googleplay-white, gift-white, gift-big-white, confidentiality
   .icon-#{$name}
     +sprite(icon-#{$name})
+
+@each $social in facebook-circle, twitter-circle, vk-circle, google-plus-circle, instagram-circle, youtube-circle
+  .icon-social-#{$social}
+    +sprite(icon-social-#{$social})

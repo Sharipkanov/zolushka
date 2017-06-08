@@ -1,0 +1,32 @@
+@import "../../../../sass/colors"
+
+.checkbox-box-label
+  display: inline-block
+  vertical-align: middle
+
+  + .checkbox-box-label
+    margin-left: 5px
+
+  > label
+    display: flex
+    align-items: center
+
+    > input
+      height: 0
+      width: 0
+      visibility: hidden
+
+      &:checked + span
+        background-color: $colorPurple
+        color: $colorWhite
+
+    > span
+      border-radius: 100px
+      line-height: 36px
+      padding: 0 15px
+      border: solid 1px $colorGrey
+      margin-right: 5px
+      margin-bottom: 10px
+      display: inline-block
+      transition: all .3s ease-in-out
+

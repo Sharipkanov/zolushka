@@ -11,6 +11,13 @@ import { PageNotFoundComponent } from './routes/page-not-found/page-not-found.co
 import { PageHomeComponent } from './routes/page-home/page-home.component';
 import { DownloadBoxComponent } from './components/download-box/download-box.component';
 import { GiftBoxComponent } from './components/gift-box/gift-box.component';
+import { SocialsCircleListComponent } from './components/socials-circle-list/socials-circle-list.component';
+import { InputBoxComponent } from './components/form/input-box/input-box.component';
+import { TextareaBoxComponent } from './components/form/textarea-box/textarea-box.component';
+import { ChecboxBoxComponent } from './components/form/checbox-box/checbox-box.component';
+import { ChecboxBoxLabelComponent } from './components/form/checbox-box-label/checbox-box-label.component';
+import { RadioBoxComponent } from './components/form/radio-box/radio-box.component';
+import { RadioBoxLabelComponent } from './components/form/radio-box-label/radio-box-label.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +29,14 @@ import { GiftBoxComponent } from './components/gift-box/gift-box.component';
     PageNotFoundComponent,
     PageHomeComponent,
     DownloadBoxComponent,
-    GiftBoxComponent
+    GiftBoxComponent,
+    SocialsCircleListComponent,
+    InputBoxComponent,
+    TextareaBoxComponent,
+    ChecboxBoxComponent,
+    ChecboxBoxLabelComponent,
+    RadioBoxComponent,
+    RadioBoxLabelComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+@import "../../../../sass/colors"
+
+.radio-box
+  border-top: 1px solid $colorPurple
+  border-bottom: 1px solid $colorPurple
+  border-right: 1px solid $colorPurple
+  display: inline-block
+  overflow: hidden
+
+  &:first-child
+    border-left: 1px solid $colorPurple
+    border-radius: 3px 0 0 3px
+
+  &:last-child
+    border-radius: 0 3px 3px 0
+
+  > label
+    display: flex
+    align-items: center
+
+    > input
+      height: 0
+      width: 0
+      visibility: hidden
+
+      &:checked + span
+        color: $colorWhite
+        background-color: $colorPurple
+
+    > span
+      background-color: $colorWhite
+      color: $colorPurple
+      transition: all .3s ease-in-out
+      padding: 0 30px
+      line-height: 36px

@@ -1,0 +1,4 @@
+<div class="input-box{{(classes.length) ? ' ' + classes : ''}}{{(tooltip.length) ? ' input-box--tooltip' : ''}}">
+  <input type="text" placeholder="{{placeholder}}" value="{{value}}" name="{{name}}">
+  <span class="input-box__tooltip" *ngIf="tooltip.length">{{tooltip}}</span>
+</div>
