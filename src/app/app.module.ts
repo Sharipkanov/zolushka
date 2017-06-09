@@ -18,6 +18,8 @@ import { ChecboxBoxComponent } from './components/form/checbox-box/checbox-box.c
 import { ChecboxBoxLabelComponent } from './components/form/checbox-box-label/checbox-box-label.component';
 import { RadioBoxComponent } from './components/form/radio-box/radio-box.component';
 import { RadioBoxLabelComponent } from './components/form/radio-box-label/radio-box-label.component';
+import { SelectBoxComponent } from './components/form/select-box/select-box.component';
+import { SelectSearchBoxComponent } from './components/form/select-search-box/select-search-box.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { RadioBoxLabelComponent } from './components/form/radio-box-label/radio-
     ChecboxBoxComponent,
     ChecboxBoxLabelComponent,
     RadioBoxComponent,
-    RadioBoxLabelComponent
+    RadioBoxLabelComponent,
+    SelectBoxComponent,
+    SelectSearchBoxComponent
   ],
   imports: [
     BrowserModule,

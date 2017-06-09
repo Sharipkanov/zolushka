@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-interface Item {
+interface RadioBoxLabelItem {
   label: string,
   checked: boolean
 }
@@ -13,7 +13,7 @@ interface Item {
 export class RadioBoxLabelComponent implements OnInit {
   @Input() classes: string = '';
   @Input() name: string = '';
-  @Input() items: Array<Item> = [];
+  @Input() items: Array<RadioBoxLabelItem> = [];
 
   constructor() { }
 
