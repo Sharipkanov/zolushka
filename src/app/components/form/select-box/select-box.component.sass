@@ -57,9 +57,6 @@
     top: 100%
     left: 0
     z-index: 1
-    background: $colorWhite
-    border-radius: 3px
-    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
     min-width: 170px
     transition: all .3s ease-in-out
     visibility: hidden
@@ -68,6 +65,8 @@
 
     > ul
       margin-top: 10px
+      box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
+      background: $colorWhite
 
       li
         &[data-selected] > a::before
