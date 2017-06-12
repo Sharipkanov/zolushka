@@ -1,11 +1,6 @@
-import { Component, AfterViewInit, Input, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, OnChanges, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 
-interface SelectSearchBoxItem {
-  label: string,
-  value: any,
-  selected: boolean,
-  text: string
-}
+import { ISelectSearchBoxItem } from '../../../interfaces/form/select-search-box-item.interface';
 
 @Component({
   selector: 'app-select-search-box',
@@ -13,84 +8,63 @@ interface SelectSearchBoxItem {
   styleUrls: ['./select-search-box.component.sass']
 })
 
-export class SelectSearchBoxComponent implements AfterViewInit {
-  @Input() items: Array<SelectSearchBoxItem> = [];
+export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
+  @Input() items: Array<ISelectSearchBoxItem> = [];
   @Input() name: string = '';
+  @Input() iconClass: string = '';
+  @Input() placeholder: string = '';
+  @Output() search = new EventEmitter();
+
+  public selectSearchBoxText: string = '';
+  public filteredItems: Array<ISelectSearchBoxItem> = [];
 
   private selectSearchBox: Element;
-  private selectSearchBoxActiveClassName = 'select-search-box--active';
-
-  selectSearchBoxText: Array<string> = [];
+  private selectSearchBoxActiveClassName: string = 'select-search-box--active';
 
   constructor(private _component: ElementRef) { }
 
   callSelect(e) {
     e.preventDefault();
 
-    (this.selectSearchBox.classList.contains(this.selectSearchBoxActiveClassName))
-      ? this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName)
-      : this.selectSearchBox.classList.add(this.selectSearchBoxActiveClassName);
+    if (!this.selectSearchBox.classList.contains(this.selectSearchBoxActiveClassName)) {
+      this.selectSearchBox.classList.add(this.selectSearchBoxActiveClassName);
+    }
   }
 
-  clearSelect(e) {
-    e.preventDefault();
+  onKeyUp(e) {
+    const input = e.target;
 
-    this.items.map((selectSearchBoxItem, selectSearchBoxIndex) => {
-      selectSearchBoxItem.selected = false;
-    });
+    this.filteredItems = [];
 
-    this.setSelectTexts();
-
-    return this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName);
+    if (this.search.observers.length) {
+      this.search.emit(input.value);
+    } else {
+      this.filteredItems = this.items.filter(selectSearchBoxItem => {
+        if (selectSearchBoxItem.label.toLowerCase().indexOf(input.value.toLowerCase()) > -1) {
+          return selectSearchBoxItem;
+        }
+      });
+    }
   }
 
   markSelect(e, index) {
     e.preventDefault();
 
     this.items.map((selectSearchBoxItem, selectSearchBoxIndex) => {
-      (selectSearchBoxIndex === index)
-        ? selectSearchBoxItem.selected = !selectSearchBoxItem.selected
-        : selectSearchBoxItem.selected = false;
-    });
-
-    this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName);
-
-    return this.setSelectTexts();
-  }
-
-  setSelectTexts() {
-    this.selectSearchBoxText.splice(0, this.selectSearchBoxText.length);
-
-    this.items.map((selectSearchBoxItem) => {
-      if (selectSearchBoxItem.selected) {
-        this.selectSearchBoxText.push(selectSearchBoxItem.label);
+      if (selectSearchBoxIndex === index) {
+        this.selectSearchBoxText = selectSearchBoxItem.label;
       }
     });
 
-    if (this.selectSearchBoxText.length === 0) {
-      this.selectSearchBoxText.push(this.items[0].label);
-    }
+    return this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName);
   }
 
   ngAfterViewInit() {
-    let selected = false;
-
-    if (this.items.length) {
-      for (let i = this.items.length; 0 < i;  --i) {
-        const selectSearchBoxItem = this.items[i - 1];
-
-        if (!selected && selectSearchBoxItem.selected && i !== 1) {
-          selected = true;
-        } else if (selected && i === 1) {
-          selectSearchBoxItem.selected = false;
-        }
-      }
-
-      this.setSelectTexts();
-    }
-
-
     this.selectSearchBox = <Element>this._component.nativeElement.children[0];
+  }
+
+  ngOnChanges() {
+    this.filteredItems = this.items;
   }
 
 }

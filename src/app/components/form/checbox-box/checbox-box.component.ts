@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-interface CheckBoxItem {
-  label: string,
-  checked: boolean
-}
+import { ICheckBoxItem } from '../../../interfaces/form/check-box-item.interface';
 
 @Component({
   selector: 'app-checbox-box',
@@ -13,7 +10,7 @@ interface CheckBoxItem {
 export class ChecboxBoxComponent implements OnInit {
   @Input() classes: string = '';
   @Input() name: string = '';
-  @Input() items: Array<CheckBoxItem> = [];
+  @Input() items: Array<ICheckBoxItem> = [];
 
   constructor() { }
 

@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-interface RadioBoxItem {
-    label: string,
-    checked: boolean
-}
+import { IRadioBoxItem } from '../../../interfaces/form/radio-box-item.interface';
 
 @Component({
   selector: 'app-radio-box',
@@ -13,7 +10,7 @@ interface RadioBoxItem {
 export class RadioBoxComponent implements OnInit {
   @Input() classes: string = '';
   @Input() name: string = '';
-  @Input() items: Array<RadioBoxItem> = [];
+  @Input() items: Array<IRadioBoxItem> = [];
 
   constructor() { }
 

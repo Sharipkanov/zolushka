@@ -1,6 +1,7 @@
-<div class="radio-box" *ngFor="let item of items">
+<div class="radio-box{{(classes.length) ? ' ' + classes : ''}}" *ngFor="let item of items">
   <label>
-    <input type="radio" name="{{name}}" [checked]="item.checked">
+    <input type="radio" name="{{name}}" [checked]="item.checked" value="{{item.value}}">
+    <span></span>
     <span>{{item.label}}</span>
   </label>
 </div>

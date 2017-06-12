@@ -1,0 +1,30 @@
+<div class="search-bar{{(widget) ? ' search-bar--widget' : ''}}{{(classes.length) ? ' ' + classes : ''}}">
+  <div class="search-bar__header">
+    <div>
+      <p>Ищу</p>
+    </div>
+    <div>
+      <div class="fw-pt-10 fw-pb-10">
+        <app-radio-box [name]="'radio'" [items]="[{label: 'Мужчину', checked: true, value: 1}, {label: 'Женщину', checked: false, value: 2}]"></app-radio-box>
+      </div>
+    </div>
+    <div>
+      <app-select-search-box (search)="getLocations($event)" [name]="'location'" [placeholder]="'Выберите город'" [iconClass]="'icon-form-navigator'" [items]="locations"></app-select-search-box>
+    </div>
+    <div>
+      <app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box>
+    </div>
+    <div>
+      <p>Ищу</p>
+    </div>
+    <div>
+      <p>Ищу</p>
+    </div>
+    <div>
+      <p>Ищу</p>
+    </div>
+  </div>
+  <div class="search-bar__content">
+
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="fw-mt-20">
+    <p class="fw-fz-26">Buttons</p>
+    <div class="fw-flex fw-pt-10 fw-pb-10">
+      <div class="fw-mr-5"><a href="#" class="button">.button</a></div>
+      <div class="fw-mr-5"><a href="#" class="button button--default">.button .button--default</a></div>
+      <div class="fw-mr-5"><a href="#" class="button button--primary">.button .button--primary</a></div>
+      <div class="fw-mr-5"><a href="#" class="button button--success">.button .button-success</a></div>
+      <div class="fw-bg-cyan"><a href="#" class="button button--transparent"><span class="button--transparent__text">.button .button--transparent</span></a></div>
+    </div>
+  </div>
+
+  <div class="fw-mt-20">
+    <p class="fw-fz-26">Form elements</p>
+    <div class="fw-pt-10 fw-pb-10">
+      <app-input-box [placeholder]="'.input-box'" [tooltip]="'см'"></app-input-box>
+    </div>
+    <div class="fw-pt-10 fw-pb-10">
+      <app-textarea-box [placeholder]="'.textarea-box'" [tooltip]="'10'" [tooltip_message]="'Длина сообщения должна быть не менее 10 символов'"></app-textarea-box>
+    </div>
+    <div class="fw-pt-10 fw-pb-10">
+      <app-select-box [name]="'select'" [iconClass]="'icon-form-triangle'" [items]="[{label: 'Select choose', selected: true, value: 0}, {label: 'option 2', selected: false, value: 1}, {label: 'option 3', selected: false, value: 2}]"></app-select-box>
+    </div>
+    <div class="fw-pt-10 fw-pb-10">
+      <app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [name]="'select_multiple'" [items]="[{label: 'Multiple select choose', text: 'Clear multiple select', selected: false, value: 0}, {label: 'option 2', selected: false, value: 1}, {label: 'option 3', selected: false, value: 2}]"></app-select-box>
+    </div>
+    <div class="fw-pt-10 fw-pb-10">
+      <app-select-search-box [name]="'select_search'" [iconClass]="'icon-form-navigator'" [placeholder]="'Search select choose'" [items]="[{label: 'option 1', labelInfo: 'option 1'}, {label: 'option 2', labelInfo: 'option 3'}, {label: 'option 3', labelInfo: 'option 3'}]"></app-select-search-box>
+    </div>
+    <div class="fw-pt-10 fw-pb-10">
+      <app-checbox-box [name]="'checkbox'" [items]="[{label: 'checkbox', checked: false}, {label: 'checkbox', checked: false}]"></app-checbox-box>
+    </div>
+    <div class="fw-pt-10 fw-pb-10">
+      <app-checbox-box-label [name]="'checkbox_label'" [items]="[{label: 'checkbox label', checked: false}, {label: 'checkbox label', checked: false}]"></app-checbox-box-label>
+    </div>
+    <div class="fw-pt-10 fw-pb-10">
+      <app-radio-box [name]="'radio'" [items]="[{label: 'radio', checked: false}, {label: 'radio', checked: false}, {label: 'radio', checked: false}]"></app-radio-box>
+    </div>
+    <div class="fw-pt-10 fw-pb-10">
+      <app-radio-box-label-separate [name]="'radio_label_separate'" [items]="[{label: 'radio', checked: false}, {label: 'radio', checked: false}, {label: 'radio', checked: false}]"></app-radio-box-label-separate>
+    </div>
+    <div class="fw-pt-10 fw-pb-10">
+      <app-radio-box-label [name]="'radio_label'" [items]="[{label: 'radio label', checked: false}, {label: 'radio label', checked: false}]"></app-radio-box-label>
+    </div>
+  </div>
+</div>

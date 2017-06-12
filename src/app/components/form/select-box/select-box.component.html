@@ -2,7 +2,10 @@
     <select name="{{name}}" [attr.multiple]="(multiple) ? '' : null" *ngIf="items.length">
       <option value="{{item.value}}" *ngFor="let item of items" [attr.selected]="(item.selected)? '': null">{{item.label}}</option>
     </select>
-    <a href="#" (click)="callSelect($event)">{{selectBoxText.join()}}</a>
+    <p (click)="callSelect($event)">
+      <a href="#">{{selectBoxText.join()}}</a>
+      <i class="{{iconClass}}"></i>
+    </p>
     <div>
       <ul *ngIf="items.length">
         <ng-container *ngIf="!multiple">

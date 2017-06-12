@@ -1,11 +1,6 @@
 import { Component, AfterViewInit, Input, ElementRef } from '@angular/core';
 
-interface SelectBoxItem {
-  label: string,
-  value: any,
-  selected: boolean,
-  text: string
-}
+import { ISelectBoxItem } from '../../../interfaces/form/select-box-item.interface';
 
 @Component({
   selector: 'app-select-box',
@@ -13,9 +8,10 @@ interface SelectBoxItem {
   styleUrls: ['./select-box.component.sass']
 })
 export class SelectBoxComponent implements AfterViewInit {
-  @Input() items: Array<SelectBoxItem> = [];
+  @Input() items: Array<ISelectBoxItem> = [];
   @Input() name: string = '';
   @Input() multiple: boolean = false;
+  @Input() iconClass: string = '';
 
   private selectBox: Element;
   private selectBoxActiveClassName = 'select-box--active';
@@ -37,9 +33,7 @@ export class SelectBoxComponent implements AfterViewInit {
   clearSelect(e) {
     e.preventDefault();
 
-    this.items.map((selectBoxItem, selectBoxIndex) => {
-      selectBoxItem.selected = false;
-    });
+    this.items.map(selectBoxItem =>  selectBoxItem.selected = false);
 
     this.setSelectTexts();
 
@@ -78,7 +72,7 @@ export class SelectBoxComponent implements AfterViewInit {
     if (this.selectBoxText.length === 0) {
       this.selectBoxText.push(this.items[0].label);
     } else {
-      if (this.multiple && this.selectBoxText[0] === this.items[0].label) {
+      if (this.multiple && this.selectBoxText[0] === this.items[0].label && this.selectBoxText.length > 1) {
         this.selectBoxText.shift();
       }
     }
@@ -88,23 +82,21 @@ export class SelectBoxComponent implements AfterViewInit {
     let selected = false;
 
     if (this.items.length) {
-      for (let i = this.items.length; 0 < i;  --i) {
-        const selectBoxItem = this.items[i - 1];
-
+      this.items.map((item, itemIndex) => {
         if (!this.multiple) {
-          if (!selected && selectBoxItem.selected) {
+          if (!selected && item.selected) {
             selected = true;
-          } else if (selected && selectBoxItem.selected) {
-            selectBoxItem.selected = !selectBoxItem.selected;
+          } else if (selected && item.selected) {
+            item.selected = !item.selected;
           }
         } else {
-          if (!selected && selectBoxItem.selected && i !== 1) {
+          if (!selected && item.selected && itemIndex !== 1) {
             selected = true;
-          } else if (selected && i === 1) {
-            selectBoxItem.selected = false;
+          } else if (selected && itemIndex === 1) {
+            item.selected = false;
           }
         }
-      }
+      });
 
       this.setSelectTexts();
     }

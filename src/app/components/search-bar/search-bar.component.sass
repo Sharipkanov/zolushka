@@ -1,0 +1,47 @@
+@import "../../../sass/colors"
+
+.search-bar
+  color: $colorDark
+  background-color: $colorLight
+  width: 100%
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3)
+
+  &.search-bar--widget
+    border-radius: 5px
+
+    > *
+      padding: 0 15px
+
+  .search-bar__header
+    height: 60px
+    display: flex
+    align-items: center
+
+    > div
+      height: 100%
+      display: flex
+      align-items: center
+      padding: 0 12px
+
+      > *
+        flex-grow: 1
+
+      &:not(:nth-child(3)),
+      &:not(:nth-child(4))
+        flex-shrink: 0
+        flex-grow: 0
+
+      &:nth-child(3),
+      &:nth-child(4)
+        flex-grow: 1
+        flex-shrink: 1
+
+      &:first-child
+        padding: 0 12px 0 0
+
+      &:last-child
+        padding: 0 0 0 12px
+
+      &:not(:last-child)
+        border-right: 1px solid #e1e1e1
+

@@ -1,5 +1,9 @@
 @import "retina_sprites"
 
+@each $name in navigator, triangle
+  .icon-form-#{$name}
+    +sprite(icon-form-#{$name})
+
 @each $name in appstore-white, googleplay-white, gift-white, gift-big-white, confidentiality
   .icon-#{$name}
     +sprite(icon-#{$name})

@@ -1,5 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule, JsonpModule } from '@angular/http';
+
+import { BackendProvider } from './services/mocks.service';
+import { MockBackend } from '@angular/http/testing';
+import { BaseRequestOptions } from '@angular/http';
+import { LocationService } from './services/location/location.service';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routes';
@@ -16,10 +22,13 @@ import { InputBoxComponent } from './components/form/input-box/input-box.compone
 import { TextareaBoxComponent } from './components/form/textarea-box/textarea-box.component';
 import { ChecboxBoxComponent } from './components/form/checbox-box/checbox-box.component';
 import { ChecboxBoxLabelComponent } from './components/form/checbox-box-label/checbox-box-label.component';
-import { RadioBoxComponent } from './components/form/radio-box/radio-box.component';
+import { RadioBoxLabelSeparateComponent } from './components/form/radio-box-label-separate/radio-box-label-separate.component';
 import { RadioBoxLabelComponent } from './components/form/radio-box-label/radio-box-label.component';
 import { SelectBoxComponent } from './components/form/select-box/select-box.component';
 import { SelectSearchBoxComponent } from './components/form/select-search-box/select-search-box.component';
+import { PageComponentsComponent } from './routes/page-components/page-components.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { RadioBoxComponent } from './components/form/radio-box/radio-box.component';
 
 @NgModule({
   declarations: [
@@ -37,16 +46,26 @@ import { SelectSearchBoxComponent } from './components/form/select-search-box/se
     TextareaBoxComponent,
     ChecboxBoxComponent,
     ChecboxBoxLabelComponent,
-    RadioBoxComponent,
+    RadioBoxLabelSeparateComponent,
     RadioBoxLabelComponent,
     SelectBoxComponent,
-    SelectSearchBoxComponent
+    SelectSearchBoxComponent,
+    PageComponentsComponent,
+    SearchBarComponent,
+    RadioBoxComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutes
+    AppRoutes,
+    HttpModule,
+    JsonpModule
   ],
-  providers: [],
+  providers: [
+    BackendProvider,
+    MockBackend,
+    BaseRequestOptions,
+    LocationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
