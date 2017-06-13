@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnChanges, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 
-import { ISelectSearchBoxItem } from '../../../interfaces/form/select-search-box-item.interface';
+import { ISelectSearchBoxItem } from '../../../interfaces/form/select-search-box-item.interface';;
 
 @Component({
   selector: 'app-select-search-box',
@@ -23,12 +23,29 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
 
   constructor(private _component: ElementRef) { }
 
-  callSelect(e) {
+  documentClick() {
+
+    return (e) => {
+      if (e.target.closest('.select-search-box') === null) {
+        return this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName);
+      }
+    }
+  }
+
+  callSelectSearch(e) {
     e.preventDefault();
 
-    if (!this.selectSearchBox.classList.contains(this.selectSearchBoxActiveClassName)) {
+    if (this.selectSearchBox.classList.contains(this.selectSearchBoxActiveClassName)) {
+      this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName);
+
+      document.removeEventListener('click', this.documentClick(), false);
+    } else {
       this.selectSearchBox.classList.add(this.selectSearchBoxActiveClassName);
+
+      document.addEventListener('click', this.documentClick(), false);
     }
+
+    return;
   }
 
   onKeyUp(e) {

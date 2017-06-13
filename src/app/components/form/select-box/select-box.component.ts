@@ -11,9 +11,10 @@ export class SelectBoxComponent implements AfterViewInit {
   @Input() items: Array<ISelectBoxItem> = [];
   @Input() name: string = '';
   @Input() multiple: boolean = false;
+  @Input() clear: boolean = false;
   @Input() iconClass: string = '';
 
-  private selectBox: Element;
+  private selectBox: HTMLElement;
   private selectBoxActiveClassName = 'select-box--active';
 
   selectBoxText: Array<string> = [];
@@ -22,12 +23,44 @@ export class SelectBoxComponent implements AfterViewInit {
 
   }
 
+  documentClick() {
+    return (e) => {
+      if (e.target.closest('.select-box') === null) {
+        return this.selectBox.classList.remove(this.selectBoxActiveClassName);
+      }
+    }
+  }
+
   callSelect(e) {
     e.preventDefault();
 
-    (this.selectBox.classList.contains(this.selectBoxActiveClassName))
-      ? this.selectBox.classList.remove(this.selectBoxActiveClassName)
-      : this.selectBox.classList.add(this.selectBoxActiveClassName);
+    if (this.selectBox.classList.contains(this.selectBoxActiveClassName)) {
+      this.selectBox.classList.remove(this.selectBoxActiveClassName);
+
+      document.removeEventListener('click', this.documentClick(), false);
+    } else {
+      const container: HTMLElement = <HTMLElement> this.selectBox.closest('.container');
+      const selectBoxContent: HTMLElement = <HTMLElement> this.selectBox.getElementsByTagName('div')[0];
+
+      const containerRect = container.getBoundingClientRect();
+      const selectBoxContentRect = selectBoxContent.getBoundingClientRect();
+
+      if (containerRect.right <= ((selectBoxContentRect.width / .7) - selectBoxContentRect.width) + selectBoxContentRect.right) {
+        selectBoxContent.style.left = 'initial';
+        selectBoxContent.style.right = '0px';
+      }
+
+      if ((selectBoxContentRect.top + selectBoxContentRect.height) >= (window.outerHeight * .7)) {
+        selectBoxContent.style.top = 'initial';
+        selectBoxContent.style.bottom = 'calc(100% + 10px)';
+      }
+
+      this.selectBox.classList.add(this.selectBoxActiveClassName);
+
+      document.addEventListener('click', this.documentClick(), false);
+    }
+
+    return;
   }
 
   clearSelect(e) {
@@ -101,7 +134,7 @@ export class SelectBoxComponent implements AfterViewInit {
       this.setSelectTexts();
     }
 
-    this.selectBox = <Element>this._component.nativeElement.children[0];
+    this.selectBox = <HTMLElement>this._component.nativeElement.children[0];
   }
 
 }

@@ -8,12 +8,12 @@
     </p>
     <div>
       <ul *ngIf="items.length">
-        <ng-container *ngIf="!multiple">
+        <ng-container *ngIf="!multiple && !clear">
           <li *ngFor="let item of items; let i = index" [attr.data-selected]="(item.selected) ? '' : null">
             <a href="#" (click)="markSelect($event, i)">{{(item.text !== undefined && item.text.length) ? item.text : item.label}}</a>
           </li>
         </ng-container>
-        <ng-container *ngIf="multiple">
+        <ng-container *ngIf="multiple || clear">
           <li data-select-clear>
             <a href="#" (click)="clearSelect($event)"><span></span>{{(items[0].text !== undefined && items[0].text.length) ? items[0].text : items[0].label}}</a>
           </li>

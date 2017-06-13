@@ -11,6 +11,8 @@ export class RadioBoxLabelComponent implements OnInit {
   @Input() classes: string = '';
   @Input() name: string = '';
   @Input() items: Array<IRadioBoxLabelItem> = [];
+  @Input() combined: boolean = false;
+  @Input() combinedStyle: boolean = false;
 
   constructor() { }
 

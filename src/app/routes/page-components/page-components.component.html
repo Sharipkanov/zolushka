@@ -37,10 +37,10 @@
       <app-radio-box [name]="'radio'" [items]="[{label: 'radio', checked: false}, {label: 'radio', checked: false}, {label: 'radio', checked: false}]"></app-radio-box>
     </div>
     <div class="fw-pt-10 fw-pb-10">
-      <app-radio-box-label-separate [name]="'radio_label_separate'" [items]="[{label: 'radio', checked: false}, {label: 'radio', checked: false}, {label: 'radio', checked: false}]"></app-radio-box-label-separate>
+      <app-radio-box-label [name]="'radio_label_separate'" [items]="[{label: 'radio', checked: false}, {label: 'radio', checked: false}, {label: 'radio', checked: false}]"></app-radio-box-label>
     </div>
     <div class="fw-pt-10 fw-pb-10">
-      <app-radio-box-label [name]="'radio_label'" [items]="[{label: 'radio label', checked: false}, {label: 'radio label', checked: false}]"></app-radio-box-label>
+      <app-radio-box-label [combined]="true" [name]="'radio_label'" [items]="[{label: 'radio label', checked: false}, {label: 'radio label', checked: false}]"></app-radio-box-label>
     </div>
   </div>
 </div>

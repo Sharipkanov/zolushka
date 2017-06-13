@@ -1,0 +1,18 @@
+{
+  "name": "zolushka",
+  "description": "",
+  "main": "",
+  "authors": [
+    "sharipkanov <sharipkanov@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Sharipkanov/zolushka",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {}
+}

@@ -1,4 +1,4 @@
-<div class="search-bar{{(widget) ? ' search-bar--widget' : ''}}{{(classes.length) ? ' ' + classes : ''}}">
+<form class="search-bar{{(widget) ? ' search-bar--widget' : ''}}{{(classes.length) ? ' ' + classes : ''}}" (submit)="searchProfiles($event)">
   <div class="search-bar__header">
     <div>
       <p>Ищу</p>
@@ -18,13 +18,60 @@
       <p>Ищу</p>
     </div>
     <div>
-      <p>Ищу</p>
+      <a href="#" class="search-bar__extend" (click)="searchBarToggle($event)">Все параметры<span></span></a>
     </div>
     <div>
-      <p>Ищу</p>
+      <button type="submit" class="button button--primary">Найти</button>
     </div>
   </div>
   <div class="search-bar__content">
-
+    <div class="search-bar__grid">
+      <div><app-input-box [placeholder]="'Рост от 170 - до 190'" [tooltip]="'см'"></app-input-box></div>
+      <div><app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box></div>
+      <div><app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box></div>
+      <div>
+        <div class="fw-grid fw-grid-12">
+          <div class="fw-width-1-2">
+            <app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box>
+          </div>
+          <div class="fw-width-1-2">
+            <app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box>
+          </div>
+        </div>
+      </div>
+      <div><app-input-box [placeholder]="'Вес от 50 - до 62'" [tooltip]="'кг'"></app-input-box></div>
+      <div>
+        <div class="fw-grid fw-grid-12">
+          <div class="fw-width-1-2">
+            <app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box>
+          </div>
+          <div class="fw-width-1-2">
+            <app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box>
+          </div>
+        </div>
+      </div>
+      <div><app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box></div>
+      <div><app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box></div>
+      <div><app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box></div>
+      <div><app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box></div>
+      <div>
+        <div class="fw-grid fw-grid-12">
+          <div class="fw-width-1-2">
+            <app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box>
+          </div>
+          <div class="fw-width-1-2">
+            <app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box>
+          </div>
+        </div>
+      </div>
+      <div><app-select-box [multiple]="true" [name]="'purposes'" [iconClass]="'icon-form-triangle'" [items]="purposes"></app-select-box></div>
+    </div>
+    <div class="search-bar__grid">
+      <div class="fw-flex fw-flex-space-between">
+        <a href="#" class="fw-fw-600 fw-fz-15 fw-flex fw-flex-middle"><i class="icon-shape-remove-purple fw-mr-5"></i>Сбросить</a>
+        <a href="#" class="fw-fw-600 fw-fz-15 fw-flex fw-flex-middle"><i class="icon-shape-heart-purple fw-mr-5"></i>Сохранить поиск</a>
+      </div>
+      <div><button type="submit" class="button button--primary fw-width-1-1">Показать 133 анкеты</button></div>
+    </div>
   </div>
-</div>
+</form>

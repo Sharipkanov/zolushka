@@ -3,6 +3,7 @@
 .radio-box-label
   display: inline-block
   vertical-align: middle
+  overflow: hidden
 
   + .radio-box-label
     margin-left: 5px
@@ -29,4 +30,52 @@
       margin-bottom: 10px
       display: inline-block
       transition: all .3s ease-in-out
+
+.radio-box-label-combined
+  border-top: 1px solid $colorGreyLight
+  border-bottom: 1px solid $colorGreyLight
+  border-right: 1px solid $colorGreyLight
+  display: inline-block
+  overflow: hidden
+
+  &.radio-box-label-combined--style
+    border-color: $colorPurple
+
+    &:first-child
+      border-color: $colorPurple
+
+    > label
+      > span
+        padding: 0 30px
+
+      > input:checked
+        + span
+          background-color: $colorPurple
+
+  &:first-child
+    border-left: 1px solid $colorGreyLight
+    border-radius: 3px 0 0 3px
+
+  &:last-child
+    border-radius: 0 3px 3px 0
+
+  > label
+    display: flex
+    align-items: center
+
+    > input
+      height: 0
+      width: 0
+      visibility: hidden
+
+      &:checked + span
+        color: $colorWhite
+        background-color: $colorViolet
+
+    > span
+      background-color: $colorWhite
+      color: $colorPurple
+      transition: all .3s ease-in-out
+      padding: 0 15px
+      line-height: 36px
 

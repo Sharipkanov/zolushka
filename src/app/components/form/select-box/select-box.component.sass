@@ -5,8 +5,11 @@
   height: 40px
   position: relative
   display: block
+  overflow: hidden
 
   &.select-box--active
+    overflow: initial
+
     > p > i
       transform: rotate(180deg)
 
@@ -54,7 +57,7 @@
   > div
     width: 100%
     position: absolute
-    top: 100%
+    top: calc(100% + 10px)
     left: 0
     z-index: 1
     min-width: 170px
@@ -64,7 +67,6 @@
     transform: scale(.7)
 
     > ul
-      margin-top: 10px
       box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
       background: $colorWhite
 

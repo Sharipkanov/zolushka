@@ -1,5 +1,9 @@
 @import "retina_sprites"
 
+@each $shape in remove-purple, heart-purple
+  .icon-shape-#{$shape}
+    +sprite(icon-shape-#{$shape})
+
 @each $name in navigator, triangle
   .icon-form-#{$name}
     +sprite(icon-form-#{$name})
