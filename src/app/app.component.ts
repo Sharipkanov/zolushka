@@ -7,14 +7,23 @@ import { Router, NavigationStart } from '@angular/router';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
- headerExpanded: boolean;
+ public headerExpanded: boolean;
+ public headerSearchBar: boolean;
 
   constructor(private _router: Router) {
     this._router.events.subscribe(e => {
       if (e instanceof NavigationStart) {
         const url = e.url;
 
-        (url === '/') ? this.headerExpanded = true : this.headerExpanded = false;
+        if (url === '/') {
+          this.headerExpanded = true;
+          this.headerSearchBar = true;
+        } else if (url === '/catalog.html') {
+          this.headerSearchBar = true;
+        } else {
+          this.headerExpanded = false;
+          this.headerSearchBar = false;
+        }
       }
     });
   }

@@ -1,7 +1,11 @@
-<div class="{{(!combined) ? 'radio-box-label' : 'radio-box-label-combined'}}{{(combinedStyle) ? ' radio-box-label-combined--style' : ''}}{{(classes.length) ? ' ' + classes : ''}}"
-     *ngFor="let item of items">
-  <label>
-    <input type="radio" name="{{name}}" [checked]="item.checked" value="{{item.value}}">
-    <span>{{item.label}}</span>
-  </label>
+<div class="{{(fullWidth) ? ' radio-box-label-fullwidth' : ''}}">
+  <div class="{{(!combined) ? 'radio-box-label' : 'radio-box-label-combined'}}
+  {{(combinedStyle) ? ' radio-box-label-combined--style' : ''}}
+  {{(classes.length) ? ' ' + classes : ''}}"
+       *ngFor="let item of items">
+    <label>
+      <input type="radio" name="{{name}}" [checked]="item.checked" value="{{item.value}}">
+      <span>{{item.label}}</span>
+    </label>
+  </div>
 </div>

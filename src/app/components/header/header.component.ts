@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class HeaderComponent implements OnInit {
   @Input() expanded: boolean = false;
   @Input() logged: boolean = false;
+  @Input() searchBar: boolean = false;
 
   constructor() { }
 

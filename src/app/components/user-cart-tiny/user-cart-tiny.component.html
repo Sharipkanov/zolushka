@@ -1,0 +1,9 @@
+<div class="user-cart-tiny">
+  <div class="user-cart-tiny__thumbnail">
+    <img src="{{(user.thumbnail.length) ? user.thumbnail: 'http://placehold.it/160x160'}}" class="fw-image-cover" alt="">
+  </div>
+  <div>
+    <app-user-info-status [status]="user.status" [firstName]="user.firstName" [externalInfo]="user.age"></app-user-info-status>
+    <p class="fw-color-grey" *ngIf="user.city.length">{{user.city}}</p>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="panel fw-pt-10">
+  <div class="fw-flex fw-pb-10 fw-flex-middle">
+    <p class="fw-flex-grow"><i class="icon-top-female-badge"></i></p>
+    <a href="#" class="link fw-mr-5 fw-flex-shrink-no fw-fw-600 fw-mr-10">Смотреть мужской топ</a>
+  </div>
+  <div class="fw-pl-20 fw-pr-20 fw-pb-20 fw-pt-20">
+    <div class="fw-grid fw-grid-15">
+      <div class="fw-width-1-5" *ngFor="let user of users">
+        <a href="#"><app-user-cart-tiny [user]="user"></app-user-cart-tiny></a>
+      </div>
+    </div>
+  </div>
+  <div class="fw-bg-light fw-mt-25">
+    <a href="#" class="fw-flex fw-flex-center fw-color-purple fw-fw-600 fw-pt-15 fw-pb-15">Смотреть все</a>
+  </div>
+</div>

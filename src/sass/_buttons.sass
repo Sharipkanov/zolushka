@@ -17,6 +17,13 @@ a.button
   cursor: pointer
   vertical-align: middle
 
+  &.button--small
+    padding: 0 10px
+    height: 32px
+    line-height: 30px
+    font-size: 13px
+    font-weight: 300
+
   &:hover
     border-color: $colorGreyDark
     background: $colorGreyDark
@@ -59,10 +66,10 @@ a.button
       color: $colorWhite
       transition: all .3s ease-in-out
       z-index: 1
+      font-size: inherit
 
     &:hover
       color: $colorBlue
-      border-color: rgba($colorPurple, .5)
       box-shadow: 0 1px 5px 0 rgba($colorPurple, 0.5)
       &:before
         width: 100%

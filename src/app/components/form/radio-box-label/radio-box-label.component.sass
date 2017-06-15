@@ -1,5 +1,14 @@
 @import "../../../../sass/colors"
 
+.radio-box-label-fullwidth
+  display: flex
+
+  > div
+    flex-grow: 1
+
+    > label > span
+      width: 100%
+
 .radio-box-label
   display: inline-block
   vertical-align: middle
@@ -30,6 +39,7 @@
       margin-bottom: 10px
       display: inline-block
       transition: all .3s ease-in-out
+      text-align: center
 
 .radio-box-label-combined
   border-top: 1px solid $colorGreyLight
@@ -78,4 +88,4 @@
       transition: all .3s ease-in-out
       padding: 0 15px
       line-height: 36px
-
+      text-align: center

@@ -1,0 +1,86 @@
+.user-cart-thumbnail
+  position: relative
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  margin: 0
+  padding: 0
+  max-width: 350px
+  max-height: 350px
+
+  &.user-cart-thumbnail--small
+    max-width: 220px
+    max-height: 220px
+
+  &:hover
+    .user-cart-thumbnail__cover
+      background: rgba(#000,.5)
+
+    .user-cart-thumbnail__text
+      transform: translateY(-50%)
+      opacity: 1
+
+    .user-cart-thumbnail__info
+      bottom: 20px
+      opacity: 1
+
+  .user-cart-thumbnail__image
+    position: absolute
+    width: 100%
+    height: 100%
+
+  .user-cart-thumbnail__text
+    transition: all .3s ease-in-out
+    text-align: center
+    opacity: 0
+    margin: 0
+    padding: 15px
+    position: absolute
+    top: 50%
+    width: 100%
+    transform: translateY(-100%)
+    z-index: 2
+    font-family: 'open-sans', sans-serif
+    font-size: 14px
+    color: #ffffff
+
+  .user-cart-thumbnail__cover
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: transparent
+    z-index: 1
+    transition: all .3s ease-in-out
+    overflow: hidden
+
+  .user-cart-thumbnail__info
+    display: flex
+    justify-content: space-between
+    align-items: center
+    position: absolute
+    bottom: 0
+    opacity: 0
+    width: 100%
+    padding: 0 15px
+    transition: all .3s ease-in-out
+
+    > div
+      display: inline-flex
+      align-items: center
+      flex-wrap: nowrap
+
+  .user-cart-thumbnail__link
+    font-size: 13px
+    color: #ffffff
+    display: inline-flex
+    align-items: center
+
+    + .user-cart-thumbnail__link
+      margin-left: 5px
+
+  .user-cart-thumbnail__photo-count
+    margin-left: 5px
+

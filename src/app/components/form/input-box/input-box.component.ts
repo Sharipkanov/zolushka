@@ -11,6 +11,7 @@ export class InputBoxComponent implements OnInit {
   @Input() classes: string = '';
   @Input() tooltip: string = '';
   @Input() name: string = '';
+  @Input() type: string = 'text';
 
   constructor() { }
 

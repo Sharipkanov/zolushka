@@ -1,3 +1,23 @@
 @each $height in 40
   .fw-height-#{$height}
     height: #{$height}px
+
+@each $height-proportion in 100
+  .fw-height-proportional-#{$height-proportion}
+    position: relative
+
+    &::after
+      margin-bottom: $height-proportion * 1%
+      content: ''
+      display: block
+
+    > *
+      &:first-child
+        position: absolute!important
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+
+      &:not(:first-child)
+        display: none

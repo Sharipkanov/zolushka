@@ -1,0 +1,22 @@
+<div class="user-cart-thumbnail{{(small) ? ' user-cart-thumbnail--smal' : ''}}">
+  <img src="{{(user.thumbnail.length) ? user.thumbnail : 'http://placehold.it/220x220'}}" alt="" class="user-cart-thumbnail__image">
+  <div class="user-cart-thumbnail__cover">
+    <p class="user-cart-thumbnail__text">
+      {{(user.firstName.length) ? user.firstName : '' }}{{(user.age) ? ', ' + user.age : '' }}
+      <br>
+      {{(user.city.length) ? user.city : '' }}{{(user.country) ? ', ' + user.country : '' }}
+    </p>
+    <div class="user-cart-thumbnail__info">
+      <div>
+        <a href="#" class="user-cart-thumbnail__link">
+          <i class="icon-user-cart-camera-small"></i>
+          <span class="user-cart-thumbnail__photo-count">{{(user.photos.length) ? user.photos.length : 0}}</span>
+        </a>
+      </div>
+      <div>
+        <a href="#" class="user-cart-thumbnail__link"><i class="icon-user-cart-chat-small"></i></a>
+        <a href="#" class="user-cart-thumbnail__link"><i class="icon-user-cart-phone-small"></i></a>
+      </div>
+    </div>
+  </div>
+</div>

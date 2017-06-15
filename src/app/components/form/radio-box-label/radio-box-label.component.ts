@@ -13,6 +13,7 @@ export class RadioBoxLabelComponent implements OnInit {
   @Input() items: Array<IRadioBoxLabelItem> = [];
   @Input() combined: boolean = false;
   @Input() combinedStyle: boolean = false;
+  @Input() fullWidth: boolean = false;
 
   constructor() { }
 

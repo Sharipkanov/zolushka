@@ -7,7 +7,8 @@ import { ILocation } from '../../interfaces/location.interface';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.sass']
+  styleUrls: ['./search-bar.component.sass'],
+  providers: [ LocationService ]
 })
 export class SearchBarComponent implements OnInit {
   @Input() widget: boolean = false;

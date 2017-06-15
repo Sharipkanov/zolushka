@@ -30,6 +30,51 @@ export function BackendMock(backend: MockBackend, options: BaseRequestOptions, r
         return;
       }
 
+      if (connection.request.url.indexOf('/users/new') > - 1 && connection.request.method === RequestMethod.Get) {
+        const newUsers = [];
+
+        for (let i = 0; i < 5; i++) {
+          newUsers.push({
+            id: 1,
+            firstName: 'Дарина',
+            age: 23,
+            city: 'Москва',
+            country: 'Россия',
+            thumbnail: '',
+            photos: []
+          });
+        }
+
+        connection.mockRespond(new Response(new ResponseOptions({
+          status: 200,
+          body: newUsers
+        })));
+
+        return;
+      }
+
+      if (connection.request.url.indexOf('/users/top') > - 1 && connection.request.method === RequestMethod.Get) {
+        const topUsers = [];
+
+        for (let i = 0; i < 5; i++) {
+          topUsers.push({
+            id: 1,
+            firstName: 'Олеся',
+            age: 23,
+            city: 'Москва',
+            thumbnail: '',
+            status: 0
+          });
+        }
+
+        connection.mockRespond(new Response(new ResponseOptions({
+          status: 200,
+          body: topUsers
+        })));
+
+        return;
+      }
+
       const realHttp = new Http(realBackend, options);
       const requestOptions = new RequestOptions({
         method: connection.request.method,

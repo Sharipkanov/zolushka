@@ -1,0 +1,25 @@
+@import "../../../sass/colors"
+
+.user-info-status
+  width: 100%
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  position: relative
+  padding-right: 14px
+
+  &.user-info-status--online
+    &::after
+      background-color: $colorGreenLight
+
+  &::after
+    position: absolute
+    content: ''
+    right: 0
+    top: 50%
+    transform: translateY(-50%)
+    display: block
+    width: 7px
+    height: 7px
+    background-color: $colorGreyDark
+    border-radius: 50%

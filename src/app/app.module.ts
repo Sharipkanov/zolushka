@@ -5,18 +5,17 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { BackendProvider } from './services/mocks.service';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
-import { LocationService } from './services/location/location.service';
+
+import { OwlModule } from 'angular-owl-carousel';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routes';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { UserCartComponent } from './components/user-cart/user-cart.component';
-import { PanelComponent } from './components/panel/panel.component';
 import { PageNotFoundComponent } from './routes/page-not-found/page-not-found.component';
 import { PageHomeComponent } from './routes/page-home/page-home.component';
 import { DownloadBoxComponent } from './components/download-box/download-box.component';
-import { GiftBoxComponent } from './components/gift-box/gift-box.component';
 import { SocialsCircleListComponent } from './components/socials-circle-list/socials-circle-list.component';
 import { InputBoxComponent } from './components/form/input-box/input-box.component';
 import { TextareaBoxComponent } from './components/form/textarea-box/textarea-box.component';
@@ -29,6 +28,15 @@ import { PageComponentsComponent } from './routes/page-components/page-component
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { RadioBoxComponent } from './components/form/radio-box/radio-box.component';
 import { SectionStoreLinkComponent } from './components/sections/section-store-link/section-store-link.component';
+import { SectionNewGirlsComponent } from './components/sections/section-new-girls/section-new-girls.component';
+import { SectionRegistrationComponent } from './components/sections/section-registration/section-registration.component';
+import { UserCartThumbnailComponent } from './components/user-cart-thumbnail/user-cart-thumbnail.component';
+import { PanelTopUsersComponent } from './components/panels/panel-top-users/panel-top-users.component';
+import { UserCartTinyComponent } from './components/user-cart-tiny/user-cart-tiny.component';
+import { UserInfoStatusComponent } from './components/user-info-status/user-info-status.component';
+import { PageRegistrationComponent } from './routes/page-registration/page-registration.component';
+import { SectionRegistrationInfoComponent } from './components/sections/section-registration-info/section-registration-info.component';
+import { PanelGiftComponent } from './components/panels/panel-gift/panel-gift.component';
 
 @NgModule({
   declarations: [
@@ -36,11 +44,9 @@ import { SectionStoreLinkComponent } from './components/sections/section-store-l
     FooterComponent,
     HeaderComponent,
     UserCartComponent,
-    PanelComponent,
     PageNotFoundComponent,
     PageHomeComponent,
     DownloadBoxComponent,
-    GiftBoxComponent,
     SocialsCircleListComponent,
     InputBoxComponent,
     TextareaBoxComponent,
@@ -52,19 +58,28 @@ import { SectionStoreLinkComponent } from './components/sections/section-store-l
     PageComponentsComponent,
     SearchBarComponent,
     RadioBoxComponent,
-    SectionStoreLinkComponent
+    SectionStoreLinkComponent,
+    SectionNewGirlsComponent,
+    SectionRegistrationComponent,
+    UserCartThumbnailComponent,
+    PanelTopUsersComponent,
+    UserCartTinyComponent,
+    UserInfoStatusComponent,
+    PageRegistrationComponent,
+    SectionRegistrationInfoComponent,
+    PanelGiftComponent
   ],
   imports: [
     BrowserModule,
     AppRoutes,
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    OwlModule
   ],
   providers: [
     BackendProvider,
     MockBackend,
-    BaseRequestOptions,
-    LocationService
+    BaseRequestOptions
   ],
   bootstrap: [AppComponent]
 })
