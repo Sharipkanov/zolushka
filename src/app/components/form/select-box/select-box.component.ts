@@ -15,7 +15,7 @@ export class SelectBoxComponent implements AfterViewInit {
   @Input() iconClass: string = '';
 
   private selectBox: HTMLElement;
-  private selectBoxActiveClassName = 'select-box--active';
+  private selectBoxActiveClassName: string = 'select-box--active';
 
   selectBoxText: Array<string> = [];
 
@@ -23,21 +23,11 @@ export class SelectBoxComponent implements AfterViewInit {
 
   }
 
-  documentClick() {
-    return (e) => {
-      if (e.target.closest('.select-box') === null) {
-        return this.selectBox.classList.remove(this.selectBoxActiveClassName);
-      }
-    }
-  }
-
   callSelect(e) {
     e.preventDefault();
 
     if (this.selectBox.classList.contains(this.selectBoxActiveClassName)) {
       this.selectBox.classList.remove(this.selectBoxActiveClassName);
-
-      document.removeEventListener('click', this.documentClick(), false);
     } else {
       const container: HTMLElement = <HTMLElement> this.selectBox.closest('.container');
       const selectBoxContent: HTMLElement = <HTMLElement> this.selectBox.getElementsByTagName('div')[0];
@@ -45,19 +35,25 @@ export class SelectBoxComponent implements AfterViewInit {
       const containerRect = container.getBoundingClientRect();
       const selectBoxContentRect = selectBoxContent.getBoundingClientRect();
 
-      if (containerRect.right <= ((selectBoxContentRect.width / .7) - selectBoxContentRect.width) + selectBoxContentRect.right) {
-        selectBoxContent.style.left = 'initial';
-        selectBoxContent.style.right = '0px';
-      }
+      (containerRect.right <= ((selectBoxContentRect.width / .7) - selectBoxContentRect.width) + selectBoxContentRect.right)
+        ? selectBoxContent.classList.add('inverse-right')
+        : selectBoxContent.classList.remove('inverse-right');
 
-      if ((selectBoxContentRect.top + selectBoxContentRect.height) >= (window.outerHeight * .7)) {
-        selectBoxContent.style.top = 'initial';
-        selectBoxContent.style.bottom = 'calc(100% + 10px)';
-      }
+      ((selectBoxContentRect.top + selectBoxContentRect.height) >= (window.outerHeight * .7))
+        ? selectBoxContent.classList.add('inverse-top')
+        : selectBoxContent.classList.remove('inverse-top');
 
       this.selectBox.classList.add(this.selectBoxActiveClassName);
 
-      document.addEventListener('click', this.documentClick(), false);
+      const selectBoxes = document.querySelectorAll('[data-select-box]');
+
+      for (let i = 0; i < selectBoxes.length; i++) {
+        const selectBox = selectBoxes[i];
+
+        (!selectBox.isEqualNode(this.selectBox))
+          ? selectBox.classList.remove(this.selectBoxActiveClassName)
+          : selectBox.classList.add(this.selectBoxActiveClassName);
+      }
     }
 
     return;

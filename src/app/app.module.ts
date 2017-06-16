@@ -37,6 +37,9 @@ import { UserInfoStatusComponent } from './components/user-info-status/user-info
 import { PageRegistrationComponent } from './routes/page-registration/page-registration.component';
 import { SectionRegistrationInfoComponent } from './components/sections/section-registration-info/section-registration-info.component';
 import { PanelGiftComponent } from './components/panels/panel-gift/panel-gift.component';
+import { SectionPopularUsersComponent } from './components/sections/section-popular-users/section-popular-users.component';
+import { PageSearchComponent } from './routes/page-search/page-search.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,10 @@ import { PanelGiftComponent } from './components/panels/panel-gift/panel-gift.co
     UserInfoStatusComponent,
     PageRegistrationComponent,
     SectionRegistrationInfoComponent,
-    PanelGiftComponent
+    PanelGiftComponent,
+    SectionPopularUsersComponent,
+    PageSearchComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

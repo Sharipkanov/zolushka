@@ -1,0 +1,10 @@
+<section class="fw-pt-20 fw-pb-20">
+  <div class="container">
+    <p class="fw-fw-600 fw-fz-26 fw-mb-10">Популярные анкеты</p>
+    <div class="fw-grid fw-grid-30">
+      <div class="fw-width-1-6" *ngFor="let user of users">
+        <app-user-cart [user]="user" [small]="true"></app-user-cart>
+      </div>
+    </div>
+  </div>
+</section>

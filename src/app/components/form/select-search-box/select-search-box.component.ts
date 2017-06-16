@@ -23,26 +23,39 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
 
   constructor(private _component: ElementRef) { }
 
-  documentClick() {
-
-    return (e) => {
-      if (e.target.closest('.select-search-box') === null) {
-        return this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName);
-      }
-    }
-  }
-
   callSelectSearch(e) {
     e.preventDefault();
 
     if (this.selectSearchBox.classList.contains(this.selectSearchBoxActiveClassName)) {
       this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName);
-
-      document.removeEventListener('click', this.documentClick(), false);
     } else {
       this.selectSearchBox.classList.add(this.selectSearchBoxActiveClassName);
 
-      document.addEventListener('click', this.documentClick(), false);
+      const container: HTMLElement = <HTMLElement> this.selectSearchBox.closest('.container');
+      const selectSearchBoxContent: HTMLElement = <HTMLElement> this.selectSearchBox.getElementsByTagName('div')[0];
+
+      const containerRect = container.getBoundingClientRect();
+      const selectSearchBoxContentRect = selectSearchBoxContent.getBoundingClientRect();
+
+      (containerRect.right <= ((selectSearchBoxContentRect.width / .7) - selectSearchBoxContentRect.width) + selectSearchBoxContentRect.right)
+        ? selectSearchBoxContent.classList.add('inverse-right')
+        : selectSearchBoxContent.classList.remove('inverse-right');
+
+      ((selectSearchBoxContentRect.top + selectSearchBoxContentRect.height) >= (window.outerHeight * .7))
+        ? selectSearchBoxContent.classList.add('inverse-top')
+        : selectSearchBoxContent.classList.remove('inverse-top');
+
+      this.selectSearchBox.classList.add(this.selectSearchBoxActiveClassName);
+
+      const selectSearchBoxes = document.querySelectorAll('[data-select-search-box]');
+
+      for (let i = 0; i < selectSearchBoxes.length; i++) {
+        const selectSearchBox = selectSearchBoxes[i];
+
+        (!selectSearchBox.isEqualNode(this.selectSearchBox))
+          ? selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName)
+          : selectSearchBox.classList.add(this.selectSearchBoxActiveClassName);
+      }
     }
 
     return;

@@ -60,6 +60,18 @@
     transform: scale(.7)
     background-color: transparent
 
+    &.inverse-top
+      top: initial
+      bottom: 100%
+
+      > ul
+        margin-top: 0
+        margin-bottom: 10px
+
+    &.inverse-right
+      left: initial
+      right: 0
+
     > ul
       margin-top: 10px
       background-color: $colorWhite

@@ -14,4 +14,12 @@ export class UsersService {
     return this.http.get('api.zolushka.ru/users/top').map((response: Response) => response.json());
   }
 
+  getPopularUsers() {
+    return this.http.get('api.zolushka.ru/users/popular').map((response: Response) => response.json());
+  }
+
+  searchUsers() {
+    return this.http.get('api.zolushka.ru/users/search').map((response: Response) => response.json());
+  }
+
 }

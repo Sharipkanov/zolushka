@@ -1,3 +1,32 @@
-<p>
-  user-cart works!
-</p>
+<div class="user-cart{{(user.inTop) ? ' user-cart--in-top' : ''}}">
+  <div class="user-cart__thumbnail">
+    <img class="user-cart__image" alt="" src="{{(user.thumbnail.length) ? user.thumbnail : 'http://placehold.it/400x400'}}" *ngIf="!small">
+    <img class="user-cart__image" alt="" src="{{(user.thumbnail.length) ? user.thumbnail : 'http://placehold.it/290x290'}}" *ngIf="small">
+    <div class="user-cart__photos{{(user.photoApproved) ? ' user-cart__photos--approved' : ''}}">
+      <i class="{{(user.photoApproved) ? 'icon-user-cart-camera-checked' : 'icon-user-cart-camera-red'}} fw-mr-5"></i>
+      <span>{{(user.photos.length) ? user.photos.length : 0}}</span>
+    </div>
+    <i class="icon-user-cart-in-top" *ngIf="user.inTop"></i>
+    <div class="user-cart__cover cover">
+      <a class="cover__item fw-inline-block fw-mr-15" href="#">
+        <i class="icon-user-cart-chat{{(!small) ? '-large' : ''}}"></i>
+      </a>
+      <a class="cover__item fw-inline-block fw-mr-15" href="#">
+        <i class="icon-user-cart-phone{{(!small) ? '-large' : ''}}"></i>
+      </a>
+      <a class="cover__item fw-inline-block" href="#">
+        <i class="icon-user-cart-star{{(!small) ? '-large' : ''}}"></i>
+      </a>
+    </div>
+  </div>
+  <div class="user-cart__information information">
+    <div class="user-cart__name"> {{(user.firstName.length) ? user.firstName : '' }}{{(user.age) ? ', ' + user.age : '' }}</div>
+    <div class="user-cart__geo fw-mb-5">{{(user.city.length) ? user.city : '' }}{{(user.country) ? ', ' + user.country : '' }}</div>
+    <div class="user-cart__status {{(user.status) ? 'user-cart__status--online' : ''}}">{{(user.status) ? 'On-line' : 'Off-line'}}</div>
+    <div class="user-cart__message fw-hidden" *ngIf="user.excerpt.length">
+      Я девушка версия 2.0 Открыта для постоянства, Общительная весёлая ,
+      Рассматриваю
+      варианты покровительства)
+    </div>
+  </div>
+</div>

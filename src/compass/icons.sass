@@ -8,7 +8,7 @@
   .icon-form-#{$name}
     +sprite(icon-form-#{$name})
 
-@each $name in appstore-white, googleplay-white, gift-white, gift-big-white, confidentiality, top-female-badge
+@each $name in appstore-white, appstore-grey, googleplay-white, googleplay-grey, gift-white, gift-big-white, confidentiality, top-female-badge
   .icon-#{$name}
     +sprite(icon-#{$name})
 
@@ -16,6 +16,6 @@
   .icon-social-#{$name}
     +sprite(icon-social-#{$name})
 
-@each $name in camera, phone, chat
-  .icon-user-cart-#{$name}-small
-    +sprite(icon-user-cart-#{$name}-small)
+@each $name in chat, phone, star, camera-small, phone-small, chat-small, chat-large, phone-large, star-large, camera-checked, camera-red, in-top
+  .icon-user-cart-#{$name}
+    +sprite(icon-user-cart-#{$name})

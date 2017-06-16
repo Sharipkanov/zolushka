@@ -75,6 +75,60 @@ export function BackendMock(backend: MockBackend, options: BaseRequestOptions, r
         return;
       }
 
+      if (connection.request.url.indexOf('/users/popular') > - 1 && connection.request.method === RequestMethod.Get) {
+        const topUsers = [];
+
+        for (let i = 0; i < 12; i++) {
+          topUsers.push({
+            id: 1,
+            firstName: 'Олеся',
+            age: 23,
+            city: 'Москва',
+            country: 'Россия',
+            thumbnail: '',
+            excerpt: '',
+            status: 0,
+            photoApproved: 0,
+            photos: [],
+            inTop: 1
+          });
+        }
+
+        connection.mockRespond(new Response(new ResponseOptions({
+          status: 200,
+          body: topUsers
+        })));
+
+        return;
+      }
+
+      if (connection.request.url.indexOf('/users/search') > - 1 && connection.request.method === RequestMethod.Get) {
+        const topUsers = [];
+
+        for (let i = 0; i < 21; i++) {
+          topUsers.push({
+            id: 1,
+            firstName: 'Олеся',
+            age: 23,
+            city: 'Anya',
+            country: 'Россия',
+            thumbnail: '',
+            excerpt: '',
+            status: 1,
+            photoApproved: 0,
+            photos: [],
+            inTop: 0
+          });
+        }
+
+        connection.mockRespond(new Response(new ResponseOptions({
+          status: 200,
+          body: topUsers
+        })));
+
+        return;
+      }
+
       const realHttp = new Http(realBackend, options);
       const requestOptions = new RequestOptions({
         method: connection.request.method,

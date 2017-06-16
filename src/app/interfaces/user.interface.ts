@@ -6,7 +6,10 @@ export class IUser {
   public country: string;
   public age: number;
   public photos: Array<string>;
+  public excerpt: string;
   public status: boolean;
+  public photoApproved: boolean;
+  public inTop: boolean;
 
   constructor() {}
 }

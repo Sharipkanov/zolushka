@@ -1,0 +1,156 @@
+@import "../../../sass/colors"
+
+.user-cart
+  border-radius: 5px
+  background-color: $colorWhite
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
+  transition: all .3s ease-in-out
+  overflow: hidden
+  flex-grow: 1
+
+  &.user-cart--unstyled
+    box-shadow: 0
+
+  &.user-cart--in-top
+    &:hover
+      box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15), 0 0 5px 2px #ff636d
+
+  &:hover
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15), 0 0 3px 1px #ff636d
+
+    .user-cart__cover
+      background: rgba($colorBlack, 0.1)
+      &.cover
+        .cover__item
+          opacity: 1
+          visibility: visible
+
+          &:first-child
+            transform: translateX(0)
+
+          &:last-child
+            transform: translateX(0)
+
+  .icon-user-cart-in-top
+    position: absolute
+    top: 20px
+    left: 0
+    z-index: 11
+
+  .user-cart__thumbnail
+    position: relative
+    font-size: 0
+    line-height: 0
+    overflow: hidden
+
+  .user-cart__image
+    width: 100%
+    height: 100%
+    object-fit: cover
+    object-position: center center
+    border-radius: 5px 5px 0 0
+
+
+  .user-cart__cover
+    transition: all .3s ease-in-out
+    position: absolute
+    height: 100%
+    display: flex
+    width: 100%
+    align-items: center
+    justify-content: center
+    z-index: 10
+    left: 0
+    top: 0
+
+    &.cover
+      .cover__item
+        transition: all .3s ease-in-out
+        opacity: 0
+        visibility: hidden
+        position: relative
+
+        &:first-child
+          transform: translateX(-30px)
+
+        &:last-child
+          transform: translateX(30px)
+
+        &:before
+          display: block
+          content: ''
+          position: absolute
+          top: 10%
+          left: 10%
+          width: 80%
+          height: 80%
+          box-shadow: 0 0 10px 5px rgba($colorBlack, 0.8)
+          z-index: 1
+          transition: all .3s ease-in-out
+          border-radius: 100%
+          opacity: 0
+
+        &:hover
+          &:before
+            opacity: 1
+
+        [class*='icon']
+          position: relative
+          z-index: 2
+
+  .user-cart__photos
+    position: absolute
+    bottom: 15px
+    left: 15px
+    padding: 3px 5px
+    border-radius: 3px
+    background: rgba($colorDark, 0.6)
+    display: flex
+    align-items: center
+    color: #fff
+    font-size: 14px
+    line-height: normal
+    z-index: 11
+
+    &.user-cart__photos--cheched
+      background: #ff616b
+
+  .user-cart__information
+    padding: 15px
+
+  .user-cart__name
+    font-weight: 600
+    color: $colorDark
+
+  .user-cart__geo
+    color: #b3b3b3
+
+  .user-cart__status
+    font-size: 13px
+    display: flex
+    align-items: center
+    position: relative
+    padding-left: 15px
+    color: $colorGreyDark
+
+    &.user-cart__status--online
+      color: $colorGreenLight
+      &::before
+        background-color: $colorGreenLight
+
+    &::before
+      position: absolute
+      content: ''
+      left: 0
+      top: 50%
+      transform: translateY(-50%)
+      border-radius: 50%
+      background-color: $colorGreyDark
+      width: 10px
+      height: 10px
+
+  .user-cart__message
+    padding-top: 20px
+    color: $colorViolet
+    font-style: italic
+
