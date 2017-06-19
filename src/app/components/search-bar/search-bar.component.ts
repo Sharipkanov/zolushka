@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewEncapsulation } from '@angular/core';
 
 import { LocationService } from '../../services/location/location.service';
 import { ISelectSearchBoxItem } from '../../interfaces/form/select-search-box-item.interface';
@@ -8,7 +8,8 @@ import { ILocation } from '../../interfaces/location.interface';
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.sass'],
-  providers: [ LocationService ]
+  providers: [ LocationService ],
+  encapsulation: ViewEncapsulation.None
 })
 export class SearchBarComponent implements OnInit {
   @Input() widget: boolean = false;
@@ -19,6 +20,7 @@ export class SearchBarComponent implements OnInit {
 
   private searchBarActiveClass: string = 'search-bar--active';
   private searchBarToggleTimeout: any;
+  private searchBarMainToggleTimeout: any;
 
   constructor(private _component: ElementRef, private locationService: LocationService) { }
 
@@ -53,20 +55,25 @@ export class SearchBarComponent implements OnInit {
     const searchBar: HTMLElement = this._component.nativeElement.children[0];
     const searchBarContent: HTMLElement = <HTMLElement>searchBar.getElementsByClassName('search-bar__content')[0];
 
+    clearTimeout(this.searchBarMainToggleTimeout);
     clearTimeout(this.searchBarToggleTimeout);
 
     if (searchBar.classList.contains(this.searchBarActiveClass)) {
-      searchBarContent.style.overflow = 'hidden';
+      this.searchBarMainToggleTimeout = setTimeout(() => {
+        searchBarContent.style.overflow = 'hidden';
 
-      this.searchBarToggleTimeout = setTimeout(() => {
-        searchBar.classList.remove(this.searchBarActiveClass);
+        this.searchBarToggleTimeout = setTimeout(() => {
+          searchBar.classList.remove(this.searchBarActiveClass);
+        }, 1);
       }, 1);
     } else {
-      searchBar.classList.add(this.searchBarActiveClass);
+      this.searchBarMainToggleTimeout = setTimeout(() => {
+        searchBar.classList.add(this.searchBarActiveClass);
 
-      this.searchBarToggleTimeout = setTimeout(() => {
-        searchBarContent.style.overflow = 'auto';
-      }, 501);
+        this.searchBarToggleTimeout = setTimeout(() => {
+          searchBarContent.style.overflow = 'initial';
+        }, 501);
+      }, 1);
     }
   }
 

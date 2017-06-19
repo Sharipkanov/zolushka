@@ -1,11 +1,12 @@
-import { Component, AfterViewInit, OnChanges, Input, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, AfterViewInit, OnChanges, Input, ElementRef, Output, EventEmitter, ViewEncapsulation, HostListener } from '@angular/core';
 
-import { ISelectSearchBoxItem } from '../../../interfaces/form/select-search-box-item.interface';;
+import { ISelectSearchBoxItem } from '../../../interfaces/form/select-search-box-item.interface';
 
 @Component({
   selector: 'app-select-search-box',
   templateUrl: './select-search-box.component.html',
-  styleUrls: ['./select-search-box.component.sass']
+  styleUrls: ['./select-search-box.component.sass'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
@@ -13,55 +14,62 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
   @Input() name: string = '';
   @Input() iconClass: string = '';
   @Input() placeholder: string = '';
+  @Input() classes: string = '';
   @Output() search = new EventEmitter();
 
   public selectSearchBoxText: string = '';
   public filteredItems: Array<ISelectSearchBoxItem> = [];
 
   private selectSearchBox: Element;
-  private selectSearchBoxActiveClassName: string = 'select-search-box--active';
+  private selectSearchBoxActiveClass: string = 'select-search-box--active';
+  private selectSearchBoxContentLeftClass: string = 'select-search-box__content--left';
+  private selectSearchBoxContentRightClass: string = 'select-search-box__content--right';
+  private selectSearchBoxContentTopClass: string = 'select-search-box__content--top';
+
+  @HostListener('document:click', ['$event'])
+  clickOutsideOfComponent(e) {
+    if (!this._component.nativeElement.contains(e.target)) {
+      this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClass);
+    }
+  }
 
   constructor(private _component: ElementRef) { }
 
-  callSelectSearch(e) {
-    e.preventDefault();
+  ngAfterViewInit() {
+    this.selectSearchBox = <Element>this._component.nativeElement.children[0];
 
-    if (this.selectSearchBox.classList.contains(this.selectSearchBoxActiveClassName)) {
-      this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName);
-    } else {
-      this.selectSearchBox.classList.add(this.selectSearchBoxActiveClassName);
+    const container: HTMLElement = <HTMLElement> this.selectSearchBox.closest('.container');
+    const selectSearchBoxContent: HTMLElement = <HTMLElement> this.selectSearchBox.getElementsByClassName('select-search-box__content')[0];
 
-      const container: HTMLElement = <HTMLElement> this.selectSearchBox.closest('.container');
-      const selectSearchBoxContent: HTMLElement = <HTMLElement> this.selectSearchBox.getElementsByTagName('div')[0];
+    const containerRect = container.getBoundingClientRect();
+    const selectSearchBoxContentRect = selectSearchBoxContent.getBoundingClientRect();
 
-      const containerRect = container.getBoundingClientRect();
-      const selectSearchBoxContentRect = selectSearchBoxContent.getBoundingClientRect();
-
-      (containerRect.right <= ((selectSearchBoxContentRect.width / .7) - selectSearchBoxContentRect.width) + selectSearchBoxContentRect.right)
-        ? selectSearchBoxContent.classList.add('inverse-right')
-        : selectSearchBoxContent.classList.remove('inverse-right');
-
-      ((selectSearchBoxContentRect.top + selectSearchBoxContentRect.height) >= (window.outerHeight * .7))
-        ? selectSearchBoxContent.classList.add('inverse-top')
-        : selectSearchBoxContent.classList.remove('inverse-top');
-
-      this.selectSearchBox.classList.add(this.selectSearchBoxActiveClassName);
-
-      const selectSearchBoxes = document.querySelectorAll('[data-select-search-box]');
-
-      for (let i = 0; i < selectSearchBoxes.length; i++) {
-        const selectSearchBox = selectSearchBoxes[i];
-
-        (!selectSearchBox.isEqualNode(this.selectSearchBox))
-          ? selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName)
-          : selectSearchBox.classList.add(this.selectSearchBoxActiveClassName);
-      }
+    if (containerRect.right <= selectSearchBoxContentRect.right) {
+      selectSearchBoxContent.classList.add(this.selectSearchBoxContentRightClass);
     }
 
-    return;
+    if (containerRect.left >= selectSearchBoxContentRect.left) {
+      selectSearchBoxContent.classList.add(this.selectSearchBoxContentLeftClass);
+    }
+
+    if ((selectSearchBoxContentRect.top + selectSearchBoxContentRect.height) >= (window.outerHeight * .7)) {
+      selectSearchBoxContent.classList.add(this.selectSearchBoxContentTopClass);
+    }
   }
 
-  onKeyUp(e) {
+  ngOnChanges() {
+    this.filteredItems = this.items;
+  }
+
+  selectSearchBoxEvent(e: Event) {
+    e.preventDefault();
+
+    return (!this.selectSearchBox.classList.contains(this.selectSearchBoxActiveClass))
+      ? this.selectSearchBox.classList.add(this.selectSearchBoxActiveClass)
+      : this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClass);
+  }
+
+  selectSearch(e) {
     const input = e.target;
 
     this.filteredItems = [];
@@ -69,7 +77,7 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
     if (this.search.observers.length) {
       this.search.emit(input.value);
     } else {
-      this.filteredItems = this.items.filter(selectSearchBoxItem => {
+      this.filteredItems = this.items.filter((selectSearchBoxItem: ISelectSearchBoxItem) => {
         if (selectSearchBoxItem.label.toLowerCase().indexOf(input.value.toLowerCase()) > -1) {
           return selectSearchBoxItem;
         }
@@ -80,21 +88,12 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
   markSelect(e, index) {
     e.preventDefault();
 
-    this.items.map((selectSearchBoxItem, selectSearchBoxIndex) => {
+    this.items.map((selectSearchBoxItem: ISelectSearchBoxItem, selectSearchBoxIndex: number) => {
       if (selectSearchBoxIndex === index) {
         this.selectSearchBoxText = selectSearchBoxItem.label;
       }
     });
 
-    return this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClassName);
+    return this.selectSearchBox.classList.remove(this.selectSearchBoxActiveClass);
   }
-
-  ngAfterViewInit() {
-    this.selectSearchBox = <Element>this._component.nativeElement.children[0];
-  }
-
-  ngOnChanges() {
-    this.filteredItems = this.items;
-  }
-
 }

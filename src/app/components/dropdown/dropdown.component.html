@@ -1,0 +1,8 @@
+<div class="dropdown{{(classes.length) ? ' ' + classes : ''}}">
+  <a href="#" class="dropdown__trigger" (click)="dropdownEvent($event)">Ищу</a>
+  <div class="dropdown__content">
+    <div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

@@ -40,6 +40,7 @@ import { PanelGiftComponent } from './components/panels/panel-gift/panel-gift.co
 import { SectionPopularUsersComponent } from './components/sections/section-popular-users/section-popular-users.component';
 import { PageSearchComponent } from './routes/page-search/page-search.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     PanelGiftComponent,
     SectionPopularUsersComponent,
     PageSearchComponent,
-    NavigationComponent
+    NavigationComponent,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,

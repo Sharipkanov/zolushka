@@ -1,0 +1,61 @@
+@import "../../../sass/colors"
+@import "../../../sass/z-indexes"
+
+.dropdown
+  position: relative
+
+  &.dropdown--active
+
+    .dropdown__content
+      top: 100%
+      visibility: visible
+      opacity: 1
+
+      &.dropdown__content--top
+        top: initial
+        bottom: 100%
+
+  .dropdown__content
+    position: absolute
+    top: calc(100% + 15px)
+    width: 100%
+    left: 50%
+    z-index: $z-index-dropdown
+    min-width: 170px
+    transition: all .3s ease 0s
+    visibility: hidden
+    opacity: 0
+    background-color: transparent
+    transform: translateX(-50%)
+
+    &.dropdown__content--top
+      top: initial
+      bottom: calc(100% + 15px)
+
+      > div
+        margin-top: 0
+        margin-bottom: 15px
+
+
+    &.dropdown__content--right
+      left: initial
+      right: 0
+      transform: translateX(0)
+
+    &.dropdown__content--left
+      left: 0
+      right: initial
+      transform: translateX(0)
+
+
+    > div
+      position: relative
+      width: 100%
+      display: block
+      box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
+      background: $colorWhite
+      padding: 12px
+      box-sizing: border-box
+      margin-top: 15px
+      overflow: hidden
+

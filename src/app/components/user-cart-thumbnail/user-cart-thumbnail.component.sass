@@ -1,3 +1,6 @@
+@import "../../../sass/colors"
+@import "../../../sass/z-indexes"
+
 .user-cart-thumbnail
   position: relative
   top: 0
@@ -15,7 +18,7 @@
 
   &:hover
     .user-cart-thumbnail__cover
-      background: rgba(#000,.5)
+      background: rgba($colorBlack,.5)
 
     .user-cart-thumbnail__text
       transform: translateY(-50%)
@@ -40,10 +43,10 @@
     top: 50%
     width: 100%
     transform: translateY(-100%)
-    z-index: 2
+    z-index: $z-index-cover + 1
     font-family: 'open-sans', sans-serif
     font-size: 14px
-    color: #ffffff
+    color: $colorWhite
 
   .user-cart-thumbnail__cover
     position: absolute
@@ -52,7 +55,7 @@
     right: 0
     bottom: 0
     background-color: transparent
-    z-index: 1
+    z-index: $z-index-cover
     transition: all .3s ease-in-out
     overflow: hidden
 
@@ -66,6 +69,7 @@
     width: 100%
     padding: 0 15px
     transition: all .3s ease-in-out
+    z-index: $z-index-cover + 1
 
     > div
       display: inline-flex
@@ -74,7 +78,7 @@
 
   .user-cart-thumbnail__link
     font-size: 13px
-    color: #ffffff
+    color: $colorWhite
     display: inline-flex
     align-items: center
 

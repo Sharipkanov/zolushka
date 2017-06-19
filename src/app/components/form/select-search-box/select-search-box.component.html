@@ -1,9 +1,9 @@
-<div class="select-search-box" data-select-search-box>
-  <p (click)="callSelectSearch($event)">
-    <input name="{{name}}" type="text" value="{{selectSearchBoxText}}" placeholder="{{placeholder}}" (keyup)="onKeyUp($event)">
+<div class="select-search-box{{(classes.length) ? ' ' + classes : ''}}">
+  <p (click)="selectSearchBoxEvent($event)">
+    <input name="{{name}}" type="text" value="{{selectSearchBoxText}}" placeholder="{{placeholder}}" (keyup)="selectSearch($event)">
     <i class="{{iconClass}}"></i>
   </p>
-  <div>
+  <div class="select-search-box__content">
     <ul *ngIf="filteredItems.length">
       <li *ngFor="let item of filteredItems; let i = index">
         <a href="#" (click)="markSelect($event, i)">
