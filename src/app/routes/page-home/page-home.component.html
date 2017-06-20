@@ -1,18 +1,37 @@
-<app-section-new-girls></app-section-new-girls>
+<div *ngIf="!logged">
+  <app-section-new-girls></app-section-new-girls>
 
-<section class="fw-pt-20 fw-pb-20">
-  <div class="container">
-    <div class="fw-grid fw-grid-15">
-      <div class="fw-width-1-2">
-        <app-panel-top-users></app-panel-top-users>
+  <section class="fw-pt-20 fw-pb-20">
+    <div class="container">
+      <div class="fw-grid fw-grid-15">
+        <div class="fw-width-1-2">
+          <app-panel-top-users [users]="usersInTop"></app-panel-top-users>
+        </div>
+        <div class="fw-width-1-2">1</div>
       </div>
-      <div class="fw-width-1-2">1</div>
+    </div>
+  </section>
+
+  <app-section-popular-users></app-section-popular-users>
+
+  <app-section-registration></app-section-registration>
+</div>
+
+<div *ngIf="logged" class="container">
+  <div class="fw-pt-40 fw-pb-40">
+    <div class="fw-grid fw-grid-30">
+      <div class="fw-width-1-2">
+        <app-panel-new-girls></app-panel-new-girls>
+      </div>
+      <div class="fw-width-1-2">
+        <div class="fw-grid fw-grid-30">
+          <div class="fw-width-1-2" *ngFor="let user of usersInTop">
+            <app-user-cart [user]="user" [small]="true"></app-user-cart>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<app-section-popular-users></app-section-popular-users>
-
-<app-section-registration></app-section-registration>
-
-<app-section-store-link></app-section-store-link>
+<app-section-store-link [backgroundImage]="!logged"></app-section-store-link>

@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from '@angular/http';
 
+import { StorageService } from './services/storage/storage.service';
+import { UserService } from './services/user/user.service';
+
 import { BackendProvider } from './services/mocks.service';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
@@ -41,6 +44,7 @@ import { SectionPopularUsersComponent } from './components/sections/section-popu
 import { PageSearchComponent } from './routes/page-search/page-search.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { PanelNewGirlsComponent } from './components/panels/panel-new-girls/panel-new-girls.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +79,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
     SectionPopularUsersComponent,
     PageSearchComponent,
     NavigationComponent,
-    DropdownComponent
+    DropdownComponent,
+    PanelNewGirlsComponent
   ],
   imports: [
     BrowserModule,
@@ -85,6 +90,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
     OwlModule
   ],
   providers: [
+    StorageService,
+    UserService,
     BackendProvider,
     MockBackend,
     BaseRequestOptions

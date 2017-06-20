@@ -1,4 +1,4 @@
-<div class="user-cart-thumbnail{{(small) ? ' user-cart-thumbnail--small' : ''}}">
+<div class="user-cart-thumbnail{{(small) ? ' user-cart-thumbnail--small' : ''}}{{(classes.length) ? ' ' + classes : ''}}">
   <img src="{{(user.thumbnail.length) ? user.thumbnail : 'http://placehold.it/220x220'}}" alt="" class="user-cart-thumbnail__image">
   <div class="user-cart-thumbnail__cover">
     <p class="user-cart-thumbnail__text">

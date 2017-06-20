@@ -1,6 +1,12 @@
 .fw-badge
   position: relative
 
+  &.fw-badge--style-2
+    padding-right: 15px
+
+    .fw-badge__text
+      top: 5px
+
   .fw-badge__text
     position: absolute
     display: flex
@@ -11,8 +17,11 @@
     right: 0
     top: 0
     transform: translateX(50%) translateY(-50%)
-    min-width: 20px
+    width: 20px
     height: 20px
     font-size: 11px
     background: $colorRed
     color: $colorWhite
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap

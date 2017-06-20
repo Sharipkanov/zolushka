@@ -32,16 +32,21 @@ export function BackendMock(backend: MockBackend, options: BaseRequestOptions, r
 
       if (connection.request.url.indexOf('/users/new') > - 1 && connection.request.method === RequestMethod.Get) {
         const newUsers = [];
+        const newUsersCount = parseInt(connection.request.url.split('/users/new/')[1].split('?')[0], 0);
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < newUsersCount; i++) {
           newUsers.push({
             id: 1,
-            firstName: 'Дарина',
+            firstName: 'Олеся',
             age: 23,
             city: 'Москва',
             country: 'Россия',
             thumbnail: '',
-            photos: []
+            excerpt: '',
+            status: 0,
+            photoApproved: 0,
+            photos: [],
+            inTop: 1
           });
         }
 
@@ -55,15 +60,21 @@ export function BackendMock(backend: MockBackend, options: BaseRequestOptions, r
 
       if (connection.request.url.indexOf('/users/top') > - 1 && connection.request.method === RequestMethod.Get) {
         const topUsers = [];
+        const topUsersCount = parseInt(connection.request.url.split('/users/top/')[1].split('?')[0], 0);
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < topUsersCount; i++) {
           topUsers.push({
             id: 1,
             firstName: 'Олеся',
             age: 23,
             city: 'Москва',
+            country: 'Россия',
             thumbnail: '',
-            status: 0
+            excerpt: '',
+            status: 0,
+            photoApproved: 0,
+            photos: [],
+            inTop: 1
           });
         }
 
@@ -124,6 +135,15 @@ export function BackendMock(backend: MockBackend, options: BaseRequestOptions, r
         connection.mockRespond(new Response(new ResponseOptions({
           status: 200,
           body: topUsers
+        })));
+
+        return;
+      }
+
+      if (connection.request.url.indexOf('/user/authenticate') > - 1 && connection.request.method === RequestMethod.Post) {
+        connection.mockRespond(new Response(new ResponseOptions({
+          status: 200,
+          body: {token: '123123drink123123drink123123drink'}
         })));
 
         return;

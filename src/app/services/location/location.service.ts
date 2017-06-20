@@ -6,7 +6,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class LocationService {
 
-  constructor(private http: Http) { }
+  constructor(private _http: Http) { }
 
   getLocations(cityName: string = null) {
     let url = 'api.zolushka.ru/locations';
@@ -15,7 +15,7 @@ export class LocationService {
       url = `${url}/${cityName}`;
     }
 
-    return this.http.get(url).map((response: Response) => response.json());
+    return this._http.get(url).map((response: Response) => response.json());
   }
 
 }

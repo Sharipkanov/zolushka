@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewEncapsulation } from '@angular/core';
 
+import { StorageService } from '../../services/storage/storage.service';
 import { LocationService } from '../../services/location/location.service';
 import { ISelectSearchBoxItem } from '../../interfaces/form/select-search-box-item.interface';
 import { ILocation } from '../../interfaces/location.interface';
@@ -22,10 +23,10 @@ export class SearchBarComponent implements OnInit {
   private searchBarToggleTimeout: any;
   private searchBarMainToggleTimeout: any;
 
-  constructor(private _component: ElementRef, private locationService: LocationService) { }
+  constructor(private _component: ElementRef, private _locationService: LocationService, private _storageService: StorageService) { }
 
   initLocation(locationName: string = null) {
-    this.locationService.getLocations(locationName).subscribe((locations: Array<ILocation>) => {
+    this._locationService.getLocations(locationName).subscribe((locations: Array<ILocation>) => {
       if (locationName !== null) {
         this.locations = [];
       }

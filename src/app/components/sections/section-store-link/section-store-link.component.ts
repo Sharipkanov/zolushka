@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-section-store-link',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./section-store-link.component.sass']
 })
 export class SectionStoreLinkComponent implements OnInit {
+  @Input() backgroundImage: boolean = false;
 
   constructor() { }
 

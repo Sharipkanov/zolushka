@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { UsersService } from '../../../services/users/users.service';
 import { IUser} from '../../../interfaces/user.interface';
@@ -10,13 +10,15 @@ import { IUser} from '../../../interfaces/user.interface';
   providers: [ UsersService ]
 })
 export class SectionNewGirlsComponent implements OnInit {
-  public users: Array<IUser>;
+  @Input() users: Array<IUser> = [];
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
-    this.usersService.getNewUsers().subscribe((users: Array<IUser>) => {
-      this.users = users;
-    });
+    if (!this.users.length) {
+      this.usersService.getNewUsers(5).subscribe((users: Array<IUser>) => {
+        this.users = users;
+      });
+    }
   }
 
 }
