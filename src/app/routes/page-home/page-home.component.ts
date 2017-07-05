@@ -19,7 +19,7 @@ export class PageHomeComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this._userService.token() !== null) {
+    if (this._userService.token().length) {
       this.logged = true;
 
       this._getTopUsers(2);
@@ -29,7 +29,7 @@ export class PageHomeComponent implements OnInit {
     }
 
     this._userService.onChangeToken.subscribe((token: string) => {
-      if (token !== null) {
+      if (token.length) {
         this.logged = true;
 
         this._getTopUsers(2);

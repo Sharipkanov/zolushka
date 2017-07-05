@@ -12,6 +12,7 @@ export class UserCartThumbnailComponent implements OnInit {
   @Input() small: boolean = false;
   @Input() user: IUser;
   @Input() classes: string = '';
+  @Input() unmax: boolean = false;
 
   constructor() { }
 

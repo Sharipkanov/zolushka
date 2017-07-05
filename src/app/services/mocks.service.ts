@@ -143,7 +143,7 @@ export function BackendMock(backend: MockBackend, options: BaseRequestOptions, r
       if (connection.request.url.indexOf('/user/authenticate') > - 1 && connection.request.method === RequestMethod.Post) {
         connection.mockRespond(new Response(new ResponseOptions({
           status: 200,
-          body: {token: '123123drink123123drink123123drink'}
+          body: {token: '12312'}
         })));
 
         return;

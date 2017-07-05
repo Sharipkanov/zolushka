@@ -5,3 +5,17 @@
     @return str_slice($string, 1, $index - 1) + $replace + str_replace(str_slice($string, $index + str_length($search)), $search, $replace)
 
   @return $string
+
+@function str-split($string, $separator)
+  $split-arr: ()
+  $index : str-index($string, $separator)
+
+  @while $index != null
+    $item: str-slice($string, 1, $index - 1)
+    $split-arr: append($split-arr, $item)
+    $string: str-slice($string, $index + 1)
+    $index : str-index($string, $separator)
+
+  $split-arr: append($split-arr, $string)
+
+  @return $split-arr

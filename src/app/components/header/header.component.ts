@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this._userService.token() !== null) {
+    if (this._userService.token().length) {
       this.logged = true;
       this.expanded = false;
     } else {
@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
     }, 1);*/
 
     this._userService.onChangeToken.subscribe((token: string) => {
-      if (token !== null) {
+      if (token.length) {
         this.logged = true;
         this.expanded = false;
       } else {
