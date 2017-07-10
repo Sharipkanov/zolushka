@@ -1,6 +1,85 @@
 <!-- Navigation -->
 <nav class="navigation">
   <div class="container">
-
+    <div class="navigation__inner-wrapper">
+      <nav class="navigation__bar">
+        <ul class="navigation__list">
+          <li class="navigation__item">
+            <a routerLink="/search.html" class="navigation__link" routerLinkActive="navigation__link_active">
+              Поиск
+            </a>
+          </li>
+          <li class="navigation__item">
+            <a class="navigation__link" routerLink="['/who-watched']">
+              Кто смотрел
+              <span class="navigation__counter"></span>
+            </a>
+          </li>
+          <li class="navigation__item">
+            <a class="navigation__link" routerLink="['/delivery']">
+              Рассылка
+              <span class="navigation__counter">59</span>
+            </a>
+          </li>
+          <li class="navigation__item">
+            <a class="navigation__link js-open-popup" data-popup-target="chat" routerLink="['/messages']">
+              Сообщения
+              <span class="navigation__counter">150</span>
+            </a>
+          </li>
+          <li class="navigation__item navigation__item_submenu">
+            <a class="navigation__link">Покупки</a>
+            <div class="navigation__submenu">
+              подменю
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="navigation__account">
+        <div class="navigation__wallet fw-mr-10">
+          <a routerLink="['/wallet']" class="navigation__wallet-icon fw-mr-5 fw-inline-block">
+            <i class="icon-header-wallet"></i>
+          </a>
+          <span class="fw-inline-block">20423 Р.</span>
+        </div>
+        <div class="navigation__profile fw-mr-10">
+          <a routerLink="['/wallet']" class="navigation__profile-link">
+            <img src="http://placehold.it/34x34" class="navigation__profile-image fw-inline-block" alt="">
+            <span class="navigation__profile-status">
+                            <i class="icon-profile-activated"></i>
+              <!--<i class="icon-profile-blocked"></i>
+              <i class="icon-profile-invisible"></i>-->
+                        </span>
+          </a>
+        </div>
+        <div class="navigation__buy-premium fw-mr-10">
+          <a routerLink="['/wallet/buy-premium']" class="button-empty"><span class="button-empty__text">Купить премиум</span></a>
+        </div>
+        <div class="js-navigation__settings navigation__settings">
+          <div class="navigation__settings-icon js-navigation__settings-icon">
+            <i class="icon-header-cog"></i>
+          </div>
+          <div class="js-navigation__settings-dropdown navigation__settings-wrapper">
+            <ul class="navigation__settings-listing">
+              <li class="navigation__settings-item">
+                <a routerLink="['/profile']" class="navigation__settings-link">Профиль</a>
+              </li>
+              <li class="navigation__settings-item">
+                <a routerLink="['/profile']" class="navigation__settings-link">Профиль</a>
+              </li>
+              <li class="navigation__settings-item">
+                <a routerLink="['/wallet']" class="navigation__settings-link">Кошелек</a>
+              </li>
+              <li class="navigation__settings-item">
+                <a routerLink="['/settings']" class="navigation__settings-link">Настройки</a>
+              </li>
+              <li class="navigation__settings-item">
+                <a routerLink="['/logout']" class="navigation__settings-link navigation__settings-link_red">Выход</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </nav><!-- Navigation end -->

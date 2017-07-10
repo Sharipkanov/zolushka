@@ -19,7 +19,7 @@ export class PageHomeComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this._userService.token().length) {
+    if (this._userService.token().length > 0) {
       this.logged = true;
 
       this._getTopUsers(2);

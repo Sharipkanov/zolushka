@@ -38,6 +38,7 @@ import { PanelTopUsersComponent } from './components/panels/panel-top-users/pane
 import { UserCartTinyComponent } from './components/user-cart-tiny/user-cart-tiny.component';
 import { UserInfoStatusComponent } from './components/user-info-status/user-info-status.component';
 import { PageRegistrationComponent } from './routes/page-registration/page-registration.component';
+import { PageAboutComponent } from './routes/page-about/page-about.component';
 import { SectionRegistrationInfoComponent } from './components/sections/section-registration-info/section-registration-info.component';
 import { PanelGiftComponent } from './components/panels/panel-gift/panel-gift.component';
 import { SectionPopularUsersComponent } from './components/sections/section-popular-users/section-popular-users.component';
@@ -54,6 +55,7 @@ import { PanelNewGirlsComponent } from './components/panels/panel-new-girls/pane
     UserCartComponent,
     PageNotFoundComponent,
     PageHomeComponent,
+    PageAboutComponent,
     DownloadBoxComponent,
     SocialsCircleListComponent,
     InputBoxComponent,

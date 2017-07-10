@@ -1,0 +1,17 @@
+{
+  "/api/auth": {
+    "target": "http://auth.test.denim.cc:8091/",
+    "secure": false,
+    "pathRewrite": {"^/api/auth" : ""}
+  },
+  "/api/api": {
+    "target": "http://api.test.denim.cc:8092/",
+    "secure": false,
+    "pathRewrite": {"^/api/api" : ""}
+  },
+  "/api/media": {
+    "target": "http://media.test.denim.cc:8093/",
+    "secure": false,
+    "pathRewrite": {"^/api/media" : ""}
+  }
+}

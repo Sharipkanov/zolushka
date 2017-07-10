@@ -19,3 +19,7 @@
 @each $name in chat, phone, star, camera-small, phone-small, chat-small, chat-large, phone-large, star-large, camera-checked, camera-red, in-top
   .icon-user-cart-#{$name}
     +sprite(icon-user-cart-#{$name})
+
+@each $name in phone, chat, invisible, message, app
+  .icon-#{$name}-about
+    +sprite(icon-#{$name}-about)

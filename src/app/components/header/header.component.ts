@@ -24,26 +24,28 @@ export class HeaderComponent implements OnInit {
           this.expanded = false;
           this._isHomepage = false;
         }
+
+        const userToken: string = this._userService.token();
+        if (userToken.length > 0 && userToken !== 'undefined') {
+          this.logged = true;
+          this.expanded = false;
+        } else {
+          this.logged = false;
+
+          (this._isHomepage) ? this.expanded = true : this.expanded = false;
+        }
       }
     });
   }
 
   ngOnInit() {
-    if (this._userService.token().length) {
-      this.logged = true;
-      this.expanded = false;
-    } else {
-      this.logged = false;
-
-      (this._isHomepage) ? this.expanded = true : this.expanded = false;
-    }
-
-    this._userService.login({
-      email: 'sharipkanov@gmail.com',
-      password: 'googlethebest'
+    /*this._userService.login({
+      email: 'test12@test.ru',
+      password: '123456'
     }).subscribe(response => {
-      this._userService.setToken(response.token);
-    });
+      console.log(response);
+      this._userService.setToken(response.accessToken);
+    });*/
 
     // TODO remove logout
     /*setTimeout(() => {
@@ -51,7 +53,7 @@ export class HeaderComponent implements OnInit {
     }, 1);*/
 
     this._userService.onChangeToken.subscribe((token: string) => {
-      if (token.length) {
+      if (token.length > 0 && token !== 'undefined') {
         this.logged = true;
         this.expanded = false;
       } else {

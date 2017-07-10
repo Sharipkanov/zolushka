@@ -1,5 +1,5 @@
 import { Injectable, Inject, Output, EventEmitter } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { StorageService } from '../storage/storage.service';
 import { ILogin } from '../../interfaces/login.interface';
@@ -13,10 +13,10 @@ export class UserService {
     }
 
     token() {
-        if (this._storageService.get('token') == null) {
-            return this._storageService.get('token');
-        } else {
+        if (this._storageService.get('token') === null) {
             return '';
+        } else {
+            return this._storageService.get('token');
         }
     }
 
@@ -27,13 +27,17 @@ export class UserService {
     }
 
     login(data: ILogin) {
-        return this._http.post(`api.zolushka.ru/user/authenticate`, { ...data }).map((response: Response) => response.json());
+        const headers: Headers = new Headers();
+
+        headers.append('Authorization', 'Basic ' + btoa(data.email + ':' + data.password));
+        headers.append('Content-Type', 'application/json');
+        return this._http.post(`/api/auth/token`, { ...data}, { headers: headers }).map((response: Response) => response.json());
     }
 
     logout() {
         this._storageService.remove('token');
 
-        return this.onChangeToken.emit(null);
+        return this.onChangeToken.emit('');
     }
 
     register() {

@@ -6,12 +6,14 @@ import { PageNotFoundComponent } from './routes/page-not-found/page-not-found.co
 import { PageRegistrationComponent } from './routes/page-registration/page-registration.component';
 import { PageSearchComponent } from './routes/page-search/page-search.component';
 import { PageComponentsComponent } from './routes/page-components/page-components.component';
+import { PageAboutComponent } from './routes/page-about/page-about.component';
 
 const appRoutes: Routes = [
     { path: '', component: PageHomeComponent, pathMatch: 'full' },
     { path: 'registration.html', component: PageRegistrationComponent },
     { path: 'search.html', component: PageSearchComponent },
     { path: 'components.html', component: PageComponentsComponent },
+    { path: 'about.html', component: PageAboutComponent },
     { path: '**', component: PageNotFoundComponent }
 ];
 
