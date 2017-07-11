@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { FormControl } from "@angular/forms";
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-section-registration-info',
@@ -9,25 +9,26 @@ import { FormControl } from "@angular/forms";
 })
 export class SectionRegistrationInfoComponent implements OnInit {
 
-    constructor(private http: Http) {
+    user: object = {};
+
+    constructor(private _http: Http) {
     }
 
     ngOnInit() {
     }
 
-    onSubmit(e, form) {
+    userRegister(e: Event) {
         e.preventDefault();
 
-        const data = {
-            name: new FormControl('name'),
-            email: new FormControl('email'),
-        };
-
-        console.log(form.value);
+        console.log(this.user);
 
         /*this.http.post('/api/auth/signup', { ...data }).subscribe(response => () => {
 
         })*/
+    }
+
+    updateState(event) {
+        this.user[event.field] = event.value;
     }
 
 }

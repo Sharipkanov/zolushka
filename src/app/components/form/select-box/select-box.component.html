@@ -1,5 +1,5 @@
 <div class="select-box{{(classes.length) ? ' ' + classes : ''}}">
-    <select name="{{name}}" [attr.multiple]="(multiple) ? '' : null" *ngIf="items.length">
+    <select name="{{name}}" [attr.multiple]="(multiple) ? '' : null" *ngIf="items.length" (change)="updateParent($event)">
       <option value="" [attr.selected]="(items[0].selected)? '': null">{{items[0].label}}</option>
       <option value="{{item.value}}" *ngFor="let item of items | slice: 1; let i = index" [attr.selected]="(item.selected)? '': null">{{item.label}}</option>
     </select>

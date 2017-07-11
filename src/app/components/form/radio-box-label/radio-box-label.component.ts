@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 import { IRadioBoxLabelItem } from '../../../interfaces/form/radio-box-label-item.interface';
 
@@ -15,9 +15,19 @@ export class RadioBoxLabelComponent implements OnInit {
   @Input() combinedStyle: boolean = false;
   @Input() fullWidth: boolean = false;
 
+  @Output()
+  updateState: EventEmitter<object> = new EventEmitter<object>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  updateParent(event) {
+    this.updateState.emit({
+      value: event.target.value,
+      field: this.name
+    });
   }
 
 }

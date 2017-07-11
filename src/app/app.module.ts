@@ -46,58 +46,62 @@ import { PageSearchComponent } from './routes/page-search/page-search.component'
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { PanelNewGirlsComponent } from './components/panels/panel-new-girls/panel-new-girls.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    UserCartComponent,
-    PageNotFoundComponent,
-    PageHomeComponent,
-    PageAboutComponent,
-    DownloadBoxComponent,
-    SocialsCircleListComponent,
-    InputBoxComponent,
-    TextareaBoxComponent,
-    ChecboxBoxComponent,
-    ChecboxBoxLabelComponent,
-    RadioBoxLabelComponent,
-    SelectBoxComponent,
-    SelectSearchBoxComponent,
-    PageComponentsComponent,
-    SearchBarComponent,
-    RadioBoxComponent,
-    SectionStoreLinkComponent,
-    SectionNewGirlsComponent,
-    SectionRegistrationComponent,
-    UserCartThumbnailComponent,
-    PanelTopUsersComponent,
-    UserCartTinyComponent,
-    UserInfoStatusComponent,
-    PageRegistrationComponent,
-    SectionRegistrationInfoComponent,
-    PanelGiftComponent,
-    SectionPopularUsersComponent,
-    PageSearchComponent,
-    NavigationComponent,
-    DropdownComponent,
-    PanelNewGirlsComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutes,
-    HttpModule,
-    JsonpModule,
-    OwlModule
-  ],
-  providers: [
-    StorageService,
-    UserService,
-    BackendProvider,
-    MockBackend,
-    BaseRequestOptions
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        FooterComponent,
+        HeaderComponent,
+        UserCartComponent,
+        PageNotFoundComponent,
+        PageHomeComponent,
+        PageAboutComponent,
+        DownloadBoxComponent,
+        SocialsCircleListComponent,
+        InputBoxComponent,
+        TextareaBoxComponent,
+        ChecboxBoxComponent,
+        ChecboxBoxLabelComponent,
+        RadioBoxLabelComponent,
+        SelectBoxComponent,
+        SelectSearchBoxComponent,
+        PageComponentsComponent,
+        SearchBarComponent,
+        RadioBoxComponent,
+        SectionStoreLinkComponent,
+        SectionNewGirlsComponent,
+        SectionRegistrationComponent,
+        UserCartThumbnailComponent,
+        PanelTopUsersComponent,
+        UserCartTinyComponent,
+        UserInfoStatusComponent,
+        PageRegistrationComponent,
+        SectionRegistrationInfoComponent,
+        PanelGiftComponent,
+        SectionPopularUsersComponent,
+        PageSearchComponent,
+        NavigationComponent,
+        DropdownComponent,
+        PanelNewGirlsComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutes,
+        HttpModule,
+        JsonpModule,
+        OwlModule,
+        FormsModule,
+        // ReactiveFormsModule
+    ],
+    providers: [
+        StorageService,
+        UserService,
+        BackendProvider,
+        MockBackend,
+        BaseRequestOptions
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

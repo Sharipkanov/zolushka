@@ -39,19 +39,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*this._userService.login({
-      email: 'test12@test.ru',
-      password: '123456'
-    }).subscribe(response => {
-      console.log(response);
-      this._userService.setToken(response.accessToken);
-    });*/
-
-    // TODO remove logout
-    /*setTimeout(() => {
-      this._userService.logout();
-    }, 1);*/
-
     this._userService.onChangeToken.subscribe((token: string) => {
       if (token.length > 0 && token !== 'undefined') {
         this.logged = true;
@@ -61,6 +48,17 @@ export class HeaderComponent implements OnInit {
 
         (this._isHomepage) ? this.expanded = true : this.expanded = false;
       }
+    });
+  }
+
+  // TODO remove this method and make login popup
+  login() {
+    this._userService.login({
+      email: 'test12@test.ru',
+      password: '123456'
+    }).subscribe(response => {
+      console.log(response);
+      this._userService.setToken(response.accessToken);
     });
   }
 }

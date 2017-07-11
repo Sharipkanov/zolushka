@@ -1,4 +1,4 @@
 <div class="input-box{{(classes.length) ? ' ' + classes : ''}}{{(tooltip.length) ? ' input-box--tooltip' : ''}}">
-    <input type="{{type}}" placeholder="{{placeholder}}" value="{{value}}" name="{{name}}" ngModel="">
+    <input type="{{type}}" placeholder="{{placeholder}}" value="{{value}}" name="{{name}}" (change)="updateParent($event)" />
     <span class="input-box__tooltip" *ngIf="tooltip.length">{{tooltip}}</span>
 </div>
