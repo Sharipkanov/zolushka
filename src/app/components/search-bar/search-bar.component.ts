@@ -33,6 +33,8 @@ export class SearchBarComponent implements OnInit {
 
       locations.map((location: ILocation) => {
         this.locations.push({
+          value: location.id,
+          selected: false,
           label: location.name,
           labelInfo: location.country
         });

@@ -17,7 +17,11 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
   @Input() classes: string = '';
   @Output() search = new EventEmitter();
 
+  @Output()
+  updateState: EventEmitter<object> = new EventEmitter<object>();
+
   public selectSearchBoxText: string = '';
+  public selectSearchBoxValues: Array<number> = [];
   public filteredItems: Array<ISelectSearchBoxItem> = [];
 
   private selectSearchBox: Element;
@@ -91,6 +95,13 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
     this.items.map((selectSearchBoxItem: ISelectSearchBoxItem, selectSearchBoxIndex: number) => {
       if (selectSearchBoxIndex === index) {
         this.selectSearchBoxText = selectSearchBoxItem.label;
+
+        // console.log(selectSearchBoxItem);
+
+        this.updateState.emit({
+          value: selectSearchBoxItem.value,
+          field: this.name
+        });
       }
     });
 

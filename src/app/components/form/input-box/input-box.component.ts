@@ -12,6 +12,7 @@ export class InputBoxComponent implements OnInit {
     @Input() tooltip: string = '';
     @Input() name: string = '';
     @Input() type: string = 'text';
+    @Input() error: boolean = false;
 
 
     @Output()

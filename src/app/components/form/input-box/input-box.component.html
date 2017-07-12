@@ -1,4 +1,4 @@
-<div class="input-box{{(classes.length) ? ' ' + classes : ''}}{{(tooltip.length) ? ' input-box--tooltip' : ''}}">
+<div class="input-box{{(classes.length) ? ' ' + classes : ''}}{{(tooltip.length) ? ' input-box--tooltip' : ''}}" [attr.data-error]="error">
     <input type="{{type}}" placeholder="{{placeholder}}" value="{{value}}" name="{{name}}" (change)="updateParent($event)" />
     <span class="input-box__tooltip" *ngIf="tooltip.length">{{tooltip}}</span>
 </div>

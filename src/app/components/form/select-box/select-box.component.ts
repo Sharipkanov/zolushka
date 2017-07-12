@@ -28,7 +28,7 @@ export class SelectBoxComponent implements OnInit, AfterViewInit {
     private selectBoxContentTopClass: string = 'select-box__content--top';
 
     public selectBoxText: Array<string> = [];
-    public selectBoxValues: Array<string> = [];
+    public selectBoxValues: Array<number> = [];
 
     @HostListener('document:click', ['$event'])
     clickOutsideOfComponent(e) {

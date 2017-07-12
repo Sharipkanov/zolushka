@@ -31,7 +31,9 @@ export class UserService {
 
         headers.append('Authorization', 'Basic ' + btoa(data.email + ':' + data.password));
         headers.append('Content-Type', 'application/json');
-        return this._http.post(`/api/auth/token`, { ...data}, { headers: headers }).map((response: Response) => response.json());
+        return this._http
+            .post(`/api/auth/token`, { ...data}, { headers: headers })
+            .map((response: Response) => response.json());
     }
 
     logout() {
