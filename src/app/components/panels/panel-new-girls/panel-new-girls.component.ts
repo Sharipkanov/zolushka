@@ -19,7 +19,7 @@ export class PanelNewGirlsComponent implements OnInit {
       this._usersService.getNewUsers(7).subscribe((users: Array<IUser>) => {
         this.users = users;
 
-        console.log(users);
+        // console.log(users);
       });
     }
   }

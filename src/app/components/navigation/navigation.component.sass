@@ -153,6 +153,11 @@
       visibility: visible
       opacity: 1
       margin-top: 0
+      
+    .navigation__settings-icon
+      &:before
+        padding: 0 8px
+        width: 100%
 
 .navigation__settings-wrapper
   position: absolute
@@ -235,7 +240,7 @@
     display: block
     +transition()
   
-  &.active
+  &.active, &:hover
     &:before
       padding: 0 8px
       width: 100%
