@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 
 import { UserService } from '../../services/user/user.service';
 import { StorageService } from "../../services/storage/storage.service";
+import { PopupsService } from "../../services/popups/popups.service";
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ export class HeaderComponent implements OnInit {
   private _isHomepage: boolean;
   public user_info: object = {};
 
-  constructor(private _router: Router, private _userService: UserService, private _storageService: StorageService) {
+  constructor(private _router: Router, private _userService: UserService, private _popupsService: PopupsService) {
     this._router.events.subscribe(e => {
       if (e instanceof NavigationStart) {
         const url = e.url;
@@ -64,14 +65,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  // TODO remove this method and make login popup
-  login() {
-    this._userService.login({
-      email: 'test12@test.ru',
-      password: '123456'
-    }).subscribe(response => {
-      console.log(response);
-      this._userService.setToken(response.accessToken);
-    });
+  callPopup(popup_name: string) {
+    this._popupsService.openPopup(popup_name);
   }
 }

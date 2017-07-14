@@ -5,7 +5,6 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { StorageService } from '../storage/storage.service';
 import { ILogin } from '../../interfaces/login.interface';
 import { Observable } from "rxjs";
-import { reject } from "q";
 
 @Injectable()
 export class UserService {
@@ -37,7 +36,24 @@ export class UserService {
         headers.append('Content-Type', 'application/json');
         return this._http
             .post(`/api/auth/token`, { ...data }, { headers: headers })
-            .map((response: Response) => response.json());
+            .map(response => response.json())
+            .catch((error) => {
+                // console.error(error.status);
+                return error;
+
+                // The following doesn't work.
+                // There's no error status at least in case of network errors.
+                // WHY?!
+                //
+                // if ( error === undefined) error = null;
+                // let errMsg = (error && error.message)
+                //     ? error.message
+                //     : (error && error.status)
+                //         ? `${error.status} - ${error.statusText}`
+                //         : error;
+                //
+                // return Observable.throw(errMsg);
+            });
     }
 
     logout() {
@@ -69,7 +85,7 @@ export class UserService {
 
             this._http.get(`/api/api/client/base-info`, new RequestOptions({ headers: headers }))
                 .toPromise()
-                .then(response =>  {
+                .then(response => {
                     response = response.json();
 
                     this._storageService.set('user_info', response);

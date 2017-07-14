@@ -24,5 +24,6 @@
   .icon-#{$name}-about
     +sprite(icon-#{$name}-about)
     
-.icon-header-cog
-  +sprite(icon-header-cog)
+@each $name in icon-header-cog, icon-header-wallet, icon-camera-purple
+  .#{$name}
+    +sprite(#{$name})

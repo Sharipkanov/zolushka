@@ -46,7 +46,12 @@ import { PageSearchComponent } from './routes/page-search/page-search.component'
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { PanelNewGirlsComponent } from './components/panels/panel-new-girls/panel-new-girls.component';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PopupLoginComponent } from './components/popups/popup-login/popup-login.component';
+import { PopupsComponent } from './components/popups/popups/popups.component';
+import { PopupsService } from "./services/popups/popups.service";
+import { PageProfileComponent } from './routes/page-profile/page-profile.component';
+import { PageProfileEditComponent } from './routes/page-profile-edit/page-profile-edit.component';
 
 @NgModule({
     declarations: [
@@ -83,7 +88,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         PageSearchComponent,
         NavigationComponent,
         DropdownComponent,
-        PanelNewGirlsComponent
+        PanelNewGirlsComponent,
+        PopupLoginComponent,
+        PopupsComponent,
+        PageProfileComponent,
+        PageProfileEditComponent
     ],
     imports: [
         BrowserModule,
@@ -99,7 +108,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
         UserService,
         BackendProvider,
         MockBackend,
-        BaseRequestOptions
+        BaseRequestOptions,
+        PopupsService
     ],
     bootstrap: [AppComponent]
 })

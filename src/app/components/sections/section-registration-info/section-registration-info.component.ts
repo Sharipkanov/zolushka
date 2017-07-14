@@ -75,8 +75,6 @@ export class SectionRegistrationInfoComponent implements OnInit {
 
     updateState(event) {
         this.user[event.field] = event.value;
-
-        console.log(this.user);
     }
 
     initBirthPicker() {

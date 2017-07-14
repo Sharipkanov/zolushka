@@ -1,0 +1,18 @@
+<div class="popup-wrapper" (click)="closePopup($event)" [ngClass]="{'popup--active':visible}">
+    <div class="popup popup-login fw-bg-white fw-pt-20 fw-pb-20 fw-pl-20 fw-pr-20">
+        <div class="fw-text-center fw-fz-24 fw-mb-20">
+            Вход
+        </div>
+        <form (ngSubmit)="loginFormSubmit($event)">
+            <div class="form-line fw-mb-10">
+                <app-input-box [name]="'email'" [placeholder]="'E-mail'" (updateState)="updateState($event)"></app-input-box>
+            </div>
+            <div class="form-line fw-mb-10">
+                <app-input-box [name]="'password'" [type]="'password'" [placeholder]="'Пароль'" (updateState)="updateState($event)"></app-input-box>
+            </div>
+            <div class="form-line">
+                <button class="button button--primary fw-width-1-1">Войти</button>
+            </div>
+        </form>
+    </div>
+</div>

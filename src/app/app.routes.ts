@@ -7,13 +7,17 @@ import { PageRegistrationComponent } from './routes/page-registration/page-regis
 import { PageSearchComponent } from './routes/page-search/page-search.component';
 import { PageComponentsComponent } from './routes/page-components/page-components.component';
 import { PageAboutComponent } from './routes/page-about/page-about.component';
+import { PageProfileComponent } from './routes/page-profile/page-profile.component';
+import { PageProfileEditComponent } from './routes/page-profile-edit/page-profile-edit.component';
 
 const appRoutes: Routes = [
     { path: '', component: PageHomeComponent, pathMatch: 'full' },
-    { path: 'registration.html', component: PageRegistrationComponent },
-    { path: 'search.html', component: PageSearchComponent },
-    { path: 'components.html', component: PageComponentsComponent },
-    { path: 'about.html', component: PageAboutComponent },
+    { path: 'registration', component: PageRegistrationComponent },
+    { path: 'search', component: PageSearchComponent },
+    { path: 'components', component: PageComponentsComponent },
+    { path: 'about', component: PageAboutComponent },
+    { path: 'profile', component: PageProfileComponent },
+    { path: 'profile-edit', component: PageProfileEditComponent },
     { path: '**', component: PageNotFoundComponent }
 ];
 
