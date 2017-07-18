@@ -52,6 +52,7 @@ import { PopupsComponent } from './components/popups/popups/popups.component';
 import { PopupsService } from "./services/popups/popups.service";
 import { PageProfileComponent } from './routes/page-profile/page-profile.component';
 import { PageProfileEditComponent } from './routes/page-profile-edit/page-profile-edit.component';
+import { HttpService } from "./services/http/http.service";
 
 @NgModule({
     declarations: [
@@ -109,7 +110,8 @@ import { PageProfileEditComponent } from './routes/page-profile-edit/page-profil
         BackendProvider,
         MockBackend,
         BaseRequestOptions,
-        PopupsService
+        PopupsService,
+        HttpService
     ],
     bootstrap: [AppComponent]
 })

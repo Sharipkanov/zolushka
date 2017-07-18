@@ -4,7 +4,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { StorageService } from '../storage/storage.service';
 import { ILogin } from '../../interfaces/login.interface';
-import { Observable } from "rxjs";
+import { HttpService } from '../http/http.service';
 
 @Injectable()
 export class UserService {
@@ -33,27 +33,22 @@ export class UserService {
         const headers: Headers = new Headers();
 
         headers.append('Authorization', 'Basic ' + btoa(data.email + ':' + data.password));
-        headers.append('Content-Type', 'application/json');
-        return this._http
-            .post(`/api/auth/token`, { ...data }, { headers: headers })
-            .map(response => response.json())
-            .catch((error) => {
-                // console.error(error.status);
-                return error;
+        const login = this._http
+            .post(`/api/auth/token`, { ...data }, { headers: headers });
 
-                // The following doesn't work.
-                // There's no error status at least in case of network errors.
-                // WHY?!
-                //
-                // if ( error === undefined) error = null;
-                // let errMsg = (error && error.message)
-                //     ? error.message
-                //     : (error && error.status)
-                //         ? `${error.status} - ${error.statusText}`
-                //         : error;
-                //
-                // return Observable.throw(errMsg);
-            });
+
+        login.subscribe((response) => {
+            if (!!response.json().accessToken) {
+                this.setToken(response.json().accessToken);
+                return true;
+            }
+            return false;
+        }, error => {
+            console.log(error);
+            return error;
+        });
+
+        return login.map(response => response.json());
     }
 
     logout() {
@@ -81,9 +76,8 @@ export class UserService {
         return new Promise((resolve, reject) => {
             const headers: Headers = new Headers();
             headers.append('Authorization', 'token ' + this._storageService.get('token'));
-            headers.append('content-type', 'application/json');
 
-            this._http.get(`/api/api/client/base-info`, new RequestOptions({ headers: headers }))
+            this._http.get(`/api/api/client/base-info`, { headers: headers })
                 .toPromise()
                 .then(response => {
                     response = response.json();
@@ -91,6 +85,22 @@ export class UserService {
                     this._storageService.set('user_info', response);
 
                     this.onChangeUserInfo.emit(response);
+                    resolve(response);
+                })
+                .catch();
+        });
+    }
+
+    profile_page_info(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            const headers: Headers = new Headers();
+            headers.append('Authorization', 'token ' + this._storageService.get('token'));
+
+            this._http.get(`/api/api/client/${this.info().id}`, { headers: headers })
+                .toPromise()
+                .then(response => {
+                    response = response.json();
+
                     resolve(response);
                 })
                 .catch();

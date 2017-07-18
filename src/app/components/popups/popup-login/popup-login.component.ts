@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PopupsService } from '../../../services/popups/popups.service';
 import { UserService } from '../../../services/user/user.service';
-import { ILogin } from "../../../interfaces/login.interface";
 
 @Component({
     selector: 'app-popup-login',
@@ -21,6 +20,11 @@ export class PopupLoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        this._userService.onChangeToken.subscribe((token: string) => {
+            if (token !== '') {
+                this._popupsService.closePopup('login');
+            }
+        });
     }
 
     updateState(event) {
@@ -42,16 +46,6 @@ export class PopupLoginComponent implements OnInit {
             password: this.model['password']
         };
 
-        console.log(data);
-
-        this._userService.login(data).subscribe(response => {
-            // console.log(response);
-            if (!!response.accessToken) {
-                this._userService.setToken(response.accessToken);
-                this._popupsService.closePopup('login');
-            } else {
-                // TODO make error handling
-            }
-        });
+        this._userService.login(data);
     }
 }

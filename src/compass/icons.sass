@@ -1,4 +1,5 @@
 @import "retina_sprites"
+@import "../sass/colors"
 
 @each $name in remove-purple, heart-purple
   .icon-shape-#{$name}
@@ -24,6 +25,17 @@
   .icon-#{$name}-about
     +sprite(icon-#{$name}-about)
     
-@each $name in icon-header-cog, icon-header-wallet, icon-camera-purple
+@each $name in icon-header-cog, icon-header-wallet, icon-camera-purple, icon-camera-white, icon-profile-views, icon-profile-comments, icon-profile-search, icon-profile-crown, icon-invisible-hat, icon-pencil
   .#{$name}
     +sprite(#{$name})
+    
+.icon-online-status
+  display: inline-block
+  vertical-align: middle
+  width: 8px
+  height: 8px
+  border-radius: 100%
+  background-color: $colorGrey
+  
+  &.online
+    background-color: $colorGreenLight

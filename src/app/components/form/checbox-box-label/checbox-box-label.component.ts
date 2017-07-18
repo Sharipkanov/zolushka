@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 import { ICheckBoxLabelItem } from '../../../interfaces/form/check-box-label-item.interface.';
 
@@ -10,11 +10,22 @@ import { ICheckBoxLabelItem } from '../../../interfaces/form/check-box-label-ite
 export class ChecboxBoxLabelComponent implements OnInit {
   @Input() classes: string = '';
   @Input() name: string = '';
+  @Input() value: string = '';
   @Input() items: Array<ICheckBoxLabelItem> = [];
+
+  @Output()
+  updateState: EventEmitter<object> = new EventEmitter<object>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  updateParent(event) {
+    this.updateState.emit({
+      value: event.target.value,
+      field: this.name
+    });
   }
 
 }

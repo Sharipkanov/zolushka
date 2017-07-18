@@ -14,12 +14,12 @@ import { UserService } from '../../../services/user/user.service';
 })
 export class SectionRegistrationInfoComponent implements OnInit {
 
-    user: object = {};
-    errors: object = {};
-    form_birth_date: Array<object> = [];
-    form_birth_month: Array<object> = [];
-    form_birth_year: Array<object> = [];
-    type_picker: Array<object> = [];
+    public user: object = {};
+    public errors: object = {};
+    public form_birth_date: Array<object> = [];
+    public form_birth_month: Array<object> = [];
+    public form_birth_year: Array<object> = [];
+    public type_picker: Array<object> = [];
 
     public locations: Array<ISelectSearchBoxItem> = [];
     public purposes: Array<Object> = [];
@@ -96,7 +96,7 @@ export class SectionRegistrationInfoComponent implements OnInit {
 
                 response.map(value => {
                     this.type_picker.push({
-                        label: value.shortTitle,
+                        title: value.shortTitle,
                         value: value.id,
                         checked: false
                     });

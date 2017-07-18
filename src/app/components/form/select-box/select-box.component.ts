@@ -1,6 +1,6 @@
 import {
     Component, AfterViewInit, Input, ElementRef, HostListener, ViewEncapsulation, OnInit,
-    Output, EventEmitter
+    Output, EventEmitter, OnChanges, SimpleChange
 } from '@angular/core';
 
 import { ISelectBoxItem } from '../../../interfaces/form/select-box-item.interface';
@@ -11,7 +11,7 @@ import { ISelectBoxItem } from '../../../interfaces/form/select-box-item.interfa
     styleUrls: ['./select-box.component.sass'],
     encapsulation: ViewEncapsulation.None
 })
-export class SelectBoxComponent implements OnInit, AfterViewInit {
+export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
     @Input() items: Array<ISelectBoxItem> = [];
     @Input() name: string = '';
     @Input() multiple: boolean = false;
@@ -39,6 +39,10 @@ export class SelectBoxComponent implements OnInit, AfterViewInit {
 
     constructor(private _component: ElementRef) {
 
+    }
+
+    ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+        this.setSelectTexts();
     }
 
     ngOnInit() {
@@ -114,12 +118,14 @@ export class SelectBoxComponent implements OnInit, AfterViewInit {
         this.selectBoxText = [];
         this.selectBoxValues = [];
 
-        return this.items.map((selectBoxItem: ISelectBoxItem) => {
-            if (selectBoxItem.selected) {
-                this.selectBoxValues.push(selectBoxItem.value);
-                this.selectBoxText.push(selectBoxItem.label);
-            }
-        });
+        if (this.items) {
+            return this.items.map((selectBoxItem: ISelectBoxItem) => {
+                if (selectBoxItem.selected) {
+                    this.selectBoxValues.push(selectBoxItem.value);
+                    this.selectBoxText.push(selectBoxItem.label);
+                }
+            });
+        }
     }
 
 }
