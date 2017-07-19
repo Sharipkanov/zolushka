@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, ElementRef } from '@angular/core';
+import {Component, AfterViewInit, Input, ElementRef, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-textarea-box',
@@ -12,6 +12,9 @@ export class TextareaBoxComponent implements AfterViewInit {
   @Input() tooltip: string = '';
   @Input() name: string = '';
   @Input() tooltip_message: string = '';
+
+  @Output()
+  updateState: EventEmitter<object> = new EventEmitter<object>();
 
   constructor(private _component: ElementRef) { }
 
@@ -36,4 +39,10 @@ export class TextareaBoxComponent implements AfterViewInit {
     }
   }
 
+  updateParent(event) {
+    this.updateState.emit({
+      value: event.target.value,
+      field: this.name
+    });
+  }
 }

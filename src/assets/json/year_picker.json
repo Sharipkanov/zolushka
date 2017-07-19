@@ -1,272 +1,267 @@
 [
   {
-    "value": "",
-    "label": "Год рождения",
-    "selected": true
-  },
-  {
-    "value": 1999,
-    "label": 1999,
+    "id": 1999,
+    "title": 1999,
     "selected": false
   },
   {
-    "value": 1998,
-    "label": 1998,
+    "id": 1998,
+    "title": 1998,
     "selected": false
   },
   {
-    "value": 1997,
-    "label": 1997,
+    "id": 1997,
+    "title": 1997,
     "selected": false
   },
   {
-    "value": 1996,
-    "label": 1996,
+    "id": 1996,
+    "title": 1996,
     "selected": false
   },
   {
-    "value": 1995,
-    "label": 1995,
+    "id": 1995,
+    "title": 1995,
     "selected": false
   },
   {
-    "value": 1994,
-    "label": 1994,
+    "id": 1994,
+    "title": 1994,
     "selected": false
   },
   {
-    "value": 1993,
-    "label": 1993,
+    "id": 1993,
+    "title": 1993,
     "selected": false
   },
   {
-    "value": 1992,
-    "label": 1992,
+    "id": 1992,
+    "title": 1992,
     "selected": false
   },
   {
-    "value": 1991,
-    "label": 1991,
+    "id": 1991,
+    "title": 1991,
     "selected": false
   },
   {
-    "value": 1990,
-    "label": 1990,
+    "id": 1990,
+    "title": 1990,
     "selected": false
   },
   {
-    "value": 1989,
-    "label": 1989,
+    "id": 1989,
+    "title": 1989,
     "selected": false
   },
   {
-    "value": 1988,
-    "label": 1988,
+    "id": 1988,
+    "title": 1988,
     "selected": false
   },
   {
-    "value": 1987,
-    "label": 1987,
+    "id": 1987,
+    "title": 1987,
     "selected": false
   },
   {
-    "value": 1986,
-    "label": 1986,
+    "id": 1986,
+    "title": 1986,
     "selected": false
   },
   {
-    "value": 1985,
-    "label": 1985,
+    "id": 1985,
+    "title": 1985,
     "selected": false
   },
   {
-    "value": 1984,
-    "label": 1984,
+    "id": 1984,
+    "title": 1984,
     "selected": false
   },
   {
-    "value": 1983,
-    "label": 1983,
+    "id": 1983,
+    "title": 1983,
     "selected": false
   },
   {
-    "value": 1982,
-    "label": 1982,
+    "id": 1982,
+    "title": 1982,
     "selected": false
   },
   {
-    "value": 1981,
-    "label": 1981,
+    "id": 1981,
+    "title": 1981,
     "selected": false
   },
   {
-    "value": 1980,
-    "label": 1980,
+    "id": 1980,
+    "title": 1980,
     "selected": false
   },
   {
-    "value": 1979,
-    "label": 1979,
+    "id": 1979,
+    "title": 1979,
     "selected": false
   },
   {
-    "value": 1978,
-    "label": 1978,
+    "id": 1978,
+    "title": 1978,
     "selected": false
   },
   {
-    "value": 1977,
-    "label": 1977,
+    "id": 1977,
+    "title": 1977,
     "selected": false
   },
   {
-    "value": 1976,
-    "label": 1976,
+    "id": 1976,
+    "title": 1976,
     "selected": false
   },
   {
-    "value": 1975,
-    "label": 1975,
+    "id": 1975,
+    "title": 1975,
     "selected": false
   },
   {
-    "value": 1974,
-    "label": 1974,
+    "id": 1974,
+    "title": 1974,
     "selected": false
   },
   {
-    "value": 1973,
-    "label": 1973,
+    "id": 1973,
+    "title": 1973,
     "selected": false
   },
   {
-    "value": 1972,
-    "label": 1972,
+    "id": 1972,
+    "title": 1972,
     "selected": false
   },
   {
-    "value": 1971,
-    "label": 1971,
+    "id": 1971,
+    "title": 1971,
     "selected": false
   },
   {
-    "value": 1970,
-    "label": 1970,
+    "id": 1970,
+    "title": 1970,
     "selected": false
   },
   {
-    "value": 1969,
-    "label": 1969,
+    "id": 1969,
+    "title": 1969,
     "selected": false
   },
   {
-    "value": 1968,
-    "label": 1968,
+    "id": 1968,
+    "title": 1968,
     "selected": false
   },
   {
-    "value": 1967,
-    "label": 1967,
+    "id": 1967,
+    "title": 1967,
     "selected": false
   },
   {
-    "value": 1966,
-    "label": 1966,
+    "id": 1966,
+    "title": 1966,
     "selected": false
   },
   {
-    "value": 1965,
-    "label": 1965,
+    "id": 1965,
+    "title": 1965,
     "selected": false
   },
   {
-    "value": 1964,
-    "label": 1964,
+    "id": 1964,
+    "title": 1964,
     "selected": false
   },
   {
-    "value": 1963,
-    "label": 1963,
+    "id": 1963,
+    "title": 1963,
     "selected": false
   },
   {
-    "value": 1962,
-    "label": 1962,
+    "id": 1962,
+    "title": 1962,
     "selected": false
   },
   {
-    "value": 1961,
-    "label": 1961,
+    "id": 1961,
+    "title": 1961,
     "selected": false
   },
   {
-    "value": 1960,
-    "label": 1960,
+    "id": 1960,
+    "title": 1960,
     "selected": false
   },
   {
-    "value": 1959,
-    "label": 1959,
+    "id": 1959,
+    "title": 1959,
     "selected": false
   },
   {
-    "value": 1958,
-    "label": 1958,
+    "id": 1958,
+    "title": 1958,
     "selected": false
   },
   {
-    "value": 1957,
-    "label": 1957,
+    "id": 1957,
+    "title": 1957,
     "selected": false
   },
   {
-    "value": 1956,
-    "label": 1956,
+    "id": 1956,
+    "title": 1956,
     "selected": false
   },
   {
-    "value": 1955,
-    "label": 1955,
+    "id": 1955,
+    "title": 1955,
     "selected": false
   },
   {
-    "value": 1954,
-    "label": 1954,
+    "id": 1954,
+    "title": 1954,
     "selected": false
   },
   {
-    "value": 1953,
-    "label": 1953,
+    "id": 1953,
+    "title": 1953,
     "selected": false
   },
   {
-    "value": 1952,
-    "label": 1952,
+    "id": 1952,
+    "title": 1952,
     "selected": false
   },
   {
-    "value": 1951,
-    "label": 1951,
+    "id": 1951,
+    "title": 1951,
     "selected": false
   },
   {
-    "value": 1950,
-    "label": 1950,
+    "id": 1950,
+    "title": 1950,
     "selected": false
   },
   {
-    "value": 1949,
-    "label": 1949,
+    "id": 1949,
+    "title": 1949,
     "selected": false
   },
   {
-    "value": 1948,
-    "label": 1948,
+    "id": 1948,
+    "title": 1948,
     "selected": false
   },
   {
-    "value": 1947,
-    "label": 1947,
+    "id": 1947,
+    "title": 1947,
     "selected": false
   }
 ]

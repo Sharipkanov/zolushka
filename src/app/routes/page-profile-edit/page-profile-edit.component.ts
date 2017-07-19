@@ -19,12 +19,27 @@ export class PageProfileEditComponent implements OnInit {
     };
 
     public enums: object = {
-        appearance: []
+        'appearance': [],
+        'eye-color': [],
+        'breast-size': [],
+        'hair-color': [],
+        'higher-education': [],
+        'hobby': [],
+        'physique': [],
+        'relationship-state': [],
+        'relationship-type': [],
+        'sexual-kind': [],
+        'sexual-periodicity': [],
+        'sexual-preference': [],
+        'sexual-role': [],
+        'zodiac-sign': [],
     };
 
     constructor(private _userService: UserService, private _http: Http) {
         this._userService.profile_page_info().then(res => {
             this.model = res;
+
+            console.log(this.model);
         });
 
         this.getEnums();
@@ -36,6 +51,7 @@ export class PageProfileEditComponent implements OnInit {
 
     updateState(event) {
         this.model[event.field] = event.value;
+        console.log(this.model);
     }
 
     getEnums() {
@@ -44,17 +60,6 @@ export class PageProfileEditComponent implements OnInit {
             .map(response => response.json())
             .subscribe(response => {
                 this.enums = response;
-                for (const key in this.enums) {
-
-                    for (let i = 0; i < this.enums[key].length; i++) {
-                        for (const myKey in this.enums[key][i]) {
-                            if (myKey === 'title') {
-                                this.enums[key][i]['label'] = this.enums[key][i][myKey];
-                            }
-                            // this.enums[key][i][myKey].label = this.enums[key][i][myKey].title;
-                        }
-                    }
-                }
 
                 console.log(this.enums);
             });
@@ -70,5 +75,11 @@ export class PageProfileEditComponent implements OnInit {
         this._http.get('./assets/json/year_picker.json')
             .map(response => response.json())
             .subscribe(response => this.form_birth_year = response);
+    }
+
+    saveProfileData(e) {
+        e.preventDefault();
+
+        console.log('submit');
     }
 }

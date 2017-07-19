@@ -3,7 +3,7 @@ import {
     Output, EventEmitter, OnChanges, SimpleChange
 } from '@angular/core';
 
-import { ISelectBoxItem } from '../../../interfaces/form/select-box-item.interface';
+import {ISelectBoxItem} from '../../../interfaces/form/select-box-item.interface';
 
 @Component({
     selector: 'app-select-box',
@@ -15,8 +15,9 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
     @Input() items: Array<ISelectBoxItem> = [];
     @Input() name: string = '';
     @Input() multiple: boolean = false;
-    @Input() iconClass: string = '';
+    @Input() iconClass: string = 'icon-form-triangle';
     @Input() classes: string = '';
+    @Input() placeholder: string = 'Выбрать';
 
     @Output()
     updateState: EventEmitter<object> = new EventEmitter<object>();
@@ -38,10 +39,16 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     constructor(private _component: ElementRef) {
-
     }
 
-    ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+        this.items.unshift({
+            id: '',
+            text: this.placeholder,
+            title: this.placeholder,
+            selected: true
+        });
+
         this.setSelectTexts();
     }
 
@@ -92,6 +99,20 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
             } else {
                 this.items[index].selected = !this.items[index].selected;
                 this.items[0].selected = false;
+
+
+                const selectVals = [];
+                this.items.map(item => {
+                    if (item.selected === true) {
+                        selectVals.push(item.id);
+                    }
+                });
+
+                this.updateState.emit({
+                    value: selectVals,
+                    field: this.name
+                });
+
             }
         } else {
             this.items.map((selectBoxItem: ISelectBoxItem, selectBoxIndex) => {
@@ -99,7 +120,7 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
                     selectBoxItem.selected = true;
 
                     this.updateState.emit({
-                        value: selectBoxItem.value,
+                        value: selectBoxItem.id,
                         field: this.name
                     });
                 } else {
@@ -121,8 +142,8 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
         if (this.items) {
             return this.items.map((selectBoxItem: ISelectBoxItem) => {
                 if (selectBoxItem.selected) {
-                    this.selectBoxValues.push(selectBoxItem.value);
-                    this.selectBoxText.push(selectBoxItem.label);
+                    this.selectBoxValues.push(selectBoxItem.id);
+                    this.selectBoxText.push(selectBoxItem.title);
                 }
             });
         }

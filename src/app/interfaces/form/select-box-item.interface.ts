@@ -1,6 +1,6 @@
 export interface ISelectBoxItem {
-  label: string;
-  value: any;
+  title: string;
+  id: any;
   selected: boolean;
   text: string;
 }
