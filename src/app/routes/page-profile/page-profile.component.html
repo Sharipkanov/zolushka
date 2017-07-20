@@ -24,8 +24,8 @@
                             </div>
                         </div>
                         <div class="profile__info-parameters fw-mb-10 fw-fw-600">
-                            <span class="fw-mr-15">Вес 85кг</span>
-                            <span>Рост 186 см</span>
+                            <span class="fw-mr-15">Вес {{ model['weight'] }}кг</span>
+                            <span>Рост {{ model['height'] }} см</span>
                         </div>
                         <div class="profile__info-additions-params">
                             Блондин, Глаза синие, Спортивное телосложение, Европейская внешность
@@ -41,7 +41,7 @@
                             Станьте членом эксклюзивного клуба «Золушка Project» – подключите премиум-доступ!
                         </div>
                         <div class="club-extend__button">
-                            <a href="#" class="button button--primary fw-width-1-1">Купить премиум</a>
+                            <a class="button button--primary fw-width-1-1">Купить премиум</a>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                 <div class="profile__top-bar panel fw-br-5 fw-mb-30">
                     <div class="profile__name fw-flex fw-flex-space-between fw-flex-middle fw-mb-30">
                         <div class="profile__name-left">
-                            <div class="profile__name-title fw-fw-600 fw-mb-5">Олег 27 лет, Весы, Москва</div>
+                            <div class="profile__name-title fw-fw-600 fw-mb-5">{{ model['name'] }} {{ model['age'] }} лет, {{ model['zodiacsign'] }}, {{ model['cityName'] }}</div>
                             <div>
                                 <i class="icon-online-status online fw-mr-5"></i>
                                 <span class="fw-color-green-light fw-inline-block fw-fz-13">On-line</span>
@@ -131,26 +131,7 @@
                         <div class="profile__about panel fw-br-5 fw-mb-30">
                             <div class="fw-fz-16 fw-fw-600 fw-mb-30">О себе</div>
                             <div class="profile__about-content">
-                                <p>Для тех кто ищет еще и романтику! Русский, живу на пмж в
-                                    Германии. Не свободен, не молод, но
-                                    умен и это тоже сексуально...Не жаден, достаточно обеспечен для достойного
-                                    содержания
-                                    молодой любовницы, тактичен, ухожен, всегда дорого и хорошо одеваюсь. Ищу в
-                                    Москве
-                                    девушку
-                                    22-28 лет для нечастых встреч в Москве 2-3 в месяц, красивую умненькую,
-                                    желательно с
-                                    вышкой,
-                                    модницу, умеющую своей в любой компании. Со стартовым "багажом" интеллектуальным
-                                    и с
-                                    соответствующим уходом за собой...Одноразовые встречи и встречи профессиональных
-                                    работниц
-                                    сферы досуга не предлагать. Расположен к длительным на 3-4 года отношениям, на
-                                    основе
-                                    взаимоуважения, честности по возможности и капельки любви, все при обоюдной
-                                    симпатии
-                                    естественно....</p>
-                                <p>PS. Не курю и того же требую от любовницы, фото мое</p>
+                                {{ model['aboutMe'] }}
                             </div>
                         </div>
 
@@ -193,7 +174,7 @@
                             <div class="profile__data-item">
                                 <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">Дети</div>
                                 <div class="profile__data-content">
-                                    Нет
+                                    {{ model['hasChildren'] }}
                                 </div>
                             </div>
                             <div class="profile__data-item">

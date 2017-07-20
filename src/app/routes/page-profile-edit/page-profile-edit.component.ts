@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user/user.service';
-import { Http } from '@angular/http';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../services/user/user.service';
+import {Http} from '@angular/http';
+import {DateService} from "../../services/date/date.service";
 
 @Component({
     selector: 'app-page-profile-edit',
@@ -9,16 +10,12 @@ import { Http } from '@angular/http';
 })
 export class PageProfileEditComponent implements OnInit {
 
-    form_birth_date: Array<object> = [];
-    form_birth_month: Array<object> = [];
-    form_birth_year: Array<object> = [];
-
     public model = {
         name: '',
         about: ''
     };
 
-    public enums: object = {
+    public enums = {
         'appearance': [],
         'eye-color': [],
         'breast-size': [],
@@ -33,11 +30,18 @@ export class PageProfileEditComponent implements OnInit {
         'sexual-preference': [],
         'sexual-role': [],
         'zodiac-sign': [],
+        'datePicker': {
+            'day': [],
+            'month': [],
+            'year': [],
+        }
     };
 
-    constructor(private _userService: UserService, private _http: Http) {
-        this._userService.profile_page_info().then(res => {
+    constructor(private _userService: UserService, private _http: Http, private _dateService: DateService) {
+        this._userService.profilePageInfo().then(res => {
             this.model = res;
+
+            this.model['birthdateDecoded'] = this._dateService.dateDecode(res['birthdate']);
 
             console.log(this.model);
         });
@@ -46,7 +50,7 @@ export class PageProfileEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.initBirthPicker();
+
     }
 
     updateState(event) {
@@ -59,27 +63,25 @@ export class PageProfileEditComponent implements OnInit {
         this._http.get('/api/api/reference/client/list')
             .map(response => response.json())
             .subscribe(response => {
-                this.enums = response;
-
-                console.log(this.enums);
+                _self._dateService.getDatePicker().then(res => {
+                    console.log(res);
+                    _self.enums = response;
+                    _self.enums.datePicker = res;
+                });
             });
-    }
-
-    initBirthPicker() {
-        this._http.get('./assets/json/date_picker.json')
-            .map(response => response.json())
-            .subscribe(response => this.form_birth_date = response);
-        this._http.get('./assets/json/month_picker.json')
-            .map(response => response.json())
-            .subscribe(response => this.form_birth_month = response);
-        this._http.get('./assets/json/year_picker.json')
-            .map(response => response.json())
-            .subscribe(response => this.form_birth_year = response);
     }
 
     saveProfileData(e) {
         e.preventDefault();
 
         console.log('submit');
+
+        this._userService.profileUpdate(this.model).then(response => {
+            if (response.id !== undefined) {
+                this.model = response;
+            } else {
+
+            }
+        });
     }
 }

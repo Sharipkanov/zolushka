@@ -1,10 +1,10 @@
 ///<reference path="../../../../node_modules/rxjs/add/operator/map.d.ts"/>
-import { Injectable, Inject, Output, EventEmitter } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import {Injectable, Inject, Output, EventEmitter} from '@angular/core';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
-import { StorageService } from '../storage/storage.service';
-import { ILogin } from '../../interfaces/login.interface';
-import { HttpService } from '../http/http.service';
+import {StorageService} from '../storage/storage.service';
+import {ILogin} from '../../interfaces/login.interface';
+import {HttpService} from '../http/http.service';
 
 @Injectable()
 export class UserService {
@@ -34,7 +34,7 @@ export class UserService {
 
         headers.append('Authorization', 'Basic ' + btoa(data.email + ':' + data.password));
         const login = this._http
-            .post(`/api/auth/token`, { ...data }, { headers: headers });
+            .post(`/api/auth/token`, {...data}, {headers: headers});
 
 
         login.subscribe((response) => {
@@ -74,10 +74,9 @@ export class UserService {
     info_update(): Promise<any> {
         // let user_info: object = {};
         return new Promise((resolve, reject) => {
-            const headers: Headers = new Headers();
-            headers.append('Authorization', 'token ' + this._storageService.get('token'));
+            const headers = this.setHeaders();
 
-            this._http.get(`/api/api/client/base-info`, { headers: headers })
+            this._http.get(`/api/api/client/base-info`, {headers: headers})
                 .toPromise()
                 .then(response => {
                     response = response.json();
@@ -91,12 +90,11 @@ export class UserService {
         });
     }
 
-    profile_page_info(): Promise<any> {
+    profilePageInfo(): Promise<any> {
         return new Promise((resolve, reject) => {
-            const headers: Headers = new Headers();
-            headers.append('Authorization', 'token ' + this._storageService.get('token'));
+            const headers = this.setHeaders();
 
-            this._http.get(`/api/api/client/${this.info().id}`, { headers: headers })
+            this._http.get(`/api/api/client/${this.info().id}`, {headers: headers})
                 .toPromise()
                 .then(response => {
                     response = response.json();
@@ -107,8 +105,30 @@ export class UserService {
         });
     }
 
+    profileUpdate(model): Promise<any> {
+        return new Promise((resolve, reject) => {
+            const headers = this.setHeaders();
+
+            this._http.post('/api/api/client', model, {headers: headers})
+                .toPromise()
+                .then(response => {
+                    response = response.json();
+
+                    resolve(response);
+                });
+        });
+    }
+
     getPhotos($userId) {
         return this._http.get(`api.zolushka.ru/user/${$userId}/photos`).map((response: Response) => response.json());
     }
 
+
+    setHeaders() {
+        const headers: Headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'token ' + this._storageService.get('token'));
+
+        return headers;
+    }
 }
