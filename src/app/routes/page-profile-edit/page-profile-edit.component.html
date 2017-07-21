@@ -89,7 +89,7 @@
                     </div>
                     <div class="field-input">
                         <app-select-box (updateState)="updateState($event)" [name]="'relationshipTypes'"
-                                        [items]="enums['relationship-type']" [multiple]="true"></app-select-box>
+                                        [items]="enums['relationshipType']" [multiple]="true"></app-select-box>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -176,7 +176,7 @@
                     </div>
                     <div class="field-input">
                         <app-select-box (updateState)="updateState($event)" [name]="'hairColor'"
-                                        [items]="enums['hair-color']"></app-select-box>
+                                        [items]="enums['hairColor']"></app-select-box>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -186,7 +186,7 @@
                     </div>
                     <div class="field-input">
                         <app-select-box (updateState)="updateState($event)" [name]="'eyeColor'"
-                                        [items]="enums['eye-color']"></app-select-box>
+                                        [items]="enums['eyeColor']"></app-select-box>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -198,7 +198,7 @@
                     </div>
                     <div class="field-input">
                         <app-select-box (updateState)="updateState($event)" [name]="'sexualPeriodicity'"
-                                        [items]="enums['sexual-periodicity']"></app-select-box>
+                                        [items]="enums['sexualPeriodicity']"></app-select-box>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -207,7 +207,7 @@
                         Роль в сексе
                     </div>
                     <div class="field-input">
-                        <app-radio-box-label [name]="'sexualRole'" [items]="enums['sexual-role']"
+                        <app-radio-box-label [name]="'sexualRole'" [items]="enums['sexualRole']"
                                              (updateState)="updateState($event)"></app-radio-box-label>
                     </div>
                     <div class="field-note"></div>
@@ -217,7 +217,7 @@
                         Вид секса
                     </div>
                     <div class="field-input">
-                        <app-checbox-box-label [name]="'sexualKinds'" [items]="enums['sexual-kind']"
+                        <app-checbox-box-label [name]="'sexualKinds'" [items]="enums['sexualKind']"
                                                (updateState)="updateState($event)" [typeArray]="true"></app-checbox-box-label>
                     </div>
                     <div class="field-note"></div>
@@ -227,7 +227,7 @@
                         Ориентация
                     </div>
                     <div class="field-input">
-                        <app-radio-box-label [name]="'sexualPreference'" [items]="enums['sexual-preference']"
+                        <app-radio-box-label [name]="'sexualPreference'" [items]="enums['sexualPreference']"
                                              [combined]="true"
                                              (updateState)="updateState($event)"></app-radio-box-label>
                     </div>
@@ -250,7 +250,7 @@
                         Отношения
                     </div>
                     <div class="field-input">
-                        <app-radio-box-label [name]="'relationshipState'" [items]="enums['relationship-state']"
+                        <app-radio-box-label [name]="'relationshipState'" [items]="enums['relationshipState']"
                                              [combined]="true"
                                              (updateState)="updateState($event)"></app-radio-box-label>
                     </div>
