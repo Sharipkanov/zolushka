@@ -1,17 +1,23 @@
 {
   "/api/auth": {
-    "target": "http://auth.test.denim.cc:8091/",
+    "target": "https://auth.test.denim.cc/",
     "secure": false,
-    "pathRewrite": {"^/api/auth" : ""}
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {"^/api/auth" : "https://auth.test.denim.cc/"}
   },
   "/api/api": {
-    "target": "http://api.test.denim.cc:8092/",
+    "target": "https://api.test.denim.cc/",
     "secure": false,
-    "pathRewrite": {"^/api/api" : ""}
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {"^/api/api" : "https://api.test.denim.cc/"}
   },
   "/api/media": {
-    "target": "http://media.test.denim.cc:8093/",
+    "target": "https://media.test.denim.cc/",
     "secure": false,
-    "pathRewrite": {"^/api/media" : ""}
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {"^/api/media" : "https://media.test.denim.cc/"}
   }
 }
