@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import {UserService} from '../../services/user/user.service';
 import {Http} from '@angular/http';
-import {DateService} from "../../services/date/date.service";
+import {DateService} from '../../services/date/date.service';
 
 @Component({
     selector: 'app-page-profile-edit',
     templateUrl: './page-profile-edit.component.html',
     styleUrls: ['./../page-profile/page-profile.component.sass']
 })
-export class PageProfileEditComponent implements OnInit {
+export class PageProfileEditComponent implements OnInit, AfterContentChecked {
 
     public model = {
         name: '',
@@ -21,7 +21,7 @@ export class PageProfileEditComponent implements OnInit {
         'breastSize': [],
         'hairColor': [],
         'higherEducation': [],
-        'hobby': [],
+        'hobbies': [],
         'physique': [],
         'relationshipState': [],
         'relationshipType': [],
@@ -53,6 +53,10 @@ export class PageProfileEditComponent implements OnInit {
 
     }
 
+    ngAfterContentChecked() {
+
+    }
+
     updateState(event) {
         this.model[event.field] = event.value;
         console.log(this.model);
@@ -63,6 +67,7 @@ export class PageProfileEditComponent implements OnInit {
         this._http.get('/api/api/reference/client/list')
             .map(response => response.json())
             .subscribe(response => {
+                console.log(response);
                 _self._dateService.getDatePicker().then(res => {
                     console.log(res);
                     _self.enums = response;
