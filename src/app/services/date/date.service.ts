@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {reject} from 'q';
-import {Http} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { reject } from 'q';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class DateService {
@@ -28,13 +28,8 @@ export class DateService {
         return newDate;
     }
 
-    getDatePicker(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this._http.get('./assets/json/date_picker.json')
-                .toPromise()
-                .then(response => {
-                    resolve(response.json());
-                });
-        });
+    getDatePicker() {
+        return this._http.get('./assets/json/date_picker.json')
+            .map(res => res.json());
     }
 }

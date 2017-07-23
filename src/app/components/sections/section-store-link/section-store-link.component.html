@@ -1,11 +1,11 @@
 <section class="section-store-link fw-pt-20 fw-pb-20 fw-color-white{{(backgroundImage) ? ' fw-bg-no-repeat fw-bg-center fw-bg-cover' : ' fw-bg-blue'}}" [ngStyle]="(backgroundImage) ? {'background-image': 'url(/assets/images/section-store-link-bg.jpg)'} : {}">
   <div class="container">
       <div class="fw-flex fw-flex-space-between fw-flex-middle">
-        <form class="fw-flex section-store-link__form">
+        <form [formGroup]="FFooterForm" class="fw-flex section-store-link__form">
           <p class="fw-mr-15 fw-flex-shrink-no">Получить ссылку на <br>приложение</p>
           <div class="fw-flex fw-flex-middle fw-flex-grow">
             <div class="fw-flex-grow">
-              <app-input-box [placeholder]="'Например: + 7(123) 456-78-90'" [name]="'phone'" [classes]="'fw-br-5'"></app-input-box>
+              <app-input-box formControlName="phone" [placeholder]="'Например: + 7(123) 456-78-90'" [classes]="'fw-br-5'"></app-input-box>
             </div>
             <div class="fw-flex-shink-no fw-ml-10"><button type="submit" class="button button--primary section-store-link__btn">Получить</button></div>
             <div class="fw-flex-shink-no fw-ml-10"><a href="#"></a></div>

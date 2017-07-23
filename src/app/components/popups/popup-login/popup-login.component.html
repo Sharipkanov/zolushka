@@ -3,12 +3,12 @@
         <div class="fw-text-center fw-fz-24 fw-mb-20">
             Вход
         </div>
-        <form (ngSubmit)="loginFormSubmit($event)">
+        <form [formGroup]="FLogin" (ngSubmit)="loginFormSubmit($event)">
             <div class="form-line fw-mb-10">
-                <app-input-box [name]="'email'" [placeholder]="'E-mail'" (updateState)="updateState($event)"></app-input-box>
+                <app-input-box formControlName="email" [placeholder]="'E-mail'"></app-input-box>
             </div>
             <div class="form-line fw-mb-10">
-                <app-input-box [name]="'password'" [type]="'password'" [placeholder]="'Пароль'" (updateState)="updateState($event)"></app-input-box>
+                <app-input-box formControlName="password" [type]="'password'" [placeholder]="'Пароль'"></app-input-box>
             </div>
             <div class="form-line">
                 <button class="button button--primary fw-width-1-1">Войти</button>

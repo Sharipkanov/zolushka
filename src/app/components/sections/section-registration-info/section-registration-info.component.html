@@ -13,43 +13,40 @@
                 </div>
             </div>
             <div class="fw-width-1-2">
-                <form (ngSubmit)="userRegister($event)">
+                <form [formGroup]="FRegistration" (ngSubmit)="userRegister($event)">
                     <div class="fw-mb-10">
-                        <app-input-box [placeholder]="'E-mail'" [error]="!!errors['email']" [type]="'email'" [classes]="'fw-br-3'" [name]="'email'" (updateState)="updateState($event)"></app-input-box>
+                        <app-input-box [placeholder]="'E-mail'" [error]="!!errors['email']" [type]="'email'" [classes]="'fw-br-3'" formControlName="email"></app-input-box>
 
                         <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['email']">{{errors['email']}}</div>
                     </div>
                     <div class="fw-mb-10">
-                        <app-input-box [placeholder]="'Придумайте пароль'" [error]="!!errors['password']" [type]="'password'" [classes]="'fw-br-3'"
-                                       [name]="'password'" (updateState)="updateState($event)"></app-input-box>
+                        <app-input-box [placeholder]="'Придумайте пароль'" [error]="!!errors['password']" [type]="'password'" [classes]="'fw-br-3'" formControlName="password"></app-input-box>
 
                         <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['password']">{{errors['password']}}</div>
                     </div>
                     <div class="fw-mb-10">
-                        <app-input-box [placeholder]="'Имя'" [classes]="'fw-br-3'" [error]="!!errors['name']" [name]="'name'" (updateState)="updateState($event)"></app-input-box>
+                        <app-input-box [placeholder]="'Имя'" [classes]="'fw-br-3'" [error]="!!errors['name']" formControlName="name"></app-input-box>
                         <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['name']">{{errors['name']}}</div>
                     </div>
                     <div class="fw-mb-10">
-                        <app-select-search-box [classes]="'search-bar__select-search-box'" (search)="getLocations($event)" [name]="'city'" [placeholder]="'Город'" [iconClass]="'icon-form-navigator'" [items]="locations" (updateState)="updateState($event)"></app-select-search-box>
-                        <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['city']">{{errors['city']}}</div>
+                        <app-select-search-box [classes]="'search-bar__select-search-box'" (search)="getLocations($event)" [placeholder]="'Город'" [iconClass]="'icon-form-navigator'" [items]="locations" formControlName="cityId"></app-select-search-box>
+                        <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['cityId']">{{errors['cityId']}}</div>
                     </div>
                     <div class="fw-mb-10">
-                        <app-radio-box-label [fullWidth]="true" [combined]="true" [name]="'type'" [items]="type_picker" (updateState)="updateState($event)"></app-radio-box-label>
+                        <app-radio-box-label [fullWidth]="true" [combined]="true" [items]="type_picker" formControlName="type"></app-radio-box-label>
                         <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['type']">{{errors['type']}}</div>
                     </div>
                     <div class="fw-mb-10 fw-grid fw-grid-15">
                         <div class="fw-width-1-3">
-                            <app-select-box [iconClass]="'icon-form-triangle'" [name]="'birth_date'" [items]="form_birth_date" (updateState)="updateState($event)"></app-select-box>
-                            <div class="fw-error-message fw-color-red fw-mt-5 fw-width-1-1" *ngIf="!!errors['birth_date']">{{errors['birth_date']}}</div>
+                            <app-select-box [iconClass]="'icon-form-triangle'" [items]="date_picker['day']" formControlName="birth_date"></app-select-box>
                         </div>
                         <div class="fw-width-1-3">
-                            <app-select-box [iconClass]="'icon-form-triangle'" [name]="'birth_month'" [items]="form_birth_month" (updateState)="updateState($event)"></app-select-box>
-                            <div class="fw-error-message fw-color-red fw-mt-5 fw-width-1-1" *ngIf="!!errors['birth_month']">{{errors['birth_month']}}</div>
+                            <app-select-box [iconClass]="'icon-form-triangle'" formControlName="birth_month" [items]="date_picker['month']"></app-select-box>
                         </div>
                         <div class="fw-width-1-3">
-                            <app-select-box [iconClass]="'icon-form-triangle'" [name]="'birth_year'" [items]="form_birth_year" (updateState)="updateState($event)"></app-select-box>
-                            <div class="fw-error-message fw-color-red fw-mt-5 fw-width-1-1" *ngIf="!!errors['birth_year']">{{errors['birth_year']}}</div>
+                            <app-select-box [iconClass]="'icon-form-triangle'" formControlName="birth_year" [items]="date_picker['year']"></app-select-box>
                         </div>
+                        <div class="fw-error-message fw-color-red fw-mt-10-inverse fw-width-1-1" *ngIf="!!errors['birthdate']">{{errors['birthdate']}}</div>
                     </div>
                     <div class="fw-mt-15">
                         <button type="submit" class="button button--primary fw-width-1-1">Зарегистрироваться</button>

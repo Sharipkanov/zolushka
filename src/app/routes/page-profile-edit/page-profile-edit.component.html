@@ -34,9 +34,8 @@
                         Имя
                     </div>
                     <div class="field-input">
-                        <app-input-box [name]="'name'" [placeholder]="'Ваше имя'"
-                                       (updateState)="updateState($event)"
-                                       [value]="model['name']"></app-input-box>
+                        <app-input-box formControlName="name" [placeholder]="'Ваше имя'"
+                                       (updateState)="updateState($event)"></app-input-box>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -102,7 +101,7 @@
                     <div class="field-input">
                         <div class="fw-flex fw-mb-15">
                             <div class="fw-flex-grow fw-mr-15">
-                                <app-input-box [name]="'phone'"
+                                <app-input-box formControlName="phone"
                                                [placeholder]="'Введите номер телефона'"
                                                (updateState)="updateState($event)"></app-input-box>
                             </div>
@@ -132,7 +131,7 @@
                     </div>
                     <div class="field-input">
                         <div class="fw-width-2-3">
-                            <app-input-box [name]="'height'" [tooltip]="'см'" (updateState)="updateState($event)"></app-input-box>
+                            <app-input-box formControlName="height" [tooltip]="'см'"></app-input-box>
                         </div>
                     </div>
                     <div class="field-note"></div>
@@ -144,7 +143,7 @@
                     <div class="field-input">
                         <div class="fw-width-2-3">
                             <div class="input-box">
-                                <app-input-box [name]="'weight'" [tooltip]="'кг'" (updateState)="updateState($event)"></app-input-box>
+                                <app-input-box formControlName="weight" [tooltip]="'кг'"></app-input-box>
                             </div>
                         </div>
                     </div>

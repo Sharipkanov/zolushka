@@ -103,7 +103,7 @@ import {DateService} from "./services/date/date.service";
         JsonpModule,
         OwlModule,
         FormsModule,
-        // ReactiveFormsModule
+        ReactiveFormsModule
     ],
     providers: [
         StorageService,

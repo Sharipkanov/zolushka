@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PopupsService } from '../../../services/popups/popups.service';
 import { UserService } from '../../../services/user/user.service';
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
 @Component({
     selector: 'app-popup-login',
@@ -9,27 +10,24 @@ import { UserService } from '../../../services/user/user.service';
 })
 export class PopupLoginComponent implements OnInit {
 
-    @Input()
-    public visible: boolean = false;
-    public model: object = {
-        email: '',
-        password: ''
-    };
+    @Input() visible: boolean = false;
 
-    constructor(private _popupsService: PopupsService, private _userService: UserService) {
+    public FLogin: FormGroup;
+
+    constructor(private fb: FormBuilder, private _popupsService: PopupsService, private _userService: UserService) {
     }
 
     ngOnInit() {
+        this.FLogin = this.fb.group({
+            email: '',
+            password: '',
+        });
+
         this._userService.onChangeToken.subscribe((token: string) => {
             if (token !== '') {
                 this._popupsService.closePopup('login');
             }
         });
-    }
-
-    updateState(event) {
-        this.model[event.field] = event.value;
-        console.log(this.model);
     }
 
     closePopup(e) {
@@ -42,9 +40,11 @@ export class PopupLoginComponent implements OnInit {
         e.preventDefault();
 
         const data = {
-            email: this.model['email'],
-            password: this.model['password']
+            email: this.FLogin.value.email,
+            password: this.FLogin.value.password
         };
+
+        console.log(data);
 
         this._userService.login(data);
     }

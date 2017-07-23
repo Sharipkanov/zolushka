@@ -68,7 +68,7 @@ export class PageProfileEditComponent implements OnInit, AfterContentChecked {
             .map(response => response.json())
             .subscribe(response => {
                 console.log(response);
-                _self._dateService.getDatePicker().then(res => {
+                _self._dateService.getDatePicker().subscribe(res => {
                     console.log(res);
                     _self.enums = response;
                     _self.enums.datePicker = res;

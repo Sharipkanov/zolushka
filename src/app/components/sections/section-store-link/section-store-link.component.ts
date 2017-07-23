@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-section-store-link',
@@ -7,6 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SectionStoreLinkComponent implements OnInit {
   @Input() backgroundImage: boolean = false;
+
+  public FFooterForm = new FormGroup({
+    phone: new FormControl('')
+  });
 
   constructor() { }
 

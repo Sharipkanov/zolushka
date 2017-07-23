@@ -3,12 +3,12 @@
     <p class="fw-fw-600 fw-fz-26 fw-text-center fw-mb-15">Регистрация</p>
     <p class="fw-text-center fw-mb-25">Это современная интернет-площадка с уникальным для своей ниши функционалом. Мы сделали ваш поиск своей золушки максимально удобным, чтобы сэкономить ваше время и доставить яркие эмоции во время пользования нашим сервисом.</p>
     <div class="fw-text-center">
-      <form action="" class="fw-width-410 fw-inline-block fw-text-left">
-        <div><app-input-box [placeholder]="'E-mail'" [name]="'email'"></app-input-box></div>
-        <div class="fw-mt-15"><app-input-box [placeholder]="'Пароль'" [name]="'password'"></app-input-box></div>
-        <div class="fw-mt-15"><app-input-box [placeholder]="'Город'" [name]="'location'"></app-input-box></div>
+      <form [formGroup]="FRegistration" class="fw-width-410 fw-inline-block fw-text-left">
+        <div><app-input-box [placeholder]="'E-mail'" formControlName="email"></app-input-box></div>
+        <div class="fw-mt-15"><app-input-box [placeholder]="'Пароль'" formControlName="password"></app-input-box></div>
+        <div class="fw-mt-15"><app-input-box [placeholder]="'Город'" formControlName="cityId"></app-input-box></div>
         <div class="fw-flex fw-mt-15">
-          <div class="fw-flex-grow"><app-input-box [placeholder]="'Имя'" [name]="'name'"></app-input-box></div>
+          <div class="fw-flex-grow"><app-input-box [placeholder]="'Имя'" formControlName="name"></app-input-box></div>
           <div class="fw-flex-shrink-no fw-ml-15">
             <app-radio-box-label [combined]="true" [name]="'gender'" [items]="[{label: 'М', checked: false, value: 'male'}, {label: 'Ж', checked: false, value: 'female'}]"></app-radio-box-label>
           </div>

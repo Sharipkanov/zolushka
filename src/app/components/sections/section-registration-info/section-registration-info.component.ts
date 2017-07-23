@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { ILocation } from '../../../interfaces/location.interface';
 import { LocationService } from '../../../services/location/location.service';
 import { ISelectSearchBoxItem } from '../../../interfaces/form/select-search-box-item.interface';
 import { UserService } from '../../../services/user/user.service';
+import { DateService } from '../../../services/date/date.service';
 
 @Component({
     selector: 'app-section-registration-info',
@@ -14,17 +15,30 @@ import { UserService } from '../../../services/user/user.service';
 })
 export class SectionRegistrationInfoComponent implements OnInit {
 
+    public FRegistration = new FormGroup({
+        email: new FormControl(''),
+        name: new FormControl(''),
+        password: new FormControl(''),
+        cityId: new FormControl(''),
+        type: new FormControl(''),
+        day: new FormControl(''),
+        month: new FormControl(''),
+        year: new FormControl(''),
+    });
+
     public user: object = {};
     public errors: object = {};
-    public form_birth_date: Array<object> = [];
-    public form_birth_month: Array<object> = [];
-    public form_birth_year: Array<object> = [];
+    public date_picker = {
+        day: [],
+        month: [],
+        year: []
+    };
     public type_picker: Array<object> = [];
 
     public locations: Array<ISelectSearchBoxItem> = [];
     public purposes: Array<Object> = [];
 
-    constructor(private _http: Http, private _locationService: LocationService, private _userService: UserService) {
+    constructor(private _http: Http, private _locationService: LocationService, private _userService: UserService, private _dateService: DateService) {
     }
 
     initLocation(locationName: string = null) {
@@ -57,9 +71,11 @@ export class SectionRegistrationInfoComponent implements OnInit {
 
         this._http.post('/api/auth/signup', { ...this.user }, { headers: headers })
             .subscribe(response => {
+                console.log(response);
                 this.errors = [];
                 this._userService.setToken(response.json().accessToken);
             }, error => {
+                console.log(error);
                 this.errors = [];
                 if (error) {
                     const res = error.json();
@@ -78,15 +94,7 @@ export class SectionRegistrationInfoComponent implements OnInit {
     }
 
     initBirthPicker() {
-        this._http.get('./assets/json/date_picker.json')
-            .map(response => response.json())
-            .subscribe(response => this.form_birth_date = response);
-        this._http.get('./assets/json/month_picker.json')
-            .map(response => response.json())
-            .subscribe(response => this.form_birth_month = response);
-        this._http.get('./assets/json/year_picker.json')
-            .map(response => response.json())
-            .subscribe(response => this.form_birth_year = response);
+        this._dateService.getDatePicker().subscribe(res => this.date_picker = res);
     }
 
     initTypePicker() {
