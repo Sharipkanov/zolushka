@@ -20,7 +20,7 @@ export class PageProfileComponent implements OnInit {
         this.getEnums().then(response => this.enums = response);
 
 
-        this._userService.profilePageInfo().then(res => {
+        this._userService.profilePageInfo().subscribe(res => {
             this.model = res;
 
             console.log(this.model);

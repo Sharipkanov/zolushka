@@ -15,7 +15,7 @@ export class LocationService {
       url = `${url}/?title=${cityName}`;
     }
 
-    return this._http.get(url).map((response: Response) => response.json());
+    return this._http.get(url).map((response: Response) => response.json()._embedded.city);
   }
 
 }

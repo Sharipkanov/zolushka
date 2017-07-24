@@ -29,8 +29,8 @@
                         <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['name']">{{errors['name']}}</div>
                     </div>
                     <div class="fw-mb-10">
-                        <app-select-search-box [classes]="'search-bar__select-search-box'" ngDefaultControl (search)="getLocations($event)" [placeholder]="'Город'" [iconClass]="'icon-form-navigator'" [items]="locations" formControlName="cityId"></app-select-search-box>
-                        <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['cityId']">{{errors['cityId']}}</div>
+                        <app-select-search-box [classes]="'search-bar__select-search-box'" ngDefaultControl (search)="getLocations($event)" [placeholder]="'Город'" [iconClass]="'icon-form-navigator'" [items]="locations" formControlName="city"></app-select-search-box>
+                        <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['city']">{{errors['city']}}</div>
                     </div>
                     <div class="fw-mb-10">
                         <app-radio-box-label [fullWidth]="true" [combined]="true" [items]="type_picker" formControlName="type"></app-radio-box-label>

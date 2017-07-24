@@ -38,7 +38,7 @@ export class PageProfileEditComponent implements AfterContentChecked {
     };
 
     constructor(private _fb: FormBuilder, private _userService: UserService, private _http: Http, private _dateService: DateService) {
-        this._userService.profilePageInfo().then(res => {
+        this._userService.profilePageInfo().subscribe(res => {
             this.model = res;
 
             this.model['birthdateDecoded'] = this._dateService.dateDecode(res['birthdate']);
