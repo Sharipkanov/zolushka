@@ -81,7 +81,7 @@ export class SectionRegistrationInfoComponent implements OnInit {
 
         headers.append('Content-Type', 'application/json');
 
-        this._http.post('/api/auth/signup', {...this.user}, {headers: headers})
+        this._http.post('/api/auth/signup', {...this.FRegistration.value}, {headers: headers})
             .subscribe(response => {
                 console.log(response);
                 this.errors = [];

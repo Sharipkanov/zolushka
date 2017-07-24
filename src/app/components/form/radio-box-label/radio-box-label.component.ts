@@ -17,13 +17,11 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 })
 export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit {
     @Input() classes: string = '';
-    // @Input() name: string = '';
     @Input() items: Array<IRadioBoxLabelItem> = [];
     @Input() combined: boolean = false;
     @Input() combinedStyle: boolean = false;
     @Input() fullWidth: boolean = false;
 
-    public inputValue: any;
     private propagateChange = (_: any) => {
     };
 
@@ -31,15 +29,9 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit {
     }
 
     ngOnInit() {
-        setTimeout(() => {
-            console.log(this.items)
-        }, 2000)
     }
 
     writeValue(value: any) {
-        if (value !== undefined) {
-            this.inputValue = value;
-        }
     }
 
     registerOnChange(fn: any) {
@@ -49,9 +41,14 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit {
     registerOnTouched() {
     }
 
-    updateParent() {
-        console.log(this.inputValue);
-        this.propagateChange(this.inputValue);
+    updateParent(itemIndex) {
+        for (let i = 0; i < this.items.length; i++) {
+            const item = this.items[i];
+
+            (i !== itemIndex) ? item.checked = false : item.checked = true;
+        }
+
+        this.propagateChange(this.items[itemIndex].value);
     }
 
 }

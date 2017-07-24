@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
@@ -15,10 +15,8 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 })
 export class InputBoxComponent implements OnInit {
     @Input() placeholder: string = '';
-    // @Input() value: string = '';
     @Input() classes: string = '';
     @Input() tooltip: string = '';
-    // @Input() name: string = '';
     @Input() type: string = 'text';
     @Input() error: boolean = false;
 

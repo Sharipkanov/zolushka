@@ -2,9 +2,9 @@
   <div class="{{(!combined) ? 'radio-box-label' : 'radio-box-label-combined'}}
   {{(combinedStyle) ? ' radio-box-label-combined--style' : ''}}
   {{(classes.length) ? ' ' + classes : ''}}"
-       *ngFor="let item of items">
+       *ngFor="let item of items; let i = index">
     <label>
-      <input type="radio" [(ngModel)]="inputValue" name="1" [checked]="item.checked" value="{{item.id}}" (change)="updateParent($event)">
+      <input type="radio" [checked]="item.checked" (change)="updateParent(i)">
       <span>{{item.title}}</span>
     </label>
   </div>
