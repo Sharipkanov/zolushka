@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
-import { ILocation } from '../../../interfaces/location.interface';
-import { LocationService } from '../../../services/location/location.service';
-import { ISelectSearchBoxItem } from '../../../interfaces/form/select-search-box-item.interface';
-import { UserService } from '../../../services/user/user.service';
-import { DateService } from '../../../services/date/date.service';
+import {Component, OnInit} from '@angular/core';
+import {Http, Headers} from '@angular/http';
+import {FormBuilder, FormControl, FormGroup, NgForm} from '@angular/forms';
+import {ILocation} from '../../../interfaces/location.interface';
+import {LocationService} from '../../../services/location/location.service';
+import {ISelectSearchBoxItem} from '../../../interfaces/form/select-search-box-item.interface';
+import {UserService} from '../../../services/user/user.service';
+import {DateService} from '../../../services/date/date.service';
 
 @Component({
     selector: 'app-section-registration-info',
@@ -15,16 +15,7 @@ import { DateService } from '../../../services/date/date.service';
 })
 export class SectionRegistrationInfoComponent implements OnInit {
 
-    public FRegistration = new FormGroup({
-        email: new FormControl(''),
-        name: new FormControl(''),
-        password: new FormControl(''),
-        cityId: new FormControl(''),
-        type: new FormControl(''),
-        day: new FormControl(''),
-        month: new FormControl(''),
-        year: new FormControl(''),
-    });
+    public FRegistration: FormGroup;
 
     public user: object = {};
     public errors: object = {};
@@ -38,7 +29,28 @@ export class SectionRegistrationInfoComponent implements OnInit {
     public locations: Array<ISelectSearchBoxItem> = [];
     public purposes: Array<Object> = [];
 
-    constructor(private _http: Http, private _locationService: LocationService, private _userService: UserService, private _dateService: DateService) {
+    constructor(private _fb: FormBuilder, private _http: Http, private _locationService: LocationService, private _userService: UserService, private _dateService: DateService) {
+    }
+
+    ngOnInit() {
+        this.FRegistration = this._fb.group({
+            email: '',
+            name: '',
+            password: '',
+            cityId: '',
+            type: [
+                []
+            ],
+            birthdate: this._fb.group({
+                day: '',
+                month: '',
+                year: '',
+            })
+        });
+
+        this.initLocation();
+        this.initBirthPicker();
+        this.initTypePicker();
     }
 
     initLocation(locationName: string = null) {
@@ -69,7 +81,7 @@ export class SectionRegistrationInfoComponent implements OnInit {
 
         headers.append('Content-Type', 'application/json');
 
-        this._http.post('/api/auth/signup', { ...this.user }, { headers: headers })
+        this._http.post('/api/auth/signup', {...this.user}, {headers: headers})
             .subscribe(response => {
                 console.log(response);
                 this.errors = [];
@@ -110,12 +122,6 @@ export class SectionRegistrationInfoComponent implements OnInit {
                     });
                 });
             });
-    }
-
-    ngOnInit() {
-        this.initLocation();
-        this.initBirthPicker();
-        this.initTypePicker();
     }
 
 }

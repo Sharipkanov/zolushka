@@ -22,10 +22,6 @@ export class InputBoxComponent implements OnInit {
     @Input() type: string = 'text';
     @Input() error: boolean = false;
 
-
-    @Output()
-    updateState: EventEmitter<object> = new EventEmitter<object>();
-
     public inputValue: any;
     private propagateChange = (_: any) => { };
 

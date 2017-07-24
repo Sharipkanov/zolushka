@@ -4,7 +4,7 @@
   {{(classes.length) ? ' ' + classes : ''}}"
        *ngFor="let item of items">
     <label>
-      <input type="radio" name="{{name}}" [checked]="item.checked" value="{{item.id}}" (change)="updateParent($event)">
+      <input type="radio" [(ngModel)]="inputValue" name="1" [checked]="item.checked" value="{{item.id}}" (change)="updateParent($event)">
       <span>{{item.title}}</span>
     </label>
   </div>

@@ -2,18 +2,18 @@ import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import {UserService} from '../../services/user/user.service';
 import {Http} from '@angular/http';
 import {DateService} from '../../services/date/date.service';
+import {FormBuilder, FormControlName, FormGroup} from '@angular/forms';
 
 @Component({
     selector: 'app-page-profile-edit',
     templateUrl: './page-profile-edit.component.html',
     styleUrls: ['./../page-profile/page-profile.component.sass']
 })
-export class PageProfileEditComponent implements OnInit, AfterContentChecked {
+export class PageProfileEditComponent implements AfterContentChecked {
 
-    public model = {
-        name: '',
-        about: ''
-    };
+    public model = {};
+
+    public FProfile: FormGroup;
 
     public enums = {
         'appearance': [],
@@ -37,7 +37,7 @@ export class PageProfileEditComponent implements OnInit, AfterContentChecked {
         }
     };
 
-    constructor(private _userService: UserService, private _http: Http, private _dateService: DateService) {
+    constructor(private _fb: FormBuilder, private _userService: UserService, private _http: Http, private _dateService: DateService) {
         this._userService.profilePageInfo().then(res => {
             this.model = res;
 
@@ -49,17 +49,14 @@ export class PageProfileEditComponent implements OnInit, AfterContentChecked {
         this.getEnums();
     }
 
-    ngOnInit() {
-
-    }
-
     ngAfterContentChecked() {
-
-    }
-
-    updateState(event) {
-        this.model[event.field] = event.value;
-        console.log(this.model);
+        this.FProfile = this._fb.group({
+            name: this.model['name'],
+            aboutMe: '',
+            height: '',
+            weight: '',
+            phone: '',
+        })
     }
 
     getEnums() {

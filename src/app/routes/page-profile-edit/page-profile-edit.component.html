@@ -27,15 +27,14 @@
                 </div>
             </div>
         </div>
-        <form (ngSubmit)="saveProfileData($event)" class="profile-edit__form">
+        <form [formGroup]="FProfile" (ngSubmit)="saveProfileData($event)" class="profile-edit__form">
             <div class="form-section">
                 <div class="form-line fw-flex fw-flex-middle fw-mb-30">
                     <div class="field-title">
                         Имя
                     </div>
                     <div class="field-input">
-                        <app-input-box formControlName="name" [placeholder]="'Ваше имя'"
-                                       (updateState)="updateState($event)"></app-input-box>
+                        <app-input-box formControlName="name" [placeholder]="'Ваше имя'"></app-input-box>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -48,17 +47,17 @@
                             <div class="fw-width-1-3">
                                 <app-select-box [iconClass]="'icon-form-triangle'" [name]="'birth_date'"
                                                 [items]="enums['datePicker']['day']"
-                                                (updateState)="updateState($event)"></app-select-box>
+                                ></app-select-box>
                             </div>
                             <div class="fw-width-1-3">
                                 <app-select-box [iconClass]="'icon-form-triangle'" [name]="'birth_month'"
                                                 [items]="enums['datePicker']['month']"
-                                                (updateState)="updateState($event)"></app-select-box>
+                                ></app-select-box>
                             </div>
                             <div class="fw-width-1-3">
                                 <app-select-box [iconClass]="'icon-form-triangle'" [name]="'birth_year'"
                                                 [items]="enums['datePicker']['year']"
-                                                (updateState)="updateState($event)"></app-select-box>
+                                ></app-select-box>
                             </div>
                         </div>
                     </div>
@@ -70,9 +69,8 @@
                     </div>
                     <div class="field-input">
                         <div class="textarea-box">
-                            <app-textarea-box [value]="model['aboutMe']" [name]="'aboutMe'"
-                                              [placeholder]="'О себе'"
-                                              (updateState)="updateState($event)"></app-textarea-box>
+                            <app-textarea-box [value]="model['aboutMe']" formControlName="aboutMe"
+                                              [placeholder]="'О себе'"></app-textarea-box>
                         </div>
                     </div>
                     <div class="field-note">
@@ -87,7 +85,7 @@
                         Цель знакомства
                     </div>
                     <div class="field-input">
-                        <app-select-box (updateState)="updateState($event)" [name]="'relationshipTypes'"
+                        <app-select-box formControlName="relationshipTypes"
                                         [items]="enums['relationshipType']" [multiple]="true"></app-select-box>
                     </div>
                     <div class="field-note"></div>
@@ -103,7 +101,7 @@
                             <div class="fw-flex-grow fw-mr-15">
                                 <app-input-box formControlName="phone"
                                                [placeholder]="'Введите номер телефона'"
-                                               (updateState)="updateState($event)"></app-input-box>
+                                ></app-input-box>
                             </div>
                             <div>
                                 <a href="#" class="button button--primary">Подключить</a>
@@ -111,8 +109,7 @@
                         </div>
                         <div class="fw-flex">
                             <app-checbox-box [name]="'phone_allow'"
-                                             [items]="[{label: 'Использовать мой номер для получения сообщений с сайта по СМС', checked: false}]"
-                                             (updateState)="updateState($event)"></app-checbox-box>
+                                             [items]="[{label: 'Использовать мой номер для получения сообщений с сайта по СМС', checked: false}]"></app-checbox-box>
                         </div>
                     </div>
                     <div class="field-note">
@@ -154,7 +151,7 @@
                         Внешность
                     </div>
                     <div class="field-input">
-                        <app-select-box (updateState)="updateState($event)" [name]="'appearance'"
+                        <app-select-box formControlName="appearance"
                                         [items]="enums['appearance']"></app-select-box>
                     </div>
                     <div class="field-note"></div>
@@ -164,7 +161,7 @@
                         Телосложение
                     </div>
                     <div class="field-input">
-                        <app-select-box (updateState)="updateState($event)" [name]="'physique'"
+                        <app-select-box formControlName="physique"
                                         [items]="enums['physique']"></app-select-box>
                     </div>
                     <div class="field-note"></div>
@@ -174,7 +171,7 @@
                         Цвет волос
                     </div>
                     <div class="field-input">
-                        <app-select-box (updateState)="updateState($event)" [name]="'hairColor'"
+                        <app-select-box formControlName="hairColor"
                                         [items]="enums['hairColor']"></app-select-box>
                     </div>
                     <div class="field-note"></div>
@@ -184,7 +181,7 @@
                         Цвет глаз
                     </div>
                     <div class="field-input">
-                        <app-select-box (updateState)="updateState($event)" [name]="'eyeColor'"
+                        <app-select-box formControlName="eyeColor"
                                         [items]="enums['eyeColor']"></app-select-box>
                     </div>
                     <div class="field-note"></div>
@@ -196,7 +193,7 @@
                         Периодичность в сексе
                     </div>
                     <div class="field-input">
-                        <app-select-box (updateState)="updateState($event)" [name]="'sexualPeriodicity'"
+                        <app-select-box formControlName="sexualPeriodicity"
                                         [items]="enums['sexualPeriodicity']"></app-select-box>
                     </div>
                     <div class="field-note"></div>
@@ -206,8 +203,8 @@
                         Роль в сексе
                     </div>
                     <div class="field-input">
-                        <app-radio-box-label [name]="'sexualRole'" [items]="enums['sexualRole']"
-                                             (updateState)="updateState($event)"></app-radio-box-label>
+                        <app-radio-box-label formControlName="sexualRole" [items]="enums['sexualRole']"
+                        ></app-radio-box-label>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -216,8 +213,8 @@
                         Вид секса
                     </div>
                     <div class="field-input">
-                        <app-checbox-box-label [name]="'sexualKinds'" [items]="enums['sexualKind']"
-                                               (updateState)="updateState($event)" [typeArray]="true"></app-checbox-box-label>
+                        <app-checbox-box-label formControlName="sexualKinds" [items]="enums['sexualKind']"
+                                               [typeArray]="true"></app-checbox-box-label>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -226,9 +223,8 @@
                         Ориентация
                     </div>
                     <div class="field-input">
-                        <app-radio-box-label [name]="'sexualPreference'" [items]="enums['sexualPreference']"
-                                             [combined]="true"
-                                             (updateState)="updateState($event)"></app-radio-box-label>
+                        <app-radio-box-label formControlName="sexualPreference" [items]="enums['sexualPreference']"
+                                             [combined]="true"></app-radio-box-label>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -237,7 +233,7 @@
                         Интересы
                     </div>
                     <div class="field-input">
-                        <app-select-box [placeholder]="'Интересы'" (updateState)="updateState($event)" [name]="'hobbies'"
+                        <app-select-box [placeholder]="'Интересы'" formControlName="hobbies"
                                         [items]="enums['hobbies']" [multiple]="true"></app-select-box>
                     </div>
                     <div class="field-note"></div>
@@ -249,9 +245,8 @@
                         Отношения
                     </div>
                     <div class="field-input">
-                        <app-radio-box-label [name]="'relationshipState'" [items]="enums['relationshipState']"
-                                             [combined]="true"
-                                             (updateState)="updateState($event)"></app-radio-box-label>
+                        <app-radio-box-label formControlName="relationshipState" [items]="enums['relationshipState']"
+                                             [combined]="true"></app-radio-box-label>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -262,9 +257,9 @@
                         Дети
                     </div>
                     <div class="field-input">
-                        <app-radio-box-label [name]="'childrenExist'" [items]="[{title: 'Есть', id: true}, {title: 'Нет', id: false}]"
-                                             [combined]="true"
-                                             (updateState)="updateState($event)"></app-radio-box-label>
+                        <app-radio-box-label formControlName="childrenExist"
+                                             [items]="[{title: 'Есть', id: true}, {title: 'Нет', id: false}]"
+                                             [combined]="true"></app-radio-box-label>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -272,7 +267,8 @@
             <div class="form-buttons">
                 <button class="button button--primary fw-mr-10">Сохранить</button>
                 <a routerLink="/profile" class="button button--default fw-mr-25"><span class="button-empty__text">Просмотреть свой профиль</span></a>
-                <span class="fw-color-grey"><button type="reset" class="fw-reset fw-color-grey">Отменить изменения</button></span>
+                <span class="fw-color-grey"><button type="reset"
+                                                    class="fw-reset fw-color-grey">Отменить изменения</button></span>
             </div>
         </form>
     </div>

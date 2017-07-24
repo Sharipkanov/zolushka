@@ -29,22 +29,22 @@
                         <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['name']">{{errors['name']}}</div>
                     </div>
                     <div class="fw-mb-10">
-                        <app-select-search-box [classes]="'search-bar__select-search-box'" (search)="getLocations($event)" [placeholder]="'Город'" [iconClass]="'icon-form-navigator'" [items]="locations" formControlName="cityId"></app-select-search-box>
+                        <app-select-search-box [classes]="'search-bar__select-search-box'" ngDefaultControl (search)="getLocations($event)" [placeholder]="'Город'" [iconClass]="'icon-form-navigator'" [items]="locations" formControlName="cityId"></app-select-search-box>
                         <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['cityId']">{{errors['cityId']}}</div>
                     </div>
                     <div class="fw-mb-10">
                         <app-radio-box-label [fullWidth]="true" [combined]="true" [items]="type_picker" formControlName="type"></app-radio-box-label>
                         <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['type']">{{errors['type']}}</div>
                     </div>
-                    <div class="fw-mb-10 fw-grid fw-grid-15">
+                    <div class="fw-mb-10 fw-grid fw-grid-15" formGroupName="birthdate">
                         <div class="fw-width-1-3">
-                            <app-select-box [iconClass]="'icon-form-triangle'" [items]="date_picker['day']" formControlName="birth_date"></app-select-box>
+                            <app-select-box [iconClass]="'icon-form-triangle'" formControlName="day" ngDefaultControl [items]="date_picker['day']"></app-select-box>
                         </div>
                         <div class="fw-width-1-3">
-                            <app-select-box [iconClass]="'icon-form-triangle'" formControlName="birth_month" [items]="date_picker['month']"></app-select-box>
+                            <app-select-box [iconClass]="'icon-form-triangle'" formControlName="month" ngDefaultControl [items]="date_picker['month']"></app-select-box>
                         </div>
                         <div class="fw-width-1-3">
-                            <app-select-box [iconClass]="'icon-form-triangle'" formControlName="birth_year" [items]="date_picker['year']"></app-select-box>
+                            <app-select-box [iconClass]="'icon-form-triangle'" formControlName="year" ngDefaultControl [items]="date_picker['year']"></app-select-box>
                         </div>
                         <div class="fw-error-message fw-color-red fw-mt-10-inverse fw-width-1-1" *ngIf="!!errors['birthdate']">{{errors['birthdate']}}</div>
                     </div>
