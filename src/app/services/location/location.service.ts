@@ -9,10 +9,10 @@ export class LocationService {
   constructor(private _http: Http) { }
 
   getLocations(cityName: string = null) {
-    let url = 'api.zolushka.ru/locations';
+    let url = '/api/api/geo/city';
 
     if (cityName !== null) {
-      url = `${url}/${cityName}`;
+      url = `${url}/?title=${cityName}`;
     }
 
     return this._http.get(url).map((response: Response) => response.json());

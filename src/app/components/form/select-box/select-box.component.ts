@@ -4,23 +4,29 @@ import {
 } from '@angular/core';
 
 import {ISelectBoxItem} from '../../../interfaces/form/select-box-item.interface';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {RadioBoxLabelComponent} from "../radio-box-label/radio-box-label.component";
 
 @Component({
     selector: 'app-select-box',
     templateUrl: './select-box.component.html',
     styleUrls: ['./select-box.component.sass'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: SelectBoxComponent,
+            multi: true
+        }
+    ]
 })
-export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
+export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, ControlValueAccessor {
     @Input() items: Array<ISelectBoxItem> = [];
     @Input() name: string = '';
     @Input() multiple: boolean = false;
     @Input() iconClass: string = 'icon-form-triangle';
     @Input() classes: string = '';
     @Input() placeholder: string = 'Выбрать';
-
-    @Output()
-    updateState: EventEmitter<object> = new EventEmitter<object>();
 
     private selectBox: HTMLElement;
     private selectBoxActiveClass: string = 'select-box--active';
@@ -31,6 +37,10 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
     public selectBoxText: Array<string> = [];
     public selectBoxValues: Array<number> = [];
 
+    public inputValue: any;
+    private propagateChange = (_: any) => {
+    };
+
     @HostListener('document:click', ['$event'])
     clickOutsideOfComponent(e) {
         if (!this._component.nativeElement.contains(e.target)) {
@@ -39,6 +49,16 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
     constructor(private _component: ElementRef) {
+    }
+
+    writeValue(value: any) {
+    }
+
+    registerOnChange(fn: any) {
+        this.propagateChange = fn;
+    }
+
+    registerOnTouched() {
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
@@ -108,10 +128,7 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
                     }
                 });
 
-                this.updateState.emit({
-                    value: selectVals,
-                    field: this.name
-                });
+                this.propagateChange(selectVals);
 
             }
         } else {
@@ -119,10 +136,12 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
                 if (selectBoxIndex === index) {
                     selectBoxItem.selected = true;
 
-                    this.updateState.emit({
-                        value: selectBoxItem.id,
-                        field: this.name
-                    });
+                    this.propagateChange(selectBoxItem.id);
+                    console.log(selectBoxItem.id);
+                    /*this.updateState.emit({
+                     value: selectBoxItem.id,
+                     field: this.name
+                     });*/
                 } else {
                     selectBoxItem.selected = false;
                 }
@@ -148,5 +167,4 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges {
             });
         }
     }
-
 }

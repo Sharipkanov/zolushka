@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { reject } from 'q';
-import { Http } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {reject} from 'q';
+import {Http} from '@angular/http';
 
 @Injectable()
 export class DateService {
@@ -21,9 +21,15 @@ export class DateService {
     dateEncode(date: any) {
         let newDate = '';
 
-        newDate += date.year;
-        newDate += '-' + date.month;
-        newDate += '-' + date.day;
+        if (date.year && date.month && date.day) {
+            newDate += (date.year) ? date.year : '0000';
+            newDate += '-';
+            newDate += (date.month < 10) ? '0' + date.month : date.month;
+            newDate += '-';
+            newDate += (date.day < 10) ? '0' + date.day : date.day;
+        } else {
+            newDate = null;
+        }
 
         return newDate;
     }

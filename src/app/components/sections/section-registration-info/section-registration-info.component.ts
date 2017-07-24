@@ -34,17 +34,15 @@ export class SectionRegistrationInfoComponent implements OnInit {
 
     ngOnInit() {
         this.FRegistration = this._fb.group({
-            email: '',
-            name: '',
-            password: '',
-            cityId: '',
-            type: [
-                []
-            ],
+            email: null,
+            name: null,
+            password: null,
+            cityId: null,
+            type: null,
             birthdate: this._fb.group({
-                day: '',
-                month: '',
-                year: '',
+                day: null,
+                month: null,
+                year: null,
             })
         });
 
@@ -58,6 +56,8 @@ export class SectionRegistrationInfoComponent implements OnInit {
             if (locationName !== null) {
                 this.locations = [];
             }
+
+            console.log(locations);
 
             locations.map((location: ILocation) => {
                 this.locations.push({
@@ -77,28 +77,37 @@ export class SectionRegistrationInfoComponent implements OnInit {
     userRegister(e: Event) {
         e.preventDefault();
 
-        const headers: Headers = new Headers();
+        console.log(this.FRegistration.value)
+        const data = {
+            name: this.FRegistration.value.name,
+            email: this.FRegistration.value.email,
+            cityId: this.FRegistration.value.cityId,
+            password: this.FRegistration.value.password,
+            type: {
+                id: this.FRegistration.value.type
+            },
+            birthdate: this._dateService.dateEncode(this.FRegistration.value.birthdate)
+        };
 
-        headers.append('Content-Type', 'application/json');
+        console.log(data);
 
-        this._http.post('/api/auth/signup', {...this.FRegistration.value}, {headers: headers})
-            .subscribe(response => {
-                console.log(response);
-                this.errors = [];
-                this._userService.setToken(response.json().accessToken);
-            }, error => {
-                console.log(error);
-                this.errors = [];
-                if (error) {
-                    const res = error.json();
+        this._userService.register(data).subscribe(response => {
+            console.log(response);
+            this.errors = [];
+            this._userService.setToken(response.json().accessToken);
+        }, error => {
+            console.log(error);
+            this.errors = [];
+            if (error) {
+                const res = error.json();
 
-                    if (res.errors) {
-                        res.errors.map((value) => {
-                            this.errors[value.field] = value.message;
-                        });
-                    }
+                if (res.errors) {
+                    res.errors.map((value) => {
+                        this.errors[value.field] = value.message;
+                    });
                 }
-            });
+            }
+        });
     }
 
     updateState(event) {

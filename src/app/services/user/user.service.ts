@@ -58,8 +58,12 @@ export class UserService {
         return this.onChangeToken.emit('');
     }
 
-    register(data: object) {
+    register(data) {
+        const headers: Headers = new Headers();
 
+        headers.append('Content-Type', 'application/json');
+
+        return this._http.post('/api/auth/signup', {...data}, {headers: headers});
     }
 
     info() {
