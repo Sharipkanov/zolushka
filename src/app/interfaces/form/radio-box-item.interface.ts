@@ -1,5 +1,5 @@
 export interface IRadioBoxItem {
-  label: string;
+  title: string;
   checked: boolean;
-  value: any;
+  id: any;
 }

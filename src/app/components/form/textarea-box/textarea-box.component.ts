@@ -1,9 +1,17 @@
 import {Component, AfterViewInit, Input, ElementRef, Output, EventEmitter} from '@angular/core';
+import {NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'app-textarea-box',
   templateUrl: './textarea-box.component.html',
-  styleUrls: ['./textarea-box.component.sass']
+  styleUrls: ['./textarea-box.component.sass'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: TextareaBoxComponent,
+      multi: true
+    }
+  ]
 })
 export class TextareaBoxComponent implements AfterViewInit {
   @Input() placeholder: string = '';
@@ -13,10 +21,23 @@ export class TextareaBoxComponent implements AfterViewInit {
   @Input() name: string = '';
   @Input() tooltip_message: string = '';
 
-  @Output()
-  updateState: EventEmitter<object> = new EventEmitter<object>();
+  public inputValue: any;
+  private propagateChange = (_: any) => { };
 
   constructor(private _component: ElementRef) { }
+
+  writeValue(value: any) {
+    if (value !== undefined) {
+      this.inputValue = value;
+    }
+  }
+
+  registerOnChange(fn: any) {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched() {
+  }
 
   ngAfterViewInit() {
     if (this.tooltip.length) {
@@ -39,10 +60,7 @@ export class TextareaBoxComponent implements AfterViewInit {
     }
   }
 
-  updateParent(event) {
-    this.updateState.emit({
-      value: event.target.value,
-      field: this.name
-    });
+  updateParent() {
+    this.propagateChange(this.inputValue);
   }
 }

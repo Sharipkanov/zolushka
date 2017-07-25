@@ -1,4 +1,5 @@
 export interface ICheckBoxLabelItem {
-  label: string;
+  title: string;
   checked: boolean;
+  id: any;
 }

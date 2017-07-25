@@ -1,6 +1,6 @@
-<div class="checkbox-box-label{{(classes.length) ? ' ' + classes : ''}}" *ngFor="let item of items">
+<div class="checkbox-box-label{{(classes.length) ? ' ' + classes : ''}}" *ngFor="let item of items; let i = index">
   <label>
-    <input type="checkbox" value="{{item.id}}" name="{{name}}" [checked]="item.checked" (change)="updateParent(item, $event)">
+    <input type="checkbox" value="{{item.id}}" name="{{name}}" [checked]="item.checked" (change)="updateParent(i, $event)">
     <span>{{item.title}}</span>
   </label>
 </div>

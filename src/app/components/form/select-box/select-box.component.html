@@ -4,7 +4,7 @@
       <option value="{{item.id}}" *ngFor="let item of items | slice: 1; let i = index" [attr.selected]="(item.selected)? '': null">{{item.title}}</option>
     </select>
     <p (click)="selectEvent($event)">
-      <a href="#">{{selectBoxText.join()}}</a>
+      <a href="#">{{selectBoxText.join(', ')}}</a>
       <i class="{{iconClass}}"></i>
     </p>
     <div class="select-box__content">

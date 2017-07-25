@@ -1,5 +1,5 @@
 <div class="textarea-box{{(classes.length) ? ' ' + classes : ''}}">
-  <textarea name="{{name}}" placeholder="{{placeholder}}" (change)="updateParent($event)">{{value}}</textarea>
+  <textarea name="{{name}}" [(ngModel)]="inputValue" placeholder="{{placeholder}}" (change)="updateParent()">{{value}}</textarea>
   <div class="textarea-box__info" *ngIf="tooltip.length">
     <span class="textarea-box__text">{{tooltip_message}}</span>
     <span class="textarea-box__tooltip">{{tooltip}}/<span class="textarea-box__count">0</span></span>

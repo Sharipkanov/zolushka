@@ -54,6 +54,7 @@ import { PageProfileComponent } from './routes/page-profile/page-profile.compone
 import { PageProfileEditComponent } from './routes/page-profile-edit/page-profile-edit.component';
 import { HttpService } from "./services/http/http.service";
 import {DateService} from "./services/date/date.service";
+import {EnumsService} from "./services/enums/enums.service";
 
 @NgModule({
     declarations: [
@@ -113,7 +114,8 @@ import {DateService} from "./services/date/date.service";
         BaseRequestOptions,
         PopupsService,
         HttpService,
-        DateService
+        DateService,
+        EnumsService
     ],
     bootstrap: [AppComponent]
 })

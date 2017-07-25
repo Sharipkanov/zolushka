@@ -1,15 +1,15 @@
-import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user/user.service';
-import {Http} from '@angular/http';
 import {DateService} from '../../services/date/date.service';
-import {FormBuilder, FormControlName, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {EnumsService} from '../../services/enums/enums.service';
 
 @Component({
     selector: 'app-page-profile-edit',
     templateUrl: './page-profile-edit.component.html',
     styleUrls: ['./../page-profile/page-profile.component.sass']
 })
-export class PageProfileEditComponent implements AfterContentChecked {
+export class PageProfileEditComponent implements OnInit {
 
     public model = {};
 
@@ -37,53 +37,74 @@ export class PageProfileEditComponent implements AfterContentChecked {
         }
     };
 
-    constructor(private _fb: FormBuilder, private _userService: UserService, private _http: Http, private _dateService: DateService) {
+    constructor(private _fb: FormBuilder,
+                private _userService: UserService,
+                private _enums: EnumsService,
+                private _dateService: DateService) {
+
+    }
+
+    ngOnInit() {
         this._userService.profilePageInfo().subscribe(res => {
             this.model = res;
 
             this.model['birthdateDecoded'] = this._dateService.dateDecode(res['birthdate']);
 
             console.log(this.model);
+            console.log(this.FProfile.controls.birthdate.value);
+
+            for (const key in this.FProfile.value) {
+                if (!!this.model[key] && typeof this.model[key] === 'string' && typeof this.model[key] === typeof this.FProfile.controls[key].value) {
+                    this.FProfile.controls[key].setValue(this.model[key]);
+                }
+            }
         });
 
-        this.getEnums();
-    }
+        this._enums.getEnums().subscribe(response => {
+            this._dateService.getDatePicker().subscribe(res => {
+                this.enums = response;
+                this.enums.datePicker = res;
+            });
+        });
 
-    ngAfterContentChecked() {
         this.FProfile = this._fb.group({
-            name: this.model['name'],
+            name: '',
             aboutMe: '',
             height: '',
             weight: '',
             phone: '',
-        })
-    }
-
-    getEnums() {
-        const _self = this;
-        this._http.get('/api/api/reference/client/list')
-            .map(response => response.json())
-            .subscribe(response => {
-                console.log(response);
-                _self._dateService.getDatePicker().subscribe(res => {
-                    console.log(res);
-                    _self.enums = response;
-                    _self.enums.datePicker = res;
-                });
-            });
+            birthdate: this._fb.group({
+                day: 2,
+                month: 2,
+                year: 1992
+            }),
+            relationshipTypes: [[100, 200]],
+            relationshipState: [],
+            appearance: 0,
+            physique: 0,
+            hairColor: 0,
+            eyeColor: 0,
+            hobbies: [],
+            sexualKinds: [[100, 200]],
+            sexualPeriodicity: null,
+            sexualPreference: null,
+            sexualRole: null,
+            childrenExist: []
+        });
     }
 
     saveProfileData(e) {
         e.preventDefault();
 
-        console.log('submit');
+        console.log(this.FProfile.value);
 
-        this._userService.profileUpdate(this.model).then(response => {
-            if (response.id !== undefined) {
-                this.model = response;
-            } else {
 
-            }
-        });
+        /*this._userService.profileUpdate(this.model).then(response => {
+         if (response.id !== undefined) {
+         this.model = response;
+         } else {
+
+         }
+         });*/
     }
 }

@@ -4,8 +4,7 @@ import {
 } from '@angular/core';
 
 import {ISelectBoxItem} from '../../../interfaces/form/select-box-item.interface';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {RadioBoxLabelComponent} from "../radio-box-label/radio-box-label.component";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
     selector: 'app-select-box',
@@ -52,6 +51,7 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
     }
 
     writeValue(value: any) {
+        this.inputValue = value;
     }
 
     registerOnChange(fn: any) {
@@ -62,11 +62,34 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+        let selectedFirst = true;
+
+
+        if (this.inputValue !== undefined && this.inputValue !== null) {
+            for (let i = 0; i < this.items.length; i++) {
+                const item = this.items[i];
+
+                console.log(typeof this.inputValue);
+                if (typeof this.inputValue === 'object') {
+                    if (this.inputValue.indexOf(item.id) !== -1) {
+                        item.selected = true;
+                        selectedFirst = false;
+                    }
+                } else {
+                    if (item.id === this.inputValue) {
+                        item.selected = true;
+                        selectedFirst = false;
+                    }
+                }
+
+            }
+        }
+
         this.items.unshift({
             id: '',
             text: this.placeholder,
             title: this.placeholder,
-            selected: true
+            selected: selectedFirst
         });
 
         this.setSelectTexts();
@@ -137,11 +160,6 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
                     selectBoxItem.selected = true;
 
                     this.propagateChange(selectBoxItem.id);
-                    console.log(selectBoxItem.id);
-                    /*this.updateState.emit({
-                     value: selectBoxItem.id,
-                     field: this.name
-                     });*/
                 } else {
                     selectBoxItem.selected = false;
                 }

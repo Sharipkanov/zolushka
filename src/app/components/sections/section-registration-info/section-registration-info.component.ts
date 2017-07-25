@@ -7,6 +7,7 @@ import { ISelectSearchBoxItem } from '../../../interfaces/form/select-search-box
 import { UserService } from '../../../services/user/user.service';
 import { DateService } from '../../../services/date/date.service';
 import { Router } from "@angular/router";
+import {EnumsService} from "../../../services/enums/enums.service";
 
 @Component({
     selector: 'app-section-registration-info',
@@ -30,7 +31,7 @@ export class SectionRegistrationInfoComponent implements OnInit {
     public locations: Array<ISelectSearchBoxItem> = [];
     public purposes: Array<Object> = [];
 
-    constructor(private _router: Router, private _fb: FormBuilder, private _http: Http, private _locationService: LocationService, private _userService: UserService, private _dateService: DateService) {
+    constructor(private _enums: EnumsService, private _router: Router, private _fb: FormBuilder, private _http: Http, private _locationService: LocationService, private _userService: UserService, private _dateService: DateService) {
     }
 
     ngOnInit() {
@@ -48,8 +49,16 @@ export class SectionRegistrationInfoComponent implements OnInit {
         });
 
         this.initLocation();
-        this.initBirthPicker();
-        this.initTypePicker();
+        this._dateService.getDatePicker().subscribe(res => this.date_picker = res);
+        this._enums.getEnums('type').subscribe(response => {
+            response.map(value => {
+                this.type_picker.push({
+                    title: value.shortTitle,
+                    value: value.id,
+                    checked: false
+                });
+            });
+        });
     }
 
     initLocation(locationName: string = null) {
@@ -112,29 +121,6 @@ export class SectionRegistrationInfoComponent implements OnInit {
                 }
             }
         });
-    }
-
-    updateState(event) {
-        this.user[event.field] = event.value;
-    }
-
-    initBirthPicker() {
-        this._dateService.getDatePicker().subscribe(res => this.date_picker = res);
-    }
-
-    initTypePicker() {
-        this._http.get('/api/api/reference/client/type')
-            .map(response => response.json())
-            .subscribe(response => {
-
-                response.map(value => {
-                    this.type_picker.push({
-                        title: value.shortTitle,
-                        value: value.id,
-                        checked: false
-                    });
-                });
-            });
     }
 
 }
