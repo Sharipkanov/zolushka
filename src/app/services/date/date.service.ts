@@ -12,9 +12,15 @@ export class DateService {
         const newDate = date.split('-');
 
         return {
-            day: newDate[2],
-            month: newDate[1],
-            year: newDate[0]
+            day: {
+                id: parseInt(newDate[2], 0)
+            },
+            month: {
+                id: parseInt(newDate[1], 0)
+            },
+            year: {
+                id: parseInt(newDate[0], 0)
+            }
         }
     }
 
@@ -22,11 +28,11 @@ export class DateService {
         let newDate = '';
 
         if (date.year && date.month && date.day) {
-            newDate += (date.year) ? date.year : '0000';
+            newDate += (date.year.id) ? date.year.id : '0000';
             newDate += '-';
-            newDate += (date.month < 10) ? '0' + date.month : date.month;
+            newDate += (date.month.id < 10) ? '0' + date.month.id : date.month.id;
             newDate += '-';
-            newDate += (date.day < 10) ? '0' + date.day : date.day;
+            newDate += (date.day.id < 10) ? '0' + date.day.id : date.day.id;
         } else {
             newDate = null;
         }

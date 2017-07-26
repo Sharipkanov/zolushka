@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../services/user/user.service';
-import {DateService} from '../../services/date/date.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {EnumsService} from '../../services/enums/enums.service';
-import {IEnums} from '../../interfaces/enums';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { UserService } from '../../services/user/user.service';
+import { DateService } from '../../services/date/date.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { EnumsService } from '../../services/enums/enums.service';
+import { IEnums } from '../../interfaces/enums';
 
 @Component({
     selector: 'app-page-profile-edit',
@@ -12,11 +12,14 @@ import {IEnums} from '../../interfaces/enums';
 })
 export class PageProfileEditComponent implements OnInit {
 
-    public model = {};
-
     public FProfile: FormGroup;
 
+    public model = {};
     public enums = new IEnums();
+    public enumsDone = false;
+    public modelDone = false;
+
+    public onAllDataGet: EventEmitter<any> = new EventEmitter();
 
     constructor(private _fb: FormBuilder,
                 private _userService: UserService,
@@ -26,6 +29,28 @@ export class PageProfileEditComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.onAllDataGet.subscribe((res) => {
+            this[res] = true;
+
+
+            if (this.enumsDone && this.modelDone) {
+                for (const key in this.FProfile.value) {
+                    // console.log(key, typeof this.model[key], typeof this.FProfile.controls[key].value)
+                    if (!!this.model[key] && key !== 'birthdate') {
+                        this.FProfile.controls[key].setValue(this.model[key]);
+                    } else if (key === 'birthdate') {
+                        this.FProfile.controls['birthdate'].get('day')
+                            .setValue(this.model['birthdateDecoded']['day']);
+                        this.FProfile.controls['birthdate'].get('month')
+                            .setValue(this.model['birthdateDecoded']['month']);
+                        this.FProfile.controls['birthdate'].get('year')
+                            .setValue(this.model['birthdateDecoded']['year']);
+                    }
+                }
+            }
+        });
+
         this._userService.profilePageInfo().subscribe(res => {
             this.model = res;
 
@@ -33,20 +58,14 @@ export class PageProfileEditComponent implements OnInit {
                 this.model['birthdateDecoded'] = this._dateService.dateDecode(res['birthdate']);
             }
 
-            console.log(this.model);
-            for (const key in this.FProfile.value) {
-                // console.log(key, typeof this.model[key], typeof this.FProfile.controls[key].value)
-                if (!!this.model[key] && key !== 'birthdate') {
-                    this.FProfile.controls[key].setValue(this.model[key]);
-                }
-            }
+            this.onAllDataGet.emit('modelDone');
         });
 
         this._enums.getEnums().subscribe(response => {
-            this._dateService.getDatePicker().subscribe(res => {
+            this._dateService.getDatePicker().subscribe(res2 => {
+                response.datePicker = res2;
                 this.enums = response;
-                this.enums.datePicker = res;
-                console.log(this.enums);
+                this.onAllDataGet.emit('enumsDone');
             });
         });
 
@@ -57,18 +76,18 @@ export class PageProfileEditComponent implements OnInit {
             weight: '',
             phone: '',
             birthdate: this._fb.group({
-                day: 2,
-                month: 2,
-                year: 1992
+                day: null,
+                month: null,
+                year: null
             }),
-            relationshipTypes: [[100, 200]],
+            relationshipTypes: [],
             relationshipState: [],
-            appearance: 0,
-            physique: 0,
-            hairColor: 0,
-            eyeColor: 0,
+            appearance: null,
+            physique: null,
+            hairColor: null,
+            eyeColor: null,
             hobbies: [],
-            sexualKinds: [[100, 200]],
+            sexualKinds: [],
             sexualPeriodicity: null,
             sexualPreference: null,
             sexualRole: null,
@@ -81,30 +100,27 @@ export class PageProfileEditComponent implements OnInit {
 
 
         const form = this.FProfile.value;
-        console.log(form.hobbies);
         const data = {
             name: form.name,
             aboutMe: form.aboutMe,
-            // birthdate: this._dateService.dateEncode(form.birthdate),
+            birthdate: this._dateService.dateEncode(form.birthdate),
             height: parseInt(form.height),
             weight: parseInt(form.weight),
-            // relationshipTypes: form.relationshipTypes,
-            // relationshipState: form.relationshipState,
-            // appearance: form.appearance,
-            // physique: form.physique,
-            // hairColor: form.hairColor,
-            // eyeColor: form.eyeColor,
-            // hobbies: form.hobbies,
-            // sexualKinds: form.sexualKinds,
-            // sexualPeriodicity: form.sexualPeriodicity,
-            // sexualPreference: form.sexualPreference,
-            // sexualRole: form.sexualRole,
-            childrenExist: {
-                id: form.childrenExist
-            }
+            relationshipTypes: form.relationshipTypes,
+            relationshipState: form.relationshipState,
+            appearance: form.appearance,
+            physique: form.physique,
+            hairColor: form.hairColor,
+            eyeColor: form.eyeColor,
+            hobbies: form.hobbies,
+            sexualKinds: form.sexualKinds,
+            sexualPeriodicity: form.sexualPeriodicity,
+            sexualPreference: form.sexualPreference,
+            sexualRole: form.sexualRole,
+            childrenExist: form.childrenExist
         };
 
-        console.log(data);
+        // console.log(data);
 
 
         this._userService.profileUpdate(data).subscribe(response => {

@@ -22,7 +22,7 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit, OnC
     @Input() combinedStyle: boolean = false;
     @Input() fullWidth: boolean = false;
 
-    public inputValue: any;
+    public inputValue: any = null;
     private propagateChange = (_: any) => {
     };
 
@@ -33,7 +33,7 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit, OnC
     }
 
     writeValue(value: any) {
-        if (value) {
+        if (!!value) {
             this.inputValue = value.id;
         }
     }
@@ -46,7 +46,6 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit, OnC
         for (let i = 0; i < this.items.length; i++) {
             const item = this.items[i];
 
-            // console.log(item.id, this.inputValue);
             if (item.id === this.inputValue) {
                 item.checked = true;
             }
@@ -62,8 +61,7 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit, OnC
 
             (i !== itemIndex) ? item.checked = false : item.checked = true;
         }
-
-        this.propagateChange(this.items[itemIndex].id);
+        this.propagateChange(this.items[itemIndex]);
     }
 
 }

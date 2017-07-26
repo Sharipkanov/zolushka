@@ -3,8 +3,8 @@ import {
     Output, EventEmitter, OnChanges, SimpleChange
 } from '@angular/core';
 
-import {ISelectBoxItem} from '../../../interfaces/form/select-box-item.interface';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { ISelectBoxItem } from '../../../interfaces/form/select-box-item.interface';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'app-select-box',
@@ -36,7 +36,7 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
     public selectBoxText: Array<string> = [];
     public selectBoxValues: Array<number> = [];
 
-    public inputValue: any;
+    public inputValue: any = null;
     private propagateChange = (_: any) => {
     };
 
@@ -66,23 +66,30 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
 
 
         if (this.inputValue !== undefined && this.inputValue !== null) {
-            for (let i = 0; i < this.items.length; i++) {
-                const item = this.items[i];
+            if (Object.prototype.toString.call(this.inputValue) === '[object Array]') {
+                for (let i = 0; i < this.items.length; i++) {
+                    const item = this.items[i];
 
-                // console.log(typeof this.inputValue);
-                if (typeof this.inputValue === 'object') {
-                    if (this.inputValue.indexOf(item.id) !== -1) {
-                        item.selected = true;
-                        selectedFirst = false;
+                    for (let z = 0; z < this.inputValue.length; z++) {
+                        const inputVal = this.inputValue[z];
+                        if (inputVal.id === item.id) {
+                            item.selected = true;
+                            selectedFirst = false;
+                        }
                     }
-                } else {
-                    if (item.id === this.inputValue) {
+                }
+            } else {
+                for (let i = 0; i < this.items.length; i++) {
+                    const item = this.items[i];
+
+                    if (this.inputValue.id === item.id) {
                         item.selected = true;
                         selectedFirst = false;
                     }
                 }
             }
         }
+
 
         this.items.unshift({
             id: '',
@@ -146,7 +153,7 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
                 const selectVals = [];
                 this.items.map(item => {
                     if (item.selected === true) {
-                        selectVals.push(item.id);
+                        selectVals.push(item);
                     }
                 });
 
@@ -158,7 +165,7 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
                 if (selectBoxIndex === index) {
                     selectBoxItem.selected = true;
 
-                    this.propagateChange(selectBoxItem.id);
+                    this.propagateChange(selectBoxItem);
                 } else {
                     selectBoxItem.selected = false;
                 }

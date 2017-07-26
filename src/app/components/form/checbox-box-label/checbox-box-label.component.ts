@@ -1,7 +1,7 @@
-import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, OnChanges } from '@angular/core';
 
-import {ICheckBoxLabelItem} from '../../../interfaces/form/check-box-label-item.interface.';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import { ICheckBoxLabelItem } from '../../../interfaces/form/check-box-label-item.interface.';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'app-checbox-box-label',
@@ -16,23 +16,18 @@ import {NG_VALUE_ACCESSOR} from '@angular/forms';
     ]
 
 })
-export class ChecboxBoxLabelComponent implements OnInit {
+export class ChecboxBoxLabelComponent implements OnInit, OnChanges {
     @Input() classes: string = '';
     @Input() name: string = '';
     @Input() value: string = '';
     @Input() typeArray: boolean = false;
     @Input() items: Array<ICheckBoxLabelItem> = [];
 
-    public inputValue: any;
+    public inputValue: any = null;
     private propagateChange = (_: any) => {
     };
 
     constructor() {
-        if (this.typeArray) {
-            this.inputValue = [];
-        } else {
-            this.inputValue = '';
-        }
     }
 
     writeValue(value: any) {
@@ -51,9 +46,32 @@ export class ChecboxBoxLabelComponent implements OnInit {
     ngOnInit() {
     }
 
+    ngOnChanges() {
+        if (!!this.items) {
+            if (Object.prototype.toString.call(this.inputValue) === '[object Array]') {
+                for (let i = 0; i < this.items.length; i++) {
+                    const item = this.items[i];
+                    for (let z = 0; z < this.inputValue.length; z++) {
+                        const inputVal = this.inputValue[z];
+                        if (inputVal.id === item.id) {
+                            item.checked = true;
+                        }
+                    }
+                }
+            } else {
+                for (let i = 0; i < this.items.length; i++) {
+                    const item = this.items[i];
+
+                    if (this.inputValue.id === item.id) {
+                        item.checked = true;
+                    }
+                }
+            }
+        }
+    }
+
     updateParent(item, event) {
         if (this.typeArray) {
-
             // console.log(item);
             this.items[item].checked = event.target.checked;
 
@@ -61,11 +79,11 @@ export class ChecboxBoxLabelComponent implements OnInit {
             for (let i = 0; i < this.items.length; i++) {
                 const forItem = this.items[i];
                 if (forItem.checked) {
-                    this.inputValue.push(forItem.id);
+                    this.inputValue.push(forItem);
                 }
             }
         } else {
-            this.inputValue = event.target.value;
+            this.inputValue = item;
         }
 
         this.propagateChange(this.inputValue);
