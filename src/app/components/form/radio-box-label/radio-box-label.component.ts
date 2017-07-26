@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output, OnChanges} from '@angular/core';
 
 import {IRadioBoxLabelItem} from '../../../interfaces/form/radio-box-label-item.interface';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
@@ -15,13 +15,14 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
         }
     ]
 })
-export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit {
+export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit, OnChanges {
     @Input() classes: string = '';
     @Input() items: Array<IRadioBoxLabelItem> = [];
     @Input() combined: boolean = false;
     @Input() combinedStyle: boolean = false;
     @Input() fullWidth: boolean = false;
 
+    public inputValue: any;
     private propagateChange = (_: any) => {
     };
 
@@ -32,10 +33,24 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit {
     }
 
     writeValue(value: any) {
+        if (value) {
+            this.inputValue = value.id;
+        }
     }
 
     registerOnChange(fn: any) {
         this.propagateChange = fn;
+    }
+
+    ngOnChanges() {
+        for (let i = 0; i < this.items.length; i++) {
+            const item = this.items[i];
+
+            // console.log(item.id, this.inputValue);
+            if (item.id === this.inputValue) {
+                item.checked = true;
+            }
+        }
     }
 
     registerOnTouched() {
@@ -48,7 +63,7 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit {
             (i !== itemIndex) ? item.checked = false : item.checked = true;
         }
 
-        this.propagateChange(this.items[itemIndex].value);
+        this.propagateChange(this.items[itemIndex].id);
     }
 
 }

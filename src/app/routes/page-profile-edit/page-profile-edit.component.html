@@ -83,7 +83,7 @@
                     </div>
                     <div class="field-input">
                         <app-select-box formControlName="relationshipTypes"
-                                        [items]="enums['relationshipType']" [multiple]="true"></app-select-box>
+                                        [items]="enums['relationshipTypes']" [multiple]="true"></app-select-box>
                     </div>
                     <div class="field-note"></div>
                 </div>
@@ -210,7 +210,7 @@
                         Вид секса
                     </div>
                     <div class="field-input">
-                        <app-checbox-box-label formControlName="sexualKinds" [items]="enums['sexualKind']"
+                        <app-checbox-box-label formControlName="sexualKinds" [items]="enums['sexualKinds']"
                                                [typeArray]="true"></app-checbox-box-label>
                     </div>
                     <div class="field-note"></div>
@@ -255,7 +255,7 @@
                     </div>
                     <div class="field-input">
                         <app-radio-box-label formControlName="childrenExist"
-                                             [items]="[{title: 'Есть', id: true}, {title: 'Нет', id: false}]"
+                                             [items]="enums['childrenExist']"
                                              [combined]="true"></app-radio-box-label>
                     </div>
                     <div class="field-note"></div>

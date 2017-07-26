@@ -69,7 +69,7 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
             for (let i = 0; i < this.items.length; i++) {
                 const item = this.items[i];
 
-                console.log(typeof this.inputValue);
+                // console.log(typeof this.inputValue);
                 if (typeof this.inputValue === 'object') {
                     if (this.inputValue.indexOf(item.id) !== -1) {
                         item.selected = true;
@@ -81,7 +81,6 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
                         selectedFirst = false;
                     }
                 }
-
             }
         }
 

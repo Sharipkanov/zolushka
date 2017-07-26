@@ -1,10 +1,10 @@
 ///<reference path="../../../../node_modules/rxjs/add/operator/map.d.ts"/>
-import { Injectable, Inject, Output, EventEmitter } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import {Injectable, Inject, Output, EventEmitter} from '@angular/core';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
-import { StorageService } from '../storage/storage.service';
-import { ILogin } from '../../interfaces/login.interface';
-import { HttpService } from '../http/http.service';
+import {StorageService} from '../storage/storage.service';
+import {ILogin} from '../../interfaces/login.interface';
+import {HttpService} from '../http/http.service';
 
 @Injectable()
 export class UserService {
@@ -34,7 +34,7 @@ export class UserService {
 
         headers.append('Authorization', 'Basic ' + btoa(data.email + ':' + data.password));
         const login = this._http
-            .post(`/api/auth/token`, { ...data }, { headers: headers });
+            .post(`/api/auth/token`, {...data}, {headers: headers});
 
 
         login.subscribe((response) => {
@@ -63,7 +63,7 @@ export class UserService {
 
         headers.append('Content-Type', 'application/json');
 
-        return this._http.post('/api/auth/signup', { ...data }, { headers: headers });
+        return this._http.post('/api/auth/signup', {...data}, {headers: headers});
     }
 
     info() {
@@ -80,7 +80,7 @@ export class UserService {
         return new Promise((resolve, reject) => {
             const headers = this.setHeaders();
 
-            this._http.get(`/api/api/client/base-info`, { headers: headers })
+            this._http.get(`/api/api/client/base-info`, {headers: headers})
                 .toPromise()
                 .then(response => {
                     response = response.json();
@@ -97,22 +97,15 @@ export class UserService {
     profilePageInfo() {
         const headers = this.setHeaders();
 
-        return this._http.get(`/api/api/client/${this.info().id}`, { headers: headers })
+        return this._http.get(`/api/api/client/${this.info().id}`, {headers: headers})
             .map(res => res.json());
     }
 
-    profileUpdate(model): Promise<any> {
-        return new Promise((resolve, reject) => {
-            const headers = this.setHeaders();
+    profileUpdate(model) {
+        const headers = this.setHeaders();
 
-            this._http.post('/api/api/client', model, { headers: headers })
-                .toPromise()
-                .then(response => {
-                    response = response.json();
-
-                    resolve(response);
-                });
-        });
+        return this._http.post('/api/api/client', model, {headers: headers})
+            .map(res => res.json());
     }
 
     getPhotos($userId) {

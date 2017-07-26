@@ -3,6 +3,7 @@ import {UserService} from '../../services/user/user.service';
 import {DateService} from '../../services/date/date.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {EnumsService} from '../../services/enums/enums.service';
+import {IEnums} from '../../interfaces/enums';
 
 @Component({
     selector: 'app-page-profile-edit',
@@ -15,27 +16,7 @@ export class PageProfileEditComponent implements OnInit {
 
     public FProfile: FormGroup;
 
-    public enums = {
-        'appearance': [],
-        'eyeColor': [],
-        'breastSize': [],
-        'hairColor': [],
-        'higherEducation': [],
-        'hobbies': [],
-        'physique': [],
-        'relationshipState': [],
-        'relationshipType': [],
-        'sexualKind': [],
-        'sexualPeriodicity': [],
-        'sexualPreference': [],
-        'sexualRole': [],
-        'zodiacSign': [],
-        'datePicker': {
-            'day': [],
-            'month': [],
-            'year': [],
-        }
-    };
+    public enums = new IEnums();
 
     constructor(private _fb: FormBuilder,
                 private _userService: UserService,
@@ -48,13 +29,14 @@ export class PageProfileEditComponent implements OnInit {
         this._userService.profilePageInfo().subscribe(res => {
             this.model = res;
 
-            this.model['birthdateDecoded'] = this._dateService.dateDecode(res['birthdate']);
+            if (!!res['birthdate']) {
+                this.model['birthdateDecoded'] = this._dateService.dateDecode(res['birthdate']);
+            }
 
             console.log(this.model);
-            console.log(this.FProfile.controls.birthdate.value);
-
             for (const key in this.FProfile.value) {
-                if (!!this.model[key] && typeof this.model[key] === 'string' && typeof this.model[key] === typeof this.FProfile.controls[key].value) {
+                // console.log(key, typeof this.model[key], typeof this.FProfile.controls[key].value)
+                if (!!this.model[key] && key !== 'birthdate') {
                     this.FProfile.controls[key].setValue(this.model[key]);
                 }
             }
@@ -64,6 +46,7 @@ export class PageProfileEditComponent implements OnInit {
             this._dateService.getDatePicker().subscribe(res => {
                 this.enums = response;
                 this.enums.datePicker = res;
+                console.log(this.enums);
             });
         });
 
@@ -96,15 +79,43 @@ export class PageProfileEditComponent implements OnInit {
     saveProfileData(e) {
         e.preventDefault();
 
-        console.log(this.FProfile.value);
+
+        const form = this.FProfile.value;
+        console.log(form.hobbies);
+        const data = {
+            name: form.name,
+            aboutMe: form.aboutMe,
+            // birthdate: this._dateService.dateEncode(form.birthdate),
+            // height: form.height as number,
+            // weight: form.weight as number,
+            // relationshipTypes: form.relationshipTypes,
+            // relationshipState: form.relationshipState,
+            // appearance: form.appearance,
+            // physique: form.physique,
+            // hairColor: form.hairColor,
+            // eyeColor: form.eyeColor,
+            hobbies: form.hobbies,
+            // sexualKinds: form.sexualKinds,
+            // sexualPeriodicity: form.sexualPeriodicity,
+            // sexualPreference: form.sexualPreference,
+            // sexualRole: form.sexualRole,
+            childrenExist: {
+                id: form.childrenExist
+            }
+        };
+
+        console.log(data);
 
 
-        /*this._userService.profileUpdate(this.model).then(response => {
-         if (response.id !== undefined) {
-         this.model = response;
-         } else {
+        this._userService.profileUpdate(data).subscribe(response => {
+            console.log(response);
+            if (response.id !== undefined) {
+                this.model = response;
+            } else {
 
-         }
-         });*/
+            }
+        }, error => {
+            console.log(error);
+        });
     }
 }
