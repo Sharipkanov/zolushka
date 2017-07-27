@@ -12,16 +12,16 @@
                     лица
                 </div>
                 <div class="profile-edit__photos fw-grid fw-grid-8">
-                    <div class="profile-edit__photos-item">
+                    <div class="profile-edit__photos-item" *ngFor="let item of gallery">
                         <a href="#" class="profile-edit__photos-link">
-                            <img class="profile-edit__photos-image" src="http://placehold.it/80x80" alt="">
+                            <img class="profile-edit__photos-image" src="{{ item._links.thumbnail.href }}" alt="">
                         </a>
-                        <span class="profile-edit__photos-main">Основная</span>
+                        <span class="profile-edit__photos-main" *ngIf="item.isAvatar">Основная</span>
                     </div>
                     <div class="profile-edit__photos-item">
                         <label class="profile-edit__photos-add">
                             <i class="icon-camera-purple"></i>
-                            <input type="file" class="fw-hidden">
+                            <input type="file" multiple (change)="uploadPhoto($event)" class="fw-hidden">
                         </label>
                     </div>
                 </div>

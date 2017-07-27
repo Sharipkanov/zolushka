@@ -5,6 +5,7 @@ import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {StorageService} from '../storage/storage.service';
 import {ILogin} from '../../interfaces/login.interface';
 import {HttpService} from '../http/http.service';
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class UserService {
@@ -48,6 +49,8 @@ export class UserService {
             return error;
         });
 
+        this.info();
+
         return login.map(response => response.json());
     }
 
@@ -67,37 +70,37 @@ export class UserService {
     }
 
     info() {
+        let user_info;
         // this._storageService.remove('user_info');
         if (this._storageService.get('user_info')) {
-            return JSON.parse(this._storageService.get('user_info'));
+            user_info = JSON.parse(this._storageService.get('user_info'));
         } else {
-            return this.info_update();
+            this.info_update().subscribe(response => {
+                this._storageService.set('user_info', response);
+                user_info = response;
+                this.onChangeUserInfo.emit(response);
+            });
         }
+
+        return user_info;
     }
 
-    info_update(): Promise<any> {
-        // let user_info: object = {};
-        return new Promise((resolve, reject) => {
-            const headers = this.setHeaders();
-
-            this._http.get(`/api/api/client/base-info`, {headers: headers})
-                .toPromise()
-                .then(response => {
-                    response = response.json();
-
-                    this._storageService.set('user_info', response);
-
-                    this.onChangeUserInfo.emit(response);
-                    resolve(response);
-                })
-                .catch();
-        });
-    }
-
-    profilePageInfo() {
+    info_update() {
         const headers = this.setHeaders();
+        return this._http.get(`/api/api/client/base-info`, {headers: headers})
+            .map(res => res.json());
+    }
 
-        return this._http.get(`/api/api/client/${this.info().id}`, {headers: headers})
+    profilePageInfo(user_info = null) {
+        const headers = this.setHeaders();
+        let user;
+
+        if (user_info) {
+            user = user_info;
+        } else {
+            user = this.info();
+        }
+        return this._http.get(`/api/api/client/${user.id}`, {headers: headers})
             .map(res => res.json());
     }
 
@@ -108,8 +111,33 @@ export class UserService {
             .map(res => res.json());
     }
 
-    getPhotos($userId) {
-        return this._http.get(`api.zolushka.ru/user/${$userId}/photos`).map((response: Response) => response.json());
+    uploadPhoto(input) {
+        const fileList: FileList = input.files;
+        if (fileList.length > 0) {
+            const files: FileList = fileList;
+            const formDataValue: FormData = new FormData();
+
+            for (let i = 0; i < files.length; i++) {
+                formDataValue.append('files', files[i], files[i].name);
+            }
+            /*file.map(value => {
+             formDataValue.append('uploadFile', value, value.name)
+             });*/
+            // formDataValue.append('uploadFile', file);
+            const headers = new Headers();
+            headers.append('Authorization', 'token ' + this._storageService.get('token'));
+            // headers.append('Content-Type', 'multipart/form-data');
+
+            // console.log(formDataValue);
+            return this._http.post(`/api/media/client/images`, formDataValue, {headers: headers})
+                .map((response: Response) => response.json());
+        }
+    }
+
+    getPhotos($userId = null) {
+        const headers = this.setHeaders();
+        return this._http.get(`/api/media/client/images`, {headers: headers})
+            .map((response: Response) => response.json());
     }
 
 

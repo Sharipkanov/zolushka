@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
-import { UserService } from '../../services/user/user.service';
-import { DateService } from '../../services/date/date.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { EnumsService } from '../../services/enums/enums.service';
-import { IEnums } from '../../interfaces/enums';
+import {Component, EventEmitter, OnInit} from '@angular/core';
+import {UserService} from '../../services/user/user.service';
+import {DateService} from '../../services/date/date.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {EnumsService} from '../../services/enums/enums.service';
+import {IEnums} from '../../interfaces/enums';
+import {IGalleryInfo} from '../../interfaces/gallery-info';
 
 @Component({
     selector: 'app-page-profile-edit',
@@ -16,8 +17,10 @@ export class PageProfileEditComponent implements OnInit {
 
     public model = {};
     public enums = new IEnums();
-    public enumsDone = false;
-    public modelDone = false;
+    public enumsDone: boolean = false;
+    public modelDone: boolean = false;
+    public gallery = [];
+    public gallery_info = new IGalleryInfo();
 
     public onAllDataGet: EventEmitter<any> = new EventEmitter();
 
@@ -25,14 +28,16 @@ export class PageProfileEditComponent implements OnInit {
                 private _userService: UserService,
                 private _enums: EnumsService,
                 private _dateService: DateService) {
-
     }
 
     ngOnInit() {
+        this._userService.getPhotos().subscribe(response => {
+            this.gallery_info = response;
+            this.gallery = this.gallery_info._embedded.images;
+        });
 
         this.onAllDataGet.subscribe((res) => {
             this[res] = true;
-
 
             if (this.enumsDone && this.modelDone) {
                 for (const key in this.FProfile.value) {
@@ -52,8 +57,13 @@ export class PageProfileEditComponent implements OnInit {
         });
 
         this._userService.profilePageInfo().subscribe(res => {
-            this.model = res;
-
+            if (res === undefined) {
+                this._userService.onChangeUserInfo.subscribe(response => {
+                    this.model = this._userService.profilePageInfo();
+                });
+            } else {
+                this.model = res;
+            }
             if (!!res['birthdate']) {
                 this.model['birthdateDecoded'] = this._dateService.dateDecode(res['birthdate']);
             }
@@ -98,7 +108,6 @@ export class PageProfileEditComponent implements OnInit {
     saveProfileData(e) {
         e.preventDefault();
 
-
         const form = this.FProfile.value;
         const data = {
             name: form.name,
@@ -120,9 +129,6 @@ export class PageProfileEditComponent implements OnInit {
             childrenExist: form.childrenExist
         };
 
-        // console.log(data);
-
-
         this._userService.profileUpdate(data).subscribe(response => {
             console.log(response);
             if (response.id !== undefined) {
@@ -133,5 +139,15 @@ export class PageProfileEditComponent implements OnInit {
         }, error => {
             console.log(error);
         });
+    }
+
+    uploadPhoto(e) {
+        e.preventDefault();
+
+        this._userService.uploadPhoto(e.target).subscribe((data) => {
+                this.gallery = data;
+            },
+            error => console.log(error)
+        );
     }
 }

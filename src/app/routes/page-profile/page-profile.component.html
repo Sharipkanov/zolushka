@@ -4,7 +4,7 @@
             <div class="profile-left">
                 <div class="profile__info fw-mb-30 panel fw-br-5">
                     <div class="profile__info-image">
-                        <img alt="" class="profile__info-avatar fw-width-1-1" src="{{(user['avatar']) ? user['avatar']['_links']['thumbnail'] : './assets/images/default-navigation-avatar.svg'}}"/>
+                        <img alt="" class="profile__info-avatar fw-width-1-1" src="{{(user_info['avatar']) ? user_info['avatar']['_links']['thumbnail'] : './assets/images/default-navigation-avatar.svg'}}"/>
                     </div>
                     <div class="profile__info-content">
                         <div class="profile__info-statistic fw-mb-20">
@@ -27,13 +27,13 @@
                             <span class="fw-mr-15" *ngIf="!!model['weight']">Вес {{ model['weight'] }}кг</span>
                             <span *ngIf="!!model['height']">Рост {{ model['height'] }} см</span>
                         </div>
-                        <div class="profile__info-additions-params fw-mt-10" *ngIf="!!model['bodyCondition'] && !!model['bodyCondition'].length">
-                            {{ model['bodyCondition'].join(', ') }}
+                        <div class="profile__info-additions-params fw-mt-10" *ngIf="!!model['_bodyCondition'] && !!model['_bodyCondition'].length">
+                            {{ model['_bodyCondition'].join(', ') }}
                             <!--Блондин, Глаза синие, Спортивное телосложение, Европейская внешность-->
                         </div>
                     </div>
                 </div>
-                <div class="profile__extend panel fw-br-5" *ngIf="!user['premium']">
+                <div class="profile__extend panel fw-br-5" *ngIf="!user_info['premium']">
                     <div class="club-extend">
                         <div class="club-extend__icon-wrapper fw-mb-20 fw-text-center">
                             <i class="icon-profile-crown"></i>
@@ -138,7 +138,7 @@
                             </div>
                         </div>
 
-                        <div class="profile__invisible panel fw-br-5" *ngIf="user['clientState'] !== 'invisible'">
+                        <div class="profile__invisible panel fw-br-5" *ngIf="user_info['clientState'] !== 'invisible'">
                             <div class="fw-mb-20">
                                 <i class="icon-invisible-hat"></i>
                             </div>
@@ -166,9 +166,7 @@
                                     предпочтения
                                 </div>
                                 <div class="profile__data-content">
-                                    <span *ngFor="let item of model['sexualKinds']; let isLast=last">
-                                        {{item['title']}}{{isLast ? '' : ', '}}
-                                    </span>
+                                    <span *ngIf="!!model['_sexualSection'] && !!model['_sexualSection'].length">{{ model['_sexualSection'].join(', ') }}</span>
                                 </div>
                             </div>
                             <div class="profile__data-item">

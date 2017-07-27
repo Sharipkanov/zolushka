@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
+import {IUserInfo} from "../../interfaces/user-info";
 
 @Component({
     selector: 'app-navigation',
@@ -9,7 +10,7 @@ import { UserService } from '../../services/user/user.service';
 export class NavigationComponent implements OnInit {
 
     @Input()
-    public user_info: object = {};
+    public user_info = new IUserInfo();
 
     constructor(private _user: UserService) {
     }

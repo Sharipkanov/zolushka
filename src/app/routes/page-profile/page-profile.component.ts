@@ -4,6 +4,7 @@ import {UserService} from '../../services/user/user.service';
 import {Http} from "@angular/http";
 import {EnumsService} from "../../services/enums/enums.service";
 import {forEach} from "@angular/router/src/utils/collection";
+import {IUserInfo} from "../../interfaces/user-info";
 
 @Component({
     selector: 'app-page-profile',
@@ -12,34 +13,51 @@ import {forEach} from "@angular/router/src/utils/collection";
 })
 export class PageProfileComponent implements OnInit {
 
-    public user = {};
+    public user_info = new IUserInfo();
     public model = {};
     public enums = {};
 
-    constructor(private _http: Http, private _userService: UserService, private _enums: EnumsService) {
+    constructor(private _userService: UserService, private _enums: EnumsService) {
     }
 
     ngOnInit() {
-        this.user = this._userService.info();
+        const user_info = this._userService.info();
+        if (user_info === undefined) {
+            this._userService.onChangeUserInfo.subscribe(res => {
+                this.user_info = res;
+                this.getProfilPageInfo(this.user_info);
+            });
+        } else {
+            this.user_info = user_info;
+            this.getProfilPageInfo(this.user_info);
+        }
+    }
+
+    getProfilPageInfo(user_info) {
         this.enums = this._enums.getEnums();
 
-        this._userService.profilePageInfo().subscribe(res => {
+        this._userService.profilePageInfo(user_info).subscribe(res => {
             this.model = res;
-            this.model['bodyCondition'] = [];
-            if (this.model['hairColor']) {
-                this.model['bodyCondition'].push(this.model['hairColor']['title']);
-            }
-            if (this.model['eyeColor']) {
-                this.model['bodyCondition'].push(this.model['eyeColor']['title']);
-            }
-            if (this.model['physique']) {
-                this.model['bodyCondition'].push(this.model['physique']['title']);
-            }
-            if (this.model['appearance']) {
-                this.model['bodyCondition'].push(this.model['appearance']['title']);
+            this.model['_bodyCondition'] = [];
+            this.model['_sexualSection'] = [];
+
+            for (const key in this.model) {
+                if (key === 'hairColor' || key === 'eyeColor' || key === 'physique' || key === 'appearance') {
+                    if (!!this.model[key]) {
+                        this.model['_bodyCondition'].push(this.model[key]['title']);
+                    }
+                } else if (key === 'sexualPeriodicity' || key === 'sexualPreference' || key === 'sexualRole') {
+                    if (!!this.model[key]) {
+                        this.model['_sexualSection'].push(this.model[key]['title']);
+                    }
+                } else if (key === 'sexualKinds') {
+                    if (!!this.model[key]) {
+                        this.model['sexualKinds'].map(sex => {
+                            this.model['_sexualSection'].push(sex['title']);
+                        });
+                    }
+                }
             }
         });
-
-        console.log(this.user);
     }
 }
