@@ -4,7 +4,7 @@
             <div class="profile-left">
                 <div class="profile__info fw-mb-30 panel fw-br-5">
                     <div class="profile__info-image">
-                        <img alt="" class="profile__info-avatar fw-w-100" src="https://placekitten.com/360"/>
+                        <img alt="" class="profile__info-avatar fw-width-1-1" src="{{(user['avatar']) ? user['avatar']['_links']['thumbnail'] : './assets/images/default-navigation-avatar.svg'}}"/>
                     </div>
                     <div class="profile__info-content">
                         <div class="profile__info-statistic fw-mb-20">
@@ -23,16 +23,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="profile__info-parameters fw-mb-10 fw-fw-600">
-                            <span class="fw-mr-15">Вес {{ model['weight'] }}кг</span>
-                            <span>Рост {{ model['height'] }} см</span>
+                        <div class="profile__info-parameters fw-fw-600">
+                            <span class="fw-mr-15" *ngIf="!!model['weight']">Вес {{ model['weight'] }}кг</span>
+                            <span *ngIf="!!model['height']">Рост {{ model['height'] }} см</span>
                         </div>
-                        <div class="profile__info-additions-params">
-                            Блондин, Глаза синие, Спортивное телосложение, Европейская внешность
+                        <div class="profile__info-additions-params fw-mt-10" *ngIf="!!model['bodyCondition'] && !!model['bodyCondition'].length">
+                            {{ model['bodyCondition'].join(', ') }}
+                            <!--Блондин, Глаза синие, Спортивное телосложение, Европейская внешность-->
                         </div>
                     </div>
                 </div>
-                <div class="profile__extend panel fw-br-5">
+                <div class="profile__extend panel fw-br-5" *ngIf="!user['premium']">
                     <div class="club-extend">
                         <div class="club-extend__icon-wrapper fw-mb-20 fw-text-center">
                             <i class="icon-profile-crown"></i>
@@ -50,7 +51,8 @@
                 <div class="profile__top-bar panel fw-br-5 fw-mb-30">
                     <div class="profile__name fw-flex fw-flex-space-between fw-flex-middle fw-mb-30">
                         <div class="profile__name-left">
-                            <div class="profile__name-title fw-fw-600 fw-mb-5">{{ model['name'] }} {{ model['age'] }} лет, {{ model['zodiacsign'] }}, {{ model['cityName'] }}</div>
+                            <div class="profile__name-title fw-fw-600 fw-mb-5">
+                                {{ model['name'] }}{{ (model['age']) ? ' ' + model['age'] + 'лет' : '' }}, {{ (model['zodiacsign']) ? model['zodiacsign']['title'] + ',' : '' }}{{ (model['city']) ? model['city']['title'] : '' }}</div>
                             <div>
                                 <i class="icon-online-status online fw-mr-5"></i>
                                 <span class="fw-color-green-light fw-inline-block fw-fz-13">On-line</span>
@@ -69,10 +71,11 @@
                         <div class="profile__photos-title fw-fz-16 fw-mb-10 fw-fw-600">Фотографии</div>
                         <div class="profile__photos-grid fw-flex fw-flex-wrap">
                             <div class="profile__photos-item fw-flex">
-                                <div class="profile-add-new-photo fw-fz-13">
+                                <label class="profile-add-new-photo fw-fz-13">
                                     <i class="icon-camera-white fw-mb-10"></i>
-                                    <div>Добавить фото</div>
-                                </div>
+                                    <span>Добавить фото</span>
+                                    <input type="file" class="fw-hidden">
+                                </label>
                             </div>
                             <div class="profile__photos-item">
                                 <a href="#" class="profile__photos-image-hover">
@@ -135,7 +138,7 @@
                             </div>
                         </div>
 
-                        <div class="profile__invisible panel fw-br-5">
+                        <div class="profile__invisible panel fw-br-5" *ngIf="user['clientState'] !== 'invisible'">
                             <div class="fw-mb-20">
                                 <i class="icon-invisible-hat"></i>
                             </div>
@@ -153,7 +156,9 @@
                             <div class="profile__data-item">
                                 <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">Цели знакомства</div>
                                 <div class="profile__data-content">
-                                    Содержание, Постоянные отношения, Совместные пушешевствия
+                                    <span *ngFor="let item of model['relationshipTypes']; let isLast=last">
+                                        {{item['title']}}{{isLast ? '' : ', '}}
+                                    </span>
                                 </div>
                             </div>
                             <div class="profile__data-item">
@@ -161,20 +166,23 @@
                                     предпочтения
                                 </div>
                                 <div class="profile__data-content">
-                                    Люблю заниматься сексом несколько раз в день, актив, интересует классический и
-                                    оральный секс, ориентация гетеро
+                                    <span *ngFor="let item of model['sexualKinds']; let isLast=last">
+                                        {{item['title']}}{{isLast ? '' : ', '}}
+                                    </span>
                                 </div>
                             </div>
                             <div class="profile__data-item">
                                 <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">Интересы</div>
                                 <div class="profile__data-content">
-                                    Охота, Рыбалка, Пить, Курить и ничего не делать, Фитнес
+                                    <span *ngFor="let item of model['hobbies']; let isLast=last">
+                                        {{item['title']}}{{isLast ? '' : ', '}}
+                                    </span>
                                 </div>
                             </div>
                             <div class="profile__data-item">
                                 <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">Дети</div>
                                 <div class="profile__data-content">
-                                    {{ model['hasChildren'] }}
+                                    {{ (model['childrenExist']) ? model['childrenExist']['title'] : '' }}
                                 </div>
                             </div>
                             <div class="profile__data-item">

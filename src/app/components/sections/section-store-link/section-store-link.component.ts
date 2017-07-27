@@ -1,21 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {Component, OnInit, Input} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'app-section-store-link',
-  templateUrl: './section-store-link.component.html',
-  styleUrls: ['./section-store-link.component.sass']
+    selector: 'app-section-store-link',
+    templateUrl: './section-store-link.component.html',
+    styleUrls: ['./section-store-link.component.sass']
 })
 export class SectionStoreLinkComponent implements OnInit {
-  @Input() backgroundImage: boolean = false;
+    @Input() backgroundImage: boolean = true;
 
-  public FFooterForm = new FormGroup({
-    phone: new FormControl('')
-  });
+    public FFooterForm: FormGroup;
 
-  constructor() { }
+    constructor(private _fb: FormBuilder) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.FFooterForm = this._fb.group({
+            phone: ''
+        });
+    }
 
 }

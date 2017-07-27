@@ -1,3 +1,6 @@
+@import "../../../../sass/colors"
+@import "../../../../sass/mixins/mixins"
+
 .section-store-link
   .section-store-link__form
     width: calc(100% - 160px)
@@ -7,3 +10,15 @@
     margin-left: -5px
     z-index: 1
     position: relative
+
+.footer-app__button
+  background-color: rgba($colorBlack, 0.2)
+  box-shadow: 0 2px 8px 0 rgba(67, 57, 145, 0.3)
+  display: inline-block
+  vertical-align: middle
+  padding: 5px 10px
+  border-radius: 5px
+  +transition()
+
+  &:hover
+    box-shadow: 0 2px 8px 0 rgba(67, 57, 145, 0.3), 0 0 0 500px rgba(#000, 0.2) inset

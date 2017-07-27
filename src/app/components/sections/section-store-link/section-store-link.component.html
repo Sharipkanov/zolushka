@@ -1,20 +1,60 @@
-<section class="section-store-link fw-pt-20 fw-pb-20 fw-color-white{{(backgroundImage) ? ' fw-bg-no-repeat fw-bg-center fw-bg-cover' : ' fw-bg-blue'}}" [ngStyle]="(backgroundImage) ? {'background-image': 'url(/assets/images/section-store-link-bg.jpg)'} : {}">
-  <div class="container">
-      <div class="fw-flex fw-flex-space-between fw-flex-middle">
-        <form [formGroup]="FFooterForm" class="fw-flex section-store-link__form">
-          <p class="fw-mr-15 fw-flex-shrink-no">Получить ссылку на <br>приложение</p>
-          <div class="fw-flex fw-flex-middle fw-flex-grow">
-            <div class="fw-flex-grow">
-              <app-input-box formControlName="phone" [placeholder]="'Например: + 7(123) 456-78-90'" [classes]="'fw-br-5'"></app-input-box>
+<section
+        class="section-store-link fw-pt-20 fw-pb-20 fw-color-white{{(backgroundImage) ? ' fw-bg-no-repeat fw-bg-center fw-bg-cover' : ' fw-bg-blue'}}"
+        [ngStyle]="(backgroundImage) ? {'background-image': 'url(/assets/images/section-store-link-bg.jpg)'} : {}">
+    <div class="container">
+        <div class="fw-flex fw-flex-space-between fw-flex-middle">
+            <div class="fw-flex fw-flex-middle section-store-link__form">
+                <form [formGroup]="FFooterForm" class="fw-flex fw-mr-10 fw-flex-grow">
+                    <p class="fw-mr-15 fw-flex-shrink-no">Получить ссылку на <br>приложение</p>
+                    <div class="fw-flex fw-flex-middle fw-flex-grow">
+                        <div class="fw-flex-grow">
+                            <app-input-box formControlName="phone" [placeholder]="'Например: + 7(123) 456-78-90'"
+                                           [classes]="'fw-br-5'"></app-input-box>
+                        </div>
+                        <div class="fw-flex-shink-no fw-ml-10">
+                            <button type="submit" class="button button--primary section-store-link__btn">Получить
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="footer-app__buttons fw-flex fw-flex-middle">
+                    <a href="#" class="footer-app__button fw-inline-block fw-mr-10">
+                        <i class="icon-footer-googleplay"></i>
+                    </a>
+                    <a href="#" class="footer-app__button fw-inline-block">
+                        <i class="icon-footer-apple"></i>
+                    </a>
+                </div>
             </div>
-            <div class="fw-flex-shink-no fw-ml-10"><button type="submit" class="button button--primary section-store-link__btn">Получить</button></div>
-            <div class="fw-flex-shink-no fw-ml-10"><a href="#"></a></div>
-            <div class="fw-flex-shink-no fw-ml-10"><a href="#"></a></div>
-          </div>
-        </form>
-        <div class="fw-flex-shrink-no fw-ml-15">
-          <a href="#">Мобильный сайт</a>
+            <div class="fw-flex-shrink-no fw-ml-15">
+                <a href="#">Мобильный сайт</a>
+            </div>
         </div>
-      </div>
-  </div>
+    </div>
 </section>
+
+<!--
+<div class="footer__top">
+  <div class="container">
+    <div class="footer__top-grid">
+      <form action="#" class="footer-app__form">
+        <div class="footer-app__text fw-mr-25">Получить ссылку на <br>приложение</div>
+        <div class="footer-app__form-group fw-mr-10">
+          <input type="text" class="footer-app__form-input" placeholder="Например: + 7(123) 456-78-90">
+          <button type="submit" class="violet-button">Получить</button>
+        </div>
+        <div class="footer-app__buttons">
+          <a href="#" class="footer-app__button fw-inline-block fw-mr-10">
+            <i class="icon-footer-app-google"></i>
+          </a>
+          <a href="#" class="footer-app__button fw-inline-block">
+            <i class="icon-footer-app-apple"></i>
+          </a>
+        </div>
+      </form>
+      <div class="footer-mobile__wrapper">
+        <a href="#" class="footer-mobile__link">Мобильный сайт</a>
+      </div>
+    </div>
+  </div>
+</div>-->

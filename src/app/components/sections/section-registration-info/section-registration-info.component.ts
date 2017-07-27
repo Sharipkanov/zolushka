@@ -29,9 +29,8 @@ export class SectionRegistrationInfoComponent implements OnInit {
     public type_picker: Array<object> = [];
 
     public locations: Array<ISelectSearchBoxItem> = [];
-    public purposes: Array<Object> = [];
 
-    constructor(private _enums: EnumsService, private _router: Router, private _fb: FormBuilder, private _http: Http, private _locationService: LocationService, private _userService: UserService, private _dateService: DateService) {
+    constructor(private _enums: EnumsService, private _router: Router, private _fb: FormBuilder, private _locationService: LocationService, private _userService: UserService, private _dateService: DateService) {
     }
 
     ngOnInit() {
@@ -49,7 +48,9 @@ export class SectionRegistrationInfoComponent implements OnInit {
         });
 
         this.initLocation();
+
         this._dateService.getDatePicker().subscribe(res => this.date_picker = res);
+
         this._enums.getEnums('type').subscribe(response => {
             response.map(value => {
                 this.type_picker.push({
@@ -66,8 +67,6 @@ export class SectionRegistrationInfoComponent implements OnInit {
             if (locationName !== null) {
                 this.locations = [];
             }
-
-            console.log(locations);
 
             locations.map((location: any) => {
                 this.locations.push({
@@ -87,29 +86,25 @@ export class SectionRegistrationInfoComponent implements OnInit {
     userRegister(e: Event) {
         e.preventDefault();
 
-        console.log(this.FRegistration.value)
+        // console.log(this.FRegistration.value)
         const data = {
             name: this.FRegistration.value.name,
             email: this.FRegistration.value.email,
-            city: {
-                id: this.FRegistration.value.city
-            },
+            city: this.FRegistration.value.city,
             password: this.FRegistration.value.password,
-            type: {
-                id: this.FRegistration.value.type
-            },
+            type: this.FRegistration.value.type,
             birthdate: this._dateService.dateEncode(this.FRegistration.value.birthdate)
         };
 
-        console.log(data);
+        // console.log(data);
 
         this._userService.register(data).subscribe(response => {
-            console.log(response);
+            // console.log(response);
             this.errors = [];
             this._userService.setToken(response.json().accessToken);
             this._router.navigate(['/']); // this will navigate to Home state.
         }, error => {
-            console.log(error);
+            // console.log(error);
             this.errors = [];
             if (error) {
                 const res = error.json();

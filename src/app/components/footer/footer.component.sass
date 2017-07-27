@@ -1,0 +1,94 @@
+@import "../../../sass/mixins/mixins"
+@import "../../../sass/colors"
+
+footer
+  margin-top: auto
+
+.footer__bottom
+  background: #fafbff
+  padding: 15px 0
+
+.footer__bottom-grid
+  padding: 15px 0 15px
+  display: flex
+  justify-content: space-between
+  align-items: center
+  border-bottom: solid 1px rgba(225, 225, 252, 0.67)
+
+.footer__navigation-item
+  display: inline-block
+  vertical-align: middle
+  &:not(:last-child)
+    margin-right: 18px
+
+.footer__navigation-link
+  color: #443a91
+  &:hover
+    text-decoration: underline
+
+.footer__confidentiality-link
+  background: #f1efff
+  border-radius: 5px
+  color: #443a91
+  font-size: 13px
+  display: flex
+  align-items: center
+  line-height: 1
+  padding: 10px
+  +transition()
+
+  &:hover
+    box-shadow: 0 0 0 500px rgba(#000, 0.2) inset
+
+.footer__confidentiality-small
+  font-size: 10px
+
+.footer__bottom-plate
+  padding: 35px 0
+  display: flex
+  justify-content: space-between
+
+.footer__bottom-plate-text
+  line-height: 1.7
+  color: $colorBlack
+  font-size: 13px
+  margin-right: 40px
+
+.footer__social
+  display: flex
+  align-items: center
+
+.footer__social-link
+  display: inline-block
+  vertical-align: middle
+  position: relative
+  //+transition()
+
+  &:before
+    display: block
+    content: ''
+    position: absolute
+    top: 50%
+    left: 50%
+    width: 30px
+    height: 30px
+    margin-top: -15px
+    margin-left: -15px
+    box-shadow: 0 0 10px 2px rgba(#000, 0.6)
+    border-radius: 100%
+    opacity: 0
+    +transition()
+
+  &:not(:last-child)
+    margin-right: 15px
+
+  &:hover
+    &:before
+      opacity: 1
+
+.icon-social
+  display: inline-block
+  vertical-align: middle
+  width: 32px
+  height: 32px
+  border-radius: 100%

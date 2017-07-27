@@ -49,12 +49,13 @@ import { PanelNewGirlsComponent } from './components/panels/panel-new-girls/pane
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopupLoginComponent } from './components/popups/popup-login/popup-login.component';
 import { PopupsComponent } from './components/popups/popups/popups.component';
-import { PopupsService } from "./services/popups/popups.service";
+import { PopupsService } from './services/popups/popups.service';
 import { PageProfileComponent } from './routes/page-profile/page-profile.component';
 import { PageProfileEditComponent } from './routes/page-profile-edit/page-profile-edit.component';
-import { HttpService } from "./services/http/http.service";
-import {DateService} from "./services/date/date.service";
-import {EnumsService} from "./services/enums/enums.service";
+import { HttpService } from './services/http/http.service';
+import {DateService} from './services/date/date.service';
+import {EnumsService} from './services/enums/enums.service';
+import { PageWalletComponent } from './routes/wallet/page-wallet/page-wallet.component';
 
 @NgModule({
     declarations: [
@@ -95,7 +96,8 @@ import {EnumsService} from "./services/enums/enums.service";
         PopupLoginComponent,
         PopupsComponent,
         PageProfileComponent,
-        PageProfileEditComponent
+        PageProfileEditComponent,
+        PageWalletComponent
     ],
     imports: [
         BrowserModule,

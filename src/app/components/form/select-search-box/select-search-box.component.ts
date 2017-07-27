@@ -127,7 +127,7 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
 
                 // console.log(selectSearchBoxItem);
 
-                this.propagateChange(selectSearchBoxItem.value);
+                this.propagateChange(selectSearchBoxItem);
             }
         });
 

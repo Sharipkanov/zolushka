@@ -33,9 +33,7 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit, OnC
     }
 
     writeValue(value: any) {
-        if (!!value) {
-            this.inputValue = value.id;
-        }
+        this.inputValue = value;
     }
 
     registerOnChange(fn: any) {
@@ -46,7 +44,7 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit, OnC
         for (let i = 0; i < this.items.length; i++) {
             const item = this.items[i];
 
-            if (item.id === this.inputValue) {
+            if (item.id === this.inputValue.id) {
                 item.checked = true;
             }
         }
@@ -61,6 +59,7 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit, OnC
 
             (i !== itemIndex) ? item.checked = false : item.checked = true;
         }
+        console.log(this.items[itemIndex]);
         this.propagateChange(this.items[itemIndex]);
     }
 

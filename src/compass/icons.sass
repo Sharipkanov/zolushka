@@ -25,9 +25,9 @@
   .icon-#{$name}-about
     +sprite(icon-#{$name}-about)
     
-@each $name in icon-header-cog, icon-header-wallet, icon-camera-purple, icon-camera-white, icon-profile-views, icon-profile-comments, icon-profile-search, icon-profile-crown, icon-invisible-hat, icon-pencil
-  .#{$name}
-    +sprite(#{$name})
+@each $name in header-cog, header-wallet, camera-purple, camera-white, profile-views, profile-comments, profile-search, profile-crown, invisible-hat, pencil, profile-blocked, profile-activated, profile-invisible, footer-googleplay, footer-apple
+  .icon-#{$name}
+    +sprite(icon-#{$name})
     
 .icon-online-status
   display: inline-block
