@@ -74,56 +74,13 @@
                                 <label class="profile-add-new-photo fw-fz-13">
                                     <i class="icon-camera-white fw-mb-10"></i>
                                     <span>Добавить фото</span>
-                                    <input type="file" class="fw-hidden">
+                                    <input type="file" multiple (change)="uploadPhoto($event)" class="fw-hidden">
                                 </label>
                             </div>
-                            <div class="profile__photos-item">
+                            <div class="profile__photos-item" *ngFor="let item of gallery">
                                 <a href="#" class="profile__photos-image-hover">
-                                    <img alt=""
-                                         class="profile__photos-image fw-inline-block"
-                                         src="http://placehold.it/100x100"/>
-                                </a>
-                            </div>
-                            <div class="profile__photos-item">
-                                <a href="#" class="profile__photos-image-hover">
-                                    <img alt=""
-                                         class="profile__photos-image fw-inline-block"
-                                         src="http://placehold.it/100x100"/>
-                                </a>
-                            </div>
-                            <div class="profile__photos-item">
-                                <a href="#" class="profile__photos-image-hover">
-                                    <img alt=""
-                                         class="profile__photos-image fw-inline-block"
-                                         src="http://placehold.it/100x100"/>
-                                </a>
-                            </div>
-                            <div class="profile__photos-item">
-                                <a href="#" class="profile__photos-image-hover">
-                                    <img alt=""
-                                         class="profile__photos-image fw-inline-block"
-                                         src="http://placehold.it/100x100"/>
-                                </a>
-                            </div>
-                            <div class="profile__photos-item">
-                                <a href="#" class="profile__photos-image-hover">
-                                    <img alt=""
-                                         class="profile__photos-image fw-inline-block"
-                                         src="http://placehold.it/100x100"/>
-                                </a>
-                            </div>
-                            <div class="profile__photos-item">
-                                <a href="#" class="profile__photos-image-hover">
-                                    <img alt=""
-                                         class="profile__photos-image fw-inline-block"
-                                         src="http://placehold.it/100x100"/>
-                                </a>
-                            </div>
-                            <div class="profile__photos-item">
-                                <a href="#" class="profile__photos-image-hover">
-                                    <img alt=""
-                                         class="profile__photos-image fw-inline-block"
-                                         src="http://placehold.it/100x100"/>
+                                    <img alt="" class="profile__photos-image fw-inline-block"
+                                         src="{{ item._links.thumbnail.href }}"/>
                                 </a>
                             </div>
                         </div>

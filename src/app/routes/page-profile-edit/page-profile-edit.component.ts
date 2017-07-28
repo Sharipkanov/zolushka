@@ -58,17 +58,24 @@ export class PageProfileEditComponent implements OnInit {
 
         this._userService.profilePageInfo().subscribe(res => {
             if (res === undefined) {
-                this._userService.onChangeUserInfo.subscribe(response => {
+                this._userService.onChangeUserInfo.subscribe(() => {
                     this.model = this._userService.profilePageInfo();
+
+                    if (!!res['birthdate']) {
+                        this.model['birthdateDecoded'] = this._dateService.dateDecode(res['birthdate']);
+                    }
+
+                    this.onAllDataGet.emit('modelDone');
                 });
             } else {
                 this.model = res;
-            }
-            if (!!res['birthdate']) {
-                this.model['birthdateDecoded'] = this._dateService.dateDecode(res['birthdate']);
-            }
 
-            this.onAllDataGet.emit('modelDone');
+                if (!!res['birthdate']) {
+                    this.model['birthdateDecoded'] = this._dateService.dateDecode(res['birthdate']);
+                }
+
+                this.onAllDataGet.emit('modelDone');
+            }
         });
 
         this._enums.getEnums().subscribe(response => {
@@ -145,7 +152,8 @@ export class PageProfileEditComponent implements OnInit {
         e.preventDefault();
 
         this._userService.uploadPhoto(e.target).subscribe((data) => {
-                this.gallery = data;
+                this.gallery = data._embedded.images;
+                console.log(data);
             },
             error => console.log(error)
         );

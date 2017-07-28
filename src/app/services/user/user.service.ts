@@ -1,4 +1,3 @@
-///<reference path="../../../../node_modules/rxjs/add/operator/map.d.ts"/>
 import {Injectable, Inject, Output, EventEmitter} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
@@ -12,6 +11,8 @@ export class UserService {
 
     onChangeToken: EventEmitter<String> = new EventEmitter<String>();
     onChangeUserInfo: EventEmitter<Object> = new EventEmitter<Object>();
+
+    public user = {};
 
     constructor(private _http: Http, @Inject(StorageService) private _storageService: StorageService) {
     }
@@ -41,6 +42,7 @@ export class UserService {
         login.subscribe((response) => {
             if (!!response.json().accessToken) {
                 this.setToken(response.json().accessToken);
+                this.info();
                 return true;
             }
             return false;
@@ -48,8 +50,6 @@ export class UserService {
             console.log(error);
             return error;
         });
-
-        this.info();
 
         return login.map(response => response.json());
     }
@@ -75,7 +75,7 @@ export class UserService {
         if (this._storageService.get('user_info')) {
             user_info = JSON.parse(this._storageService.get('user_info'));
         } else {
-            this.info_update().subscribe(response => {
+            this.infoUpdate().subscribe(response => {
                 this._storageService.set('user_info', response);
                 user_info = response;
                 this.onChangeUserInfo.emit(response);
@@ -85,29 +85,22 @@ export class UserService {
         return user_info;
     }
 
-    info_update() {
+    infoUpdate() {
         const headers = this.setHeaders();
         return this._http.get(`/api/api/client/base-info`, {headers: headers})
             .map(res => res.json());
     }
 
-    profilePageInfo(user_info = null) {
+    profilePageInfo() {
         const headers = this.setHeaders();
-        let user;
-
-        if (user_info) {
-            user = user_info;
-        } else {
-            user = this.info();
-        }
-        return this._http.get(`/api/api/client/${user.id}`, {headers: headers})
+        return this._http.get(`/api/api/client/`, {headers: headers})
             .map(res => res.json());
     }
 
     profileUpdate(model) {
         const headers = this.setHeaders();
 
-        return this._http.post('/api/api/client', model, {headers: headers})
+        return this._http.post('/api/api/client/', model, {headers: headers})
             .map(res => res.json());
     }
 
@@ -120,21 +113,13 @@ export class UserService {
             for (let i = 0; i < files.length; i++) {
                 formDataValue.append('files', files[i], files[i].name);
             }
-            /*file.map(value => {
-             formDataValue.append('uploadFile', value, value.name)
-             });*/
-            // formDataValue.append('uploadFile', file);
-            const headers = new Headers();
-            headers.append('Authorization', 'token ' + this._storageService.get('token'));
-            // headers.append('Content-Type', 'multipart/form-data');
-
-            // console.log(formDataValue);
+            const headers = this.setHeaders();
             return this._http.post(`/api/media/client/images`, formDataValue, {headers: headers})
                 .map((response: Response) => response.json());
         }
     }
 
-    getPhotos($userId = null) {
+    getPhotos() {
         const headers = this.setHeaders();
         return this._http.get(`/api/media/client/images`, {headers: headers})
             .map((response: Response) => response.json());
@@ -143,7 +128,7 @@ export class UserService {
 
     setHeaders() {
         const headers: Headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        // headers.append('Content-Type', 'application/json');
         headers.append('Authorization', 'token ' + this._storageService.get('token'));
 
         return headers;

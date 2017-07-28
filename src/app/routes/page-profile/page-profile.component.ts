@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpService} from '../../services/http/http.service';
 import {UserService} from '../../services/user/user.service';
-import {Http} from "@angular/http";
-import {EnumsService} from "../../services/enums/enums.service";
-import {forEach} from "@angular/router/src/utils/collection";
-import {IUserInfo} from "../../interfaces/user-info";
+import {EnumsService} from '../../services/enums/enums.service';
+import {IUserInfo} from '../../interfaces/user-info';
+import {IGalleryInfo} from "../../interfaces/gallery-info";
 
 @Component({
     selector: 'app-page-profile',
@@ -17,6 +15,9 @@ export class PageProfileComponent implements OnInit {
     public model = {};
     public enums = {};
 
+    public gallery: any = [];
+    public gallery_info: any = new IGalleryInfo();
+
     constructor(private _userService: UserService, private _enums: EnumsService) {
     }
 
@@ -25,18 +26,23 @@ export class PageProfileComponent implements OnInit {
         if (user_info === undefined) {
             this._userService.onChangeUserInfo.subscribe(res => {
                 this.user_info = res;
-                this.getProfilPageInfo(this.user_info);
             });
         } else {
             this.user_info = user_info;
-            this.getProfilPageInfo(this.user_info);
         }
+
+        this.getProfilPageInfo();
+
+        this._userService.getPhotos().subscribe(response => {
+            this.gallery_info = response;
+            this.gallery = this.gallery_info._embedded.images;
+        });
     }
 
-    getProfilPageInfo(user_info) {
+    getProfilPageInfo() {
         this.enums = this._enums.getEnums();
 
-        this._userService.profilePageInfo(user_info).subscribe(res => {
+        this._userService.profilePageInfo().subscribe(res => {
             this.model = res;
             this.model['_bodyCondition'] = [];
             this.model['_sexualSection'] = [];
@@ -59,5 +65,16 @@ export class PageProfileComponent implements OnInit {
                 }
             }
         });
+    }
+
+    uploadPhoto(e) {
+        e.preventDefault();
+
+        this._userService.uploadPhoto(e.target).subscribe((data) => {
+                this.gallery = data._embedded.images;
+                console.log(data);
+            },
+            error => console.log(error)
+        );
     }
 }
