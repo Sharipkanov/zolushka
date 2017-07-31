@@ -2,12 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user/user.service';
 import {EnumsService} from '../../services/enums/enums.service';
 import {IUserInfo} from '../../interfaces/user-info';
-import {IGalleryInfo} from "../../interfaces/gallery-info";
+import {IGalleryInfo} from '../../interfaces/gallery-info';
 
 @Component({
     selector: 'app-page-profile',
     templateUrl: './page-profile.component.html',
-    styleUrls: ['./page-profile.component.sass']
+    styleUrls: [
+        './page-profile.component.sass'
+    ]
 })
 export class PageProfileComponent implements OnInit {
 

@@ -4,7 +4,8 @@
             <div class="profile-left">
                 <div class="profile__info fw-mb-30 panel fw-br-5">
                     <div class="profile__info-image">
-                        <img alt="" class="profile__info-avatar fw-width-1-1" src="{{(user_info['avatar']) ? user_info['avatar']['_links']['thumbnail'] : './assets/images/default-navigation-avatar.svg'}}"/>
+                        <img alt="" class="profile__info-avatar fw-width-1-1"
+                             src="{{(user_info['avatar']) ? user_info['avatar']['_links']['thumbnail'] : './assets/images/default-navigation-avatar.svg'}}"/>
                     </div>
                     <div class="profile__info-content">
                         <div class="profile__info-statistic fw-mb-20">
@@ -27,7 +28,8 @@
                             <span class="fw-mr-15" *ngIf="!!model['weight']">Вес {{ model['weight'] }}кг</span>
                             <span *ngIf="!!model['height']">Рост {{ model['height'] }} см</span>
                         </div>
-                        <div class="profile__info-additions-params fw-mt-10" *ngIf="!!model['_bodyCondition'] && !!model['_bodyCondition'].length">
+                        <div class="profile__info-additions-params fw-mt-10"
+                             *ngIf="!!model['_bodyCondition'] && !!model['_bodyCondition'].length">
                             {{ model['_bodyCondition'].join(', ') }}
                             <!--Блондин, Глаза синие, Спортивное телосложение, Европейская внешность-->
                         </div>
@@ -52,7 +54,10 @@
                     <div class="profile__name fw-flex fw-flex-space-between fw-flex-middle fw-mb-30">
                         <div class="profile__name-left">
                             <div class="profile__name-title fw-fw-600 fw-mb-5">
-                                {{ model['name'] }}{{ (model['age']) ? ' ' + model['age'] + 'лет' : '' }}, {{ (model['zodiacsign']) ? model['zodiacsign']['title'] + ',' : '' }}{{ (model['city']) ? model['city']['title'] : '' }}</div>
+                                {{ model['name'] }}{{ (model['age']) ? ' ' + model['age'] + 'лет' : '' }}, {{
+                                (model['zodiacsign']) ? model['zodiacsign']['title'] + ',' : '' }}{{ (model['city']) ?
+                                model['city']['title'] : '' }}
+                            </div>
                             <div>
                                 <i class="icon-online-status online fw-mr-5"></i>
                                 <span class="fw-color-green-light fw-inline-block fw-fz-13">On-line</span>
@@ -69,20 +74,33 @@
                     </div>
                     <div class="profile__photos">
                         <div class="profile__photos-title fw-fz-16 fw-mb-10 fw-fw-600">Фотографии</div>
-                        <div class="profile__photos-grid fw-flex fw-flex-wrap">
-                            <div class="profile__photos-item fw-flex">
-                                <label class="profile-add-new-photo fw-fz-13">
-                                    <i class="icon-camera-white fw-mb-10"></i>
-                                    <span>Добавить фото</span>
-                                    <input type="file" multiple (change)="uploadPhoto($event)" class="fw-hidden">
-                                </label>
+                        <div class="fw-flex">
+                            <div class="profile__photos-item fw-flex fw-flex-shrink-no">
+                                <div class="fw-height-proportional-100 fw-width-1-1">
+                                    <label class="profile-add-new-photo fw-fz-13">
+                                        <i class="icon-camera-white fw-mb-10"></i>
+                                        <span>Добавить фото</span>
+                                        <input type="file" multiple (change)="uploadPhoto($event)" class="fw-hidden">
+                                    </label>
+                                </div>
                             </div>
-                            <div class="profile__photos-item" *ngFor="let item of gallery">
+                            <div class="fw-flex-grow fw-min-width-0">
+                                <owl-carousel [options]="{items: 8}" [items]="gallery">
+                                    <div class="profile__photos-item1 fw-height-proportional-100 fw-width-1-1"
+                                         *ngFor="let item of gallery">
+                                        <div class="profile__photos-image-hover">
+                                            <img alt="" class="profile__photos-image fw-inline-block"
+                                                 src="{{ item._links.thumbnail.href }}"/>
+                                        </div>
+                                    </div>
+                                </owl-carousel>
+                            </div>
+                            <!--<div class="profile__photos-item" *ngFor="let item of gallery">
                                 <a href="#" class="profile__photos-image-hover">
                                     <img alt="" class="profile__photos-image fw-inline-block"
                                          src="{{ item._links.thumbnail.href }}"/>
                                 </a>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>

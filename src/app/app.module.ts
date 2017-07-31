@@ -9,8 +9,6 @@ import { BackendProvider } from './services/mocks.service';
 import { MockBackend } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
 
-import { OwlModule } from 'angular-owl-carousel';
-
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routes';
 import { FooterComponent } from './components/footer/footer.component';
@@ -53,9 +51,10 @@ import { PopupsService } from './services/popups/popups.service';
 import { PageProfileComponent } from './routes/page-profile/page-profile.component';
 import { PageProfileEditComponent } from './routes/page-profile-edit/page-profile-edit.component';
 import { HttpService } from './services/http/http.service';
-import {DateService} from './services/date/date.service';
-import {EnumsService} from './services/enums/enums.service';
+import { DateService } from './services/date/date.service';
+import { EnumsService } from './services/enums/enums.service';
 import { PageWalletComponent } from './routes/wallet/page-wallet/page-wallet.component';
+import { OwlModule } from 'ng2-owl-carousel';
 
 @NgModule({
     declarations: [
@@ -104,9 +103,9 @@ import { PageWalletComponent } from './routes/wallet/page-wallet/page-wallet.com
         AppRoutes,
         HttpModule,
         JsonpModule,
-        OwlModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        OwlModule
     ],
     providers: [
         StorageService,
