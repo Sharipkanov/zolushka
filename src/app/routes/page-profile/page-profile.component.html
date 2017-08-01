@@ -75,7 +75,7 @@
                     <div class="profile__photos">
                         <div class="profile__photos-title fw-fz-16 fw-mb-10 fw-fw-600">Фотографии</div>
                         <div class="fw-flex">
-                            <div class="profile__photos-item fw-flex fw-flex-shrink-no">
+                            <div class="profile__photos-item fw-flex fw-flex-shrink-no fw-pr-10">
                                 <div class="fw-height-proportional-100 fw-width-1-1">
                                     <label class="profile-add-new-photo fw-fz-13">
                                         <i class="icon-camera-white fw-mb-10"></i>
@@ -85,13 +85,11 @@
                                 </div>
                             </div>
                             <div class="fw-flex-grow fw-min-width-0">
-                                <owl-carousel [options]="{items: 8}" [items]="gallery">
-                                    <div class="profile__photos-item1 fw-height-proportional-100 fw-width-1-1"
+                                <owl-carousel #photoCarousel [options]="owlSettings" [items]="gallery" >
+                                    <div class="profile__photos-image-wrapper fw-height-proportional-100 fw-width-1-1"
                                          *ngFor="let item of gallery">
-                                        <div class="profile__photos-image-hover">
-                                            <img alt="" class="profile__photos-image fw-inline-block"
-                                                 src="{{ item._links.thumbnail.href }}"/>
-                                        </div>
+                                        <img alt="" class="profile__photos-image"
+                                             src="{{ item._links.thumbnail.href }}"/>
                                     </div>
                                 </owl-carousel>
                             </div>

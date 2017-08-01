@@ -4,6 +4,45 @@
 .profile-page
 	padding: 40px 0
 
+	.owl-next, .owl-prev
+		position: absolute
+		top: 50%
+		left: 15px
+		width: 26px
+		height: 26px
+		border: 2px solid #fff
+		background-color: rgba(#000, 0.8)
+		font-size: 0
+		border-radius: 100%
+		margin-top: -10px
+		opacity: 0.4
+		+transition()
+
+		&:after
+			display: block
+			content: ''
+			position: absolute
+			top: 50%
+			left: 50%
+			margin-top: -5px
+			margin-left: -3px
+			width: 8px
+			height: 8px
+			border-right: 2px solid #fff
+			border-top: 2px solid #fff
+			+transform(rotate(-135deg))
+
+		&:hover
+			opacity: 0.9
+
+	.owl-next
+		left: auto
+		right: 15px
+
+		&:after
+			+transform(rotate(45deg))
+			margin-left: -6px
+
 .profile-left
 	flex-shrink: 0
 	flex-basis: 30%
@@ -43,7 +82,7 @@
 	flex-wrap: wrap
 
 .profile__photos-item
-	padding-left: 10px
+	//padding-left: 10px
 	width: 12.5%
 	font-size: 0
 	position: relative
