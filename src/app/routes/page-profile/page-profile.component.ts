@@ -84,10 +84,12 @@ export class PageProfileComponent implements OnInit, AfterViewChecked {
             }
 
             setTimeout(() => {
-                _self.photoCarousel.$owlChild.$owl.on('changed.owl.carousel', function () {
-                    console.log('hi')
+                _self.photoCarousel.$owlChild.$owl.on('changed.owl.carousel', function (e) {
+                    if (e.item.count - 1 <= e.item.index + e.page.size) {
+                        _self.getProfilePhotos();
+                    }
                 })
-            }, 1)
+            }, 1000)
 
         });
     }
