@@ -78,20 +78,24 @@
                             <div class="profile__photos-item fw-flex fw-flex-shrink-no fw-pr-10">
                                 <div class="fw-height-proportional-100 fw-width-1-1">
                                     <label class="profile-add-new-photo fw-fz-13">
-                                        <i class="icon-camera-white fw-mb-10"></i>
-                                        <span>Добавить фото</span>
+                                        <i class="icon-camera-purple"></i>
+                                        <!--<i class="icon-camera-white fw-mb-10"></i>-->
+                                        <!--<span>Добавить фото</span>-->
                                         <input type="file" multiple (change)="uploadPhoto($event)" class="fw-hidden">
                                     </label>
                                 </div>
                             </div>
-                            <div class="fw-flex-grow fw-min-width-0">
+                            <div class="fw-flex-grow fw-min-width-0 fw-position-relative">
                                 <owl-carousel #photoCarousel [options]="owlSettings" [items]="gallery" >
                                     <div class="profile__photos-image-wrapper fw-height-proportional-100 fw-width-1-1"
                                          *ngFor="let item of gallery">
                                         <img alt="" class="profile__photos-image"
                                              src="{{ item._links.thumbnail.href }}"/>
+                                        <i class="icon-circle-remove"></i>
+                                        <i class="icon-circle-edit"></i>
                                     </div>
                                 </owl-carousel>
+                                <app-preloader *ngIf="queryInProcess"></app-preloader>
                             </div>
                             <!--<div class="profile__photos-item" *ngFor="let item of gallery">
                                 <a href="#" class="profile__photos-image-hover">

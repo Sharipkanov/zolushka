@@ -31,7 +31,7 @@ export class PageProfileEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._userService.getPhotos().subscribe(response => {
+        this._userService.getPhotos('?size=1000').subscribe(response => {
             this.gallery_info = response;
             this.gallery = this.gallery_info._embedded.images;
         });

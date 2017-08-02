@@ -55,6 +55,7 @@ import { DateService } from './services/date/date.service';
 import { EnumsService } from './services/enums/enums.service';
 import { PageWalletComponent } from './routes/wallet/page-wallet/page-wallet.component';
 import { OwlModule } from 'ng2-owl-carousel';
+import { PreloaderComponent } from './components/preloader/preloader.component';
 
 @NgModule({
     declarations: [
@@ -96,7 +97,8 @@ import { OwlModule } from 'ng2-owl-carousel';
         PopupsComponent,
         PageProfileComponent,
         PageProfileEditComponent,
-        PageWalletComponent
+        PageWalletComponent,
+        PreloaderComponent
     ],
     imports: [
         BrowserModule,

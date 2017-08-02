@@ -119,9 +119,15 @@ export class UserService {
         }
     }
 
-    getPhotos() {
+    getPhotos(link: string = null) {
         const headers = this.setHeaders();
-        return this._http.get(`/api/media/client/images`, {headers: headers})
+        let query = `/api/media/client/images`;
+
+        if (link && link !== undefined) {
+            query += '/' + link;
+        }
+
+        return this._http.get(query, {headers: headers})
             .map((response: Response) => response.json());
     }
 

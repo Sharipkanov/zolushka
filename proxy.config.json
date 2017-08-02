@@ -3,21 +3,18 @@
     "target": "https://auth.test.denim.cc/",
     "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug",
     "pathRewrite": {"^/api/auth" : ""}
   },
   "/api/api": {
     "target": "https://api.test.denim.cc/",
     "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug",
     "pathRewrite": {"^/api/api" : ""}
   },
   "/api/media": {
     "target": "https://media.test.denim.cc/",
     "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug",
     "pathRewrite": {"^/api/media" : ""}
   }
 }

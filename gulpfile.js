@@ -20,4 +20,8 @@ gulp.task('compass', function() {
         .pipe(gulp.dest('src/assets/css'))
 });
 
-gulp.task('default', ['compass']);
+gulp.task('watch', function () {
+    gulp.watch('src/compass/icons.sass', ['compass']);
+});
+
+gulp.task('default', ['compass', 'watch']);
