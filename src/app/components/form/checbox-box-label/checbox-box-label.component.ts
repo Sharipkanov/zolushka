@@ -62,7 +62,7 @@ export class ChecboxBoxLabelComponent implements OnInit, OnChanges {
                 for (let i = 0; i < this.items.length; i++) {
                     const item = this.items[i];
 
-                    if (this.inputValue.id === item.id) {
+                    if (!!this.inputValue && this.inputValue.id === item.id) {
                         item.checked = true;
                     }
                 }

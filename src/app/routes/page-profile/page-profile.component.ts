@@ -3,7 +3,7 @@ import {UserService} from '../../services/user/user.service';
 import {EnumsService} from '../../services/enums/enums.service';
 import {IUserInfo} from '../../interfaces/user-info';
 import {IGalleryInfo} from '../../interfaces/gallery-info';
-import {OwlCarousel} from 'ng2-owl-carousel';
+import {OwlCarousel} from 'ngx-owl-carousel';
 
 @Component({
     selector: 'app-page-profile',
@@ -63,8 +63,10 @@ export class PageProfileComponent implements OnInit {
         this.queryInProcess = true;
         _self._userService.getPhotos(link).subscribe((response) => {
             _self.gallery_info = response;
-            for (let i = 0; i < _self.gallery_info._embedded.images.length; i++) {
-                _self.gallery.push(_self.gallery_info._embedded.images[i]);
+            if (response._embedded) {
+                for (let i = 0; i < _self.gallery_info._embedded.images.length; i++) {
+                    _self.gallery.push(_self.gallery_info._embedded.images[i]);
+                }
             }
 
             this.owlBinding(response);

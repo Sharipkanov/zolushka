@@ -98,7 +98,9 @@ export class UserService {
     }
 
     profileUpdate(model) {
-        const headers = this.setHeaders();
+        const headers = this.setHeaders({json: true});
+
+        console.log(model);
 
         return this._http.post('/api/api/client/', model, {headers: headers})
             .map(res => res.json());
@@ -131,10 +133,19 @@ export class UserService {
             .map((response: Response) => response.json());
     }
 
+    removePhoto(id: number) {
+        const headers = this.setHeaders();
 
-    setHeaders() {
+        return this._http.get(`/api/media/client/image/${id}/delete`, {headers: headers})
+            .map((response: Response) => response.json());
+    }
+
+    setHeaders(type: object = null) {
         const headers: Headers = new Headers();
-        // headers.append('Content-Type', 'application/json');
+        if (!!type && type['json']) {
+            headers.append('Content-Type', 'application/json');
+        }
+
         headers.append('Authorization', 'token ' + this._storageService.get('token'));
 
         return headers;

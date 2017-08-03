@@ -89,10 +89,16 @@
                                 <owl-carousel #photoCarousel [options]="owlSettings" [items]="gallery" >
                                     <div class="profile__photos-image-wrapper fw-height-proportional-100 fw-width-1-1"
                                          *ngFor="let item of gallery">
-                                        <img alt="" class="profile__photos-image"
-                                             src="{{ item._links.thumbnail.href }}"/>
-                                        <i class="icon-circle-remove"></i>
-                                        <i class="icon-circle-edit"></i>
+                                        <div class="profile-edit__photos-link">
+                                            <img alt="" class="profile__photos-image"
+                                                   src="{{ item._links.thumbnail.href }}"/>
+                                            <div class="profile-edit__photo-icon-left">
+                                                <i class="icon-circle-remove"></i>
+                                            </div>
+                                            <div class="profile-edit__photo-icon-right">
+                                                <i class="icon-circle-edit"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </owl-carousel>
                                 <app-preloader *ngIf="queryInProcess"></app-preloader>

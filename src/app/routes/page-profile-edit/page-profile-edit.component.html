@@ -11,10 +11,16 @@
                     фотографии на которых не изображен владелец анкеты, а так же фотографии, скрыващеие более 1/3
                     лица
                 </div>
-                <div class="profile-edit__photos fw-grid fw-grid-8">
-                    <div class="profile-edit__photos-item" *ngFor="let item of gallery">
-                        <a href="#" class="profile-edit__photos-link">
+                <div class="profile-edit__photos fw-grid fw-grid-8 fw-position-relative">
+                    <div class="profile-edit__photos-item" *ngFor="let item of gallery; let i = index;">
+                        <a class="profile-edit__photos-link">
                             <img class="profile-edit__photos-image" src="{{ item._links.thumbnail.href }}" alt="">
+                            <span class="profile-edit__photo-icon-left">
+                                <i class="icon-circle-edit"></i>
+                            </span>
+                            <span class="profile-edit__photo-icon-right">
+                                <i class="icon-circle-remove" (click)="removePhoto(item.id, i)"></i>
+                            </span>
                         </a>
                         <span class="profile-edit__photos-main" *ngIf="item.isAvatar">Основная</span>
                     </div>
@@ -24,6 +30,7 @@
                             <input type="file" multiple (change)="uploadPhoto($event)" class="fw-hidden">
                         </label>
                     </div>
+                    <app-preloader *ngIf="queryInProcess"></app-preloader>
                 </div>
             </div>
         </div>
@@ -96,9 +103,7 @@
                     <div class="field-input">
                         <div class="fw-flex fw-mb-15">
                             <div class="fw-flex-grow fw-mr-15">
-                                <app-input-box formControlName="phone"
-                                               [placeholder]="'Введите номер телефона'"
-                                ></app-input-box>
+                                <app-input-box [placeholder]="'Введите номер телефона'"></app-input-box>
                             </div>
                             <div>
                                 <a href="#" class="button button--primary">Подключить</a>

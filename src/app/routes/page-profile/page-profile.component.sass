@@ -195,6 +195,13 @@
 
 .profile-edit__photos-link
 	display: block
+	position: relative
+
+	&:hover
+		z-index: 2
+		.profile-edit__photo-icon-left, .profile-edit__photo-icon-right
+			visibility: visible
+			opacity: 1
 
 .profile-edit__photos-image
 	border-radius: 3px
@@ -202,6 +209,20 @@
 	height: 80px
 	vertical-align: middle
 	object-fit: cover
+
+.profile-edit__photo-icon-left, .profile-edit__photo-icon-right
+	position: absolute
+	top: -10px
+	left: -10px
+	font-size: 0
+	visibility: hidden
+	opacity: 0
+	+transition()
+
+.profile-edit__photo-icon-right
+	left: auto
+	right: -10px
+
 
 .profile-edit__photos-add
 	height: 80px

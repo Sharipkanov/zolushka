@@ -22,6 +22,8 @@ export class PageProfileEditComponent implements OnInit {
     public gallery = [];
     public gallery_info = new IGalleryInfo();
 
+    public queryInProcess: boolean = false;
+
     public onAllDataGet: EventEmitter<any> = new EventEmitter();
 
     constructor(private _fb: FormBuilder,
@@ -31,9 +33,13 @@ export class PageProfileEditComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.queryInProcess = true;
         this._userService.getPhotos('?size=1000').subscribe(response => {
+            this.queryInProcess = false;
             this.gallery_info = response;
-            this.gallery = this.gallery_info._embedded.images;
+            if (response._embedded) {
+                this.gallery = this.gallery_info._embedded.images;
+            }
         });
 
         this.onAllDataGet.subscribe((res) => {
@@ -150,12 +156,23 @@ export class PageProfileEditComponent implements OnInit {
 
     uploadPhoto(e) {
         e.preventDefault();
+        this.queryInProcess = true;
 
         this._userService.uploadPhoto(e.target).subscribe((data) => {
                 this.gallery = data._embedded.images;
                 console.log(data);
+                this.queryInProcess = false;
             },
             error => console.log(error)
         );
+    }
+
+    removePhoto(id: number, index) {
+        this.queryInProcess = true;
+        this._userService.removePhoto(id).subscribe(res => {
+            this.gallery.splice(index, 1);
+            console.log(res);
+            this.queryInProcess = false;
+        });
     }
 }
