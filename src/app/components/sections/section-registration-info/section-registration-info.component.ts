@@ -55,7 +55,7 @@ export class SectionRegistrationInfoComponent implements OnInit {
             response.map(value => {
                 this.type_picker.push({
                     title: value.shortTitle,
-                    value: value.id,
+                    id: value.id,
                     checked: false
                 });
             });
@@ -70,7 +70,7 @@ export class SectionRegistrationInfoComponent implements OnInit {
 
             locations.map((location: any) => {
                 this.locations.push({
-                    value: location.id,
+                    id: location.id,
                     selected: false,
                     label: location.title,
                     labelInfo: location.country.title
@@ -96,7 +96,7 @@ export class SectionRegistrationInfoComponent implements OnInit {
             birthdate: this._dateService.dateEncode(this.FRegistration.value.birthdate)
         };
 
-        // console.log(data);
+        console.log(data);
 
         this._userService.register(data).subscribe(response => {
             // console.log(response);

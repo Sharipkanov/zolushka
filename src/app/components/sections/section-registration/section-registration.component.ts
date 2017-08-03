@@ -67,7 +67,7 @@ export class SectionRegistrationComponent implements OnInit {
 
             locations.map((location: any) => {
                 this.locations.push({
-                    value: location.id,
+                    id: location.id,
                     selected: false,
                     label: location.title,
                     labelInfo: location.country.title

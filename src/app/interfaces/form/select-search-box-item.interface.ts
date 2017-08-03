@@ -1,6 +1,6 @@
 export interface ISelectSearchBoxItem  {
   label: string;
   labelInfo: string;
-  value: any;
+  id: any;
   selected: boolean;
 }
