@@ -15,12 +15,12 @@
                     <div class="profile-edit__photos-item" *ngFor="let item of gallery; let i = index;">
                         <a class="profile-edit__photos-link">
                             <img class="profile-edit__photos-image" src="{{ item._links.thumbnail.href }}" alt="">
-                            <span class="profile-edit__photo-icon-left">
+                            <a (click)="cropPhoto(item.id, i)" class="profile-edit__photo-icon-left">
                                 <i class="icon-circle-edit"></i>
-                            </span>
-                            <span class="profile-edit__photo-icon-right">
-                                <i class="icon-circle-remove" (click)="removePhoto(item.id, i)"></i>
-                            </span>
+                            </a>
+                            <a (click)="removePhoto(item.id, i)" class="profile-edit__photo-icon-right">
+                                <i class="icon-circle-remove"></i>
+                            </a>
                         </a>
                         <span class="profile-edit__photos-main" *ngIf="item.isAvatar">Основная</span>
                     </div>

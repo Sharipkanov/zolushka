@@ -75,6 +75,11 @@
 
 .profile__name-title
 	font-size: 24px
+	
+.profile__photos-carousel
+	.owl-stage-outer
+		padding: 10px
+		margin: -10px
 
 .profile__photos-grid
 	margin-left: -10px
@@ -104,7 +109,7 @@
 	//position: relative
 	//width: 100%
 
-	&:after
+	&:before
 		+transition()
 		display: block
 		content: ''
@@ -115,9 +120,10 @@
 		left: 0
 		background: #000
 		opacity: 0
+		z-index: 1
 
 	&:hover
-		&:after
+		&:before
 			opacity: 0.5
 
 .profile__photos-image
@@ -218,6 +224,7 @@
 	visibility: hidden
 	opacity: 0
 	+transition()
+	z-index: 2
 
 .profile-edit__photo-icon-right
 	left: auto

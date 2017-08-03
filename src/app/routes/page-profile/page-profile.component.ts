@@ -130,4 +130,17 @@ export class PageProfileComponent implements OnInit {
             error => console.log(error)
         );
     }
+
+    /*removePhoto(id: number, index) {
+        this.queryInProcess = true;
+        this._userService.removePhoto(id).subscribe(res => {
+            this.gallery.splice(index, 1);
+            console.log(res);
+            this.queryInProcess = false;
+        });
+    }
+
+    cropPhoto(id: number, index) {
+        console.log('crop photo')
+    }*/
 }

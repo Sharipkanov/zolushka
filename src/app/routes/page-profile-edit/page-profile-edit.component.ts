@@ -158,7 +158,7 @@ export class PageProfileEditComponent implements OnInit {
         e.preventDefault();
         this.queryInProcess = true;
 
-        this._userService.uploadPhoto(e.target).subscribe((data) => {
+        this._userService.uploadPhoto(e.target, 1000).subscribe((data) => {
                 this.gallery = data._embedded.images;
                 console.log(data);
                 this.queryInProcess = false;
@@ -174,5 +174,9 @@ export class PageProfileEditComponent implements OnInit {
             console.log(res);
             this.queryInProcess = false;
         });
+    }
+
+    cropPhoto(id: number, index) {
+        console.log('crop photo')
     }
 }
