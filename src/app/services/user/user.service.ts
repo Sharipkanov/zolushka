@@ -1,20 +1,19 @@
-import { Injectable, Inject, Output, EventEmitter } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import {Injectable, Inject, Output, EventEmitter} from '@angular/core';
+import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
-import { StorageService } from '../storage/storage.service';
-import { ILogin } from '../../interfaces/login.interface';
-import { HttpService } from '../http/http.service';
-import { Observable } from "rxjs/Observable";
+import {StorageService} from '../storage/storage.service';
+import {ILogin} from '../../interfaces/login.interface';
+import {CanActivate, Router} from '@angular/router';
 
 @Injectable()
-export class UserService {
+export class UserService implements CanActivate {
 
     onChangeToken: EventEmitter<String> = new EventEmitter<String>();
     onChangeUserInfo: EventEmitter<Object> = new EventEmitter<Object>();
 
     public user = {};
 
-    constructor(private _http: Http, @Inject(StorageService) private _storageService: StorageService) {
+    constructor(private _router: Router, private _http: Http, @Inject(StorageService) private _storageService: StorageService) {
     }
 
     token() {
@@ -31,12 +30,19 @@ export class UserService {
         return this.onChangeToken.emit(this.token());
     }
 
+    removeToken() {
+        this.onChangeToken.emit('');
+        this._storageService.remove('token');
+        this._storageService.remove('user_info');
+        this._router.navigate(['/']);
+    }
+
     login(data: ILogin) {
         const headers: Headers = new Headers();
 
         headers.append('Authorization', 'Basic ' + btoa(data.email + ':' + data.password));
         const login = this._http
-            .post(`/api/auth/token`, { ...data }, { headers: headers });
+            .post(`/api/auth/token`, {...data}, {headers: headers});
 
 
         login.subscribe((response) => {
@@ -55,10 +61,7 @@ export class UserService {
     }
 
     logout() {
-        this._storageService.remove('token');
-        this._storageService.remove('user_info');
-
-        return this.onChangeToken.emit('');
+        this.removeToken();
     }
 
     register(data) {
@@ -66,7 +69,7 @@ export class UserService {
 
         headers.append('Content-Type', 'application/json');
 
-        return this._http.post('/api/auth/signup', { ...data }, { headers: headers });
+        return this._http.post('/api/auth/signup', {...data}, {headers: headers});
     }
 
     info() {
@@ -87,22 +90,22 @@ export class UserService {
 
     infoUpdate() {
         const headers = this.setHeaders();
-        return this._http.get(`/api/api/client/base-info`, { headers: headers })
+        return this._http.get(`/api/api/client/base-info`, {headers: headers})
             .map(res => res.json());
     }
 
     profilePageInfo() {
         const headers = this.setHeaders();
-        return this._http.get(`/api/api/client/`, { headers: headers })
+        return this._http.get(`/api/api/client/`, {headers: headers})
             .map(res => res.json());
     }
 
     profileUpdate(model) {
-        const headers = this.setHeaders({ json: true });
+        const headers = this.setHeaders({json: true});
 
         console.log(model);
 
-        return this._http.post('/api/api/client/', model, { headers: headers })
+        return this._http.post('/api/api/client/', model, {headers: headers})
             .map(res => res.json());
     }
 
@@ -121,7 +124,7 @@ export class UserService {
                 formDataValue.append('files', files[i], files[i].name);
             }
             const headers = this.setHeaders();
-            return this._http.post(url, formDataValue, { headers: headers })
+            return this._http.post(url, formDataValue, {headers: headers})
                 .map((response: Response) => response.json());
         }
     }
@@ -134,14 +137,14 @@ export class UserService {
             query += '/' + link;
         }
 
-        return this._http.get(query, { headers: headers })
+        return this._http.get(query, {headers: headers})
             .map((response: Response) => response.json());
     }
 
     removePhoto(id: number) {
         const headers = this.setHeaders();
 
-        return this._http.get(`/api/media/client/image/${id}/delete`, { headers: headers })
+        return this._http.get(`/api/media/client/image/${id}/delete`, {headers: headers})
             .map((response: Response) => response.json());
     }
 
@@ -154,5 +157,13 @@ export class UserService {
         headers.append('Authorization', 'token ' + this._storageService.get('token'));
 
         return headers;
+    }
+
+    canActivate() {
+        if (!this.token().length) {
+            this._router.navigate(['/']);
+            return false;
+        }
+        return true;
     }
 }

@@ -4,6 +4,7 @@ import {EnumsService} from '../../services/enums/enums.service';
 import {IUserInfo} from '../../interfaces/user-info';
 import {IGalleryInfo} from '../../interfaces/gallery-info';
 import {OwlCarousel} from 'ngx-owl-carousel';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-page-profile',
@@ -40,7 +41,7 @@ export class PageProfileComponent implements OnInit {
     public gallery: any = [];
     public gallery_info: any = new IGalleryInfo();
 
-    constructor(private _userService: UserService, private _enums: EnumsService) {
+    constructor(private _router: Router, private _userService: UserService, private _enums: EnumsService) {
     }
 
     ngOnInit() {
@@ -56,6 +57,7 @@ export class PageProfileComponent implements OnInit {
         this.getProfilPageInfo();
 
         this.getProfilePhotos();
+
     }
 
     getProfilePhotos(link: string = null) {
@@ -132,15 +134,15 @@ export class PageProfileComponent implements OnInit {
     }
 
     /*removePhoto(id: number, index) {
-        this.queryInProcess = true;
-        this._userService.removePhoto(id).subscribe(res => {
-            this.gallery.splice(index, 1);
-            console.log(res);
-            this.queryInProcess = false;
-        });
-    }
+     this.queryInProcess = true;
+     this._userService.removePhoto(id).subscribe(res => {
+     this.gallery.splice(index, 1);
+     console.log(res);
+     this.queryInProcess = false;
+     });
+     }
 
-    cropPhoto(id: number, index) {
-        console.log('crop photo')
-    }*/
+     cropPhoto(id: number, index) {
+     console.log('crop photo')
+     }*/
 }
