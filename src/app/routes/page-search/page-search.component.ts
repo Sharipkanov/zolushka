@@ -15,9 +15,9 @@ export class PageSearchComponent implements OnInit {
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
-    this.usersService.searchUsers().subscribe((users: Array<IUser>) => {
-      console.log(users);
-      this.users = users
+    this.usersService.searchUsers().subscribe((users) => {
+      console.log(users._embedded.clientCard);
+      this.users = users._embedded.clientCard;
     });
   }
 

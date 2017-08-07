@@ -1,15 +1,20 @@
 export class IUser {
   public id: number;
-  public firstName: string;
-  public thumbnail: string;
-  public city: string;
-  public country: string;
+  public name: string;
+  public avatar: object = {
+    thumb: null
+  };
+  public city: {
+    title: null,
+    country: {
+      title: null
+    }
+  };
   public age: number;
-  public photos: Array<string>;
-  public excerpt: string;
-  public status: boolean;
-  public photoApproved: boolean;
-  public inTop: boolean;
+  public countPhotos: Array<string>;
+  public excerpt: string = null;
+  public online: boolean = false;
+  public top: boolean;
 
   constructor() {}
 }

@@ -3,8 +3,8 @@ import {
     Output, EventEmitter, OnChanges, SimpleChange
 } from '@angular/core';
 
-import { ISelectBoxItem } from '../../../interfaces/form/select-box-item.interface';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {ISelectBoxItem} from '../../../interfaces/form/select-box-item.interface';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
     selector: 'app-select-box',
@@ -21,7 +21,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, ControlValueAccessor {
     @Input() items: Array<ISelectBoxItem> = [];
-    @Input() name: string = '';
     @Input() multiple: boolean = false;
     @Input() iconClass: string = 'icon-form-triangle';
     @Input() classes: string = '';
@@ -43,7 +42,9 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
     @HostListener('document:click', ['$event'])
     clickOutsideOfComponent(e) {
         if (!this._component.nativeElement.contains(e.target)) {
-            this.selectBox.classList.remove(this.selectBoxActiveClass);
+            if (!!this.selectBox) {
+                this.selectBox.classList.remove(this.selectBoxActiveClass);
+            }
         }
     }
 
@@ -91,12 +92,12 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
         }
 
 
-        this.items.unshift({
-            id: '',
-            text: this.placeholder,
-            title: this.placeholder,
-            selected: selectedFirst
-        });
+        /*this.items.unshift({
+         id: '',
+         text: this.placeholder,
+         title: this.placeholder,
+         selected: selectedFirst
+         });*/
 
         this.setSelectTexts();
     }
@@ -106,6 +107,9 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
     }
 
     ngAfterViewInit() {
+    }
+
+    selectCheckPosition() {
         this.selectBox = <HTMLElement>this._component.nativeElement.children[0];
 
         const container: HTMLElement = <HTMLElement> this.selectBox.closest('.container');
@@ -129,6 +133,8 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
 
     selectEvent(e: Event) {
         e.preventDefault();
+
+        this.selectCheckPosition();
 
         return (!this.selectBox.classList.contains(this.selectBoxActiveClass))
             ? this.selectBox.classList.add(this.selectBoxActiveClass)
@@ -157,6 +163,10 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
                     }
                 });
 
+                if (!selectVals.length) {
+                    this.items[0].selected = true;
+                }
+
                 this.propagateChange(selectVals);
 
             }
@@ -180,12 +190,10 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
 
     setSelectTexts() {
         this.selectBoxText = [];
-        this.selectBoxValues = [];
 
         if (this.items) {
             return this.items.map((selectBoxItem: ISelectBoxItem) => {
                 if (selectBoxItem.selected) {
-                    this.selectBoxValues.push(selectBoxItem.id);
                     this.selectBoxText.push(selectBoxItem.title);
                 }
             });

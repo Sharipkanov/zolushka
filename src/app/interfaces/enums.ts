@@ -8,11 +8,11 @@ export class IEnums {
     physique: Array<any> = [];
     relationshipState: Array<any> = [];
     relationshipTypes: Array<any> = [];
-    sexualKind: Array<any> = [];
+    sexualKinds: Array<any> = [];
     sexualPeriodicity: Array<any> = [];
     sexualPreference: Array<any> = [];
     sexualRole: Array<any> = [];
-    zodiacSign: Array<any> = [];
+    zodiacsign: Array<any> = [];
     childrenExist: Array<any> = [];
     datePicker: object = {
         day: [],

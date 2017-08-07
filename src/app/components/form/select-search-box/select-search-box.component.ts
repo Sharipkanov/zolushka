@@ -37,7 +37,6 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
     @Output() search = new EventEmitter();
 
     public selectSearchBoxText: string = '';
-    public selectSearchBoxValues: Array<number> = [];
     public filteredItems: Array<ISelectSearchBoxItem> = [];
 
     private selectSearchBox: Element;

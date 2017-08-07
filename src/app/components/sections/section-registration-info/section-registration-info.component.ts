@@ -8,6 +8,7 @@ import { UserService } from '../../../services/user/user.service';
 import { DateService } from '../../../services/date/date.service';
 import { Router } from "@angular/router";
 import {EnumsService} from "../../../services/enums/enums.service";
+import {ISelectBoxItem} from "../../../interfaces/form/select-box-item.interface";
 
 @Component({
     selector: 'app-section-registration-info',
