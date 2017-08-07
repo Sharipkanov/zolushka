@@ -1,5 +1,6 @@
 @import "retina_sprites"
 @import "../sass/colors"
+@import "../sass/mixins/mixins"
 
 @each $name in remove-purple, heart-purple
   .icon-shape-#{$name}
@@ -39,3 +40,25 @@
   
   &.online
     background-color: $colorGreenLight
+
+.icon-plus
+  position: relative
+  width: 16px
+  height: 16px
+  display: inline-block
+  vertical-align: middle
+
+  &:after, &:before
+    position: absolute
+    top: 50%
+    left: 50%
+    height: 2px
+    width: 80%
+    content: ''
+    display: block
+    background-color: #443a91
+    +transform(translate(-50%, -50%))
+
+  &:before
+    height: 80%
+    width: 2px

@@ -22,6 +22,10 @@
 .fw-width-1-6
   width: 16.666666%
 
-@each $width in 410
+@each $width in 410, 290
   .fw-width-#{$width}
     width: #{$width}px
+
+@each $mw in 400, 300, 335
+  .fw-mw-#{$mw}
+    max-width: #{$mw}px

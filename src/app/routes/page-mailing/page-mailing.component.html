@@ -1,0 +1,125 @@
+<div class="page-section">
+    <div class="container">
+        <div class="fw-grid fw-grid-30">
+            <div class="fw-width-1-2">
+                <section class="panel-section panel-section--rounded fw-box-shadow fw-padding-20">
+                    <div class="panel-section__content panel-section__content--boxed">
+                        <div class="fw-text-center">
+                            <div class="fw-mw-400 fw-inline-block fw-width-1-1 fw-mb-25">
+                                <p class="fw-fz-30 fw-normal fw-mb-30">Найти девушку за 30 минут</p>
+                                <div class="mailing-visits-image"><img src="./assets/images/visits-image.png"
+                                                                       class="fw-img-responsive fw-mb-30 fw-mw-300 fw-w-1-1"/>
+                                </div>
+                                <p class="fw-fw-600 fw-fz-16 fw-text-left">Получайте десятки откликов, <br> не теряя
+                                    время на изучение множества анкет и переписку. </p>
+                            </div>
+                        </div>
+                        <div class="panel-section__devider"></div>
+                        <p class="fw-fw-600 fw-fz-16 fw-mb-20">Рассылки в вашем городе</p>
+                        <div>
+                            <div class="fw-flex fw-flex-middle fw-mb-20" *ngFor="let item of [1,2,3,4]">
+                                <div class="fw-mr-10 fw-flex-shrink-no">
+                                    <a href="#">
+                                        <img src="http://placehold.it/50x50" class="fw-brp-50" alt="">
+                                    </a>
+                                </div>
+                                <div class="fw-flex-grow">
+                                    <p class="fw-fw-600 fw-fz-14 fw-mb-5">
+                                        <a class="fw-text-ellipsis fw-has-user-status fw-has-user-status--offline">Alex,
+                                            39 Москва</a>
+                                    </p>
+                                    <p class="fw-fz-13 fw-mb-5 fw-text-ellipsis">Нужна компания на 24 января в сауну 4-5
+                                        девушек для веселой тус...</p>
+                                    <p class="fw-color-grey-dark fw-fz-13">09.12.2016 01:42</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="fw-width-1-2">
+                <section class="panel-section fw-padding-20 fw-box-shadow">
+                    <div class="panel-section__content panel-section__content--boxed">
+                        <form [formGroup]="FMailing" class="form">
+                            <p class="fw-fw-600 fw-fz-16">Создать рассылку</p>
+                            <p class="fw-mt-10 fw-fz-14">Укажите кому показывать рассылку </p>
+                            <div class="fw-flex fw-flex-middle fw-mt-20">
+                                <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14 fw-color-grey-dark">Возраст</p>
+                                </div>
+                                <div class="fw-width-290">
+                                    <app-input-box [tooltip]="'Лет'" [placeholder]="'от 20 до 65'"></app-input-box>
+                                </div>
+                            </div>
+                            <div class="fw-flex fw-flex-middle fw-mt-20">
+                                <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14 fw-color-grey-dark">Город</p>
+                                </div>
+                                <div class="fw-width-290">
+                                    <app-select-search-box [classes]="'search-bar__select-search-box'" ngDefaultControl
+                                                           (search)="getLocations($event)" [placeholder]="'Город'"
+                                                           [iconClass]="'icon-form-navigator'" [items]="locations"
+                                                           formControlName="city"></app-select-search-box>
+                                    <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['city']">
+                                        {{errors['city']}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fw-flex fw-flex-middle fw-mt-20">
+                                <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14 fw-color-grey-dark">Цели
+                                    знакомства</p></div>
+                                <div class="fw-width-290">
+                                    <app-select-box [items]="relationshipTypes" [multiple]="true"
+                                                    [placeholder]="'Цели знакомств'"></app-select-box>
+                                </div>
+                            </div>
+                            <div class="fw-flex fw-flex-middle fw-mt-20">
+                                <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14 fw-color-grey-dark">Исключить
+                                    пользователей</p></div>
+                                <div class="fw-width-290">
+                                    <a class="button button--blue button--small">
+                                        <i class="icon-plus icon-plus--purple-dark fw-mr-3"></i>
+                                        <span class="fw-inline-block fw-fz-14 fw-text-600 fw-vam">Выбрать</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="fw-flex fw-flex-start fw-mt-20">
+                                <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14 fw-color-grey-dark">Текст
+                                    рассылки</p></div>
+                                <div class="fw-width-290">
+                                    <app-textarea-box
+                                            [placeholder]="'Пример: втречусь сегодня с очаровашкой модельной внешности, в Вас ласка, с меня подарок'"></app-textarea-box>
+                                </div>
+                            </div>
+                            <div class="panel-section__devider"></div>
+                            <div class="fw-text-center">
+                                <p class="fw-fz-13 fw-mb-10"> Стоимость рассылки на 9 часов 200 ₽.</p>
+                                <button class="button button--success">Создать рассылку</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+                <section class="panel-section panel-section--rounded fw-box-shadow fw-padding-20 fw-mt-20" *ngIf="!!owlReviews.length">
+                    <div class="panel-section__content panel-section__content--boxed">
+                        <p class="fw-fw-600 fw-fz-16 fw-mb-30">Отзывы</p>
+                        <owl-carousel [options]="carouselOptions" [items]="owlReviews" class="carousel-navs carousel-dots">
+                            <div *ngFor="let item of owlReviews" class="item fw-flex fw-flex-middle fw-flex-center">
+                                <div class="fw-flex fw-flex-middle fw-mw-335">
+                                    <div class="fw-mr-10 fw-flex-shrink-no">
+                                        <a href="#"><img src="http://placehold.it/50x50" class="fw-brp-50" alt=""></a>
+                                    </div>
+                                    <div class="fw-flex-grow">
+                                        <p class="fw-fw-600 fw-fz-14">Maxim 35, Москва</p>
+                                        <p class="fw-fz-14 fw-text-italic fw-color-semipurple">На все, про все ушло 15 минут, через
+                                            час мы уже пили кофе в центре..</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </owl-carousel>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="fw-mt-40">
+        <!--{% include 'components/bottom-grid.twig' %}-->
+    </div>
+</div>

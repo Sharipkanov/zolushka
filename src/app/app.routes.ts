@@ -10,6 +10,7 @@ import {PageAboutComponent} from './routes/page-about/page-about.component';
 import {PageProfileComponent} from './routes/page-profile/page-profile.component';
 import {PageProfileEditComponent} from './routes/page-profile-edit/page-profile-edit.component';
 import {UserService} from './services/user/user.service';
+import {PageMailingComponent} from './routes/page-mailing/page-mailing.component';
 
 const appRoutes: Routes = [
     {path: '', component: PageHomeComponent, pathMatch: 'full'},
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
     {path: 'about', component: PageAboutComponent},
     {path: 'profile', component: PageProfileComponent, canActivate: [UserService]},
     {path: 'profile-edit', component: PageProfileEditComponent, canActivate: [UserService]},
+    {path: 'mailing', component: PageMailingComponent, canActivate: [UserService]},
     {path: '**', component: PageNotFoundComponent}
 ];
 

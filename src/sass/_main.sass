@@ -81,3 +81,48 @@ app-preloader
   height: 100%
   background-color: rgba(#fff, 0.6)
   z-index: 1000
+
+
+
+.carousel-dots
+  .owl-dots
+    margin-top: 50px
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .owl-dot
+      flex-shrink: 0
+      width: 6px
+      height: 6px
+      background-color: #d8d8d8
+      border-radius: 50%
+
+      &:not(:last-child)
+        margin-right: 8px
+
+      &.active
+        background-color: #ff4870
+
+.carousel-navs
+  box-sizing: border-box
+  padding: 0 15px
+  position: relative
+
+  .owl-nav
+    > *
+      position: absolute
+      top: calc(50% - 25px)
+      width: 20px
+      height: 20px
+      border-top: 1px solid #d8d8d8
+      border-right: 1px solid #d8d8d8
+      font-size: 0
+
+    .owl-prev
+      left: 0
+      transform: translateY(-50%) rotate(-135deg)
+
+    .owl-next
+      right: 0
+      transform: translateY(-50%) rotate(45deg)

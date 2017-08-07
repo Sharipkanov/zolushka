@@ -4,6 +4,9 @@
 .fw-inline-block
   display: inline-block
 
+.fw-vam
+  vertical-align: middle
+
 .fw-transition
   transition: all .3s ease-in-out
 
@@ -17,7 +20,7 @@
 
 .fw-box-shadow
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
-  
+
 .fw-hidden
   display: none
 
@@ -28,9 +31,42 @@
   background: none
   padding: 0
   margin: 0
-  
+
 .fw-min-width-0
   min-width: 0
 
 .fw-position-relative
   position: relative
+
+.panel-section__devider
+  height: 1px
+  background-color: #dadada
+  width: 100%
+  margin: 20px 0
+
+.fw-has-user-status
+  font-family: "open-sans", sans-serif
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  position: relative
+  box-sizing: border-box
+  padding-right: 12px
+
+  &:after
+    display: inline-block
+    vertical-align: middle
+    position: absolute
+    right: 0
+    top: 50%
+    margin-top: -3px
+    width: 6px
+    height: 6px
+    border-radius: 100%
+    content: ''
+    background-color: #6ec100
+    
+  &.fw-has-user-status--offline
+    &:after
+      background-color: #999999
+

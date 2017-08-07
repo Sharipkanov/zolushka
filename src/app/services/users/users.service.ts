@@ -19,7 +19,7 @@ export class UsersService {
   }
 
   searchUsers() {
-    return this._http.get('api.zolushka.ru/users/search').map((response: Response) => response.json());
+    return this._http.get('/api/api/client/search?type=200').map((response: Response) => response.json());
   }
 
 }

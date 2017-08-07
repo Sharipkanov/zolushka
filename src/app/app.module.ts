@@ -56,6 +56,7 @@ import { EnumsService } from './services/enums/enums.service';
 import { PageWalletComponent } from './routes/wallet/page-wallet/page-wallet.component';
 import { OwlModule } from 'ngx-owl-carousel';
 import { PreloaderComponent } from './components/preloader/preloader.component';
+import { PageMailingComponent } from './routes/page-mailing/page-mailing.component';
 
 @NgModule({
     declarations: [
@@ -98,7 +99,8 @@ import { PreloaderComponent } from './components/preloader/preloader.component';
         PageProfileComponent,
         PageProfileEditComponent,
         PageWalletComponent,
-        PreloaderComponent
+        PreloaderComponent,
+        PageMailingComponent
     ],
     imports: [
         BrowserModule,

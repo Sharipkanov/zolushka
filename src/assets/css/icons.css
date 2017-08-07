@@ -1049,3 +1049,30 @@
 .icon-online-status.online {
   background-color: #6ec100;
 }
+
+.icon-plus {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.icon-plus:after, .icon-plus:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 2px;
+  width: 80%;
+  content: "";
+  display: block;
+  background-color: #443a91;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.icon-plus:before {
+  height: 80%;
+  width: 2px;
+}
