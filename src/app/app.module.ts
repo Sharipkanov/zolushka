@@ -59,6 +59,9 @@ import { PreloaderComponent } from './components/preloader/preloader.component';
 import { PageMailingComponent } from './routes/page-mailing/page-mailing.component';
 import { PageProfileViewsComponent } from './routes/page-profile-views/page-profile-views.component';
 import { ChatListComponent } from './components/chat-list/chat-list.component';
+import { PopupChatComponent } from './components/popups/popup-chat/popup-chat.component';
+import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import {DialogService} from "./services/dialog/dialog.service";
 
 @NgModule({
     declarations: [
@@ -104,7 +107,8 @@ import { ChatListComponent } from './components/chat-list/chat-list.component';
         PreloaderComponent,
         PageMailingComponent,
         PageProfileViewsComponent,
-        ChatListComponent
+        ChatListComponent,
+        PopupChatComponent
     ],
     imports: [
         BrowserModule,
@@ -113,7 +117,8 @@ import { ChatListComponent } from './components/chat-list/chat-list.component';
         JsonpModule,
         FormsModule,
         ReactiveFormsModule,
-        OwlModule
+        OwlModule,
+        PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG)
     ],
     providers: [
         StorageService,
@@ -124,7 +129,8 @@ import { ChatListComponent } from './components/chat-list/chat-list.component';
         PopupsService,
         HttpService,
         DateService,
-        EnumsService
+        EnumsService,
+        DialogService
     ],
     bootstrap: [AppComponent]
 })

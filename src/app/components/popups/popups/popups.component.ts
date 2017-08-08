@@ -14,14 +14,19 @@ export class PopupsComponent implements OnInit {
         login: {
             active: false,
             visible: false
+        },
+        chat: {
+            active: true,
+            visible: true
         }
     };
 
     constructor(private _userService: UserService, private _popupsService: PopupsService) {
-        (!this._userService.token().length) ? this.popups['login']['active'] = true : this.popups['login']['active'] = false;
     }
 
     ngOnInit() {
+        this.detectActivePopups();
+
         this._userService.onChangeToken.subscribe((token: string) => {
             (!token.length) ? this.popups['login']['active'] = true : this.popups['login']['active'] = false;
         });
@@ -33,6 +38,14 @@ export class PopupsComponent implements OnInit {
         this._popupsService.onClosePopup.subscribe((popup_name: string) => {
             this.closePopup(popup_name);
         });
+    }
+
+    detectActivePopups() {
+        // login popup
+        (!this._userService.token().length) ? this.popups['login']['active'] = true : this.popups['login']['active'] = false;
+
+        // chat popup
+        (!!this._userService.token().length) ? this.popups['chat']['active'] = true : this.popups['chat']['active'] = false;
     }
 
     openPopup(popup_name: string) {

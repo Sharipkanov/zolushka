@@ -6,6 +6,11 @@
   width: 100%
   overflow: hidden
 
+  &[data-error="true"]
+    > input
+      box-shadow: inset 2px 2px 0 0 rgba(#ff616b, 0.06)
+      border: 1px solid #ff616b
+
   .input-box--tooltip
     > input
       padding-right: 35px

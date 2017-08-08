@@ -44,8 +44,6 @@ export class PopupLoginComponent implements OnInit {
             password: this.FLogin.value.password
         };
 
-        console.log(data);
-
         this._userService.login(data);
     }
 }

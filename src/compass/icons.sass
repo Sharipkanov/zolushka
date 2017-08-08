@@ -62,3 +62,7 @@
   &:before
     height: 80%
     width: 2px
+
+@each $chat in cog, cog-active, close, call, messages, messages-active, lips, lips-active, phone, phone-active, check, check-active, bell, bell-active, star, star-active, hand, hand-active, folder, folder-active, search, send, smile, smile-active, photo, gift, gift-active, call-green, message
+  .icon-chat-#{$chat}
+    +sprite(icon-chat-#{$chat})
