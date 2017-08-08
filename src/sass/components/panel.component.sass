@@ -1,0 +1,140 @@
+.panel-box
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
+  display: block
+  background-color: #fff
+  padding: 20px
+
+  + .panel-box
+    margin-top: 30px
+
+  &.panel-box--unboxed
+    padding: 0
+
+  &.panel-box--rounded
+    border-radius: 5px
+    overflow: hidden
+
+  &.panel-box--bordered
+    box-shadow: none
+    border: solid 1px #d9d9d9
+
+  &.panel-box--overflow-no
+    overflow: visible
+
+  .panel-box__title
+    font-family: 'open-sans', sans-serif
+    font-size: 24px
+    text-align: left
+    color: #191919
+
+  .panel-box__text
+    font-family: 'open-sans', sans-serif
+    font-size: 16px
+    font-weight: 600
+    text-align: left
+    color: #191919
+
+.panel-section
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
+  display: block
+  background-color: #fff
+  position: relative
+
+  &.panel-section--rounded
+    border-radius: 5px
+    overflow: hidden
+
+  + .panel-section
+    margin-top: 30px
+
+  &.panel-section--unstyled
+    box-shadow: none
+
+  &.panel-section--overflow-no
+    overflow: visible
+
+  .panel-section__header
+    background-color: #fff
+    box-sizing: border-box
+    padding: 20px
+    border-radius: 5px 5px 0 0
+    overflow: hidden
+
+  .panel-top-bookmark-placeholder
+    position: absolute
+    top: 0
+    left: 0
+
+  .panel-section__content
+    background-color: #fff
+    box-sizing: border-box
+
+    &.panel-section__content--boxed
+      box-sizing: border-box
+      padding: 20px
+
+  .panel-section__footer
+    background-color: #fff
+    box-sizing: border-box
+    border-radius: 0 0 5px 5px
+    overflow: hidden
+
+  .panel-section__title
+    margin: 0
+    padding: 0
+    display: inline-block
+    font-size: 16px
+    font-weight: 600
+    text-align: left
+    color: #191919
+    font-family: 'open-sans', sans-serif
+
+    &.panel-section__title--badge
+      position: relative
+
+      &::after
+        position: absolute
+        top: -5px
+        left: 100%
+        margin-left: 10px
+        padding: 2px 5px
+        content: attr(data-badge)
+        display: block
+        border-radius: 100px
+        background-color: #f2535c
+        font-family: 'open-sans', sans-serif
+        font-size: 12px
+        font-weight: 600
+        text-align: center
+        color: #ffffff
+
+  .panel-section__text
+    font-family: 'open-sans', sans-serif
+    font-size: 14px
+    text-align: left
+    color: #262626
+
+  .panel-section__btn
+    width: 100%
+    display: flex
+    align-items: center
+    text-align: center
+    justify-content: center
+    padding: 5px 15px
+    min-height: 50px
+    font-size: 14px
+    font-weight: 600
+    color: #bd0fe1
+    font-family: 'open-sans', sans-serif
+    background-color: #f8f8f8
+    border: none
+    outline: none
+
+    + .panel-section__btn
+      margin-top: 5px
+
+  .panel-section__devider
+    height: 1px
+    background-color: #dadada
+    width: 100%
+    margin: 20px 0

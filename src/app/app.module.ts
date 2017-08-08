@@ -57,6 +57,8 @@ import { PageWalletComponent } from './routes/wallet/page-wallet/page-wallet.com
 import { OwlModule } from 'ngx-owl-carousel';
 import { PreloaderComponent } from './components/preloader/preloader.component';
 import { PageMailingComponent } from './routes/page-mailing/page-mailing.component';
+import { PageProfileViewsComponent } from './routes/page-profile-views/page-profile-views.component';
+import { ChatListComponent } from './components/chat-list/chat-list.component';
 
 @NgModule({
     declarations: [
@@ -100,7 +102,9 @@ import { PageMailingComponent } from './routes/page-mailing/page-mailing.compone
         PageProfileEditComponent,
         PageWalletComponent,
         PreloaderComponent,
-        PageMailingComponent
+        PageMailingComponent,
+        PageProfileViewsComponent,
+        ChatListComponent
     ],
     imports: [
         BrowserModule,
