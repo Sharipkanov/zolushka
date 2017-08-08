@@ -1,9 +1,11 @@
-import {Injectable} from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {UserService} from '../user/user.service';
 
 @Injectable()
 export class DialogService {
+
+    public onAddNewDialog: EventEmitter<any> = new EventEmitter();
 
     constructor(private _http: Http, private _userService: UserService) {
     }

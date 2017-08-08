@@ -1,7 +1,8 @@
-import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import {PopupsService} from '../../../services/popups/popups.service';
 import {DialogService} from '../../../services/dialog/dialog.service';
-import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { IDialog } from '../../../interfaces/dialog';
 
 @Component({
     selector: 'app-popup-chat',
@@ -14,7 +15,7 @@ export class PopupChatComponent implements OnInit {
     @Input() visible: boolean = false;
 
     public folders = [];
-    public dialogs = [];
+    public dialogs: Array<IDialog> = [];
     public messages = [];
 
     public newFolderForm: boolean = false;
@@ -50,7 +51,13 @@ export class PopupChatComponent implements OnInit {
                 // TODO set new dialogs
             }
             this.preloaders.dialogs = false;
-        })
+        });
+
+        this._dialogService.onAddNewDialog.subscribe(data => {
+            this.dialogs.unshift(data);
+            this._popupsService.openPopup('chat');
+            console.log(this.dialogs);
+        });
     }
 
     closePopup(e) {

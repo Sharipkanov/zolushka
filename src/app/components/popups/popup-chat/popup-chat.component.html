@@ -132,12 +132,16 @@
 
                     <div class="list__item" *ngFor="let dialog of dialogs">
                         <div>
-                            <a class="list__thumbnail"><img src="http://placehold.it/50x50" alt=""></a>
+                            <a class="list__thumbnail">
+                                <img src="{{ !!dialog.clientTo.avatar ? dialog.clientTo.avatar : 'http://placehold.it/50x50' }}" alt="">
+                            </a>
                         </div>
                         <div>
-                            <a><h4 class="list__user">Аврора, 23</h4></a>
-                            <p class="list__message  list__message--active">позвони прям тут, можно же</p>
-                            <p class="list__time">19.05.06 21:00:21</p>
+                            <a>
+                                <div class="list__user" [ngClass]="{'list__user--offline': !dialog.clientTo.online}">{{dialog.clientTo.name}}, {{dialog.clientTo.age}}</div>
+                            </a>
+                            <p class="list__message" [ngClass]="{'list__message--active': !!dialog.lastMessage}">{{!!dialog.lastMessage ? dialog.lastMessage : 'Нет сообщений'}}</p>
+                            <p class="list__time">{{!!dialog.lastMessageCreated? dialog.lastMessageCreated : ''}}</p>
                             <a><i class="list__icon icon-chat-call-green"></i></a>
                         </div>
                     </div>

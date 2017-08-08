@@ -8,13 +8,13 @@
     </div>
     <i class="icon-user-cart-in-top" *ngIf="user.top"></i>
     <div class="user-cart__cover cover">
-      <a class="cover__item fw-inline-block fw-mr-15" href="#">
-        <i class="icon-user-cart-chat{{(!small) ? '-large' : ''}}"></i>
+      <a class="cover__item fw-inline-block fw-mr-15">
+        <i (click)="openChat(user)" class="icon-user-cart-chat{{(!small) ? '-large' : ''}}"></i>
       </a>
-      <a class="cover__item fw-inline-block fw-mr-15" href="#">
+      <a class="cover__item fw-inline-block fw-mr-15">
         <i class="icon-user-cart-phone{{(!small) ? '-large' : ''}}"></i>
       </a>
-      <a class="cover__item fw-inline-block" href="#">
+      <a class="cover__item fw-inline-block">
         <i class="icon-user-cart-star{{(!small) ? '-large' : ''}}"></i>
       </a>
     </div>
