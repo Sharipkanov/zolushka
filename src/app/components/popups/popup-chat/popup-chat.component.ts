@@ -12,9 +12,11 @@ import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class PopupChatComponent implements OnInit {
 
     @Input() visible: boolean = false;
-    @ViewChild('foldersScrollbar') foldersScrollbar;
 
     public folders = [];
+    public dialogs = [];
+    public messages = [];
+
     public newFolderForm: boolean = false;
     public preloaders = {
         folderForm: false,
@@ -41,9 +43,14 @@ export class PopupChatComponent implements OnInit {
         this._dialogService.getFolders().subscribe(response => {
             this.folders = response;
             this.preloaders.folderList = false;
-
-            this.foldersScrollbar.update();
         });
+
+        this._dialogService.getDialogs().subscribe(response => {
+            if (!!response._embedded) {
+                // TODO set new dialogs
+            }
+            this.preloaders.dialogs = false;
+        })
     }
 
     closePopup(e) {

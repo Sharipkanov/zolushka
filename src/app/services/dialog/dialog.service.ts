@@ -23,7 +23,8 @@ export class DialogService {
     }
 
     getDialogs() {
-
+        return this._http.get('/api/api/dialogs', {headers: this._userService.setHeaders({json: true})})
+            .map((response: Response) => response.json());
     }
 
     addDialog() {
