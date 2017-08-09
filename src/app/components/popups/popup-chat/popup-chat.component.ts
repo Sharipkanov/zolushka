@@ -1,14 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {PopupsService} from '../../../services/popups/popups.service';
 import {DialogService} from '../../../services/dialog/dialog.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { IDialog } from '../../../interfaces/dialog';
+import {IDialog} from '../../../interfaces/dialog';
 
 @Component({
     selector: 'app-popup-chat',
     templateUrl: './popup-chat.component.html',
     styleUrls: ['./popup-chat.component.sass'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    // providers: [DialogService]
 })
 export class PopupChatComponent implements OnInit {
 
@@ -16,14 +17,16 @@ export class PopupChatComponent implements OnInit {
 
     public folders = [];
     public dialogs: Array<IDialog> = [];
+    public dialog;
     public messages = [];
+    public conntection;
 
     public newFolderForm: boolean = false;
     public preloaders = {
         folderForm: false,
         folderList: true,
         dialogs: true,
-        messages: true,
+        messages: false,
         messageForm: true
     };
 
@@ -48,9 +51,10 @@ export class PopupChatComponent implements OnInit {
 
         this._dialogService.getDialogs().subscribe(response => {
             if (!!response._embedded) {
-                // TODO set new dialogs
+                this.dialogs = response._embedded.content;
             }
             this.preloaders.dialogs = false;
+            console.log(response);
         });
 
         this._dialogService.onAddNewDialog.subscribe(data => {
@@ -61,8 +65,13 @@ export class PopupChatComponent implements OnInit {
     }
 
     closePopup(e) {
-        if (e.target.classList.contains('popup-wrapper') || e.target.classList.contains('js-close-popup')) {
+        if (e.target.classList.contains('popup-wrapper') || e.target.classList.contains('js-close-popup') || !!e.target.closest('.js-close-popup')) {
             this._popupsService.closePopup('chat');
+
+            if (!!this.dialogs[0] && !this.dialogs[0].id) {
+                this.dialogs.shift();
+                delete this.dialog;
+            }
         }
     }
 
@@ -77,5 +86,57 @@ export class PopupChatComponent implements OnInit {
                 this.FNewFolder.controls.title.setValue('');
             });
         }
+    }
+
+    removeFolder(e, i) {
+        e.preventDefault();
+        this.preloaders.folderList = true;
+        this._dialogService.deleteFolder(this.folders[i]).subscribe(response => {
+            console.log(response);
+            this.folders.splice(i, 1);
+            this.preloaders.folderList = false;
+        });
+
+    }
+
+    openMessages(dialog) {
+        this.dialog = dialog;
+        this.preloaders.messages = true;
+        console.log(dialog);
+        if (!!dialog.token) {
+            this._dialogService.getMessagesList(dialog.token).subscribe(response => {
+                if (!!response._embedded) {
+                    this.messages = response._embedded.content;
+                } else {
+                    this.messages = [];
+                }
+                console.log(response);
+
+                this.preloaders.messages = false;
+            }, error => {
+                console.log(error);
+            });
+        } else {
+            this.messages = [];
+            this.preloaders.messages = false;
+        }
+    }
+
+    sendMessage(e) {
+        e.preventDefault();
+        // remove data from input
+
+        this.preloaders.messageForm = true;
+        if (!!this.dialog && !!this.dialog.token) {
+            this.messages.push(this.FMessage.value);
+            this._dialogService.addMessage(this.FMessage.value, this.dialog).subscribe(response => {
+
+            });
+        } else if (!!this.dialog) {
+            this._dialogService.addDialog(this.FMessage.value, this.dialog.clientTo.id).subscribe(response => {
+                console.log(response);
+            });
+        }
+        this.FMessage.controls.message.setValue('');
     }
 }

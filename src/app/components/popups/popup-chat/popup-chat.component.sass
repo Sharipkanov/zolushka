@@ -1,3 +1,5 @@
+@import "../../../../sass/mixins/mixins"
+
 .chat-wrapper
   .popup
     max-width: 1140px
@@ -39,6 +41,10 @@
             display: none
             &:not(:first-child)
               display: inline-flex
+
+      &:hover
+        .chat__archive-list--remove
+          opacity: 1
 
 
   .chat__archive
@@ -562,5 +568,19 @@
 
   .ps>.ps__scrollbar-y-rail>.ps__scrollbar-y, .ps:hover>.ps__scrollbar-y-rail:hover>.ps__scrollbar-y
     background-color: #bd0fe1
+    border-radius: 6px
+
+  .ps>.ps__scrollbar-y-rail>.ps__scrollbar-y
     width: 3px
     border-radius: 2px
+
+.chat__archive-list--remove
+  position: absolute
+  top: 50%
+  right: 10px
+  background-color: #f7f7f7
+  box-shadow: 0 0 0 5px #f7f7f7
+  +transform(translate(0, -50%))
+  opacity: 0
+  +transition()
+

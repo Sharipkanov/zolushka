@@ -57,12 +57,13 @@
                 </div>
                 <div class="fw-position-relative fw-mt-40 fw-mb-15 fw-flex fw-flex-grow fw-flex-column">
                     <p class="fw-fz-15 fw-fw-600 fw-flex-shrink-no">Мои папки</p>
-                    <perfect-scrollbar #foldersScrollbar class="fw-flex-grow fw-flex fw-flex-column">
+                    <perfect-scrollbar class="fw-flex-grow fw-flex fw-flex-column">
                         <ul class="chat__archive-list fw-mt-10" *ngIf="!!folders.length">
-                            <li class="fw-mt-10" *ngFor="let folder of folders">
-                                <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle ">
+                            <li class="fw-mt-10" *ngFor="let folder of folders; let i = index;">
+                                <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle fw-position-relative fw-text-ellipsis">
                                     <span><i class="icon-chat-folder"></i></span>
                                     <span><i class="icon-chat-folder-active"></i></span>
+                                    <span class="chat__archive-list--remove" (click)="removeFolder($event, i)"><i class="icon-shape-remove-purple"></i></span>
                                     <span class="fw-ml-5">{{folder.title}}</span>
                                 </a>
                             </li>
@@ -96,7 +97,7 @@
                     <div><a><i class="icon-chat-search"></i></a></div>
                 </div>
                 <perfect-scrollbar class="chat__list list">
-                    <div class="list__item list__inbox list__inbox--new">
+                    <!--<div class="list__item list__inbox list__inbox&#45;&#45;new">
                         <div>
                             <a class="list__thumbnail"><img src="http://placehold.it/50x50" alt=""></a>
                         </div>
@@ -112,7 +113,7 @@
                             <a class="list__thumbnail"><img src="http://placehold.it/50x50" alt=""></a>
                         </div>
                         <div>
-                            <a><h4 class="list__user list__user--offline">Алла, 27</h4></a>
+                            <a><h4 class="list__user list__user&#45;&#45;offline">Алла, 27</h4></a>
                             <p class="list__message">о отличная идея!</p>
                             <p class="list__time">19.05.06 21:00:21</p>
                             <a><i class="list__icon icon-chat-message"></i></a>
@@ -124,13 +125,13 @@
                         </div>
                         <div>
                             <a><h4 class="list__user">Аврора, 23</h4></a>
-                            <p class="list__message  list__message--active">позвони прям тут, можно же</p>
+                            <p class="list__message  list__message&#45;&#45;active">позвони прям тут, можно же</p>
                             <p class="list__time">19.05.06 21:00:21</p>
                             <a><i class="list__icon icon-chat-message"></i></a>
                         </div>
-                    </div>
+                    </div>-->
 
-                    <div class="list__item" *ngFor="let dialog of dialogs">
+                    <div class="list__item" *ngFor="let dialog of dialogs" (click)="openMessages(dialog)">
                         <div>
                             <a class="list__thumbnail">
                                 <img src="{{ !!dialog.clientTo.avatar ? dialog.clientTo.avatar : 'http://placehold.it/50x50' }}" alt="">
@@ -141,7 +142,7 @@
                                 <div class="list__user" [ngClass]="{'list__user--offline': !dialog.clientTo.online}">{{dialog.clientTo.name}}, {{dialog.clientTo.age}}</div>
                             </a>
                             <p class="list__message" [ngClass]="{'list__message--active': !!dialog.lastMessage}">{{!!dialog.lastMessage ? dialog.lastMessage : 'Нет сообщений'}}</p>
-                            <p class="list__time">{{!!dialog.lastMessageCreated? dialog.lastMessageCreated : ''}}</p>
+                            <p class="list__time">{{!!dialog.lastMessageCreated ? dialog.lastMessageCreated : ''}}</p>
                             <a><i class="list__icon icon-chat-call-green"></i></a>
                         </div>
                     </div>
@@ -152,11 +153,11 @@
                 <app-preloader *ngIf="preloaders.messages"></app-preloader>
                 <div class="chat__header chat__header--bordered">
                     <div>
-                        <a><i class="icon-chat-call"></i></a>
+                        <a><i *ngIf="!!dialog" class="icon-chat-call"></i></a>
                     </div>
                     <div class="fw-text-center">
-                        <div class="fw-inline-block"><p class="fw-hus fw-hus--offline">Анютка, 25 лет, Москва</p></div>
-                        <div><p class="fw-text-warmgrey fw-fz-13">Была последний раз 8 минут назад</p></div>
+                        <div class="fw-inline-block"><p *ngIf="!!dialog" class="fw-hus" [ngClass]="{'fw-hus--offline': dialog.clientTo.online}">{{!!dialog ? dialog.clientTo.name : ''}}, {{!!dialog ? dialog.clientTo.age : ''}} лет, {{!!dialog ? dialog.clientTo.city.title : ''}}</p></div>
+                        <div><p class="fw-color-grey-dark fw-fz-13" *ngIf="!!dialog">Была последний раз 8 минут назад</p></div>
                     </div>
                     <div class="fw-relative">
                         <a class="fw-mr-15 chat__settings-link"><i class="icon-chat-cog"></i><i
@@ -189,8 +190,8 @@
                             </div>
                         </div>
                     </perfect-scrollbar>
-                    <div class="context__footer fw-flex-shrink-no fw-pt-15">
-                        <form [formGroup]="FMessage" class="chat__new-message fw-flex">
+                    <div class="context__footer fw-flex-shrink-no fw-pt-15" *ngIf="!!dialog">
+                        <form [formGroup]="FMessage" class="chat__new-message fw-flex" (submit)="sendMessage($event)">
                             <app-input-box formControlName="message" class="fw-flex-grow"
                                            [placeholder]="'Ваше сообщение'"></app-input-box>
                             <button type="submit" class="fw-reset"><i class="icon-chat-send fw-brp-50"></i></button>
