@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-preloader',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./preloader.component.sass']
 })
 export class PreloaderComponent implements OnInit {
+
+  @Input() big: boolean = true;
 
   constructor() { }
 

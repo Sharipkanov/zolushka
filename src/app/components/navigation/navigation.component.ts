@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
-import {IUserInfo} from "../../interfaces/user-info";
-import {PopupsService} from "../../services/popups/popups.service";
+import {IUserInfo} from '../../interfaces/user-info.interface';
+import {PopupsService} from '../../services/popups/popups.service';
 
 @Component({
     selector: 'app-navigation',

@@ -3,7 +3,7 @@ import {Component, OnInit, Input, ElementRef, ViewEncapsulation} from '@angular/
 import {StorageService} from '../../services/storage/storage.service';
 import {LocationService} from '../../services/location/location.service';
 import {ISelectSearchBoxItem} from '../../interfaces/form/select-search-box-item.interface';
-import {IEnums} from '../../interfaces/enums';
+import {IEnums} from '../../interfaces/enums.interface';
 import {EnumsService} from '../../services/enums/enums.service';
 
 @Component({

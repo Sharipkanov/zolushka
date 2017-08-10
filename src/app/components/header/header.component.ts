@@ -1,10 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, NavigationStart} from '@angular/router';
 
 import {UserService} from '../../services/user/user.service';
-import {StorageService} from "../../services/storage/storage.service";
-import {PopupsService} from "../../services/popups/popups.service";
-import {IUserInfo} from "../../interfaces/user-info";
+import {PopupsService} from '../../services/popups/popups.service';
+import {IUserInfo} from '../../interfaces/user-info.interface';
 
 @Component({
     selector: 'app-header',

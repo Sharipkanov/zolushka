@@ -1,9 +1,9 @@
-import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {PopupsService} from '../../../services/popups/popups.service';
-import {DialogService} from '../../../services/dialog/dialog.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {IDialog} from '../../../interfaces/dialog';
-import {PerfectScrollbarComponent} from 'ngx-perfect-scrollbar';
+import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { PopupsService } from '../../../services/popups/popups.service';
+import { DialogService } from '../../../services/dialog/dialog.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IDialog } from '../../../interfaces/dialog.interface';
+import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 
 @Component({
     selector: 'app-popup-chat',
@@ -18,7 +18,7 @@ export class PopupChatComponent implements OnInit {
     @ViewChild('messagesScroll') messagesScroll: PerfectScrollbarComponent;
 
     public folders = [];
-    public folderId;
+    public filterParams = {};
     public dialogs: Array<IDialog> = [];
     public dialogKey: number;
     public messages = [];
@@ -29,7 +29,7 @@ export class PopupChatComponent implements OnInit {
         folderList: true,
         dialogs: true,
         messages: false,
-        messageForm: true
+        dialogAction: false
     };
 
     public FNewFolder: FormGroup;
@@ -74,16 +74,45 @@ export class PopupChatComponent implements OnInit {
     }
 
     getDialogs() {
-        this._dialogService.getDialogs(this.folderId).subscribe(response => {
-            console.log(response);
+        console.log(this.filterParams, !this.filterParams, Object.keys(this.filterParams).length);
+        this._dialogService.getDialogs(this.filterParams).subscribe(response => {
             if (!!response._embedded) {
                 this.dialogs = response._embedded.content;
             } else {
                 this.dialogs = [];
             }
             delete this.dialogKey;
+            this.messages = [];
             this.preloaders.dialogs = false;
-            // console.log(response);
+        });
+    }
+
+    deleteDialog(e) {
+        e.preventDefault();
+        this.preloaders.dialogAction = true;
+        this._dialogService.deleteDialog(this.dialogs[this.dialogKey].token).subscribe(response => {
+            this.dialogs.splice(this.dialogKey, 1);
+            delete this.dialogKey;
+            this.messages = [];
+            this.preloaders.dialogAction = false;
+        });
+    }
+
+    favoriteDialog(e) {
+        e.preventDefault();
+        this.preloaders.dialogAction = true;
+        this._dialogService.favoriteDialog(this.dialogs[this.dialogKey].token).subscribe(response => {
+            this.dialogs[this.dialogKey] = response;
+            this.preloaders.dialogAction = false;
+        });
+    }
+
+    blacklistDialog(e) {
+        e.preventDefault();
+        this.preloaders.dialogAction = true;
+        this._dialogService.blacklistDialog(this.dialogs[this.dialogKey].token).subscribe(response => {
+            this.dialogs[this.dialogKey] = response;
+            this.preloaders.dialogAction = false;
         });
     }
 
@@ -108,12 +137,6 @@ export class PopupChatComponent implements OnInit {
             this.folders.splice(i, 1);
             this.preloaders.folderList = false;
         });
-    }
-
-    showFolder(i) {
-        console.log('hi');
-        this.folderId = this.folders[i].id;
-        this.getDialogs();
     }
 
     openMessages(i) {
@@ -153,7 +176,7 @@ export class PopupChatComponent implements OnInit {
                     customKey = 0;
                 }
 
-                messagesOutput[customKey] = {messageDate: curDate, messageList: []};
+                messagesOutput[customKey] = { messageDate: curDate, messageList: [] };
             }
 
             messagesOutput[customKey].messageList.push(value);
@@ -180,11 +203,32 @@ export class PopupChatComponent implements OnInit {
                     console.log(error);
                     this.messages.pop();
                 });
-        } else if (!!this.dialogKey) {
+        } else if (!!this.dialogs[this.dialogKey]) {
             this._dialogService.addDialog(this.FMessage.value, this.dialogs[this.dialogKey].clientTo.id).subscribe(response => {
                 this.dialogs[this.dialogKey] = response;
+                console.log(response);
             });
         }
         this.FMessage.controls.message.setValue('');
+    }
+
+    applyFilter(data = null) {
+        if (data !== null) {
+            for (const key in data) {
+                if(key !== 'folderId') {
+                    for (const Key in this.filterParams) {
+                        if (key !== Key && Key !== 'folderId') {
+                            delete this.filterParams[Key];
+                        }
+                    }
+
+                }
+                this.filterParams[key] = data[key];
+            }
+        } else {
+            this.filterParams = {};
+        }
+
+        this.getDialogs();
     }
 }

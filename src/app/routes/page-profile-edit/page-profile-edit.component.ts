@@ -3,8 +3,8 @@ import {UserService} from '../../services/user/user.service';
 import {DateService} from '../../services/date/date.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {EnumsService} from '../../services/enums/enums.service';
-import {IEnums} from '../../interfaces/enums';
-import {IGalleryInfo} from '../../interfaces/gallery-info';
+import {IEnums} from '../../interfaces/enums.interface';
+import {IGalleryInfo} from '../../interfaces/gallery-info.interface';
 
 @Component({
     selector: 'app-page-profile-edit',

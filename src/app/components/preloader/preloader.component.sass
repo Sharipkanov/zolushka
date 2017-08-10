@@ -12,6 +12,18 @@
   -webkit-transform-origin: 100% 50%
   transform-origin: 100% 50%
   width: 16px
+  
+  &.preloader--small
+    height: 16px
+    width: 8px
+    margin-left: -8px
+    margin-top: -8px
+  
+    .circle-preloader::before,
+    [data-circle-preloader]::before,
+    .circle-preloader::after,
+    [data-circle-preloader]::after
+      border-width: 2px
 
 .circle-preloader::before,
 [data-circle-preloader]::before

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { IUser} from '../../interfaces/user.interface';
-import { PopupsService } from "../../services/popups/popups.service";
-import { DialogService } from "../../services/dialog/dialog.service";
-import { IDialog } from "../../interfaces/dialog";
+import { PopupsService } from '../../services/popups/popups.service';
+import { DialogService } from '../../services/dialog/dialog.service';
+import { IDialog } from '../../interfaces/dialog.interface';
 
 @Component({
   selector: 'app-user-cart',

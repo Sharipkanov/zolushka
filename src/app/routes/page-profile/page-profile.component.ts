@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {UserService} from '../../services/user/user.service';
 import {EnumsService} from '../../services/enums/enums.service';
-import {IUserInfo} from '../../interfaces/user-info';
-import {IGalleryInfo} from '../../interfaces/gallery-info';
+import {IUserInfo} from '../../interfaces/user-info.interface';
+import {IGalleryInfo} from '../../interfaces/gallery-info.interface';
 import {OwlCarousel} from 'ngx-owl-carousel';
 import {Router} from '@angular/router';
 

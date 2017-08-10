@@ -1,20 +1,26 @@
+import { IImages } from './images.interface';
 export class IUser {
-  public id: number;
-  public name: string;
-  public avatar: object = {
+  id: number;
+  name: string;
+  avatar: object = {
     thumb: null
   };
-  public city: {
+  city: {
     title: null,
     country: {
       title: null
     }
   };
-  public age: number;
-  public countPhotos: Array<string>;
-  public excerpt: string = null;
-  public online: boolean = false;
-  public top: boolean;
+  age: number;
+  countPhotos: Array<string>;
+  excerpt: string = null;
+  online: boolean = false;
+  top: boolean;
 
   constructor() {}
+}
+
+export class IUserAvatar {
+  id: number = null;
+  _links: IImages = new IImages();
 }

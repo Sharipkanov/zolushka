@@ -27,6 +27,10 @@ export class PopupsComponent implements OnInit {
     ngOnInit() {
         this.detectActivePopups();
 
+        this._userService.onChangeToken.subscribe(() => {
+            this.detectActivePopups();
+        });
+
         this._userService.onChangeToken.subscribe((token: string) => {
             (!token.length) ? this.popups['login']['active'] = true : this.popups['login']['active'] = false;
         });
