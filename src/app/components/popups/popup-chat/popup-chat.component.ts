@@ -1,8 +1,9 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {PopupsService} from '../../../services/popups/popups.service';
 import {DialogService} from '../../../services/dialog/dialog.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IDialog} from '../../../interfaces/dialog';
+import {PerfectScrollbarComponent} from 'ngx-perfect-scrollbar';
 
 @Component({
     selector: 'app-popup-chat',
@@ -14,12 +15,13 @@ import {IDialog} from '../../../interfaces/dialog';
 export class PopupChatComponent implements OnInit {
 
     @Input() visible: boolean = false;
+    @ViewChild('messagesScroll') messagesScroll: PerfectScrollbarComponent;
 
     public folders = [];
+    public folderId;
     public dialogs: Array<IDialog> = [];
-    public dialog;
+    public dialogKey: number;
     public messages = [];
-    public conntection;
 
     public newFolderForm: boolean = false;
     public preloaders = {
@@ -38,29 +40,25 @@ export class PopupChatComponent implements OnInit {
 
     ngOnInit() {
         this.FNewFolder = this._fb.group({
-            title: ['', [Validators.required, Validators.minLength(5)]]
+            title: ['', [Validators.required]]
         });
         this.FMessage = this._fb.group({
-            message: ['', [Validators.required, Validators.minLength(5)]]
+            message: ['', [Validators.required]]
         });
 
         this._dialogService.getFolders().subscribe(response => {
+            console.log(response);
             this.folders = response;
             this.preloaders.folderList = false;
         });
 
-        this._dialogService.getDialogs().subscribe(response => {
-            if (!!response._embedded) {
-                this.dialogs = response._embedded.content;
-            }
-            this.preloaders.dialogs = false;
-            console.log(response);
-        });
+        this.getDialogs();
 
         this._dialogService.onAddNewDialog.subscribe(data => {
             this.dialogs.unshift(data);
+            this.dialogKey = 0;
+            this.messages = [];
             this._popupsService.openPopup('chat');
-            console.log(this.dialogs);
         });
     }
 
@@ -70,9 +68,23 @@ export class PopupChatComponent implements OnInit {
 
             if (!!this.dialogs[0] && !this.dialogs[0].id) {
                 this.dialogs.shift();
-                delete this.dialog;
+                delete this.dialogKey;
             }
         }
+    }
+
+    getDialogs() {
+        this._dialogService.getDialogs(this.folderId).subscribe(response => {
+            console.log(response);
+            if (!!response._embedded) {
+                this.dialogs = response._embedded.content;
+            } else {
+                this.dialogs = [];
+            }
+            delete this.dialogKey;
+            this.preloaders.dialogs = false;
+            // console.log(response);
+        });
     }
 
     addNewFolder(e) {
@@ -96,21 +108,27 @@ export class PopupChatComponent implements OnInit {
             this.folders.splice(i, 1);
             this.preloaders.folderList = false;
         });
-
     }
 
-    openMessages(dialog) {
-        this.dialog = dialog;
+    showFolder(i) {
+        console.log('hi');
+        this.folderId = this.folders[i].id;
+        this.getDialogs();
+    }
+
+    openMessages(i) {
+        this.dialogKey = i;
         this.preloaders.messages = true;
-        console.log(dialog);
-        if (!!dialog.token) {
-            this._dialogService.getMessagesList(dialog.token).subscribe(response => {
+        if (!!this.dialogs[this.dialogKey].token) {
+            this._dialogService.getMessagesList(this.dialogs[this.dialogKey].token).subscribe(response => {
                 if (!!response._embedded) {
-                    this.messages = response._embedded.content;
+                    this.messages = this.filterMessages(response._embedded.content);
+                    setTimeout(() => {
+                        this.messagesScroll.directiveRef.scrollToTop(this.messagesScroll.directiveRef.elementRef.nativeElement.getElementsByClassName('ps-content')[0].clientHeight);
+                    }, 200);
                 } else {
                     this.messages = [];
                 }
-                console.log(response);
 
                 this.preloaders.messages = false;
             }, error => {
@@ -122,19 +140,49 @@ export class PopupChatComponent implements OnInit {
         }
     }
 
+    filterMessages(messages: Array<any>) {
+        let curDate;
+        let customKey = null;
+        const messagesOutput = [];
+        messages.map((value) => {
+            if (curDate !== value.createdDate) {
+                curDate = value.createdDate;
+                if (customKey !== null) {
+                    customKey += 1;
+                } else {
+                    customKey = 0;
+                }
+
+                messagesOutput[customKey] = {messageDate: curDate, messageList: []};
+            }
+
+            messagesOutput[customKey].messageList.push(value);
+        });
+
+        return messagesOutput;
+    }
+
     sendMessage(e) {
         e.preventDefault();
-        // remove data from input
 
-        this.preloaders.messageForm = true;
-        if (!!this.dialog && !!this.dialog.token) {
+        // save dialog to variable
+        const movingDialog = this.dialogs[this.dialogKey];
+        // remove dialog from scope
+        this.dialogs.splice(this.dialogKey, 1);
+        this.dialogs.unshift(movingDialog);
+        this.dialogKey = 0;
+        if (!!this.dialogs[this.dialogKey] && !!this.dialogs[this.dialogKey].token) {
             this.messages.push(this.FMessage.value);
-            this._dialogService.addMessage(this.FMessage.value, this.dialog).subscribe(response => {
-
-            });
-        } else if (!!this.dialog) {
-            this._dialogService.addDialog(this.FMessage.value, this.dialog.clientTo.id).subscribe(response => {
-                console.log(response);
+            this._dialogService.addMessage(this.FMessage.value, this.dialogs[this.dialogKey]).subscribe(response => {
+                    console.log(response);
+                },
+                error => {
+                    console.log(error);
+                    this.messages.pop();
+                });
+        } else if (!!this.dialogKey) {
+            this._dialogService.addDialog(this.FMessage.value, this.dialogs[this.dialogKey].clientTo.id).subscribe(response => {
+                this.dialogs[this.dialogKey] = response;
             });
         }
         this.FMessage.controls.message.setValue('');

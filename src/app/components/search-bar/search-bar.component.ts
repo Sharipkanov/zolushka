@@ -92,7 +92,7 @@ export class SearchBarComponent implements OnInit {
 
         this._enums.getEnums().subscribe(response => {
             this.enums = response;
-            console.log(response)
+            // console.log(response)
         });
     }
 

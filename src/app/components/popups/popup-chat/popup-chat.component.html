@@ -59,11 +59,12 @@
                     <p class="fw-fz-15 fw-fw-600 fw-flex-shrink-no">Мои папки</p>
                     <perfect-scrollbar class="fw-flex-grow fw-flex fw-flex-column">
                         <ul class="chat__archive-list fw-mt-10" *ngIf="!!folders.length">
-                            <li class="fw-mt-10" *ngFor="let folder of folders; let i = index;">
+                            <li class="fw-mt-10" *ngFor="let folder of folders; let i = index;" (click)="showFolder(i)">
                                 <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle fw-position-relative fw-text-ellipsis">
                                     <span><i class="icon-chat-folder"></i></span>
                                     <span><i class="icon-chat-folder-active"></i></span>
-                                    <span class="chat__archive-list--remove" (click)="removeFolder($event, i)"><i class="icon-shape-remove-purple"></i></span>
+                                    <span class="chat__archive-list--remove" (click)="removeFolder($event, i)"><i
+                                            class="icon-shape-remove-purple"></i></span>
                                     <span class="fw-ml-5">{{folder.title}}</span>
                                 </a>
                             </li>
@@ -74,7 +75,7 @@
                     <app-preloader *ngIf="preloaders.folderList"></app-preloader>
                 </div>
                 <div class="fw-mt-auto fw-position-relative fw-flex-shrink-no">
-                    <a *ngIf="!newFolderForm" (click)="newFolderForm = true;"
+                    <a *ngIf="!newFolderForm" (click)="newFolderForm = true"
                        class="button button--blue button--small fw-width-1-1 fw-flex fw-flex-middle">
                         <i class="icon-plus icon-plus--purple-dark fw-mr-5"></i>
                         <span class="fw-fz-14 fw-text-600 fw-vam">Добавить папку</span>
@@ -131,19 +132,27 @@
                         </div>
                     </div>-->
 
-                    <div class="list__item" *ngFor="let dialog of dialogs" (click)="openMessages(dialog)">
+                    <div class="list__item" [ngClass]="{'list__inbox': (dialogKey === i)}"
+                         *ngFor="let dialog of dialogs; let i = index;" (click)="openMessages(i)">
                         <div>
                             <a class="list__thumbnail">
-                                <img src="{{ !!dialog.clientTo.avatar ? dialog.clientTo.avatar : 'http://placehold.it/50x50' }}" alt="">
+                                <img src="{{ !!dialog.clientTo.avatar ? dialog.clientTo.avatar : 'http://placehold.it/50x50' }}"
+                                     alt="">
                             </a>
                         </div>
                         <div>
                             <a>
-                                <div class="list__user" [ngClass]="{'list__user--offline': !dialog.clientTo.online}">{{dialog.clientTo.name}}, {{dialog.clientTo.age}}</div>
+                                <div class="list__user" [ngClass]="{'list__user--offline': !dialog.clientTo.online}">
+                                    {{dialog.clientTo.name}}, {{dialog.clientTo.age}}
+                                </div>
                             </a>
-                            <p class="list__message" [ngClass]="{'list__message--active': !!dialog.lastMessage}">{{!!dialog.lastMessage ? dialog.lastMessage : 'Нет сообщений'}}</p>
+                            <p class="list__message" [ngClass]="{'list__message--active': !!dialog.lastMessage}">
+                                {{!!dialog.lastMessage ? dialog.lastMessage : 'Нет сообщений'}}</p>
                             <p class="list__time">{{!!dialog.lastMessageCreated ? dialog.lastMessageCreated : ''}}</p>
-                            <a><i class="list__icon icon-chat-call-green"></i></a>
+                            <a>
+                                <!--<i class="list__icon icon-chat-call-green"></i>-->
+                                <i class="list__icon icon-chat-message"></i>
+                            </a>
                         </div>
                     </div>
                 </perfect-scrollbar>
@@ -153,29 +162,50 @@
                 <app-preloader *ngIf="preloaders.messages"></app-preloader>
                 <div class="chat__header chat__header--bordered">
                     <div>
-                        <a><i *ngIf="!!dialog" class="icon-chat-call"></i></a>
+                        <a><i *ngIf="!!dialogs[dialogKey]" class="icon-chat-call"></i></a>
                     </div>
                     <div class="fw-text-center">
-                        <div class="fw-inline-block"><p *ngIf="!!dialog" class="fw-hus" [ngClass]="{'fw-hus--offline': dialog.clientTo.online}">{{!!dialog ? dialog.clientTo.name : ''}}, {{!!dialog ? dialog.clientTo.age : ''}} лет, {{!!dialog ? dialog.clientTo.city.title : ''}}</p></div>
-                        <div><p class="fw-color-grey-dark fw-fz-13" *ngIf="!!dialog">Была последний раз 8 минут назад</p></div>
+                        <div class="fw-inline-block">
+                            <p *ngIf="!!dialogs[dialogKey]" class="fw-has-user-status fw-text-600"
+                               [ngClass]="{'fw-has-user-status--offline': !dialogs[dialogKey].clientTo.online}">
+                                {{!!dialogs[dialogKey] ? dialogs[dialogKey].clientTo.name : ''}},
+                                {{!!dialogs[dialogKey] ? dialogs[dialogKey].clientTo.age : ''}} лет,
+                                {{!!dialogs[dialogKey] ? dialogs[dialogKey].clientTo.city.title : ''}}
+                            </p>
+                        </div>
+                        <div><p class="fw-color-grey-dark fw-fz-13" *ngIf="!!dialogs[dialogKey]">{{dialogs[dialogKey].clientTo.lastOnline}}</p></div>
                     </div>
                     <div class="fw-relative">
-                        <a class="fw-mr-15 chat__settings-link"><i class="icon-chat-cog"></i><i
-                                class="icon-chat-cog-active"></i></a>
+                        <a class="fw-mr-15 chat__settings-link">
+                            <i class="icon-chat-cog"></i>
+                            <i class="icon-chat-cog-active"></i>
+
+                            <div class="chat__settings">
+                                <div><a class="fw-fz-13">Удалить диалог</a></div>
+                                <div><a class="fw-fz-13">Переместить в другую папку</a></div>
+                                <div><a class="fw-fz-13">Добавить в избранное</a></div>
+                                <div><a class="fw-fz-13">Добавить в черный список</a></div>
+                            </div>
+                        </a>
                         <a class="js-close-popup"><i class="icon-chat-close"></i></a>
-                        <div class="chat__settings">
-                            <div><a class="fw-fz-13">Удалить диалог</a></div>
-                            <div><a class="fw-fz-13">Переместить в другую папку</a></div>
-                            <div><a class="fw-fz-13">Добавить в избранное</a></div>
-                            <div><a class="fw-fz-13">Добавить в черный список</a></div>
-                        </div>
                     </div>
                 </div>
                 <div class="chat__context context fw-flex">
-                    <perfect-scrollbar class="fw-flex-grow fw-flex fw-flex-column">
-                        <div class="chat__box box" *ngFor="let message of messages">
-                            <div class="box__data"><p>1 ноября 2016</p></div>
-                            <div class="box__message message message--income">
+                    <perfect-scrollbar #messagesScroll class="fw-flex-grow fw-flex fw-flex-column">
+                        <div class="chat__box box" *ngFor="let messageGroup of messages">
+
+                            <div class="box__data"><p>{{messageGroup.messageDate}}</p></div>
+                            <div class="box__message message" [ngClass]="{'message--income': message.incoming}"
+                                 *ngFor="let message of messageGroup.messageList">
+                                <div class="message__image" *ngIf="message['incoming']"><img
+                                        src="http://placehold.it/32x32" alt=""></div>
+                                <p *ngIf="!message.incoming" class="message__time">{{message['createdTime']}}</p>
+                                <p class="message__text">
+                                    <span>{{message['message']}}</span>
+                                </p>
+                                <p *ngIf="message['incoming']" class="message__time">{{message['createdTime']}}</p>
+                            </div>
+                            <!--<div class="box__message message message&#45;&#45;income">
                                 <div class="message__image"><img src="http://placehold.it/32x32" alt=""></div>
                                 <p class="message__text">
                                     <span>Привет! Как жизнь?!</span>
@@ -187,10 +217,10 @@
                                 <p class="message__text">
                                     <span>Привет! Как жизнь?!</span>
                                 </p>
-                            </div>
+                            </div>-->
                         </div>
                     </perfect-scrollbar>
-                    <div class="context__footer fw-flex-shrink-no fw-pt-15" *ngIf="!!dialog">
+                    <div class="context__footer fw-flex-shrink-no fw-pt-15" *ngIf="!!dialogs[dialogKey]">
                         <form [formGroup]="FMessage" class="chat__new-message fw-flex" (submit)="sendMessage($event)">
                             <app-input-box formControlName="message" class="fw-flex-grow"
                                            [placeholder]="'Ваше сообщение'"></app-input-box>

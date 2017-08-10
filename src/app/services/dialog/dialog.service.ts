@@ -4,7 +4,7 @@ import {UserService} from '../user/user.service';
 import {IDialogMessage} from '../../interfaces/dialog-message';
 import {Socket} from 'ngx-socket-io';
 import {IDialogFolder} from '../../interfaces/dialog-folder';
-import {IDialog} from "../../interfaces/dialog";
+import {IDialog} from '../../interfaces/dialog';
 
 @Injectable()
 export class DialogService {
@@ -29,8 +29,12 @@ export class DialogService {
             .map((response: Response) => response.json());
     }
 
-    getDialogs() {
-        return this._http.get(`/api/api/dialogs`, {headers: this._userService.setHeaders({json: true})})
+    getDialogs(folderId: string = null) {
+        let url = `/api/api/dialogs`;
+        if (!!folderId) {
+            url += `?folderId=${folderId}`;
+        }
+        return this._http.get(url, {headers: this._userService.setHeaders({json: true})})
             .map((response: Response) => response.json());
     }
 

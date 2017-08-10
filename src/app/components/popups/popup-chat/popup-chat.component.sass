@@ -519,6 +519,12 @@
         right: -10px
 
   .chat__settings-link
+    position: relative
+
+    &:hover
+      .chat__settings
+        display: block
+
     i
       display: none
 
@@ -542,13 +548,22 @@
     z-index: 4
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
     box-sizing: border-box
-    padding: 20px
+    padding: 10px 0
     display: none
+
+    & > div
+      padding: 7px 20px
+      z-index: 2
+      position: relative
+      +transition()
+
+      &:hover
+        box-shadow: 0 0 0 1000px rgba(#000, 0.1) inset
 
     &.chat__settings--active
       display: block
 
-    &::before
+    &::before, &::after
       display: block
       position: absolute
       bottom: 100%
@@ -560,8 +575,13 @@
       border-width: 0 0 20px 20px
       border-color: transparent transparent #fff transparent
 
-    > div + div
-      margin-top: 10px
+    &::after
+      border: 0
+      width: 100%
+      top: -30px
+      left: 0
+      height: 50px
+      z-index: 1
 
   .ps>.ps__scrollbar-y-rail
     z-index: 5
