@@ -5,49 +5,60 @@
                 <div class="fw-flex-shrink-no">
                     <ul class="chat__archive-list">
                         <li class="fw-mt-10 active">
-                            <a (click)="applyFilter()" class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle" [ngClass]="{'active': filterParams === {}}">
+                            <a (click)="applyFilter()" class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+                               [ngClass]="{'active': filterParams === {}}">
                                 <span><i class="icon-chat-messages"></i></span>
                                 <span><i class="icon-chat-messages-active"></i></span>
                                 <span class="fw-ml-5">Все</span>
                             </a>
                         </li>
                         <li class="fw-mt-10">
-                            <a (click)="applyFilter({online: 1})" class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle" [ngClass]="{'active': !!filterParams['online']}">
+                            <a (click)="applyFilter({online: 1})"
+                               class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+                               [ngClass]="{'active': !!filterParams['online']}">
                                 <span><i class="icon-chat-lips"></i></span>
                                 <span><i class="icon-chat-lips-active"></i></span>
                                 <span class="fw-ml-5">On-line</span>
                             </a>
                         </li>
                         <li class="fw-mt-10">
-                            <a (click)="applyFilter({calls: 1})" class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle" [ngClass]="{'active': !!filterParams['calls']}">
+                            <a (click)="applyFilter({calls: 1})"
+                               class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+                               [ngClass]="{'active': !!filterParams['calls']}">
                                 <span><i class="icon-chat-phone"></i></span>
                                 <span><i class="icon-chat-phone-active"></i></span>
                                 <span class="fw-ml-5">Звонки</span>
                             </a>
                         </li>
                         <li class="fw-mt-10">
-                            <a (click)="applyFilter({removed: 1})" class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle" [ngClass]="{'active': !!filterParams['removed']}">
+                            <a (click)="applyFilter({removed: 1})"
+                               class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+                               [ngClass]="{'active': !!filterParams['removed']}">
                                 <span><i class="icon-chat-check"></i></span>
                                 <span><i class="icon-chat-check-active"></i></span>
                                 <span class="fw-ml-5">Скрыть удаленные</span>
                             </a>
                         </li>
                         <li class="fw-mt-10">
-                            <a (click)="applyFilter({new: 1})" class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle" [ngClass]="{'active': !!filterParams['new']}">
+                            <a (click)="applyFilter({new: 1})"
+                               class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+                               [ngClass]="{'active': !!filterParams['new']}">
                                 <span><i class="icon-chat-bell"></i></span>
                                 <span><i class="icon-chat-bell-active"></i></span>
                                 <span class="fw-ml-5">Новые</span>
                             </a>
                         </li>
                         <li (click)="applyFilter({favorite: 1})" class="fw-mt-10">
-                            <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle" [ngClass]="{'active': !!filterParams['favorite']}">
+                            <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+                               [ngClass]="{'active': !!filterParams['favorite']}">
                                 <span><i class="icon-chat-star"></i></span>
                                 <span><i class="icon-chat-star-active"></i></span>
                                 <span class="fw-ml-5">Избранные</span>
                             </a>
                         </li>
-                        <li class="fw-mt-10">
-                            <a (click)="applyFilter({blacklist: 1})" class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle">
+                        <li (click)="applyFilter({blacklist: 1})" class="fw-mt-10">
+                            <a [ngClass]="{'active': !!filterParams['blacklist']}"
+                               class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle">
                                 <span><i class="icon-chat-hand"></i></span>
                                 <span><i class="icon-chat-hand-active"></i></span>
                                 <span class="fw-ml-5">Черный список</span>
@@ -59,8 +70,10 @@
                     <p class="fw-fz-15 fw-fw-600 fw-flex-shrink-no">Мои папки</p>
                     <perfect-scrollbar class="fw-flex-grow fw-flex fw-flex-column">
                         <ul class="chat__archive-list fw-mt-10" *ngIf="!!folders.length">
-                            <li class="fw-mt-10" *ngFor="let folder of folders; let i = index;" (click)="applyFilter({folderId: folder.id})">
-                                <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle fw-position-relative fw-text-ellipsis" [ngClass]="{'active': !!filterParams['folderId'] && filterParams['folderId'] === folder.id}">
+                            <li class="fw-mt-10" *ngFor="let folder of folders; let i = index;"
+                                (click)="applyFilter({folderId: folder.id})">
+                                <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle fw-position-relative fw-text-ellipsis"
+                                   [ngClass]="{'active': !!filterParams['folderId'] && filterParams['folderId'] === folder.id}">
                                     <span><i class="icon-chat-folder"></i></span>
                                     <span><i class="icon-chat-folder-active"></i></span>
                                     <span class="chat__archive-list--remove" (click)="removeFolder($event, i)"><i
@@ -97,7 +110,7 @@
                     <div><p class="fw-fw-600 fw-fz-16">Все сообщения</p></div>
                     <div><a><i class="icon-chat-search"></i></a></div>
                 </div>
-                <perfect-scrollbar class="chat__list list">
+                <perfect-scrollbar class="chat__list list" (ps-scroll-y)="infineFolderScroll()">
                     <!--<div class="list__item list__inbox list__inbox&#45;&#45;new">
                         <div>
                             <a class="list__thumbnail"><img src="http://placehold.it/50x50" alt=""></a>
@@ -132,29 +145,34 @@
                         </div>
                     </div>-->
 
-                    <div class="list__item" [ngClass]="{'list__inbox': (dialogKey === i)}"
-                         *ngFor="let dialog of dialogs; let i = index;" (click)="openMessages(i)">
-                        <div>
-                            <a class="list__thumbnail">
-                                <img src="{{ !!dialog.clientTo.avatar ? dialog.clientTo.avatar : 'http://placehold.it/50x50' }}"
-                                     alt="">
-                            </a>
-                        </div>
-                        <div>
-                            <a>
+
+                    <ng-container *ngIf="!!dialogs._embedded">
+                        <div class="list__item" *ngFor="let dialog of dialogs._embedded.content; let i = index;"
+                             [ngClass]="{'list__inbox': (dialogKey === i)}"
+                             (click)="openMessages(i)">
+                            <div>
+                                <a class="list__thumbnail">
+                                    <img src="{{ !!dialog.clientTo.avatar ? dialog.clientTo.avatar : 'http://placehold.it/50x50' }}"
+                                         alt="">
+                                </a>
+                            </div>
+                            <div>
                                 <div class="list__user" [ngClass]="{'list__user--offline': !dialog.clientTo.online}">
                                     {{dialog.clientTo.name}}, {{dialog.clientTo.age}}
                                 </div>
-                            </a>
-                            <p class="list__message" [ngClass]="{'list__message--active': !!dialog.lastMessage}">
-                                {{!!dialog.lastMessage ? dialog.lastMessage : 'Нет сообщений'}}</p>
-                            <p class="list__time">{{!!dialog.lastMessageCreated ? dialog.lastMessageCreated : ''}}</p>
-                            <a>
-                                <!--<i class="list__icon icon-chat-call-green"></i>-->
-                                <i class="list__icon icon-chat-message"></i>
-                            </a>
+                                <p class="list__message" [ngClass]="{'list__message--active': !!dialog.lastMessage}">
+                                    {{!!dialog.lastMessage ? dialog.lastMessage : 'Нет сообщений'}}</p>
+                                <p class="list__time">{{!!dialog.lastMessageCreated ? dialog.lastMessageCreated :
+                                    ''}}</p>
+                                <span>
+                                    <!--<i class="list__icon icon-chat-call-green"></i>-->
+                                    <i class="list__icon icon-chat-message"></i>
+                                </span>
+                            </div>
                         </div>
-                    </div>
+                    </ng-container>
+
+
                 </perfect-scrollbar>
                 <app-preloader *ngIf="preloaders.dialogs"></app-preloader>
             </div>
@@ -162,21 +180,22 @@
                 <app-preloader *ngIf="preloaders.messages"></app-preloader>
                 <div class="chat__header chat__header--bordered">
                     <div>
-                        <a><i *ngIf="!!dialogs[dialogKey]" class="icon-chat-call"></i></a>
+                        <a><i *ngIf="!!dialog" class="icon-chat-call"></i></a>
                     </div>
                     <div class="fw-text-center">
                         <div class="fw-inline-block">
-                            <p *ngIf="!!dialogs[dialogKey]" class="fw-has-user-status fw-text-600"
-                               [ngClass]="{'fw-has-user-status--offline': !dialogs[dialogKey].clientTo.online}">
-                                {{!!dialogs[dialogKey] ? dialogs[dialogKey].clientTo.name : ''}},
-                                {{!!dialogs[dialogKey] ? dialogs[dialogKey].clientTo.age : ''}} лет,
-                                {{!!dialogs[dialogKey] ? dialogs[dialogKey].clientTo.city.title : ''}}
+                            <p *ngIf="!!dialog" class="fw-has-user-status fw-text-600"
+                               [ngClass]="{'fw-has-user-status--offline': !dialog.clientTo.online}">
+                                {{!!dialog ? dialog.clientTo.name : ''}},
+                                {{!!dialog ? dialog.clientTo.age : ''}} лет,
+                                {{!!dialog ? dialog.clientTo.city.title : ''}}
                             </p>
                         </div>
-                        <div><p class="fw-color-grey-dark fw-fz-13" *ngIf="!!dialogs[dialogKey]">{{dialogs[dialogKey].clientTo.lastOnline}}</p></div>
+                        <div><p class="fw-color-grey-dark fw-fz-13" *ngIf="!!dialog">
+                            {{dialog.clientTo.lastOnline}}</p></div>
                     </div>
                     <div class="fw-relative fw-flex fw-flex-middle">
-                        <div class="fw-mr-15 chat__settings-link" *ngIf="!!dialogs[dialogKey]">
+                        <div class="fw-mr-15 chat__settings-link" *ngIf="!!dialog">
                             <i class="icon-chat-cog"></i>
                             <i class="icon-chat-cog-active"></i>
 
@@ -184,12 +203,12 @@
                                 <a class="fw-fz-13" (click)="deleteDialog($event)">Удалить диалог</a>
                                 <a class="fw-fz-13">Переместить в другую папку</a>
                                 <a class="fw-fz-13" (click)="favoriteDialog($event)">
-                                    <span *ngIf="!dialogs[dialogKey].favorite">Добавить в избранное</span>
-                                    <span *ngIf="dialogs[dialogKey].favorite">Убрать из избранного</span>
+                                    <span *ngIf="!dialog.favorite">Добавить в избранное</span>
+                                    <span *ngIf="dialog.favorite">Убрать из избранного</span>
                                 </a>
                                 <a class="fw-fz-13" (click)="blacklistDialog($event)">
-                                    <span *ngIf="!dialogs[dialogKey].blacklist">Добавить в черный список</span>
-                                    <span *ngIf="dialogs[dialogKey].blacklist">Убрать из черного списока</span>
+                                    <span *ngIf="!dialog.blacklist">Добавить в черный список</span>
+                                    <span *ngIf="dialog.blacklist">Убрать из черного списока</span>
                                 </a>
                                 <app-preloader *ngIf="preloaders.dialogAction"></app-preloader>
                             </div>
@@ -227,7 +246,7 @@
                             </div>-->
                         </div>
                     </perfect-scrollbar>
-                    <div class="context__footer fw-flex-shrink-no fw-pt-15" *ngIf="!!dialogs[dialogKey]">
+                    <div class="context__footer fw-flex-shrink-no fw-pt-15" *ngIf="!!dialog">
                         <form [formGroup]="FMessage" class="chat__new-message fw-flex" (submit)="sendMessage($event)">
                             <app-input-box formControlName="message" class="fw-flex-grow"
                                            [placeholder]="'Ваше сообщение'"></app-input-box>

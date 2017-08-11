@@ -71,8 +71,8 @@ export class DialogService {
             .map((response: Response) => response.json());
     }
 
-    addMessage(message: IDialogMessage, dialog: IDialog) {
-        return this._http.post(`/api/api/dialogs/${dialog.token}/messages`, message, { headers: this._userService.setHeaders({ json: true }) })
+    addMessage(message: IDialogMessage, token: string) {
+        return this._http.post(`/api/api/dialogs/${token}/messages`, message, { headers: this._userService.setHeaders({ json: true }) })
             .map((response: Response) => response.json());
         // this.socket.emit('add-message', message);
     }

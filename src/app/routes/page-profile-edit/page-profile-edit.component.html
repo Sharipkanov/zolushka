@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <form [formGroup]="FProfile" (ngSubmit)="saveProfileData($event)" class="profile-edit__form">
+        <form [formGroup]="FProfile" (ngSubmit)="saveProfileData($event)" class="profile-edit__form" *ngIf="!formControlEmpty">
             <div class="form-section">
                 <div class="form-line fw-flex fw-flex-middle fw-mb-30">
                     <div class="field-title">

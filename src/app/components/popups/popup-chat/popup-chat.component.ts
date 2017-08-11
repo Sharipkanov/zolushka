@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { PopupsService } from '../../../services/popups/popups.service';
-import { DialogService } from '../../../services/dialog/dialog.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IDialog } from '../../../interfaces/dialog.interface';
-import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
+import {Component, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {PopupsService} from '../../../services/popups/popups.service';
+import {DialogService} from '../../../services/dialog/dialog.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {IDialog} from '../../../interfaces/dialog.interface';
+import {PerfectScrollbarComponent} from 'ngx-perfect-scrollbar';
+import {IPagination, IPaginationDialogs} from '../../../interfaces/pagination.interface';
 
 @Component({
     selector: 'app-popup-chat',
@@ -12,14 +13,15 @@ import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
     encapsulation: ViewEncapsulation.None,
     // providers: [DialogService]
 })
-export class PopupChatComponent implements OnInit {
+export class PopupChatComponent implements OnInit, OnDestroy {
 
     @Input() visible: boolean = false;
     @ViewChild('messagesScroll') messagesScroll: PerfectScrollbarComponent;
 
     public folders = [];
     public filterParams = {};
-    public dialogs: Array<IDialog> = [];
+    public dialogs: IPagination = <IPagination>{};
+    public dialog: IDialog;
     public dialogKey: number;
     public messages = [];
 
@@ -54,34 +56,44 @@ export class PopupChatComponent implements OnInit {
 
         this.getDialogs();
 
-        this._dialogService.onAddNewDialog.subscribe(data => {
-            this.dialogs.unshift(data);
-            this.dialogKey = 0;
+        this._dialogService.onAddNewDialog.subscribe((dialog: IDialog) => {
+            this.dialogs._embedded.content.unshift(dialog);
+            this.dialog = new IDialog(dialog);
             this.messages = [];
             this._popupsService.openPopup('chat');
         });
+    }
+
+    infineFolderScroll() {
+        console.log('scroll');
     }
 
     closePopup(e) {
         if (e.target.classList.contains('popup-wrapper') || e.target.classList.contains('js-close-popup') || !!e.target.closest('.js-close-popup')) {
             this._popupsService.closePopup('chat');
 
-            if (!!this.dialogs[0] && !this.dialogs[0].id) {
-                this.dialogs.shift();
-                delete this.dialogKey;
+            if (!!this.dialogs._embedded.content[0] && !this.dialogs._embedded.content[0].id) {
+                this.dialogs._embedded.content.shift();
+                delete this.dialog;
             }
         }
     }
 
-    getDialogs() {
-        console.log(this.filterParams, !this.filterParams, Object.keys(this.filterParams).length);
-        this._dialogService.getDialogs(this.filterParams).subscribe(response => {
+    getDialogs(update: boolean = true) {
+        this._dialogService.getDialogs(this.filterParams).subscribe((response: IPaginationDialogs) => {
             if (!!response._embedded) {
-                this.dialogs = response._embedded.content;
+                if (update) {
+                    this.dialogs = <IPaginationDialogs>response;
+                    console.log(this.dialogs._embedded.content[0]);
+                } else {
+                    for (let i = 0; i < response._embedded.content.length; i++) {
+                        this.dialogs._embedded.content.push(new IDialog(response._embedded.content[i]));
+                    }
+                }
             } else {
-                this.dialogs = [];
+                this.dialogs._embedded.content = [];
             }
-            delete this.dialogKey;
+            delete this.dialog;
             this.messages = [];
             this.preloaders.dialogs = false;
         });
@@ -90,8 +102,8 @@ export class PopupChatComponent implements OnInit {
     deleteDialog(e) {
         e.preventDefault();
         this.preloaders.dialogAction = true;
-        this._dialogService.deleteDialog(this.dialogs[this.dialogKey].token).subscribe(response => {
-            this.dialogs.splice(this.dialogKey, 1);
+        this._dialogService.deleteDialog(this.dialog.token).subscribe(response => {
+            this.dialogs._embedded.content.splice(this.dialogKey, 1);
             delete this.dialogKey;
             this.messages = [];
             this.preloaders.dialogAction = false;
@@ -101,8 +113,14 @@ export class PopupChatComponent implements OnInit {
     favoriteDialog(e) {
         e.preventDefault();
         this.preloaders.dialogAction = true;
-        this._dialogService.favoriteDialog(this.dialogs[this.dialogKey].token).subscribe(response => {
+        this._dialogService.favoriteDialog(this.dialog.token).subscribe((response: IDialog) => {
             this.dialogs[this.dialogKey] = response;
+            if (!!this.filterParams['favorite'] && !this.dialogs[this.dialogKey].favorite) {
+                this.dialogs._embedded.content.splice(this.dialogKey, 1);
+            } else {
+                this.dialogs._embedded.content.unshift(this.dialog);
+                this.dialogKey = 0;
+            }
             this.preloaders.dialogAction = false;
         });
     }
@@ -110,8 +128,14 @@ export class PopupChatComponent implements OnInit {
     blacklistDialog(e) {
         e.preventDefault();
         this.preloaders.dialogAction = true;
-        this._dialogService.blacklistDialog(this.dialogs[this.dialogKey].token).subscribe(response => {
+        this._dialogService.blacklistDialog(this.dialog.token).subscribe((response: IDialog) => {
             this.dialogs[this.dialogKey] = response;
+            if (!!this.filterParams['blacklist'] && !this.dialogs[this.dialogKey].blacklist) {
+                this.dialogs._embedded.content.splice(this.dialogKey, 1);
+            } else {
+                this.dialogs._embedded.content.unshift(this.dialog);
+                this.dialogKey = 0;
+            }
             this.preloaders.dialogAction = false;
         });
     }
@@ -141,10 +165,12 @@ export class PopupChatComponent implements OnInit {
 
     openMessages(i) {
         this.dialogKey = i;
+        this.dialog = this.dialogs._embedded.content[this.dialogKey];
         this.preloaders.messages = true;
-        if (!!this.dialogs[this.dialogKey].token) {
-            this._dialogService.getMessagesList(this.dialogs[this.dialogKey].token).subscribe(response => {
+        if (!!this.dialog && !!this.dialog.token) {
+            this._dialogService.getMessagesList(this.dialog.token).subscribe((response: IPagination) => {
                 if (!!response._embedded) {
+                    console.log(response._embedded.content);
                     this.messages = this.filterMessages(response._embedded.content);
                     setTimeout(() => {
                         this.messagesScroll.directiveRef.scrollToTop(this.messagesScroll.directiveRef.elementRef.nativeElement.getElementsByClassName('ps-content')[0].clientHeight);
@@ -176,7 +202,7 @@ export class PopupChatComponent implements OnInit {
                     customKey = 0;
                 }
 
-                messagesOutput[customKey] = { messageDate: curDate, messageList: [] };
+                messagesOutput[customKey] = {messageDate: curDate, messageList: []};
             }
 
             messagesOutput[customKey].messageList.push(value);
@@ -188,24 +214,23 @@ export class PopupChatComponent implements OnInit {
     sendMessage(e) {
         e.preventDefault();
 
-        // save dialog to variable
-        const movingDialog = this.dialogs[this.dialogKey];
         // remove dialog from scope
-        this.dialogs.splice(this.dialogKey, 1);
-        this.dialogs.unshift(movingDialog);
+        this.dialogs._embedded.content.splice(this.dialogKey, 1);
+        this.dialogs._embedded.content.unshift(this.dialog);
         this.dialogKey = 0;
-        if (!!this.dialogs[this.dialogKey] && !!this.dialogs[this.dialogKey].token) {
+        if (!!this.dialog && !!this.dialog.token) {
             this.messages.push(this.FMessage.value);
-            this._dialogService.addMessage(this.FMessage.value, this.dialogs[this.dialogKey]).subscribe(response => {
+            this._dialogService.addMessage(this.FMessage.value, this.dialog.token).subscribe(response => {
                     console.log(response);
                 },
                 error => {
                     console.log(error);
                     this.messages.pop();
                 });
-        } else if (!!this.dialogs[this.dialogKey]) {
-            this._dialogService.addDialog(this.FMessage.value, this.dialogs[this.dialogKey].clientTo.id).subscribe(response => {
-                this.dialogs[this.dialogKey] = response;
+        } else if (!!this.dialog) {
+            this._dialogService.addDialog(this.FMessage.value, this.dialog.clientTo.id).subscribe(response => {
+                this.dialog = response;
+                this.dialogs._embedded.content[this.dialogKey] = this.dialog;
                 console.log(response);
             });
         }
@@ -213,9 +238,10 @@ export class PopupChatComponent implements OnInit {
     }
 
     applyFilter(data = null) {
+        this.preloaders.dialogs = true;
         if (data !== null) {
             for (const key in data) {
-                if(key !== 'folderId') {
+                if (key !== 'folderId') {
                     for (const Key in this.filterParams) {
                         if (key !== Key && Key !== 'folderId') {
                             delete this.filterParams[Key];
@@ -230,5 +256,12 @@ export class PopupChatComponent implements OnInit {
         }
 
         this.getDialogs();
+    }
+
+    ngOnDestroy() {
+        this.filterParams = {};
+        this.dialogKey = null;
+        this.dialogs._embedded.content = [];
+        this.messages = [];
     }
 }
