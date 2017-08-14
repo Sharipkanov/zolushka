@@ -34,6 +34,8 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit, OnC
 
     writeValue(value: any) {
         this.inputValue = value;
+
+        this.detectChanges();
     }
 
     registerOnChange(fn: any) {
@@ -41,6 +43,10 @@ export class RadioBoxLabelComponent implements ControlValueAccessor, OnInit, OnC
     }
 
     ngOnChanges() {
+        this.detectChanges();
+    }
+
+    detectChanges() {
         for (let i = 0; i < this.items.length; i++) {
             const item = this.items[i];
 

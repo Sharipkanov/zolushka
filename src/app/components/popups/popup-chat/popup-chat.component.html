@@ -144,8 +144,6 @@
                             <a><i class="list__icon icon-chat-message"></i></a>
                         </div>
                     </div>-->
-
-
                     <ng-container *ngIf="!!dialogs._embedded">
                         <div class="list__item" *ngFor="let dialog of dialogs._embedded.content; let i = index;"
                              [ngClass]="{'list__inbox': (dialogKey === i)}"
@@ -171,8 +169,6 @@
                             </div>
                         </div>
                     </ng-container>
-
-
                 </perfect-scrollbar>
                 <app-preloader *ngIf="preloaders.dialogs"></app-preloader>
             </div>

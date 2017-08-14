@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import {UsersService} from '../../services/users/users.service';
-import {IUser} from '../../interfaces/user.interface';
-import {SearchBarComponent} from "../../components/search-bar/search-bar.component";
-import {ActivatedRoute, Router} from "@angular/router";
-import {IPagination, IPaginationUserSearch} from "../../interfaces/pagination.interface";
+import { UsersService } from '../../services/users/users.service';
+import { IUser } from '../../interfaces/user.interface';
+import { SearchBarComponent } from "../../components/search-bar/search-bar.component";
+import { ActivatedRoute, Router } from "@angular/router";
+import { IPagination, IPaginationUserSearch } from "../../interfaces/pagination.interface";
 
 @Component({
     selector: 'app-page-search',
@@ -14,23 +14,24 @@ import {IPagination, IPaginationUserSearch} from "../../interfaces/pagination.in
 })
 export class PageSearchComponent implements OnInit {
     public users: IPaginationUserSearch = <IPaginationUserSearch>{};
+    public preloaders = {
+        userGrid: false,
+        filters: false
+    };
 
     constructor(private _router: Router, private _activatedRouter: ActivatedRoute, private usersService: UsersService) {
     }
 
     ngOnInit() {
+        console.log(this._activatedRouter.snapshot.params);
         this.searchUsers(this._activatedRouter.snapshot.params);
-    }
-
-    searchUsersSubmit(e) {
-        e.preventDefault();
     }
 
     searchUsersQuery(searchObject) {
         const queryArray = {};
         for (const key in searchObject) {
             if (!!searchObject[key]) {
-                if (Object.prototype.toString.call( searchObject[key] ) === '[object Array]') {
+                if (Object.prototype.toString.call(searchObject[key]) === '[object Array]') {
                     queryArray[key] = [];
                     for (let i = 0; i < searchObject[key].length; i++) {
                         queryArray[key].push(searchObject[key][i].id);
@@ -46,10 +47,12 @@ export class PageSearchComponent implements OnInit {
     }
 
     searchUsers(data = null) {
+        this.preloaders.userGrid = true;
         console.log(data);
         this.usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
             console.log(users);
             this.users = <IPaginationUserSearch>users;
+            this.preloaders.userGrid = false;
         });
     }
 }

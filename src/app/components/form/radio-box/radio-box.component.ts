@@ -1,8 +1,8 @@
-import {Component, OnInit, Input, OnChanges} from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
-import {IRadioBoxItem} from '../../../interfaces/form/radio-box-item.interface';
-import {RadioBoxLabelComponent} from "../radio-box-label/radio-box-label.component";
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import { IRadioBoxItem } from '../../../interfaces/form/radio-box-item.interface';
+import { RadioBoxLabelComponent } from "../radio-box-label/radio-box-label.component";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
     selector: 'app-radio-box',
@@ -33,6 +33,8 @@ export class RadioBoxComponent implements OnInit, OnChanges, ControlValueAccesso
 
     writeValue(value: any) {
         this.inputValue = value;
+
+        this.detectChanges();
     }
 
     registerOnChange(fn: any) {
@@ -40,11 +42,15 @@ export class RadioBoxComponent implements OnInit, OnChanges, ControlValueAccesso
     }
 
     ngOnChanges() {
-        if (this.items !== undefined) {
+        this.detectChanges();
+    }
+
+    detectChanges() {
+        if (!!this.items) {
             for (let i = 0; i < this.items.length; i++) {
                 const item = this.items[i];
 
-                if (this.inputValue && item.id === this.inputValue.id) {
+                if (!!this.inputValue && item.id === this.inputValue.id) {
                     item.checked = true;
                 }
             }

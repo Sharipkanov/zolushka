@@ -2,9 +2,12 @@
 
 <section class="fw-pt-20 fw-pb-20">
   <div class="container">
-    <div class="fw-grid fw-grid-30" *ngIf="!!users._embedded">
-      <div class="fw-width-1-3" *ngFor="let user of users._embedded.clientCard">
-        <app-user-cart [user]="user"></app-user-cart>
+    <div class="fw-position-relative">
+      <div class="fw-grid fw-grid-30" *ngIf="!!users._embedded">
+        <div class="fw-width-1-3" *ngFor="let user of users._embedded.clientCard">
+          <app-user-cart [user]="user"></app-user-cart>
+        </div>
+        <app-preloader *ngIf="preloaders.userGrid"></app-preloader>
       </div>
     </div>
   </div>

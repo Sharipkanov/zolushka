@@ -1,11 +1,12 @@
-import {Component, OnInit, Input, ElementRef, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 
-import {StorageService} from '../../services/storage/storage.service';
-import {LocationService} from '../../services/location/location.service';
-import {ISelectSearchBoxItem} from '../../interfaces/form/select-search-box-item.interface';
-import {IEnums} from '../../interfaces/enums.interface';
-import {EnumsService} from '../../services/enums/enums.service';
-import {Form, FormBuilder, FormGroup} from "@angular/forms";
+import { StorageService } from '../../services/storage/storage.service';
+import { LocationService } from '../../services/location/location.service';
+import { ISelectSearchBoxItem } from '../../interfaces/form/select-search-box-item.interface';
+import { IEnums } from '../../interfaces/enums.interface';
+import { EnumsService } from '../../services/enums/enums.service';
+import { Form, FormBuilder, FormGroup } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: 'app-search-bar',
@@ -21,6 +22,7 @@ export class SearchBarComponent implements OnInit {
 
 
     public locations: Array<ISelectSearchBoxItem> = [];
+    public hiddenSearchBarFilters = true;
 
     private searchBarActiveClass: string = 'search-bar--active';
     private searchBarToggleTimeout: any;
@@ -30,7 +32,7 @@ export class SearchBarComponent implements OnInit {
 
     public enums = new IEnums();
 
-    constructor(private _fb: FormBuilder, private _enums: EnumsService, private _component: ElementRef, private _locationService: LocationService, private _storageService: StorageService) {
+    constructor(private _activatedRouter: ActivatedRoute, private _fb: FormBuilder, private _enums: EnumsService, private _component: ElementRef, private _locationService: LocationService) {
     }
 
     initLocation(locationName: string = null) {
@@ -61,7 +63,6 @@ export class SearchBarComponent implements OnInit {
     searchProfiles(e) {
         e.preventDefault();
         this.onSubmitSearchBar.emit(this.FSearchBar.value);
-        const form = e.target;
     }
 
     searchBarToggle(e) {
@@ -97,27 +98,47 @@ export class SearchBarComponent implements OnInit {
 
         this._enums.getEnums().subscribe(response => {
             this.enums = response;
+
+            this.renderFormChosenValues();
         });
+    }
+
+    renderFormChosenValues() {
+        const filterParams = this._activatedRouter.snapshot.params;
+        const newFilterObject = {};
+        for (const key in filterParams) {
+            const array = filterParams[key].split(',');
+            if (array.length > 1) {
+                newFilterObject[key] = [];
+                for (let i = 0; i < array.length; i++) {
+                    newFilterObject[key].push({ id: array[i] });
+                }
+            } else {
+                newFilterObject[key] = { id: parseInt(filterParams[key], 0) };
+            }
+        }
 
         this.FSearchBar = this._fb.group({
-            type: 200,
+            type: [(!!newFilterObject['type']) ? newFilterObject['type'] : { id: 200 }],
             cityId: null,
-            relationshipTypes: [],
-            appearance: [],
-            sexualPeriodicity: [],
-            relationshipState: [],
-            childrenExist: [],
-            hairColor: [],
-            eyeColor: [],
-            sexualRole: [],
-            zodiacsign: [],
-            physique: [],
-            higherEducation: [],
-            breastSize: [],
-            sexualKinds: [],
-            sexualPreference: [],
-            hobbies: [],
+            relationshipTypes: [(!!newFilterObject['relationshipTypes']) ? newFilterObject['relationshipTypes'] : {}],
+            appearance: [(!!newFilterObject['appearance']) ? newFilterObject['appearance'] : {}],
+            sexualPeriodicity: [(!!newFilterObject['sexualPeriodicity']) ? newFilterObject['sexualPeriodicity'] : {}],
+            relationshipState: [(!!newFilterObject['relationshipState']) ? newFilterObject['relationshipState'] : {}],
+            childrenExist: [(!!newFilterObject['childrenExist']) ? newFilterObject['childrenExist'] : {}],
+            hairColor: [(!!newFilterObject['hairColor']) ? newFilterObject['hairColor'] : {}],
+            eyeColor: [(!!newFilterObject['eyeColor']) ? newFilterObject['eyeColor'] : {}],
+            sexualRole: [(!!newFilterObject['sexualRole']) ? newFilterObject['sexualRole'] : {}],
+            zodiacsign: [(!!newFilterObject['zodiacsign']) ? newFilterObject['zodiacsign'] : {}],
+            physique: [(!!newFilterObject['physique']) ? newFilterObject['physique'] : {}],
+            higherEducation: [(!!newFilterObject['higherEducation']) ? newFilterObject['higherEducation'] : {}],
+            breastSize: [(!!newFilterObject['breastSize']) ? newFilterObject['breastSize'] : {}],
+            sexualKinds: [(!!newFilterObject['sexualKinds']) ? newFilterObject['sexualKinds'] : {}],
+            sexualPreference: [(!!newFilterObject['sexualPreference']) ? newFilterObject['sexualPreference'] : {}],
+            hobbies: [(!!newFilterObject['hobbies']) ? newFilterObject['hobbies'] : {}],
         });
+
+        this.hiddenSearchBarFilters = false;
     }
 
     switchType(e) {

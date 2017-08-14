@@ -3,8 +3,8 @@ import {
     Output, EventEmitter, OnChanges, SimpleChange
 } from '@angular/core';
 
-import {ISelectBoxItem} from '../../../interfaces/form/select-box-item.interface';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { ISelectBoxItem } from '../../../interfaces/form/select-box-item.interface';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'app-select-box',
@@ -53,6 +53,8 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
 
     writeValue(value: any) {
         this.inputValue = value;
+
+        this.detectChanges();
     }
 
     registerOnChange(fn: any) {
@@ -63,19 +65,21 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
     }
 
     ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
-        let selectedFirst = true;
+        this.detectChanges();
+    }
 
-
-        if (this.inputValue !== undefined && this.inputValue !== null) {
+    detectChanges() {
+        let response = true;
+        if (!!this.inputValue) {
             if (Object.prototype.toString.call(this.inputValue) === '[object Array]') {
                 for (let i = 0; i < this.items.length; i++) {
                     const item = this.items[i];
 
                     for (let z = 0; z < this.inputValue.length; z++) {
                         const inputVal = this.inputValue[z];
-                        if (inputVal.id === item.id) {
+                        if (parseInt(inputVal.id, 0) === item.id) {
                             item.selected = true;
-                            selectedFirst = false;
+                            response = false;
                         }
                     }
                 }
@@ -83,9 +87,9 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
                 for (let i = 0; i < this.items.length; i++) {
                     const item = this.items[i];
 
-                    if (this.inputValue.id === item.id) {
+                    if (parseInt(this.inputValue.id, 0) === item.id) {
                         item.selected = true;
-                        selectedFirst = false;
+                        response = false;
                     }
                 }
             }
@@ -96,8 +100,10 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
                 id: '',
                 text: this.placeholder,
                 title: this.placeholder,
-                selected: selectedFirst
+                selected: response
             });
+        } else if (!!this.items.length && this.items[0].id === '' && !response) {
+            this.items[0].selected = false;
         }
 
         this.setSelectTexts();
