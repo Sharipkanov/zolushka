@@ -156,7 +156,7 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
                 this.items.map((selectBoxItem: ISelectBoxItem, selectBoxIndex) => {
                     (selectBoxIndex === index) ? selectBoxItem.selected = true : selectBoxItem.selected = false;
                 });
-
+                this.propagateChange(null);
                 this.selectBox.classList.remove(this.selectBoxActiveClass);
             } else {
                 this.items[index].selected = !this.items[index].selected;
