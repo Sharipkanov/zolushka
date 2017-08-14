@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, ElementRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 
-import { StorageService } from '../../services/storage/storage.service';
 import { LocationService } from '../../services/location/location.service';
 import { ISelectSearchBoxItem } from '../../interfaces/form/select-search-box-item.interface';
 import { IEnums } from '../../interfaces/enums.interface';
 import { EnumsService } from '../../services/enums/enums.service';
-import { Form, FormBuilder, FormGroup } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-search-bar',
@@ -120,7 +119,7 @@ export class SearchBarComponent implements OnInit {
 
         this.FSearchBar = this._fb.group({
             type: [(!!newFilterObject['type']) ? newFilterObject['type'] : { id: 200 }],
-            cityId: null,
+            cityId: [(!!newFilterObject['cityId']) ? newFilterObject['cityId'] : {}],
             relationshipTypes: [(!!newFilterObject['relationshipTypes']) ? newFilterObject['relationshipTypes'] : {}],
             appearance: [(!!newFilterObject['appearance']) ? newFilterObject['appearance'] : {}],
             sexualPeriodicity: [(!!newFilterObject['sexualPeriodicity']) ? newFilterObject['sexualPeriodicity'] : {}],

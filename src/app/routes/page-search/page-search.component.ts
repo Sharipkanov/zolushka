@@ -34,9 +34,12 @@ export class PageSearchComponent implements OnInit {
                 if (Object.prototype.toString.call(searchObject[key]) === '[object Array]') {
                     queryArray[key] = [];
                     for (let i = 0; i < searchObject[key].length; i++) {
+                        if (!searchObject[key][i].id) {
+                            continue;
+                        }
                         queryArray[key].push(searchObject[key][i].id);
                     }
-                } else {
+                } else if (!!searchObject[key]['id']) {
                     queryArray[key] = searchObject[key].id;
                 }
             }

@@ -36,6 +36,7 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
     @Input() classes: string = '';
     @Output() search = new EventEmitter();
 
+    public inputValue;
     public selectSearchBoxText: string = '';
     public filteredItems: Array<ISelectSearchBoxItem> = [];
 
@@ -45,7 +46,8 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
     private selectSearchBoxContentRightClass: string = 'select-search-box__content--right';
     private selectSearchBoxContentTopClass: string = 'select-search-box__content--top';
 
-    private propagateChange = (_: any) => { };
+    private propagateChange = (_: any) => {
+    };
 
     @HostListener('document:click', ['$event'])
     clickOutsideOfComponent(e) {
@@ -58,6 +60,9 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
     }
 
     writeValue(value: any) {
+        this.inputValue = value;
+        console.log(this.items);
+        this.detectChanges(true);
     }
 
     registerOnChange(fn: any) {
@@ -89,8 +94,24 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
         }
     }
 
+    detectChanges(bool = null) {
+        console.log(this.items.length) // TODO detect where items length becomes 0
+        if (!!this.items) {
+            for (let i = 0; i < this.items.length; i++) {
+                if (!!this.inputValue && this.items[i].id === parseInt(this.inputValue.id, 0)) {
+                    this.items[i].selected = true;
+                    this.selectSearchBoxText = this.items[i].label;
+                } else {
+                    this.items[i].selected = false;
+                }
+            }
+        }
+    }
+
     ngOnChanges() {
         this.filteredItems = this.items;
+        console.log(this.filteredItems);
+        this.detectChanges(false);
     }
 
     selectSearchBoxEvent(e: Event) {
@@ -123,8 +144,6 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
         this.items.map((selectSearchBoxItem: ISelectSearchBoxItem, selectSearchBoxIndex: number) => {
             if (selectSearchBoxIndex === index) {
                 this.selectSearchBoxText = selectSearchBoxItem.label;
-
-                // console.log(selectSearchBoxItem);
 
                 this.propagateChange(selectSearchBoxItem);
             }
