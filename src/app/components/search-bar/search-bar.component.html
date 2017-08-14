@@ -1,4 +1,4 @@
-<form [formGroup]="" class="search-bar{{(widget) ? ' search-bar--widget' : ''}}{{(classes.length) ? ' ' + classes : ''}}" (submit)="searchProfiles($event)">
+<form (submit)="searchProfiles($event)" [formGroup]="FSearchBar" class="search-bar{{(widget) ? ' search-bar--widget' : ''}}{{(classes.length) ? ' ' + classes : ''}}">
   <div class="{{(!widget) ? 'container': ''}}">
     <div class="search-bar__header">
       <div>
@@ -6,14 +6,14 @@
       </div>
       <div>
         <div class="fw-pt-10 fw-pb-10">
-          <app-radio-box (change)="switchType($event)" [items]="enums['type']"></app-radio-box>
+          <app-radio-box formControlName="type" (change)="switchType($event)" [items]="enums['type']"></app-radio-box>
         </div>
       </div>
       <div>
-        <app-select-search-box [classes]="'search-bar__select-search-box no-borders'" (search)="getLocations($event)" [placeholder]="'Выберите город'" [iconClass]="'icon-form-navigator'" [items]="locations"></app-select-search-box>
+        <app-select-search-box formControlName="cityId" [classes]="'search-bar__select-search-box no-borders'" (search)="getLocations($event)" [placeholder]="'Выберите город'" [iconClass]="'icon-form-navigator'" [items]="locations"></app-select-search-box>
       </div>
       <div>
-        <app-select-box class="fw-width-1-1" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['relationshipTypes']" [classes]="'search-bar__select-box no-borders'"></app-select-box>
+        <app-select-box formControlName="relationshipTypes" class="fw-width-1-1" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['relationshipTypes']" [classes]="'search-bar__select-box no-borders'"></app-select-box>
       </div>
       <div>
           <app-dropdown [classes]="'search-bar__dropdown'">
@@ -21,7 +21,7 @@
           </app-dropdown>
       </div>
       <div>
-        <a href="#" class="search-bar__extend" (click)="searchBarToggle($event)">Все параметры<span></span></a>
+        <a class="search-bar__extend" (click)="searchBarToggle($event)">Все параметры<span></span></a>
       </div>
       <div>
         <button type="submit" class="button button--primary">Найти</button>
@@ -31,15 +31,15 @@
       <div class="search-bar__content-inner">
         <div class="search-bar__grid">
           <div><app-input-box [placeholder]="'Рост от 170 - до 190'" [tooltip]="'см'"></app-input-box></div>
-          <div><app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['appearance']"></app-select-box></div>
-          <div><app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['sexualPeriodicity']"></app-select-box></div>
+          <div><app-select-box formControlName="appearance" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['appearance']"></app-select-box></div>
+          <div><app-select-box formControlName="sexualPeriodicity" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['sexualPeriodicity']"></app-select-box></div>
           <div>
             <div class="fw-grid fw-grid-12">
               <div class="fw-width-1-2">
-                <app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['relationshipState']"></app-select-box>
+                <app-select-box formControlName="relationshipState" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['relationshipState']"></app-select-box>
               </div>
               <div class="fw-width-1-2">
-                <app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['childrenExist']"></app-select-box>
+                <app-select-box formControlName="childrenExist" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['childrenExist']"></app-select-box>
               </div>
             </div>
           </div>
@@ -47,34 +47,34 @@
           <div>
             <div class="fw-grid fw-grid-12">
               <div class="fw-width-1-2">
-                <app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['hairColor']"></app-select-box>
+                <app-select-box formControlName="hairColor" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['hairColor']"></app-select-box>
               </div>
               <div class="fw-width-1-2">
-                <app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['eyeColor']"></app-select-box>
+                <app-select-box formControlName="eyeColor" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['eyeColor']"></app-select-box>
               </div>
             </div>
           </div>
-          <div><app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['sexualRole']"></app-select-box></div>
-          <div><app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['zodiacsign']"></app-select-box></div>
-          <div><app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['physique']"></app-select-box></div>
-          <div *ngIf="searchType === 200"><app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['higherEducation']"></app-select-box></div>
-          <div *ngIf="searchType === 100"><app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['breastSize']"></app-select-box></div>
+          <div><app-select-box formControlName="sexualRole" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['sexualRole']"></app-select-box></div>
+          <div><app-select-box formControlName="zodiacsign" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['zodiacsign']"></app-select-box></div>
+          <div><app-select-box formControlName="physique" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['physique']"></app-select-box></div>
+          <div *ngIf="searchType === 200"><app-select-box formControlName="higherEducation" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['higherEducation']"></app-select-box></div>
+          <div *ngIf="searchType === 100"><app-select-box formControlName="breastSize" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['breastSize']"></app-select-box></div>
           <div>
             <div class="fw-grid fw-grid-12">
               <div class="fw-width-1-2">
-                <app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['sexualKinds']"></app-select-box>
+                <app-select-box formControlName="sexualKinds" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['sexualKinds']"></app-select-box>
               </div>
               <div class="fw-width-1-2">
-                <app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['sexualPreference']"></app-select-box>
+                <app-select-box formControlName="sexualPreference" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['sexualPreference']"></app-select-box>
               </div>
             </div>
           </div>
-          <div><app-select-box [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['hobbies']"></app-select-box></div>
+          <div><app-select-box formControlName="hobbies" [multiple]="true" [iconClass]="'icon-form-triangle'" [items]="enums['hobbies']"></app-select-box></div>
         </div>
         <div class="search-bar__grid">
           <div class="fw-flex fw-flex-space-between">
-            <a href="#" class="fw-fw-600 fw-fz-15 fw-flex fw-flex-middle"><i class="icon-shape-remove-purple fw-mr-5"></i>Сбросить</a>
-            <a href="#" class="fw-fw-600 fw-fz-15 fw-flex fw-flex-middle"><i class="icon-shape-heart-purple fw-mr-5"></i>Сохранить поиск</a>
+            <button type="reset" class="fw-reset fw-fw-600 fw-fz-15 fw-flex fw-flex-middle"><i class="icon-shape-remove-purple fw-mr-5"></i>Сбросить</button>
+            <a class="fw-fw-600 fw-fz-15 fw-flex fw-flex-middle"><i class="icon-shape-heart-purple fw-mr-5"></i>Сохранить поиск</a>
           </div>
           <div><button type="submit" class="button button--primary fw-width-1-1">Показать 133 анкеты</button></div>
         </div>

@@ -1,12 +1,17 @@
 import {ILink} from './link.interface';
 import {IDialog} from './dialog.interface';
+import {IUser} from "./user.interface";
 
 export interface IEmbedded {
     content: Array<any>
 }
 
-export interface IEmbeddedDialogs {
+export interface IEmbeddedDialogs extends IEmbedded {
     content: Array<IDialog>
+}
+
+export interface IEmbeddedUserSearch extends IEmbedded {
+    clientCard: Array<IUser>;
 }
 
 export class IPagination {
@@ -15,7 +20,7 @@ export class IPagination {
     _embedded: IEmbedded = <IEmbedded>{};
 
     constructor(data = null) {
-       this.setDatas(data);
+        this.setDatas(data);
     }
 
     setDatas(data) {
@@ -28,8 +33,6 @@ export class IPagination {
         }
     }
 }
-
-
 
 export class IPaginationPage {
     number: number = 0;
@@ -50,6 +53,15 @@ export class IPaginationPage {
 
 export class IPaginationDialogs extends IPagination {
     _embedded: IEmbeddedDialogs = <IEmbeddedDialogs>{};
+
+    constructor(data = null) {
+        super(data);
+    }
+}
+
+export class IPaginationUserSearch extends IPagination {
+    _embedded: IEmbeddedUserSearch = <IEmbeddedUserSearch>{};
+
     constructor(data = null) {
         super(data);
     }

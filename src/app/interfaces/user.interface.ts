@@ -3,8 +3,8 @@ import {ICity} from './city.interface';
 export class IUser {
   id: number;
   name: string;
-  avatar: IUserAvatar = new IUserAvatar();
-  city: ICity = new ICity();
+  avatar: IUserAvatar = <IUserAvatar>{};
+  city: ICity = <ICity>{};
   lastOnline: string = null;
   age: number;
   countPhotos: Array<string>;
@@ -17,5 +17,5 @@ export class IUser {
 
 export class IUserAvatar {
   id: number = null;
-  _links: IImages = new IImages();
+  _links: IImages = <IImages>{};
 }

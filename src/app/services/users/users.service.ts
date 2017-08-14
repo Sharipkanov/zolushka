@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Http, Response, URLSearchParams} from '@angular/http';
+import {UserService} from '../user/user.service';
 
 @Injectable()
 export class UsersService {
 
-    constructor(private _http: Http) {
+    constructor(private _userService: UserService, private _http: Http) {
     }
 
     getNewUsers(count: number) {
@@ -19,12 +20,23 @@ export class UsersService {
         return this._http.get('api.zolushka.ru/users/popular').map((response: Response) => response.json());
     }
 
-    searchUsers(searchArray: Array<any> = null) {
-        let url = '/api/api/client/search';
+    searchUsers(searchArray = null) {
+        const params: URLSearchParams = new URLSearchParams();
+        const headers = this._userService.setHeaders({json: true})
         if (!!searchArray) {
-            url += '?' + JSON.stringify(searchArray);
+            // url += '?';
+            for (const key in searchArray) {
+                params.set(key, searchArray[key]);
+                /*if (Object.prototype.toString.call(searchArray[key]) === '[object Array]') {
+                    for (let i = 0; i < searchArray[key].length; i++) {
+                        url += `${key}=${searchArray[key][i]}&`;
+                    }
+                } else {
+                    url += `${key}=${searchArray[key]}&`;
+                }*/
+            }
         }
-        return this._http.get(url).map((response: Response) => response.json());
+        return this._http.get('/api/api/client/search', {search: params, headers: headers}).map((response: Response) => response.json());
     }
 
 }

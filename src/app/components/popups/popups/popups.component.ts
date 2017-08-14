@@ -16,8 +16,8 @@ export class PopupsComponent implements OnInit {
             visible: false
         },
         chat: {
-            active: true,
-            visible: true
+            active: false,
+            visible: false
         }
     };
 

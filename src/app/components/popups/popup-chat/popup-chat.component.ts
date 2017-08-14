@@ -49,7 +49,7 @@ export class PopupChatComponent implements OnInit, OnDestroy {
         });
 
         this._dialogService.getFolders().subscribe(response => {
-            console.log(response);
+            // console.log(response);
             this.folders = response;
             this.preloaders.folderList = false;
         });
@@ -84,7 +84,7 @@ export class PopupChatComponent implements OnInit, OnDestroy {
             if (!!response._embedded) {
                 if (update) {
                     this.dialogs = <IPaginationDialogs>response;
-                    console.log(this.dialogs._embedded.content[0]);
+                    // console.log(this.dialogs);
                 } else {
                     for (let i = 0; i < response._embedded.content.length; i++) {
                         this.dialogs._embedded.content.push(new IDialog(response._embedded.content[i]));
@@ -170,7 +170,7 @@ export class PopupChatComponent implements OnInit, OnDestroy {
         if (!!this.dialog && !!this.dialog.token) {
             this._dialogService.getMessagesList(this.dialog.token).subscribe((response: IPagination) => {
                 if (!!response._embedded) {
-                    console.log(response._embedded.content);
+                    // console.log(response._embedded.content);
                     this.messages = this.filterMessages(response._embedded.content);
                     setTimeout(() => {
                         this.messagesScroll.directiveRef.scrollToTop(this.messagesScroll.directiveRef.elementRef.nativeElement.getElementsByClassName('ps-content')[0].clientHeight);

@@ -1,10 +1,11 @@
-import {Component, OnInit, Input, ElementRef, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, Input, ElementRef, ViewEncapsulation, Output, EventEmitter} from '@angular/core';
 
 import {StorageService} from '../../services/storage/storage.service';
 import {LocationService} from '../../services/location/location.service';
 import {ISelectSearchBoxItem} from '../../interfaces/form/select-search-box-item.interface';
 import {IEnums} from '../../interfaces/enums.interface';
 import {EnumsService} from '../../services/enums/enums.service';
+import {Form, FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'app-search-bar',
@@ -16,6 +17,8 @@ import {EnumsService} from '../../services/enums/enums.service';
 export class SearchBarComponent implements OnInit {
     @Input() widget: boolean = false;
     @Input() classes: string = '';
+    @Output() onSubmitSearchBar: EventEmitter<any> = new EventEmitter();
+
 
     public locations: Array<ISelectSearchBoxItem> = [];
 
@@ -23,10 +26,11 @@ export class SearchBarComponent implements OnInit {
     private searchBarToggleTimeout: any;
     private searchBarMainToggleTimeout: any;
     public searchType = 200;
+    public FSearchBar: FormGroup;
 
     public enums = new IEnums();
 
-    constructor(private _enums: EnumsService, private _component: ElementRef, private _locationService: LocationService, private _storageService: StorageService) {
+    constructor(private _fb: FormBuilder, private _enums: EnumsService, private _component: ElementRef, private _locationService: LocationService, private _storageService: StorageService) {
     }
 
     initLocation(locationName: string = null) {
@@ -38,6 +42,7 @@ export class SearchBarComponent implements OnInit {
             if (!locations) {
                 return;
             }
+
             locations.map((location: any) => {
                 this.locations.push({
                     id: location.id,
@@ -55,7 +60,7 @@ export class SearchBarComponent implements OnInit {
 
     searchProfiles(e) {
         e.preventDefault();
-
+        this.onSubmitSearchBar.emit(this.FSearchBar.value);
         const form = e.target;
     }
 
@@ -92,7 +97,26 @@ export class SearchBarComponent implements OnInit {
 
         this._enums.getEnums().subscribe(response => {
             this.enums = response;
-            // console.log(response)
+        });
+
+        this.FSearchBar = this._fb.group({
+            type: 200,
+            cityId: null,
+            relationshipTypes: [],
+            appearance: [],
+            sexualPeriodicity: [],
+            relationshipState: [],
+            childrenExist: [],
+            hairColor: [],
+            eyeColor: [],
+            sexualRole: [],
+            zodiacsign: [],
+            physique: [],
+            higherEducation: [],
+            breastSize: [],
+            sexualKinds: [],
+            sexualPreference: [],
+            hobbies: [],
         });
     }
 

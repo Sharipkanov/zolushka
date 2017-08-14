@@ -11,7 +11,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: RadioBoxLabelComponent,
+            useExisting: RadioBoxComponent,
             multi: true
         }
     ]

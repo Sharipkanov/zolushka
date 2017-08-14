@@ -91,13 +91,14 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
             }
         }
 
-
-        this.items.unshift({
-            id: '',
-            text: this.placeholder,
-            title: this.placeholder,
-            selected: selectedFirst
-        });
+        if (!!this.items.length && this.items[0].id !== '') {
+            this.items.unshift({
+                id: '',
+                text: this.placeholder,
+                title: this.placeholder,
+                selected: selectedFirst
+            });
+        }
 
         this.setSelectTexts();
     }

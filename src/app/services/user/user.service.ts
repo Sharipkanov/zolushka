@@ -65,11 +65,9 @@ export class UserService implements CanActivate {
     }
 
     register(data) {
-        const headers: Headers = new Headers();
+        const headers = this.setHeaders({json: true});
 
-        headers.append('Content-Type', 'application/json');
-
-        return this._http.post('/api/auth/signup', {...data}, {headers: headers});
+        return this._http.post('/api/auth/signup', data, {headers: headers});
     }
 
     info() {
@@ -154,7 +152,10 @@ export class UserService implements CanActivate {
             headers.append('Content-Type', 'application/json');
         }
 
-        headers.append('Authorization', 'token ' + this._storageService.get('token'));
+        if (!!this.token().length) {
+            headers.append('Authorization', 'token ' + this.token());
+
+        }
 
         return headers;
     }

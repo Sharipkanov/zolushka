@@ -1,9 +1,9 @@
-<app-search-bar></app-search-bar>
+<app-search-bar (onSubmitSearchBar)="searchUsersQuery($event)"></app-search-bar>
 
 <section class="fw-pt-20 fw-pb-20">
   <div class="container">
-    <div class="fw-grid fw-grid-30">
-      <div class="fw-width-1-3" *ngFor="let user of users">
+    <div class="fw-grid fw-grid-30" *ngIf="!!users._embedded">
+      <div class="fw-width-1-3" *ngFor="let user of users._embedded.clientCard">
         <app-user-cart [user]="user"></app-user-cart>
       </div>
     </div>

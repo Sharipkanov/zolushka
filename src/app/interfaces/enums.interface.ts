@@ -14,6 +14,7 @@ export class IEnums {
     sexualRole: Array<any> = [];
     zodiacsign: Array<any> = [];
     childrenExist: Array<any> = [];
+    type: number;
     datePicker: object = {
         day: [],
         month: [],
