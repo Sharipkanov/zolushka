@@ -10,9 +10,9 @@ import {
     HostListener
 } from '@angular/core';
 
-import { ISelectSearchBoxItem } from '../../../interfaces/form/select-search-box-item.interface';
-import { InputBoxComponent } from "../input-box/input-box.component";
-import { NG_VALUE_ACCESSOR } from "@angular/forms";
+import {ISelectSearchBoxItem} from '../../../interfaces/form/select-search-box-item.interface';
+import {InputBoxComponent} from "../input-box/input-box.component";
+import {NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
     selector: 'app-select-search-box',
@@ -37,6 +37,7 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
     @Output() search = new EventEmitter();
 
     public inputValue;
+    public inputTimeout;
     public selectSearchBoxText: string = '';
     public filteredItems: Array<ISelectSearchBoxItem> = [];
 
@@ -61,8 +62,7 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
 
     writeValue(value: any) {
         this.inputValue = value;
-        console.log(this.items);
-        this.detectChanges(true);
+        this.detectChanges();
     }
 
     registerOnChange(fn: any) {
@@ -94,9 +94,8 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
         }
     }
 
-    detectChanges(bool = null) {
-        console.log(this.items.length) // TODO detect where items length becomes 0
-        if (!!this.items) {
+    detectChanges() {
+        if (!!this.items.length) {
             for (let i = 0; i < this.items.length; i++) {
                 if (!!this.inputValue && this.items[i].id === parseInt(this.inputValue.id, 0)) {
                     this.items[i].selected = true;
@@ -110,8 +109,7 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
 
     ngOnChanges() {
         this.filteredItems = this.items;
-        console.log(this.filteredItems);
-        this.detectChanges(false);
+        this.detectChanges();
     }
 
     selectSearchBoxEvent(e: Event) {
@@ -123,19 +121,22 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
     }
 
     selectSearch(e) {
-        const input = e.target;
+        clearTimeout(this.inputTimeout);
+        this.inputTimeout = setTimeout(() => {
+            const input = e.target;
 
-        this.filteredItems = [];
+            // this.filteredItems = [];
 
-        if (this.search.observers.length) {
-            this.search.emit(input.value);
-        } else {
-            this.filteredItems = this.items.filter((selectSearchBoxItem: ISelectSearchBoxItem) => {
-                if (selectSearchBoxItem.label.toLowerCase().indexOf(input.value.toLowerCase()) > -1) {
-                    return selectSearchBoxItem;
-                }
-            });
-        }
+            if (this.search.observers.length) {
+                this.search.emit(input.value);
+            } else {
+                this.filteredItems = this.items.filter((selectSearchBoxItem: ISelectSearchBoxItem) => {
+                    if (selectSearchBoxItem.label.toLowerCase().indexOf(input.value.toLowerCase()) > -1) {
+                        return selectSearchBoxItem;
+                    }
+                });
+            }
+        }, 1000);
     }
 
     markSelect(e, index) {

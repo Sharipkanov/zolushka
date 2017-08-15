@@ -45,18 +45,17 @@ export class PageMailingComponent implements OnInit {
 
   initLocation(locationName: string = null) {
     this._locationService.getLocations(locationName).subscribe((locations: Array<any>) => {
-      if (locationName !== null) {
-        this.locations = [];
-      }
-
+      const locationsArray = [];
       locations.map((location: any) => {
-        this.locations.push({
+        locationsArray.push({
           id: location.id,
           selected: false,
           label: location.title,
           labelInfo: location.country.title
         });
       });
+
+      this.locations = locationsArray;
     });
   }
 

@@ -63,6 +63,7 @@ import {PopupChatComponent} from './components/popups/popup-chat/popup-chat.comp
 import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {DialogService} from './services/dialog/dialog.service';
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
+import {IonRangeSliderModule} from 'ng2-ion-range-slider';
 
 const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', options: {}};
 
@@ -122,7 +123,8 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         ReactiveFormsModule,
         OwlModule,
         PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
-        SocketIoModule.forRoot(config)
+        SocketIoModule.forRoot(config),
+        IonRangeSliderModule
     ],
     providers: [
         StorageService,

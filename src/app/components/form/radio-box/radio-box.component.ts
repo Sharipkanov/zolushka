@@ -20,6 +20,7 @@ export class RadioBoxComponent implements OnInit, OnChanges, ControlValueAccesso
     @Input() classes: string = '';
     @Input() name: string = '';
     @Input() items: Array<any> = [];
+    @Input() titleName: string = 'title';
 
     public inputValue: any = null;
     private propagateChange = (_: any) => {

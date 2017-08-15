@@ -1,16 +1,19 @@
-import { Component, OnInit, Input, ElementRef, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import {
+    Component, OnInit, Input, ElementRef, ViewEncapsulation, Output, EventEmitter,
+    HostListener
+} from '@angular/core';
 
-import { LocationService } from '../../services/location/location.service';
-import { ISelectSearchBoxItem } from '../../interfaces/form/select-search-box-item.interface';
-import { IEnums } from '../../interfaces/enums.interface';
-import { EnumsService } from '../../services/enums/enums.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {LocationService} from '../../services/location/location.service';
+import {ISelectSearchBoxItem} from '../../interfaces/form/select-search-box-item.interface';
+import {IEnums} from '../../interfaces/enums.interface';
+import {EnumsService} from '../../services/enums/enums.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-search-bar',
     templateUrl: './search-bar.component.html',
-    styleUrls: ['./search-bar.component.sass'],
+    styleUrls: ['./search-bar.component.sass', '../dropdown/dropdown.component.sass', '../form/input-box/input-box.component.sass'],
     providers: [LocationService],
     encapsulation: ViewEncapsulation.None
 })
@@ -31,28 +34,50 @@ export class SearchBarComponent implements OnInit {
 
     public enums = new IEnums();
 
+    public rangeSliderValues = {
+        minAge: 19,
+        maxAge: 27
+    };
+
+    @HostListener('document:click', ['$event'])
+    clickOutsideOfComponent(e) {
+        if (!e.target.closest('.dropdown') && document.querySelector('.dropdown.dropdown--active')) {
+            document.querySelector('.dropdown.dropdown--active').classList.remove('dropdown--active');
+        }
+    }
+
     constructor(private _activatedRouter: ActivatedRoute, private _fb: FormBuilder, private _enums: EnumsService, private _component: ElementRef, private _locationService: LocationService) {
+    }
+
+    ngOnInit() {
+        this.initLocation();
+
+        this._enums.getEnums().subscribe(response => {
+            this.enums = response;
+
+            this.renderFormChosenValues();
+        });
     }
 
     initLocation(locationName: string = null) {
         this._locationService.getLocations(locationName).subscribe((locations: Array<any>) => {
-            if (locationName !== null) {
-                this.locations = [];
-            }
-
-            if (!locations) {
-                return;
-            }
-
+            const locationsArray = [];
             locations.map((location: any) => {
-                this.locations.push({
+                locationsArray.push({
                     id: location.id,
                     selected: false,
                     label: location.title,
                     labelInfo: location.country.title
                 });
             });
+
+            this.locations = locationsArray;
         });
+    }
+
+    searchOnChangeAge(e) {
+        this.FSearchBar.controls['minAge'].setValue({id: e.from});
+        this.FSearchBar.controls['maxAge'].setValue({id: e.to});
     }
 
     getLocations(locationName) {
@@ -61,6 +86,7 @@ export class SearchBarComponent implements OnInit {
 
     searchProfiles(e) {
         e.preventDefault();
+        console.log(this.FSearchBar.value);
         this.onSubmitSearchBar.emit(this.FSearchBar.value);
     }
 
@@ -92,16 +118,6 @@ export class SearchBarComponent implements OnInit {
         }
     }
 
-    ngOnInit() {
-        this.initLocation();
-
-        this._enums.getEnums().subscribe(response => {
-            this.enums = response;
-
-            this.renderFormChosenValues();
-        });
-    }
-
     renderFormChosenValues() {
         const filterParams = this._activatedRouter.snapshot.params;
         const newFilterObject = {};
@@ -110,15 +126,15 @@ export class SearchBarComponent implements OnInit {
             if (array.length > 1) {
                 newFilterObject[key] = [];
                 for (let i = 0; i < array.length; i++) {
-                    newFilterObject[key].push({ id: array[i] });
+                    newFilterObject[key].push({id: array[i]});
                 }
             } else {
-                newFilterObject[key] = { id: parseInt(filterParams[key], 0) };
+                newFilterObject[key] = {id: parseInt(filterParams[key], 0)};
             }
         }
 
         this.FSearchBar = this._fb.group({
-            type: [(!!newFilterObject['type']) ? newFilterObject['type'] : { id: 200 }],
+            type: [(!!newFilterObject['type']) ? newFilterObject['type'] : {id: 200}],
             cityId: [(!!newFilterObject['cityId']) ? newFilterObject['cityId'] : {}],
             relationshipTypes: [(!!newFilterObject['relationshipTypes']) ? newFilterObject['relationshipTypes'] : {}],
             appearance: [(!!newFilterObject['appearance']) ? newFilterObject['appearance'] : {}],
@@ -135,13 +151,35 @@ export class SearchBarComponent implements OnInit {
             sexualKinds: [(!!newFilterObject['sexualKinds']) ? newFilterObject['sexualKinds'] : {}],
             sexualPreference: [(!!newFilterObject['sexualPreference']) ? newFilterObject['sexualPreference'] : {}],
             hobbies: [(!!newFilterObject['hobbies']) ? newFilterObject['hobbies'] : {}],
+            minAge: [(!!newFilterObject['minAge']) ? newFilterObject['minAge'] : {id: 19}],
+            maxAge: [(!!newFilterObject['maxAge']) ? newFilterObject['maxAge'] : {id: 27}],
+            minHeight: [(!!newFilterObject['minHeight']) ? newFilterObject['minHeight'].id : ''],
+            maxHeight: [(!!newFilterObject['maxHeight']) ? newFilterObject['maxHeight'].id : ''],
+            minWeight: [(!!newFilterObject['minWeight']) ? newFilterObject['minWeight'].id : ''],
+            maxWeight: [(!!newFilterObject['maxWeight']) ? newFilterObject['maxWeight'].id : ''],
         });
+
+        this.rangeSliderValues = {
+            minAge: this.FSearchBar.value.minAge.id,
+            maxAge: this.FSearchBar.value.maxAge.id,
+        };
 
         this.hiddenSearchBarFilters = false;
     }
 
     switchType(e) {
         this.searchType = parseInt(e.target.value, 0);
+    }
+
+    dropdownEvent(e: Event) {
+        e.preventDefault();
+
+        const target: HTMLElement = <HTMLElement>e.target;
+        const parent = <HTMLElement>target.closest('.dropdown');
+
+        return (!parent.classList.contains('dropdown--active'))
+            ? parent.classList.add('dropdown--active')
+            : parent.classList.remove('dropdown--active');
     }
 
 }

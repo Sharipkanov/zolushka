@@ -1,4 +1,5 @@
 @import "../../../sass/colors"
+@import "../../../sass/mixins/mixins"
 @import "../../../sass/z-indexes"
 
 .search-bar
@@ -186,3 +187,55 @@
       > ul
         margin-top: 20px
         border-radius: 5px
+
+.search-bar__dropdown-wrapper
+  .dropdown
+    align-self: stretch
+    align-items: center
+    display: flex
+
+  .irs
+    height: 13px
+
+  .irs-line, .irs-bar
+    background: #CCC
+    height: 2px
+    top: 6px
+
+    & > *
+      background: none
+    
+  .irs-bar
+    background: #bd0fe1
+
+  .irs-slider
+    width: 13px
+    height: 13px
+    background: linear-gradient(to top,#a149a9,#c732d4)
+    box-shadow: 0 1px 3px 0 rgba(165,85,172,.6), inset 0 0 1px 0 rgba(0,0,0,.07)
+    border: none
+    border-radius: 50%
+    top: 0
+
+.search-bar__dropdown-wrapper
+  .dropdown.dropdown--active
+    .choose_age__number
+      background-color: rgba(#d2d1dd, .67)
+
+.search-nav__choose_age
+  &.choose_age
+    .choose_age__number
+      font-size: 14px
+      +transition()
+      font-family: 'open-sans', sans-serif
+      font-weight: 600
+      color: #b7b6be
+      box-sizing: border-box
+      padding: 2px 2px 4px 2px
+
+    .choose_age__text
+      font-size: 14px
+      font-family: 'open-sans', sans-serif
+      font-weight: 600
+      color: #808080
+      margin: 0 2px

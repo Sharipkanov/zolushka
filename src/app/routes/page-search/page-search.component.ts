@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
-import { UsersService } from '../../services/users/users.service';
-import { IUser } from '../../interfaces/user.interface';
-import { SearchBarComponent } from "../../components/search-bar/search-bar.component";
-import { ActivatedRoute, Router } from "@angular/router";
-import { IPagination, IPaginationUserSearch } from "../../interfaces/pagination.interface";
+import {UsersService} from '../../services/users/users.service';
+import {IUser} from '../../interfaces/user.interface';
+import {SearchBarComponent} from "../../components/search-bar/search-bar.component";
+import {ActivatedRoute, Router} from "@angular/router";
+import {IPagination, IPaginationUserSearch} from "../../interfaces/pagination.interface";
 
 @Component({
     selector: 'app-page-search',
@@ -23,7 +23,6 @@ export class PageSearchComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this._activatedRouter.snapshot.params);
         this.searchUsers(this._activatedRouter.snapshot.params);
     }
 
@@ -41,11 +40,15 @@ export class PageSearchComponent implements OnInit {
                     }
                 } else if (!!searchObject[key]['id']) {
                     queryArray[key] = searchObject[key].id;
+                } else if (typeof searchObject[key] === 'string' || typeof searchObject[key] === 'number') {
+                    queryArray[key] = searchObject[key];
                 }
             }
         }
-        console.log(this._router.navigate([queryArray]));
 
+        console.log(queryArray);
+
+        this._router.navigate([queryArray]);
         this.searchUsers(queryArray);
     }
 

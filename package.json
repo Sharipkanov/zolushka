@@ -23,6 +23,7 @@
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
     "jquery": "^3.2.1",
+    "ng2-ion-range-slider": "^1.0.3",
     "ngx-owl-carousel": "^1.0.1",
     "ngx-perfect-scrollbar": "^4.5.3",
     "ngx-socket-io": "^1.0.6",
