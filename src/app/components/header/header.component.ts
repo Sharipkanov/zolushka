@@ -7,7 +7,8 @@ import {IUserInfo} from '../../interfaces/user-info.interface';
 
 @Component({
     selector: 'app-header',
-    templateUrl: './header.component.html'
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent implements OnInit {
     public expanded: boolean;

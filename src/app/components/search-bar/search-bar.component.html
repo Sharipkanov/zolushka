@@ -1,5 +1,5 @@
 <form (submit)="searchProfiles($event)" [formGroup]="FSearchBar"
-      class="search-bar--active search-bar{{(widget) ? ' search-bar--widget' : ''}}{{(classes.length) ? ' ' + classes : ''}}"
+      class="search-bar{{(widget) ? ' search-bar--widget' : ''}}{{(classes.length) ? ' ' + classes : ''}}"
       *ngIf="!hiddenSearchBarFilters">
   <div class="{{(!widget) ? 'container': ''}}">
     <div class="search-bar__header">

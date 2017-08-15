@@ -7,8 +7,8 @@
   <div class="container">
     <div class="fw-flex fw-flex-space-between fw-flex-middle">
       <div class="fw-flex-grow fw-flex">
-        <a routerLink="/">
-          <img src="/assets/images/logo{{(logged && !expanded) ? '-logged' : ''}}.svg" alt="" class="fw-mr-35">
+        <a routerLink="/" class="fw-mt-auto fw-mb-auto">
+          <img src="/assets/images/logo{{(logged && !expanded) ? '-logged' : ''}}.svg" alt="" class="logo fw-mr-35">
         </a>
         <div class="fw-flex fw-flex-middle fw-pt-6 fw-pb-6 fw-pr-12 fw-pl-12 fw-bw-1 fw-bc-white fw-br-5 fw-bw-1 fw-bs-solid fw-br-5 fw-bc-grey-dark" *ngIf="logged && !expanded">
           <p class="fw-fz-10 fw-fw-300 fw-text-uppercase fw-mr-20 fw-color-grey-dark">Установить <br>приложение</p>
@@ -35,9 +35,9 @@
         </div>
       </div>
       <div class="fw-flex-shrink-no fw-ml-20 fw-flex fw-flex-middle" *ngIf="logged && !expanded">
-        <p class="fw-color-dark fw-flex fw-flex-middle fw-mr-15"><span class="fw-mr-5">Осталось минут</span> <span class="fw-br-50 fw-lh-24 fw-pl-4 fw-pr-4 fw-bc-blue fw-bw-1 fw-bs-solid fw-bc-purple-dark fw-color-purple-dark"> {{user_info['minutesAmount']}} </span></p>
-        <p class="fw-color-dark fw-flex fw-flex-middle fw-mr-15"><span class="fw-mr-5">Осталось контактов</span> <span class="fw-br-50 fw-lh-24 fw-pl-4 fw-pr-4 fw-bc-blue fw-bw-1 fw-bs-solid fw-bc-purple-dark fw-color-purple-dark"> {{user_info['contactsAmount']}} </span></p>
-        <p class="fw-color-dark fw-flex fw-flex-middle"><span class="fw-mr-5">Место в поиске</span> <span class="fw-br-50 fw-lh-24 fw-pl-4 fw-pr-4 fw-bc-blue fw-bw-1 fw-bs-solid fw-bc-purple-dark fw-color-purple-dark"> {{user_info['sortPosition']}} </span></p>
+        <p class="fw-color-dark fw-flex fw-flex-middle fw-mr-15"><span class="fw-mr-5"><span class="header-small-hidden">Осталось</span> минут</span> <span class="fw-br-50 fw-lh-24 fw-pl-4 fw-pr-4 fw-bc-blue fw-bw-1 fw-bs-solid fw-bc-purple-dark fw-color-purple-dark"> {{user_info['minutesAmount']}} </span></p>
+        <p class="fw-color-dark fw-flex fw-flex-middle fw-mr-15"><span class="fw-mr-5"><span class="header-small-hidden">Осталось</span> контактов</span> <span class="fw-br-50 fw-lh-24 fw-pl-4 fw-pr-4 fw-bc-blue fw-bw-1 fw-bs-solid fw-bc-purple-dark fw-color-purple-dark"> {{user_info['contactsAmount']}} </span></p>
+        <p class="fw-color-dark fw-flex fw-flex-middle"><span class="fw-mr-5"><span class="header-small-hidden">Место</span> в поиске</span> <span class="fw-br-50 fw-lh-24 fw-pl-4 fw-pr-4 fw-bc-blue fw-bw-1 fw-bs-solid fw-bc-purple-dark fw-color-purple-dark"> {{user_info['sortPosition']}} </span></p>
       </div>
       <div class="fw-flex-shrink-no fw-ml-20" *ngIf="!logged">
         <a class="fw-text-underline--hover fw-mr-30" (click)="callPopup('login')">Вход</a>

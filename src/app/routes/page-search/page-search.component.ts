@@ -46,15 +46,12 @@ export class PageSearchComponent implements OnInit {
             }
         }
 
-        console.log(queryArray);
-
         this._router.navigate([queryArray]);
         this.searchUsers(queryArray);
     }
 
     searchUsers(data = null) {
         this.preloaders.userGrid = true;
-        console.log(data);
         this.usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
             console.log(users);
             this.users = <IPaginationUserSearch>users;
