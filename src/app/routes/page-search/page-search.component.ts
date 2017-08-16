@@ -24,10 +24,14 @@ export class PageSearchComponent implements OnInit {
 
     ngOnInit() {
         this.searchUsers(this._activatedRouter.snapshot.params);
+        this._activatedRouter.params.subscribe(params => {
+            this.searchUsers(params);
+        });
     }
 
     searchUsersQuery(searchObject) {
         const queryArray = {};
+
         for (const key in searchObject) {
             if (!!searchObject[key]) {
                 if (Object.prototype.toString.call(searchObject[key]) === '[object Array]') {
@@ -39,21 +43,19 @@ export class PageSearchComponent implements OnInit {
                         queryArray[key].push(searchObject[key][i].id);
                     }
                 } else if (!!searchObject[key]['id']) {
-                    queryArray[key] = searchObject[key].id;
+                    queryArray[key] = searchObject[key].id.toString();
                 } else if (typeof searchObject[key] === 'string' || typeof searchObject[key] === 'number') {
-                    queryArray[key] = searchObject[key];
+                    queryArray[key] = searchObject[key].toString();
                 }
             }
         }
 
         this._router.navigate([queryArray]);
-        this.searchUsers(queryArray);
     }
 
     searchUsers(data = null) {
         this.preloaders.userGrid = true;
         this.usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
-            console.log(users);
             this.users = <IPaginationUserSearch>users;
             this.preloaders.userGrid = false;
         });

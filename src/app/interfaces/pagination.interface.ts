@@ -20,10 +20,6 @@ export class IPagination {
     _embedded: IEmbedded = <IEmbedded>{};
 
     constructor(data = null) {
-        this.setDatas(data);
-    }
-
-    setDatas(data) {
         if (!!data) {
             for (const key in data) {
                 if (!!this[key]) {
@@ -82,4 +78,19 @@ export class IPaginationLinks {
             }
         }
     }
+}
+
+export class IPaginationComponent extends IPagination {
+    _allowPrev: boolean = false;
+    _allowNext: boolean = false;
+    _pages: Array<IPaginationPages> = [];
+
+    constructor(data = null) {
+        super(data);
+    }
+}
+
+export class IPaginationPages {
+    title: string = '';
+    id: number = null;
 }

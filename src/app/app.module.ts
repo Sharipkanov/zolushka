@@ -64,6 +64,7 @@ import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarModule} from 'ngx-perfect-scro
 import {DialogService} from './services/dialog/dialog.service';
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 import {IonRangeSliderModule} from 'ng2-ion-range-slider';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', options: {}};
 
@@ -112,7 +113,8 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         PageMailingComponent,
         PageProfileViewsComponent,
         ChatListComponent,
-        PopupChatComponent
+        PopupChatComponent,
+        PaginationComponent
     ],
     imports: [
         BrowserModule,

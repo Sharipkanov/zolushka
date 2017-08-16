@@ -2,6 +2,25 @@
 
 <section class="fw-pt-20 fw-pb-20">
   <div class="container">
+    <div class="catalog__header">
+      <div class="catalog__header-filter">
+        <a class="catalog__header-filter-link active">Все</a>
+        <a class="catalog__header-filter-link">Новые</a>
+        <a class="catalog__header-filter-link">Онлайн</a>
+        <a class="catalog__header-filter-link">С реальным фото</a>
+      </div>
+      <div class="catalog__header-type">
+        <span class="catalog__header-type-link fw-inline-block fw-mr-10 active js-change-catalog-view"
+              data-gridtype="grid-type">
+            <i class="icon-catalog-grid"></i>
+            <i class="icon-catalog-grid-active fw-hidden"></i>
+        </span>
+        <span class="catalog__header-type-link fw-inline-block js-change-catalog-view" data-gridtype="list-type">
+            <i class="icon-catalog-listing"></i>
+            <i class="icon-catalog-listing-active fw-hidden"></i>
+        </span>
+      </div>
+    </div>
     <div class="fw-position-relative">
       <div class="fw-grid fw-grid-30" *ngIf="!!users._embedded">
         <div class="fw-width-1-3" *ngFor="let user of users._embedded.clientCard">
@@ -9,6 +28,9 @@
         </div>
         <app-preloader *ngIf="preloaders.userGrid"></app-preloader>
       </div>
+    </div>
+    <div class="fw-mt-30">
+      <app-pagination [pagination]="users"></app-pagination>
     </div>
   </div>
 </section>
