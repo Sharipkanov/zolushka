@@ -50,10 +50,14 @@ export class PaginationComponent implements OnInit, OnChanges {
                     this.pagination._pages.push({
                         title: (1).toString(),
                         id: 1
-                    }, {
-                        title: null,
-                        id: null
                     });
+
+                    if (startPage > 2) {
+                        this.pagination._pages.push({
+                            title: null,
+                            id: null
+                        });
+                    }
                 }
             }
 
@@ -64,11 +68,15 @@ export class PaginationComponent implements OnInit, OnChanges {
                 });
             }
 
-            if (this.pagination.page.number + 4 < this.pagination.page.totalPages) {
+            if (endPage < this.pagination.page.totalPages - 1) {
                 this.pagination._pages.push({
                     title: null,
                     id: null
-                }, {
+                });
+            }
+
+            if (endPage < this.pagination.page.totalPages) {
+                this.pagination._pages.push({
                     title: (this.pagination.page.totalPages - 1).toString(),
                     id: this.pagination.page.totalPages - 1
                 });
