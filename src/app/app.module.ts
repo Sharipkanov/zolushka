@@ -64,7 +64,15 @@ import {PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarModule} from 'ngx-perfect-scro
 import {DialogService} from './services/dialog/dialog.service';
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 import {IonRangeSliderModule} from 'ng2-ion-range-slider';
-import { PaginationComponent } from './components/pagination/pagination.component';
+import {PaginationComponent} from './components/pagination/pagination.component';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient, HttpClientModule} from '@angular/common/http'
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}
 
 const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', options: {}};
 
@@ -126,7 +134,15 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         OwlModule,
         PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
         SocketIoModule.forRoot(config),
-        IonRangeSliderModule
+        IonRangeSliderModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })
     ],
     providers: [
         StorageService,

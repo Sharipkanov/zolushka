@@ -6,34 +6,39 @@
       <div class="footer__bottom-grid">
         <nav class="footer__navigation">
           <ul class="footer__navigation-list">
-            <li class="footer__navigation-item"><a href="#" class="footer__navigation-link">О проекте</a>
+            <li class="footer__navigation-item">
+              <a class="footer__navigation-link" routerLink="/about" translate="LINKS.ABOUT_PROJECT">О проекте</a>
             </li>
-            <li class="footer__navigation-item"><a href="#" class="footer__navigation-link">Блог</a></li>
-            <li class="footer__navigation-item"><a href="#" class="footer__navigation-link">Города</a></li>
-            <li class="footer__navigation-item"><a href="#" class="footer__navigation-link">Часто задаваемые
-              вопросы</a></li>
-            <li class="footer__navigation-item"><a href="#" class="footer__navigation-link">Условия
-              использования</a></li>
+            <li class="footer__navigation-item">
+              <a class="footer__navigation-link" routerLink="/blog" translate="LINKS.BLOG">Блог</a>
+            </li>
+            <li class="footer__navigation-item">
+              <a class="footer__navigation-link" routerLink="/cities" translate="LINKS.CITIES">Города</a>
+            </li>
+            <li class="footer__navigation-item">
+              <a class="footer__navigation-link" routerLink="/faq" translate="LINKS.FAQ">Часто задаваемые вопросы</a>
+            </li>
+            <li class="footer__navigation-item">
+              <a class="footer__navigation-link" routerLink="/terms-of-use" translate="LINKS.TERMS_OF_USE">Условия использования</a>
+            </li>
           </ul>
         </nav>
         <div class="footer__confidentiality">
-          <a href="#" class="footer__confidentiality-link">
+          <a class="footer__confidentiality-link">
             <div class="footer__confidencieality-icon fw-mr-10">
               <i class="icon-confidentiality"></i>
             </div>
-            <div class="footer__confidentiality-text">
-              <div class="footer__confidentiality-small">Конфиденциальность</div>
-              <div class="footer__confidentiality-big">и безопасность</div>
+            <div class="footer__confidentiality-text" routerLink="/confidential">
+              <div class="footer__confidentiality-small" translate="FOOTER.CONFIDENTIALITY_TOP">Конфиденциальность</div>
+              <div class="footer__confidentiality-big" translate="FOOTER.CONFIDENTIALITY_BOTTOM">и безопасность</div>
             </div>
           </a>
         </div>
       </div>
       <div class="footer__bottom-plate">
         <div class="footer__bottom-plate-text">
-          <p>© «Золушка project». Лучший on-line сервис по поиску спонсоров и содержанок, 2015-2017</p>
-          <p>Администрация не несёт ответственности за размещённые анкеты - вся информация на сайте
-            предоставлена
-            посетителями.</p>
+          <p translate="FOOTER.COPYRIGHT"></p>
+          <p translate="FOOTER.ADMIN_TEXT"></p>
         </div>
         <div class="footer__social">
           <app-socials-circle-list></app-socials-circle-list>

@@ -6,29 +6,29 @@
                 <ul class="navigation__list">
                     <li class="navigation__item">
                         <a routerLink="/search" class="navigation__link" routerLinkActive="navigation__link_active">
-                            Поиск
+                            {{ 'LINKS.SEARCH' | translate }}
                         </a>
                     </li>
                     <li class="navigation__item">
                         <a class="navigation__link" routerLink="/profile-views">
-                            Кто смотрел
+                            {{ 'LINKS.WHO_WATCHED' | translate }}
                             <span class="navigation__counter"></span>
                         </a>
                     </li>
                     <li class="navigation__item">
                         <a class="navigation__link" routerLink="/mailing">
-                            Рассылка
+                            {{ 'LINKS.MAILING' | translate }}
                             <span class="navigation__counter">59</span>
                         </a>
                     </li>
                     <li class="navigation__item">
                         <a class="navigation__link" (click)="openChat($event)">
-                            Сообщения
+                            {{ 'LINKS.MESSAGES' | translate }}
                             <span class="navigation__counter">150</span>
                         </a>
                     </li>
                     <li class="navigation__item navigation__item_submenu">
-                        <a class="navigation__link">Покупки</a>
+                        <a class="navigation__link">{{ 'LINKS.PURCHASES' | translate }}</a>
                         <div class="navigation__submenu">
                             подменю
                         </div>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="navigation__buy-premium fw-mr-10" *ngIf="!user_info['premium']">
                     <a routerLink="/wallet/buy-premium" class="button button--transparent button-small">
-                        <span class="button--transparent__text">Купить премиум</span>
+                        <span class="button--transparent__text">{{ 'BUTTONS.BUY_PREMIUM' | translate }}</span>
                     </a>
                 </div>
                 <div class="js-navigation__settings navigation__settings">
@@ -65,17 +65,17 @@
                     <div class="js-navigation__settings-dropdown navigation__settings-wrapper">
                         <ul class="navigation__settings-listing">
                             <li class="navigation__settings-item">
-                                <a routerLink="/profile" class="navigation__settings-link">Профиль</a>
+                                <a routerLink="/profile" class="navigation__settings-link">{{ 'LINKS.PROFILE' | translate }}</a>
                             </li>
                             <li class="navigation__settings-item">
-                                <a routerLink="/wallet" class="navigation__settings-link">Кошелек</a>
+                                <a routerLink="/wallet" class="navigation__settings-link">{{ 'LINKS.WALLET' | translate }}</a>
                             </li>
                             <li class="navigation__settings-item">
-                                <a routerLink="/settings" class="navigation__settings-link">Настройки</a>
+                                <a routerLink="/settings" class="navigation__settings-link">{{ 'LINKS.SETTINGS' | translate }}</a>
                             </li>
                             <li class="navigation__settings-item">
                                 <a (click)="navigationLogout()"
-                                   class="navigation__settings-link navigation__settings-link_red">Выход</a>
+                                   class="navigation__settings-link navigation__settings-link_red">{{ 'LINKS.LOG_OUT' | translate }}</a>
                             </li>
                         </ul>
                     </div>

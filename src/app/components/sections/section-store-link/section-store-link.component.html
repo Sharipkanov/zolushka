@@ -4,30 +4,29 @@
     <div class="container">
         <div class="fw-flex fw-flex-space-between fw-flex-middle">
             <div class="fw-flex fw-flex-middle section-store-link__form">
-                <form [formGroup]="FFooterForm" class="fw-flex fw-mr-10 fw-flex-grow">
-                    <p class="fw-mr-15 fw-flex-shrink-no">Получить ссылку на <br>приложение</p>
+                <form [formGroup]="FFooterForm" class="fw-flex fw-mr-10 fw-flex-grow fw-flex-middle">
+                    <p class="fw-mr-15 fw-flex-shrink-no" [innerHTML]="'SECTION_STORE_LINK.GET_APP' | translate"></p>
                     <div class="fw-flex fw-flex-middle fw-flex-grow">
                         <div class="fw-flex-grow">
-                            <app-input-box formControlName="phone" [placeholder]="'Например: + 7(123) 456-78-90'"
+                            <app-input-box formControlName="phone" [placeholder]="'SECTION_STORE_LINK.INPUT_PLACEHOLDER' | translate"
                                            [classes]="'fw-br-5'"></app-input-box>
                         </div>
                         <div class="fw-flex-shink-no fw-ml-10">
-                            <button type="submit" class="button button--primary section-store-link__btn">Получить
-                            </button>
+                            <button type="submit" class="button button--primary section-store-link__btn" translate="SECTION_STORE_LINK.GET_BUTTON_TEXT"></button>
                         </div>
                     </div>
                 </form>
                 <div class="footer-app__buttons fw-flex fw-flex-middle">
-                    <a href="#" class="footer-app__button fw-inline-block fw-mr-10">
+                    <a class="footer-app__button fw-inline-block fw-mr-10">
                         <i class="icon-footer-googleplay"></i>
                     </a>
-                    <a href="#" class="footer-app__button fw-inline-block">
+                    <a class="footer-app__button fw-inline-block">
                         <i class="icon-footer-apple"></i>
                     </a>
                 </div>
             </div>
             <div class="fw-flex-shrink-no fw-ml-15">
-                <a href="#">Мобильный сайт</a>
+                <a translate="SECTION_STORE_LINK.MOBILE_VERSION"></a>
             </div>
         </div>
     </div>
@@ -44,16 +43,16 @@
           <button type="submit" class="violet-button">Получить</button>
         </div>
         <div class="footer-app__buttons">
-          <a href="#" class="footer-app__button fw-inline-block fw-mr-10">
+          <a class="footer-app__button fw-inline-block fw-mr-10">
             <i class="icon-footer-app-google"></i>
           </a>
-          <a href="#" class="footer-app__button fw-inline-block">
+          <a class="footer-app__button fw-inline-block">
             <i class="icon-footer-app-apple"></i>
           </a>
         </div>
       </form>
       <div class="footer-mobile__wrapper">
-        <a href="#" class="footer-mobile__link">Мобильный сайт</a>
+        <a class="footer-mobile__link">Мобильный сайт</a>
       </div>
     </div>
   </div>

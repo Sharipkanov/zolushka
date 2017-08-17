@@ -1,0 +1,13 @@
+{
+  "HEADER": {
+    "MINUTES_LEFT": "Осталось минут",
+    "CONTACTS_LEFT": "Осталось контактов",
+    "SEARCH_PLACE": "Место в поиске",
+    "MINUTES_LEFT__SHORT": "Минут",
+    "CONTACTS_LEFT__SHORT": "Контактов",
+    "SEARCH_PLACE__SHORT": "В поиске",
+    "INSTALL_APP": "Установить<br>приложение",
+    "HEADER_NOT_AUTH_INDEX_TITLE": "Лучший on-line сервис по поиску <br>содержанок и спонсоров",
+    "HEADER_NOT_AUTH_INDEX_PRESENT": "Дарим 36 часов премиум доступа <br>Всем мужчинам прошедшим регистрацию"
+  }
+}

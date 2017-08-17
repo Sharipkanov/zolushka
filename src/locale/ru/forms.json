@@ -1,0 +1,13 @@
+{
+  "INPUTS": {
+    "NAME": "Имя",
+    "PASSWORD": "Пароль",
+    "EMAIL": "E-mail"
+  },
+  "SELECTBOX": {
+    "CITY": "Город",
+    "DAY": "День",
+    "MONTH": "Месяц",
+    "YEAR": "Год рождения"
+  }
+}
