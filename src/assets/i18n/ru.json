@@ -7,11 +7,29 @@
 		"TO_REGISTER": "Зарегистрироваться"
 	},
 	"ENUMS": {
-		"meetGoals": "Цель знакомства",
-		"meetGoals1": "Цель знакомства",
-		"meetGoals2": "Цель знакомства",
-		"meetGoals3": "Цель знакомства",
-		"meetGoals4": "Цель знакомства"
+		"appearance": "Внешность",
+		"breastSize": "Размер груди",
+		"eyeColor": "Цвет глаз",
+		"hairColor": "Цвет волос",
+		"higherEducation": "Высшее образование",
+		"hobbies": "Хобби",
+		"physique": "Телосложение",
+		"childrenExist": "Дети",
+		"registrationCityType": "Регистрация в городе",
+		"relationshipState": "Отнощения",
+		"relationshipTypes": "Цели знакомства",
+		"sexualKinds": "Вид секса",
+		"sexualPeriodicity": "Периодичность в сексе",
+		"sexualPreference": "Ориентация",
+		"sexualRole": "Роль в сексе",
+		"type": "Пол",
+		"zodiacsign": "Знак зодиака",
+		"city": "Выберите город",
+		"datepicker": {
+			"day": "День",
+			"month": "Месяц",
+			"year": "Год"
+		}
 	},
 	"FOOTER": {
 		"CONFIDENTIALITY_TOP": "Конфиденциальность",

@@ -1,12 +1,17 @@
 <section class="fw-pt-40 fw-pb-20">
-    <div class="container">
+    <div class="container medium-container">
         <p class="fw-fz-24 fw-text-center fw-mb-20">{{ "REGISTRATION_PAGE.TITLE" | translate }}</p>
-        <div class="fw-grid fw-grid-15">
+        <div class="fw-grid fw-grid-30">
             <div class="fw-width-1-2 fw-fz-14">
                 <p>{{ "REGISTRATION_PAGE.FIRST_SENTENCE" | translate }}</p>
                 <p class="fw-mt-20">{{ "REGISTRATION_PAGE.SECOND_SENTENCE" | translate }}</p>
                 <div class="fw-mt-40">
                     <app-panel-gift></app-panel-gift>
+                </div>
+                <div class="fw-mt-50 fw-flex fw-flex-wrap fw-flex-space-between">
+                    <a href="#"><i class="icon-grey-confidential"></i></a>
+                    <a href="#"><i class="icon-grey-app-store"></i></a>
+                    <a href="#"><i class="icon-grey-google-play"></i></a>
                 </div>
             </div>
             <div class="fw-width-1-2">
@@ -35,13 +40,13 @@
                     </div>
                     <div class="fw-mb-10 fw-grid fw-grid-15" formGroupName="birthdate">
                         <div class="fw-width-1-3">
-                            <app-select-box [iconClass]="'icon-form-triangle'" formControlName="day" ngDefaultControl [items]="date_picker['day']"></app-select-box>
+                            <app-select-box [placeholder]="'ENUMS.datepicker.day' | translate" [iconClass]="'icon-form-triangle'" formControlName="day" ngDefaultControl [items]="date_picker['day']"></app-select-box>
                         </div>
                         <div class="fw-width-1-3">
-                            <app-select-box [iconClass]="'icon-form-triangle'" formControlName="month" ngDefaultControl [items]="date_picker['month']"></app-select-box>
+                            <app-select-box [placeholder]="'ENUMS.datepicker.month' | translate" [iconClass]="'icon-form-triangle'" formControlName="month" ngDefaultControl [items]="date_picker['month']"></app-select-box>
                         </div>
                         <div class="fw-width-1-3">
-                            <app-select-box [iconClass]="'icon-form-triangle'" formControlName="year" ngDefaultControl [items]="date_picker['year']"></app-select-box>
+                            <app-select-box [placeholder]="'ENUMS.datepicker.year' | translate" [iconClass]="'icon-form-triangle'" formControlName="year" ngDefaultControl [items]="date_picker['year']"></app-select-box>
                         </div>
                         <div class="fw-error-message fw-color-red fw-mt-10-inverse fw-width-1-1" *ngIf="!!errors['birthdate']">{{errors['birthdate']}}</div>
                     </div>
@@ -60,3 +65,4 @@
     </div>
 </section>
 <hr class="hr">
+<app-mass-media class="fw-block fw-mb-40"></app-mass-media>

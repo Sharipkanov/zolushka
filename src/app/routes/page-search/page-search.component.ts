@@ -23,13 +23,20 @@ export class PageSearchComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.searchUsers(this._activatedRouter.snapshot.queryParams);
-        // console.log(this._activatedRouter);
+        const queryParams = {...this._activatedRouter.snapshot.queryParams};
+        if (!queryParams['type']) {
+            queryParams['type'] = 200;
+        }
+
+        this.searchUsers(queryParams);
+
         this._activatedRouter.queryParams.subscribe(params => {
-            this.searchUsers(params);
+            const myParams = {...params};
+            if (!myParams['type']) {
+                myParams['type'] = 200;
+            }
+            this.searchUsers(myParams);
         });
-
-
     }
 
     searchUsersQuery(searchObject) {

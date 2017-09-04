@@ -14,11 +14,11 @@
       </div>
       <div>
         <app-select-search-box formControlName="cityId" [classes]="'search-bar__select-search-box no-borders'"
-                               (search)="getLocations($event)" [placeholder]="'Выберите город'"
+                               (search)="getLocations($event)" [placeholder]="'ENUMS.city' | translate"
                                [iconClass]="'icon-form-navigator'" [items]="locations"></app-select-search-box>
       </div>
       <div>
-        <app-select-box [placeholder]="'Цель знакомства'" formControlName="relationshipTypes" class="fw-width-1-1" [multiple]="true"
+        <app-select-box [placeholder]="'ENUMS.relationshipTypes' | translate" formControlName="relationshipTypes" class="fw-width-1-1" [multiple]="true"
                         [iconClass]="'icon-form-triangle'" [items]="enums['relationshipTypes']"
                         [classes]="'search-bar__select-box no-borders'"></app-select-box>
       </div>
@@ -46,7 +46,6 @@
             </div>
           </div>
         </div>
-
       </div>
       <div>
         <a class="search-bar__extend" (click)="searchBarToggle($event)">Все параметры<span></span></a>
@@ -76,24 +75,24 @@
             </div>
           </div>
           <div>
-            <app-select-box formControlName="appearance" [multiple]="true"
+            <app-select-box [placeholder]="'ENUMS.appearance' | translate" formControlName="appearance" [multiple]="true"
                             [iconClass]="'icon-form-triangle'"
                             [items]="enums['appearance']"></app-select-box>
           </div>
           <div>
-            <app-select-box formControlName="sexualPeriodicity" [multiple]="true"
+            <app-select-box [placeholder]="'ENUMS.sexualPeriodicity' | translate" formControlName="sexualPeriodicity" [multiple]="true"
                             [iconClass]="'icon-form-triangle'"
                             [items]="enums['sexualPeriodicity']"></app-select-box>
           </div>
           <div>
             <div class="fw-grid fw-grid-12">
               <div class="fw-width-1-2">
-                <app-select-box formControlName="relationshipState" [multiple]="true"
+                <app-select-box [placeholder]="'ENUMS.relationshipState' | translate" formControlName="relationshipState" [multiple]="true"
                                 [iconClass]="'icon-form-triangle'"
                                 [items]="enums['relationshipState']"></app-select-box>
               </div>
               <div class="fw-width-1-2">
-                <app-select-box formControlName="childrenExist" [iconClass]="'icon-form-triangle'"
+                <app-select-box [placeholder]="'ENUMS.childrenExist' | translate" formControlName="childrenExist" [iconClass]="'icon-form-triangle'"
                                 [items]="enums['childrenExist']"></app-select-box>
               </div>
             </div>
@@ -118,64 +117,64 @@
           <div>
             <div class="fw-grid fw-grid-12">
               <div class="fw-width-1-2">
-                <app-select-box formControlName="hairColor" [multiple]="true"
+                <app-select-box [placeholder]="'ENUMS.hairColor' | translate" formControlName="hairColor" [multiple]="true"
                                 [iconClass]="'icon-form-triangle'"
                                 [items]="enums['hairColor']"></app-select-box>
               </div>
               <div class="fw-width-1-2">
-                <app-select-box formControlName="eyeColor" [multiple]="true"
+                <app-select-box [placeholder]="'ENUMS.eyeColor' | translate" formControlName="eyeColor" [multiple]="true"
                                 [iconClass]="'icon-form-triangle'"
                                 [items]="enums['eyeColor']"></app-select-box>
               </div>
             </div>
           </div>
           <div>
-            <app-select-box formControlName="sexualRole" [multiple]="true"
+            <app-select-box [placeholder]="'ENUMS.sexualRole' | translate" formControlName="sexualRole" [multiple]="true"
                             [iconClass]="'icon-form-triangle'"
                             [items]="enums['sexualRole']"></app-select-box>
           </div>
           <div>
-            <app-select-box formControlName="zodiacsign" [multiple]="true"
+            <app-select-box [placeholder]="'ENUMS.zodiacsign' | translate" formControlName="zodiacsign" [multiple]="true"
                             [iconClass]="'icon-form-triangle'"
                             [items]="enums['zodiacsign']"></app-select-box>
           </div>
           <div>
-            <app-select-box formControlName="physique" [multiple]="true" [iconClass]="'icon-form-triangle'"
+            <app-select-box [placeholder]="'ENUMS.physique' | translate" formControlName="physique" [multiple]="true" [iconClass]="'icon-form-triangle'"
                             [items]="enums['physique']"></app-select-box>
           </div>
-          <div *ngIf="searchType === 200">
-            <app-select-box formControlName="higherEducation" [multiple]="true"
+          <div *ngIf="searchType === 100">
+            <app-select-box [placeholder]="'ENUMS.higherEducation' | translate" formControlName="higherEducation" [multiple]="true"
                             [iconClass]="'icon-form-triangle'"
                             [items]="enums['higherEducation']"></app-select-box>
           </div>
-          <div *ngIf="searchType === 100">
-            <app-select-box formControlName="breastSize" [multiple]="true"
+          <div *ngIf="searchType === 200">
+            <app-select-box [placeholder]="'ENUMS.breastSize' | translate" formControlName="breastSize" [multiple]="true"
                             [iconClass]="'icon-form-triangle'"
                             [items]="enums['breastSize']"></app-select-box>
           </div>
           <div>
             <div class="fw-grid fw-grid-12">
               <div class="fw-width-1-2">
-                <app-select-box formControlName="sexualKinds" [multiple]="true"
+                <app-select-box [placeholder]="'ENUMS.sexualKinds' | translate" formControlName="sexualKinds" [multiple]="true"
                                 [iconClass]="'icon-form-triangle'"
                                 [items]="enums['sexualKinds']"></app-select-box>
               </div>
               <div class="fw-width-1-2">
-                <app-select-box formControlName="sexualPreference" [multiple]="true"
+                <app-select-box [placeholder]="'ENUMS.sexualPreference' | translate" formControlName="sexualPreference" [multiple]="true"
                                 [iconClass]="'icon-form-triangle'"
                                 [items]="enums['sexualPreference']"></app-select-box>
               </div>
             </div>
           </div>
           <div>
-            <app-select-box formControlName="hobbies" [multiple]="true" [iconClass]="'icon-form-triangle'"
+            <app-select-box [placeholder]="'ENUMS.hobbies' | translate" formControlName="hobbies" [multiple]="true" [iconClass]="'icon-form-triangle'"
                             [items]="enums['hobbies']"></app-select-box>
           </div>
         </div>
         <div class="search-bar__grid">
           <div class="fw-flex fw-flex-space-between">
-            <button type="reset" class="fw-reset fw-fw-600 fw-fz-15 fw-flex fw-flex-middle"><i
-                class="icon-shape-remove-purple fw-mr-5"></i>Сбросить
+            <button type="reset" (click)="resetForm($event)" class="fw-reset fw-fw-600 fw-fz-15 fw-flex fw-flex-middle">
+              <i class="icon-shape-remove-purple fw-mr-5"></i>Сбросить
             </button>
             <a class="fw-fw-600 fw-fz-15 fw-flex fw-flex-middle"><i
                 class="icon-shape-heart-purple fw-mr-5"></i>Сохранить поиск</a>

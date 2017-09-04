@@ -67,7 +67,8 @@ import {IonRangeSliderModule} from 'ng2-ion-range-slider';
 import {PaginationComponent} from './components/pagination/pagination.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpClient, HttpClientModule} from '@angular/common/http'
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { MassMediaComponent } from './components/mass-media/mass-media.component'
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -122,7 +123,8 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         PageProfileViewsComponent,
         ChatListComponent,
         PopupChatComponent,
-        PaginationComponent
+        PaginationComponent,
+        MassMediaComponent
     ],
     imports: [
         BrowserModule,

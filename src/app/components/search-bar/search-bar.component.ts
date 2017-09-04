@@ -8,7 +8,7 @@ import {ISelectSearchBoxItem} from '../../interfaces/form/select-search-box-item
 import {IEnums} from '../../interfaces/enums.interface';
 import {EnumsService} from '../../services/enums/enums.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-search-bar',
@@ -46,7 +46,7 @@ export class SearchBarComponent implements OnInit {
         }
     }
 
-    constructor(private _activatedRouter: ActivatedRoute, private _fb: FormBuilder, private _enums: EnumsService, private _component: ElementRef, private _locationService: LocationService) {
+    constructor(private _router: Router, private _activatedRouter: ActivatedRoute, private _fb: FormBuilder, private _enums: EnumsService, private _component: ElementRef, private _locationService: LocationService) {
     }
 
     ngOnInit() {
@@ -55,7 +55,10 @@ export class SearchBarComponent implements OnInit {
         this._enums.getEnums().subscribe(response => {
             this.enums = response;
 
-            this.renderFormChosenValues();
+            this._activatedRouter.queryParams.subscribe(params => {
+                this.renderFormChosenValues();
+
+            });
         });
     }
 
@@ -182,4 +185,11 @@ export class SearchBarComponent implements OnInit {
             : parent.classList.remove('dropdown--active');
     }
 
+    resetForm(e: Event) {
+        e.preventDefault();
+        for (const key in this.FSearchBar.value) {
+            this.FSearchBar.controls[key].setValue([{id: 300}]);
+            console.log(this.FSearchBar.value)
+        }
+    }
 }
