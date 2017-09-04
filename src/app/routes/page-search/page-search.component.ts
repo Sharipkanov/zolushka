@@ -3,7 +3,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {UsersService} from '../../services/users/users.service';
 import {IUser} from '../../interfaces/user.interface';
 import {SearchBarComponent} from "../../components/search-bar/search-bar.component";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 import {IPagination, IPaginationUserSearch} from "../../interfaces/pagination.interface";
 
 @Component({
@@ -19,14 +19,17 @@ export class PageSearchComponent implements OnInit {
         filters: false
     };
 
-    constructor(private _router: Router, private _activatedRouter: ActivatedRoute, private usersService: UsersService) {
+    constructor(private _router: Router, private _activatedRouter: ActivatedRoute, private _usersService: UsersService) {
     }
 
     ngOnInit() {
-        this.searchUsers(this._activatedRouter.snapshot.params);
-        this._activatedRouter.params.subscribe(params => {
+        this.searchUsers(this._activatedRouter.snapshot.queryParams);
+        // console.log(this._activatedRouter);
+        this._activatedRouter.queryParams.subscribe(params => {
             this.searchUsers(params);
         });
+
+
     }
 
     searchUsersQuery(searchObject) {
@@ -50,12 +53,12 @@ export class PageSearchComponent implements OnInit {
             }
         }
 
-        this._router.navigate([queryArray]);
+        this._router.navigate(['/search'], {queryParams: queryArray});
     }
 
     searchUsers(data = null) {
         this.preloaders.userGrid = true;
-        this.usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
+        this._usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
             this.users = <IPaginationUserSearch>users;
             this.preloaders.userGrid = false;
         });

@@ -119,14 +119,14 @@ export class SearchBarComponent implements OnInit {
     }
 
     renderFormChosenValues() {
-        const filterParams = this._activatedRouter.snapshot.params;
+        const filterParams = this._activatedRouter.snapshot.queryParams;
         const newFilterObject = {};
         for (const key in filterParams) {
-            const array = filterParams[key].split(',');
-            if (array.length > 1) {
+            const Value = filterParams[key];
+            if (Object.prototype.toString.call(Value) === '[object Array]') {
                 newFilterObject[key] = [];
-                for (let i = 0; i < array.length; i++) {
-                    newFilterObject[key].push({id: array[i]});
+                for (let i = 0; i < Value.length; i++) {
+                    newFilterObject[key].push({id: Value[i]});
                 }
             } else {
                 newFilterObject[key] = {id: parseInt(filterParams[key], 0)};

@@ -18,7 +18,7 @@
                                [iconClass]="'icon-form-navigator'" [items]="locations"></app-select-search-box>
       </div>
       <div>
-        <app-select-box formControlName="relationshipTypes" class="fw-width-1-1" [multiple]="true"
+        <app-select-box [placeholder]="'Цель знакомства'" formControlName="relationshipTypes" class="fw-width-1-1" [multiple]="true"
                         [iconClass]="'icon-form-triangle'" [items]="enums['relationshipTypes']"
                         [classes]="'search-bar__select-box no-borders'"></app-select-box>
       </div>
