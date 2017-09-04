@@ -189,6 +189,7 @@ export class SearchBarComponent implements OnInit {
         e.preventDefault();
         for (const key in this.FSearchBar.value) {
             this.FSearchBar.controls[key].setValue([{id: 300}]);
+            this.FSearchBar.controls[key].setValue([{}]);
             console.log(this.FSearchBar.value)
         }
     }

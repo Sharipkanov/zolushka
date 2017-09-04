@@ -3,8 +3,8 @@ import {
     Output, EventEmitter, OnChanges, SimpleChange
 } from '@angular/core';
 
-import { ISelectBoxItem } from '../../../interfaces/form/select-box-item.interface';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {ISelectBoxItem} from '../../../interfaces/form/select-box-item.interface';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
     selector: 'app-select-box',
@@ -82,6 +82,9 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
                             response = false;
                         }
                     }
+                    if (!response) {
+                        this.items[0].selected = false;
+                    }
                 }
             } else {
                 for (let i = 0; i < this.items.length; i++) {
@@ -92,6 +95,14 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
                         response = false;
                     }
                 }
+                if (!response) {
+                    this.items[0].selected = false;
+                }
+            }
+        } else {
+            this.items[0].selected = true;
+            for (let y = 1; y < this.items.length; y++) {
+                this.items[y].selected = false;
             }
         }
 
@@ -105,6 +116,8 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
         } else if (!!this.items.length && this.items[0].id === '' && !response) {
             this.items[0].selected = false;
         }
+
+        // TODO make sorting fix
 
         this.setSelectTexts();
     }
