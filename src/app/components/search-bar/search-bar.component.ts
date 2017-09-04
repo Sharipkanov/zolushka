@@ -3,12 +3,12 @@ import {
     HostListener
 } from '@angular/core';
 
-import {LocationService} from '../../services/location/location.service';
-import {ISelectSearchBoxItem} from '../../interfaces/form/select-search-box-item.interface';
-import {IEnums} from '../../interfaces/enums.interface';
-import {EnumsService} from '../../services/enums/enums.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import { LocationService } from '../../services/location/location.service';
+import { ISelectSearchBoxItem } from '../../interfaces/form/select-search-box-item.interface';
+import { IEnums } from '../../interfaces/enums.interface';
+import { EnumsService } from '../../services/enums/enums.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-search-bar',
@@ -79,8 +79,8 @@ export class SearchBarComponent implements OnInit {
     }
 
     searchOnChangeAge(e) {
-        this.FSearchBar.controls['minAge'].setValue({id: e.from});
-        this.FSearchBar.controls['maxAge'].setValue({id: e.to});
+        this.FSearchBar.controls['minAge'].setValue({ id: e.from });
+        this.FSearchBar.controls['maxAge'].setValue({ id: e.to });
     }
 
     getLocations(locationName) {
@@ -129,15 +129,15 @@ export class SearchBarComponent implements OnInit {
             if (Object.prototype.toString.call(Value) === '[object Array]') {
                 newFilterObject[key] = [];
                 for (let i = 0; i < Value.length; i++) {
-                    newFilterObject[key].push({id: Value[i]});
+                    newFilterObject[key].push({ id: Value[i] });
                 }
             } else {
-                newFilterObject[key] = {id: parseInt(filterParams[key], 0)};
+                newFilterObject[key] = { id: parseInt(filterParams[key], 0) };
             }
         }
 
         this.FSearchBar = this._fb.group({
-            type: [(!!newFilterObject['type']) ? newFilterObject['type'] : {id: 200}],
+            type: [(!!newFilterObject['type']) ? newFilterObject['type'] : { id: 200 }],
             cityId: [(!!newFilterObject['cityId']) ? newFilterObject['cityId'] : {}],
             relationshipTypes: [(!!newFilterObject['relationshipTypes']) ? newFilterObject['relationshipTypes'] : {}],
             appearance: [(!!newFilterObject['appearance']) ? newFilterObject['appearance'] : {}],
@@ -154,8 +154,8 @@ export class SearchBarComponent implements OnInit {
             sexualKinds: [(!!newFilterObject['sexualKinds']) ? newFilterObject['sexualKinds'] : {}],
             sexualPreference: [(!!newFilterObject['sexualPreference']) ? newFilterObject['sexualPreference'] : {}],
             hobbies: [(!!newFilterObject['hobbies']) ? newFilterObject['hobbies'] : {}],
-            minAge: [(!!newFilterObject['minAge']) ? newFilterObject['minAge'] : {id: 19}],
-            maxAge: [(!!newFilterObject['maxAge']) ? newFilterObject['maxAge'] : {id: 27}],
+            minAge: [(!!newFilterObject['minAge']) ? newFilterObject['minAge'] : { id: 19 }],
+            maxAge: [(!!newFilterObject['maxAge']) ? newFilterObject['maxAge'] : { id: 27 }],
             minHeight: [(!!newFilterObject['minHeight']) ? newFilterObject['minHeight'].id : ''],
             maxHeight: [(!!newFilterObject['maxHeight']) ? newFilterObject['maxHeight'].id : ''],
             minWeight: [(!!newFilterObject['minWeight']) ? newFilterObject['minWeight'].id : ''],
@@ -188,9 +188,10 @@ export class SearchBarComponent implements OnInit {
     resetForm(e: Event) {
         e.preventDefault();
         for (const key in this.FSearchBar.value) {
-            this.FSearchBar.controls[key].setValue([{id: 300}]);
-            this.FSearchBar.controls[key].setValue([{}]);
-            console.log(this.FSearchBar.value)
+            if (key !== 'minAge' && key !== 'maxAge') {
+                this.FSearchBar.controls[key].setValue([{ id: 300 }]);
+                this.FSearchBar.controls[key].setValue([]);
+            }
         }
     }
 }
