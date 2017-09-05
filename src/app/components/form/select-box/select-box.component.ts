@@ -3,8 +3,8 @@ import {
     Output, EventEmitter, OnChanges, SimpleChange
 } from '@angular/core';
 
-import { ISelectBoxItem } from '../../../interfaces/form/select-box-item.interface';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {ISelectBoxItem} from '../../../interfaces/form/select-box-item.interface';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
     selector: 'app-select-box',
@@ -70,7 +70,7 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
 
     detectChanges() {
         let response = true;
-        if (!!this.inputValue && !!this.inputValue.length) {
+        if (!!this.inputValue) {
             if (Object.prototype.toString.call(this.inputValue) === '[object Array]') {
                 for (let i = 0; i < this.items.length; i++) {
                     const item = this.items[i];
@@ -95,10 +95,12 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
             }
         } else {
             for (let z = 0; z < this.items.length; z++) {
-                this.items[z].selected = false;
+                delete(this.items[z].selected);
             }
 
-            this.items[0].selected = true;
+            if (!!this.items[0] && this.items[0].id === '') {
+                this.items[0].selected = true;
+            }
         }
 
         if (!!this.items.length && this.items[0].id !== '') {
@@ -111,10 +113,6 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
         } else if (!!this.items.length && this.items[0].id === '' && !response) {
             this.items[0].selected = false;
         }
-
-        console.log(this.items);
-
-        // TODO make sorting fix
 
         this.setSelectTexts();
     }
@@ -191,12 +189,10 @@ export class SelectBoxComponent implements OnInit, AfterViewInit, OnChanges, Con
             this.items.map((selectBoxItem: ISelectBoxItem, selectBoxIndex) => {
                 if (selectBoxIndex === index) {
                     selectBoxItem.selected = true;
-
                     this.propagateChange(selectBoxItem);
                 } else {
                     selectBoxItem.selected = false;
                 }
-
             });
 
             this.selectBox.classList.remove(this.selectBoxActiveClass);

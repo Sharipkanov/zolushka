@@ -89,7 +89,7 @@ export class SearchBarComponent implements OnInit {
 
     searchProfiles(e) {
         e.preventDefault();
-        console.log(this.FSearchBar.value);
+        console.log('submit');
         this.onSubmitSearchBar.emit(this.FSearchBar.value);
     }
 
@@ -190,7 +190,7 @@ export class SearchBarComponent implements OnInit {
         for (const key in this.FSearchBar.value) {
             if (key !== 'minAge' && key !== 'maxAge') {
                 this.FSearchBar.controls[key].setValue([{ id: 300 }]);
-                this.FSearchBar.controls[key].setValue([]);
+                this.FSearchBar.controls[key].setValue(null);
             }
         }
     }
