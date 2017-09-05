@@ -15,6 +15,8 @@ export class UserCartComponent implements OnInit {
   @Input() small: boolean = false;
   @Input() gridType: boolean = true;
 
+  public favoritesPreloader: boolean = false;
+
   constructor(private _dialogService: DialogService) { }
 
   ngOnInit() {
@@ -24,5 +26,13 @@ export class UserCartComponent implements OnInit {
     const dialog = new IDialog();
     dialog.clientTo = user;
     this._dialogService.onAddNewDialog.emit(dialog);
+  }
+
+  addToFavorites(user) {
+    this.favoritesPreloader = true;
+
+    setTimeout(() => {
+      this.favoritesPreloader = false;
+    }, 3000);
   }
 }

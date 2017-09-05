@@ -15,7 +15,7 @@
         <i class="icon-user-cart-phone{{(!small) ? '-large' : ''}}"></i>
       </a>
       <a class="cover__item fw-inline-block">
-        <i class="icon-user-cart-star{{(!small) ? '-large' : ''}}"></i>
+        <i class="icon-user-cart-star{{(!small) ? '-large' : ''}}" (click)="addToFavorites(user)"></i>
       </a>
     </div>
   </div>
@@ -31,4 +31,5 @@
       {{user.aboutMe}}
     </div>
   </div>
+  <app-preloader *ngIf="favoritesPreloader"></app-preloader>
 </div>
