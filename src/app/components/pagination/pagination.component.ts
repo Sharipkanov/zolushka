@@ -42,8 +42,8 @@ export class PaginationComponent implements OnInit, OnChanges {
                     startPage = 1;
                     endPage = 7;
                 } else if (this.pagination.page.number + 3 >= this.pagination.page.totalPages) {
-                    startPage = this.pagination.page.totalPages - 6;
-                    endPage = this.pagination.page.totalPages;
+                    startPage = this.pagination.page.totalPages - 5;
+                    endPage = this.pagination.page.totalPages + 1;
                 } else {
                     startPage = this.pagination.page.number - 2;
                     endPage = this.pagination.page.number + 4;
@@ -86,10 +86,12 @@ export class PaginationComponent implements OnInit, OnChanges {
     }
 
     setPage(pageId: number) {
-        const params = {...this._activatedRouter.snapshot.params};
+        const params = {...this._activatedRouter.snapshot.queryParams};
         params.page = pageId - 1;
 
-        this._router.navigate([{...params}]);
+        console.log(params);
+
+        this._router.navigate([], {queryParams: params});
 
         this.renderPagination();
     }

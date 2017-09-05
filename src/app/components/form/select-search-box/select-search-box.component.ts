@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 
 import {ISelectSearchBoxItem} from '../../../interfaces/form/select-search-box-item.interface';
-import {InputBoxComponent} from "../input-box/input-box.component";
-import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import {InputBoxComponent} from '../input-box/input-box.component';
+import {NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
     selector: 'app-select-search-box',
@@ -95,14 +95,20 @@ export class SelectSearchBoxComponent implements AfterViewInit, OnChanges {
     }
 
     detectChanges() {
+        let selected = false;
         if (!!this.items.length) {
             for (let i = 0; i < this.items.length; i++) {
                 if (!!this.inputValue && this.items[i].id === parseInt(this.inputValue.id, 0)) {
                     this.items[i].selected = true;
                     this.selectSearchBoxText = this.items[i].label;
+                    selected = true;
                 } else {
                     this.items[i].selected = false;
                 }
+            }
+
+            if (selected === false) {
+                this.selectSearchBoxText = '';
             }
         }
     }
