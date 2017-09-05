@@ -8,6 +8,7 @@
   transition: all .3s ease-in-out
   overflow: hidden
   flex-grow: 1
+  position: relative
 
   &.user-cart--unstyled
     box-shadow: 0
@@ -52,7 +53,6 @@
     object-fit: cover
     object-position: center center
     border-radius: 5px 5px 0 0
-
 
   .user-cart__cover
     transition: all .3s ease-in-out
@@ -115,7 +115,7 @@
     line-height: normal
     z-index: $z-index-cover + 1
 
-    &.user-cart__photos--cheched
+    &.user-cart__photos--checked
       background: $colorRedLight
 
   .user-cart__information
@@ -156,4 +156,13 @@
     padding-top: 20px
     color: $colorViolet
     font-style: italic
+
+  &[data-grid="false"]
+    display: flex
+
+    .user-cart__thumbnail
+      width: 30%
+      position: static
+      flex-shrink: 0
+
 

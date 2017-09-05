@@ -55,7 +55,7 @@
                         <div class="profile__name-left">
                             <div class="profile__name-title fw-fw-600 fw-mb-5">
                                 {{ model['name'] }}{{ (model['age']) ? ' ' + model['age'] + 'лет' : '' }}, {{
-                                (model['zodiacsign']) ? model['zodiacsign']['title'] + ',' : '' }}{{ (model['city']) ?
+                                (model['zodiacsign']) ? model['zodiacsign'] + ', ' : '' }}{{ (model['city']) ?
                                 model['city']['title'] : '' }}
                             </div>
                             <div>

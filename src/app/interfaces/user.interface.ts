@@ -8,7 +8,7 @@ export class IUser {
   lastOnline: string = null;
   age: number;
   countPhotos: Array<string>;
-  excerpt: string = null;
+  aboutMe: string = null;
   online: boolean = false;
   top: boolean;
 

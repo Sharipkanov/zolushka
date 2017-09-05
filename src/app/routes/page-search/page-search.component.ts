@@ -5,6 +5,7 @@ import {IUser} from '../../interfaces/user.interface';
 import {SearchBarComponent} from "../../components/search-bar/search-bar.component";
 import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 import {IPagination, IPaginationUserSearch} from "../../interfaces/pagination.interface";
+import {StorageService} from "../../services/storage/storage.service";
 
 @Component({
     selector: 'app-page-search',
@@ -14,15 +15,18 @@ import {IPagination, IPaginationUserSearch} from "../../interfaces/pagination.in
 })
 export class PageSearchComponent implements OnInit {
     public users: IPaginationUserSearch = <IPaginationUserSearch>{};
+    public gridType: boolean = true;
     public preloaders = {
         userGrid: false,
         filters: false
     };
 
-    constructor(private _router: Router, private _activatedRouter: ActivatedRoute, private _usersService: UsersService) {
+    constructor(private _storageService: StorageService, private _router: Router, private _activatedRouter: ActivatedRoute, private _usersService: UsersService) {
     }
 
     ngOnInit() {
+        this.gridType = !!parseInt(this._storageService.get('catalogGridType'), 0);
+
         const queryParams = {...this._activatedRouter.snapshot.queryParams};
         if (!queryParams['type']) {
             queryParams['type'] = 200;
@@ -69,5 +73,15 @@ export class PageSearchComponent implements OnInit {
             this.users = <IPaginationUserSearch>users;
             this.preloaders.userGrid = false;
         });
+    }
+
+    switchGridType(grid: boolean) {
+        this.gridType = grid;
+        if (grid) {
+            this._storageService.set('catalogGridType', 1);
+        } else {
+            this._storageService.set('catalogGridType', 0);
+        }
+
     }
 }

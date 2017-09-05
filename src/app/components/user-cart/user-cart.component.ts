@@ -13,6 +13,7 @@ import { IDialog } from '../../interfaces/dialog.interface';
 export class UserCartComponent implements OnInit {
   @Input() user: IUser;
   @Input() small: boolean = false;
+  @Input() gridType: boolean = true;
 
   constructor(private _dialogService: DialogService) { }
 
