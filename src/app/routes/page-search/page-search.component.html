@@ -4,10 +4,10 @@
   <div class="container">
     <div class="catalog__header">
       <div class="catalog__header-filter">
-        <a class="catalog__header-filter-link active">Все</a>
-        <a class="catalog__header-filter-link">Новые</a>
-        <a class="catalog__header-filter-link">Онлайн</a>
-        <a class="catalog__header-filter-link">С реальным фото</a>
+        <a class="catalog__header-filter-link" [ngClass]="{'active': filter === 'all'}" (click)="changeFilter('all')">Все</a>
+        <a class="catalog__header-filter-link" [ngClass]="{'active': filter === 'newDays'}" (click)="changeFilter('newDays')">Новые</a>
+        <a class="catalog__header-filter-link" [ngClass]="{'active': filter === 'online'}" (click)="changeFilter('online')">Онлайн</a>
+        <a class="catalog__header-filter-link" [ngClass]="{'active': filter === 'realPhoto'}" (click)="changeFilter('realPhoto')">С реальным фото</a>
       </div>
       <div class="catalog__header-type fw-flex fw-flex-middle">
         <span class="catalog__header-type-link fw-mr-10"

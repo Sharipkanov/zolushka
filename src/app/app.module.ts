@@ -68,7 +68,8 @@ import {PaginationComponent} from './components/pagination/pagination.component'
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { MassMediaComponent } from './components/mass-media/mass-media.component'
+import { MassMediaComponent } from './components/mass-media/mass-media.component';
+import { PopupNoticeConfirmedPhotosComponent } from './components/popups/popup-notice-confirmed-photos/popup-notice-confirmed-photos.component'
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -124,7 +125,8 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         ChatListComponent,
         PopupChatComponent,
         PaginationComponent,
-        MassMediaComponent
+        MassMediaComponent,
+        PopupNoticeConfirmedPhotosComponent
     ],
     imports: [
         BrowserModule,

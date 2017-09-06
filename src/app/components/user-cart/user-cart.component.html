@@ -2,9 +2,9 @@
   <div class="user-cart__thumbnail">
     <img class="user-cart__image" alt="" src="{{(!!user.avatar) ? user.avatar['thumb'] : '/assets/images/default-navigation-avatar.svg'}}" *ngIf="!small">
     <img class="user-cart__image" alt="" src="{{(!!user.avatar) ? user.avatar['thumb'] : '/assets/images/default-navigation-avatar.svg'}}" *ngIf="small">
-    <div class="user-cart__photos{{(!!user.photoApproved) ? ' user-cart__photos--approved' : ''}}">
+    <div class="user-cart__photos{{(!!user.photoApproved) ? ' user-cart__photos--approved' : ''}}" *ngIf="user.countPhotos > 0">
       <i class="{{(!!user.photoApproved) ? 'icon-user-cart-camera-checked' : 'icon-user-cart-camera-red'}} fw-mr-5"></i>
-      <span>{{(!!user.countPhotos) ? user.countPhotos: 0}}</span>
+      <span>{{(!!user.countPhotos) ? user.countPhotos : 0}}</span>
     </div>
     <i class="icon-user-cart-in-top" *ngIf="user.top"></i>
     <div class="user-cart__cover cover">

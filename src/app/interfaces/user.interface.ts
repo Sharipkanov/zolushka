@@ -7,7 +7,7 @@ export class IUser {
   city: ICity = <ICity>{};
   lastOnline: string = null;
   age: number;
-  countPhotos: Array<string>;
+  countPhotos: number;
   aboutMe: string = null;
   online: boolean = false;
   top: boolean;

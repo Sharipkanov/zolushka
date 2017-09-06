@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PopupsService } from '../../../services/popups/popups.service';
 import { UserService } from '../../../services/user/user.service';
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-popup-login',

@@ -1,6 +1,6 @@
-import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
-import { UserService } from '../../../services/user/user.service';
-import { PopupsService } from '../../../services/popups/popups.service';
+import {Component, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
+import {UserService} from '../../../services/user/user.service';
+import {PopupsService} from '../../../services/popups/popups.service';
 
 @Component({
     selector: 'app-popups',
@@ -18,6 +18,10 @@ export class PopupsComponent implements OnInit {
         chat: {
             active: false,
             visible: false
+        },
+        buyConfirmedPhotos: {
+            active: true,
+            visible: false
         }
     };
 
@@ -32,7 +36,13 @@ export class PopupsComponent implements OnInit {
         });
 
         this._userService.onChangeToken.subscribe((token: string) => {
-            (!token.length) ? this.popups['login']['active'] = true : this.popups['login']['active'] = false;
+            if (!token.length) {
+                // ACTIVATE POPUPS IF USER IS LOGGED IN
+                this.popups['login']['active'] = true;
+            } else {
+                // ACTIVATE POPUPS IF USER IS LOGGED OUT
+                this.popups['login']['active'] = false;
+            }
         });
 
         this._popupsService.onOpenPopup.subscribe((popup_name: string) => {

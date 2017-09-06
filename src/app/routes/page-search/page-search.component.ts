@@ -6,6 +6,8 @@ import {SearchBarComponent} from "../../components/search-bar/search-bar.compone
 import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 import {IPagination, IPaginationUserSearch} from "../../interfaces/pagination.interface";
 import {StorageService} from "../../services/storage/storage.service";
+import {UserService} from "../../services/user/user.service";
+import {PopupsService} from "../../services/popups/popups.service";
 
 @Component({
     selector: 'app-page-search',
@@ -16,12 +18,13 @@ import {StorageService} from "../../services/storage/storage.service";
 export class PageSearchComponent implements OnInit {
     public users: IPaginationUserSearch = <IPaginationUserSearch>{};
     public gridType: boolean = true;
+    public filter: string = 'all';
     public preloaders = {
         userGrid: false,
         filters: false
     };
 
-    constructor(private _storageService: StorageService, private _router: Router, private _activatedRouter: ActivatedRoute, private _usersService: UsersService) {
+    constructor(private _popupsService: PopupsService, private _storageService: StorageService, private _router: Router, private _activatedRouter: ActivatedRoute, private _usersService: UsersService, private _userService: UserService) {
     }
 
     ngOnInit() {
@@ -30,6 +33,16 @@ export class PageSearchComponent implements OnInit {
         const queryParams = {...this._activatedRouter.snapshot.queryParams};
         if (!queryParams['type']) {
             queryParams['type'] = 200;
+        }
+
+        if (!!queryParams['realPhoto']) {
+            this.filter = 'realPhoto';
+        } else if (!!queryParams['online']) {
+            this.filter = 'online';
+        } else if (!!queryParams['newDays']) {
+            this.filter = 'newDays';
+        } else {
+            this.filter = 'all';
         }
 
         this.searchUsers(queryParams);
@@ -72,6 +85,11 @@ export class PageSearchComponent implements OnInit {
         this._usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
             this.users = <IPaginationUserSearch>users;
             this.preloaders.userGrid = false;
+        }, error => {
+            if (this.filter === 'realPhoto') {
+                this._popupsService.openPopup('buyConfirmedPhotos');
+                this.preloaders.userGrid = false;
+            }
         });
     }
 
@@ -82,6 +100,29 @@ export class PageSearchComponent implements OnInit {
         } else {
             this._storageService.set('catalogGridType', 0);
         }
+    }
 
+    changeFilter(filter: string) {
+        this.filter = filter;
+
+        const queryParams = {...this._activatedRouter.snapshot.queryParams};
+
+        delete queryParams['newDays'];
+        delete queryParams['online'];
+        delete queryParams['realPhoto'];
+        delete queryParams['page'];
+
+        switch (filter) {
+            case 'online':
+                queryParams['online'] = true;
+                break;
+            case 'newDays':
+                queryParams['newDays'] = 3;
+                break;
+            case 'realPhoto':
+                queryParams['realPhoto'] = true;
+                break;
+        }
+        this._router.navigate([], {queryParams: queryParams});
     }
 }
