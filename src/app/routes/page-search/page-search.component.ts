@@ -28,7 +28,7 @@ export class PageSearchComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.gridType = !!parseInt(this._storageService.get('catalogGridType'), 0);
+        this.gridType = !parseInt(this._storageService.get('catalogGridType'), 0);
 
         const queryParams = { ...this._activatedRouter.snapshot.queryParams };
         if (!queryParams['type']) {
