@@ -1,6 +1,6 @@
-import {Component, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
-import {UserService} from '../../../services/user/user.service';
-import {PopupsService} from '../../../services/popups/popups.service';
+import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
+import { UserService } from '../../../services/user/user.service';
+import { PopupsService } from '../../../services/popups/popups.service';
 
 @Component({
     selector: 'app-popups',
@@ -22,6 +22,14 @@ export class PopupsComponent implements OnInit {
         buyConfirmedPhotos: {
             active: true,
             visible: false
+        },
+        regBeforeFilterByOnline: {
+            active: false,
+            visible: false
+        },
+        regBeforeFilterByRealPhoto: {
+            active: false,
+            visible: false
         }
     };
 
@@ -36,6 +44,7 @@ export class PopupsComponent implements OnInit {
         });
 
         this._userService.onChangeToken.subscribe((token: string) => {
+            this.detectActivePopups();
             if (!token.length) {
                 // ACTIVATE POPUPS IF USER IS LOGGED IN
                 this.popups['login']['active'] = true;
@@ -55,11 +64,21 @@ export class PopupsComponent implements OnInit {
     }
 
     detectActivePopups() {
-        // login popup
-        (!this._userService.token().length) ? this.popups['login']['active'] = true : this.popups['login']['active'] = false;
 
-        // chat popup
-        (!!this._userService.token().length) ? this.popups['chat']['active'] = true : this.popups['chat']['active'] = false;
+        if (!this._userService.token().length) {
+            // login popup
+            this.popups['login']['active'] = true;
+            // chat popup
+            this.popups['chat']['active'] = false;
+            // filter notification popups ## reg before online and real photo popups
+            this.popups['regBeforeFilterByOnline']['active'] = true;
+            this.popups['regBeforeFilterByRealPhoto']['active'] = true;
+        } else {
+            // login popup
+            this.popups['login']['active'] = false;
+            // chat popup
+            this.popups['chat']['active'] = true;
+        }
     }
 
     openPopup(popup_name: string) {

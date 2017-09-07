@@ -1,13 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import {UsersService} from '../../services/users/users.service';
-import {IUser} from '../../interfaces/user.interface';
-import {SearchBarComponent} from "../../components/search-bar/search-bar.component";
-import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
-import {IPagination, IPaginationUserSearch} from "../../interfaces/pagination.interface";
-import {StorageService} from "../../services/storage/storage.service";
-import {UserService} from "../../services/user/user.service";
-import {PopupsService} from "../../services/popups/popups.service";
+import { UsersService } from '../../services/users/users.service';
+import { IUser } from '../../interfaces/user.interface';
+import { SearchBarComponent } from "../../components/search-bar/search-bar.component";
+import { ActivatedRoute, NavigationExtras, Router } from "@angular/router";
+import { IPagination, IPaginationUserSearch } from "../../interfaces/pagination.interface";
+import { StorageService } from "../../services/storage/storage.service";
+import { UserService } from "../../services/user/user.service";
+import { PopupsService } from "../../services/popups/popups.service";
 
 @Component({
     selector: 'app-page-search',
@@ -30,7 +30,7 @@ export class PageSearchComponent implements OnInit {
     ngOnInit() {
         this.gridType = !!parseInt(this._storageService.get('catalogGridType'), 0);
 
-        const queryParams = {...this._activatedRouter.snapshot.queryParams};
+        const queryParams = { ...this._activatedRouter.snapshot.queryParams };
         if (!queryParams['type']) {
             queryParams['type'] = 200;
         }
@@ -48,7 +48,7 @@ export class PageSearchComponent implements OnInit {
         this.searchUsers(queryParams);
 
         this._activatedRouter.queryParams.subscribe(params => {
-            const myParams = {...params};
+            const myParams = { ...params };
             if (!myParams['type']) {
                 myParams['type'] = 200;
             }
@@ -77,7 +77,7 @@ export class PageSearchComponent implements OnInit {
             }
         }
 
-        this._router.navigate(['/search'], {queryParams: queryArray});
+        this._router.navigate(['/search'], { queryParams: queryArray });
     }
 
     searchUsers(data = null) {
@@ -103,9 +103,9 @@ export class PageSearchComponent implements OnInit {
     }
 
     changeFilter(filter: string) {
-        this.filter = filter;
 
-        const queryParams = {...this._activatedRouter.snapshot.queryParams};
+        const queryParams = { ...this._activatedRouter.snapshot.queryParams };
+        let makeQuery = true;
 
         delete queryParams['newDays'];
         delete queryParams['online'];
@@ -113,16 +113,30 @@ export class PageSearchComponent implements OnInit {
         delete queryParams['page'];
 
         switch (filter) {
-            case 'online':
-                queryParams['online'] = true;
-                break;
             case 'newDays':
                 queryParams['newDays'] = 3;
                 break;
+            case 'online':
+                if (this._userService.token().length) {
+                    queryParams['online'] = true;
+                } else {
+                    this._popupsService.openPopup('regBeforeFilterByOnline');
+                    makeQuery = false;
+                }
+                break;
             case 'realPhoto':
-                queryParams['realPhoto'] = true;
+                if (this._userService.token().length) {
+                    queryParams['realPhoto'] = true;
+                } else {
+                    this._popupsService.openPopup('regBeforeFilterByRealPhoto');
+                    makeQuery = false;
+                }
                 break;
         }
-        this._router.navigate([], {queryParams: queryParams});
+
+        if (makeQuery === true) {
+            this.filter = filter;
+            this._router.navigate([], { queryParams: queryParams });
+        }
     }
 }

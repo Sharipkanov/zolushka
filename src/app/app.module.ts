@@ -69,7 +69,9 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { MassMediaComponent } from './components/mass-media/mass-media.component';
-import { PopupNoticeConfirmedPhotosComponent } from './components/popups/popup-notice-confirmed-photos/popup-notice-confirmed-photos.component'
+import { PopupNoticeConfirmedPhotosComponent } from './components/popups/popup-notice-confirmed-photos/popup-notice-confirmed-photos.component';
+import { PopupRegBeforeFilterByOnlineComponent } from './components/popups/popup-reg-before-filter-by-online/popup-reg-before-filter-by-online.component';
+import { PopupRegBeforeFilterByRealPhotoComponent } from './components/popups/popup-reg-before-filter-by-real-photo/popup-reg-before-filter-by-real-photo.component'
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -126,7 +128,9 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         PopupChatComponent,
         PaginationComponent,
         MassMediaComponent,
-        PopupNoticeConfirmedPhotosComponent
+        PopupNoticeConfirmedPhotosComponent,
+        PopupRegBeforeFilterByOnlineComponent,
+        PopupRegBeforeFilterByRealPhotoComponent
     ],
     imports: [
         BrowserModule,

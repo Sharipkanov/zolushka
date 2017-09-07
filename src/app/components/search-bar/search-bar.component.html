@@ -55,7 +55,15 @@
       </div>
     </div>
     <div class="search-bar__content">
-      <div class="search-bar__content-inner">
+      <div class="search-bar__content-inner fw-position-relative">
+        <div class="search-bar__locked-search fw-flex" *ngIf="!subFilterActive">
+          <div class="fw-m-auto fw-text-center">
+              <div class="fw-mb-20 fw-text-600">Для поиска по всем параметрам необходимо<br>зарегистрироваться</div>
+              <div>
+                  <a routerLink="/registration" class="button button--primary">Регистрация</a>
+              </div>
+          </div>
+        </div>
         <div class="search-bar__grid">
           <div>
             <div class="fw-flex search-bar__custom-input">
