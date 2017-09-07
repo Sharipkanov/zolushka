@@ -5,7 +5,7 @@
                 <div class="profile__info fw-mb-30 panel fw-br-5">
                     <div class="profile__info-image">
                         <img alt="" class="profile__info-avatar fw-width-1-1"
-                             src="{{(user_info['avatar']) ? user_info['avatar']['_links']['thumbnail'] : './assets/images/default-navigation-avatar.svg'}}"/>
+                             src="{{(user_info['avatar']) ? user_info['avatar']['_links']['thumbnail'] : './assets/images/default-avatar.svg'}}"/>
                     </div>
                     <div class="profile__info-content">
                         <div class="profile__info-statistic fw-mb-20">
@@ -31,7 +31,6 @@
                         <div class="profile__info-additions-params fw-mt-10"
                              *ngIf="!!model['_bodyCondition'] && !!model['_bodyCondition'].length">
                             {{ model['_bodyCondition'].join(', ') }}
-                            <!--Блондин, Глаза синие, Спортивное телосложение, Европейская внешность-->
                         </div>
                     </div>
                 </div>
@@ -53,7 +52,7 @@
                 <div class="profile__top-bar panel fw-br-5 fw-mb-30">
                     <div class="profile__name fw-flex fw-flex-space-between fw-flex-middle fw-mb-30">
                         <div class="profile__name-left">
-                            <div class="profile__name-title fw-fw-600 fw-mb-5">
+                            <div class="profile__name-title fw-fw-600 fw-mb-5" *ngIf="model['name']">
                                 {{ model['name'] }}{{ (model['age']) ? ' ' + model['age'] + 'лет' : '' }}, {{
                                 (model['zodiacsign']) ? model['zodiacsign'] + ', ' : '' }}{{ (model['city']) ?
                                 model['city']['title'] : '' }}
@@ -101,7 +100,7 @@
                                         </div>
                                     </div>
                                 </owl-carousel>
-                                <app-preloader *ngIf="queryInProcess"></app-preloader>
+                                <app-preloader *ngIf="preloaders.photos"></app-preloader>
                             </div>
                             <!--<div class="profile__photos-item" *ngFor="let item of gallery">
                                 <a href="#" class="profile__photos-image-hover">

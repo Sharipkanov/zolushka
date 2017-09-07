@@ -19,7 +19,11 @@ export class PageProfileComponent implements OnInit {
     public user_info = new IUserInfo();
     public model = {};
     public enums = {};
-    public queryInProcess: boolean = false;
+    public preloaders = {
+        total: false,
+        photos: false,
+        avatar: false
+    };
     public photoCurrentItem: number = 0;
 
     @ViewChild('photoCarousel') photoCarousel: OwlCarousel;
@@ -41,7 +45,7 @@ export class PageProfileComponent implements OnInit {
     public gallery: any = [];
     public gallery_info: any = new IGalleryInfo();
 
-    constructor(private _router: Router, private _userService: UserService, private _enums: EnumsService) {
+    constructor(private _userService: UserService, private _enums: EnumsService) {
     }
 
     ngOnInit() {
@@ -62,7 +66,7 @@ export class PageProfileComponent implements OnInit {
 
     getProfilePhotos(link: string = null) {
         const _self = this;
-        this.queryInProcess = true;
+        this.preloaders.photos = true;
         _self._userService.getPhotos(link).subscribe((response) => {
             _self.gallery_info = response;
             if (response._embedded) {
@@ -81,9 +85,9 @@ export class PageProfileComponent implements OnInit {
             if (this.photoCurrentItem > 0) {
                 _self.photoCarousel.$owlChild.$owl.trigger('to.owl.carousel', [this.photoCurrentItem, 0, true]);
             }
-            this.queryInProcess = false;
+            this.preloaders.photos = false;
             _self.photoCarousel.$owlChild.$owl.on('changed.owl.carousel', function (e) {
-                if (e.item.count - 1 <= e.item.index + e.page.size && !_self.queryInProcess) {
+                if (e.item.count - 1 <= e.item.index + e.page.size && !_self.preloaders.photos) {
                     _self.photoCurrentItem = e.item.index;
 
                     if (!!response._links.next) {
@@ -124,7 +128,7 @@ export class PageProfileComponent implements OnInit {
 
     uploadPhoto(e) {
         e.preventDefault();
-        this.queryInProcess = true;
+        this.preloaders.photos = true;
         this._userService.uploadPhoto(e.target).subscribe((response) => {
                 this.gallery = response._embedded.images;
                 this.owlBinding(response);
@@ -134,11 +138,11 @@ export class PageProfileComponent implements OnInit {
     }
 
     /*removePhoto(id: number, index) {
-     this.queryInProcess = true;
+     this.preloaders.photos = true;
      this._userService.removePhoto(id).subscribe(res => {
      this.gallery.splice(index, 1);
      console.log(res);
-     this.queryInProcess = false;
+     this.preloaders.photos = false;
      });
      }
 
