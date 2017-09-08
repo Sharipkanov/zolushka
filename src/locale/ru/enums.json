@@ -22,6 +22,15 @@
       "day": "День",
       "month": "Месяц",
       "year": "Год"
-    }
+    },
+    "birthdate": "День рождения",
+    "name": "Имя",
+    "aboutMe": "О себе",
+    "addPhone": "Подключить телефон",
+    "height": "Рост",
+    "weight": "Вес",
+    "interests": "Интересы",
+    "internationalLanguages": "Иностранные языки",
+    "education": "Образование"
   }
 }

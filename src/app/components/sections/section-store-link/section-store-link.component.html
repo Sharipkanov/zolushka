@@ -1,18 +1,18 @@
 <section
-        class="section-store-link fw-pt-20 fw-pb-20 fw-color-white{{(backgroundImage) ? ' fw-bg-no-repeat fw-bg-center fw-bg-cover' : ' fw-bg-blue'}}"
+        class="section-store-link fw-pt-20 fw-pb-20 {{(backgroundImage) ? ' fw-bg-no-repeat fw-bg-center fw-bg-cover' : ' fw-bg-blue'}}"
         [ngStyle]="(backgroundImage) ? {'background-image': 'url(/assets/images/section-store-link-bg.jpg)'} : {}">
     <div class="container">
         <div class="fw-flex fw-flex-space-between fw-flex-middle">
             <div class="fw-flex fw-flex-middle section-store-link__form">
                 <form [formGroup]="FFooterForm" class="fw-flex fw-mr-10 fw-flex-grow fw-flex-middle">
-                    <p class="fw-mr-15 fw-flex-shrink-no" [innerHTML]="'SECTION_STORE_LINK.GET_APP' | translate"></p>
+                    <p class="fw-mr-15 fw-flex-shrink-no fw-color-white" [innerHTML]="'SECTION_STORE_LINK.GET_APP' | translate"></p>
                     <div class="fw-flex fw-flex-middle fw-flex-grow">
                         <div class="fw-flex-grow">
                             <app-input-box formControlName="phone" [placeholder]="'SECTION_STORE_LINK.INPUT_PLACEHOLDER' | translate"
                                            [classes]="'fw-br-5'"></app-input-box>
                         </div>
                         <div class="fw-flex-shink-no fw-ml-10">
-                            <button type="submit" class="button button--primary section-store-link__btn" translate="SECTION_STORE_LINK.GET_BUTTON_TEXT"></button>
+                            <button type="submit" class="button button--primary section-store-link__btn">{{'SECTION_STORE_LINK.GET_BUTTON_TEXT' | translate}}</button>
                         </div>
                     </div>
                 </form>
@@ -25,8 +25,8 @@
                     </a>
                 </div>
             </div>
-            <div class="fw-flex-shrink-no fw-ml-15">
-                <a translate="SECTION_STORE_LINK.MOBILE_VERSION"></a>
+            <div class="fw-flex-shrink-no fw-ml-15 fw-color-white">
+                <a>{{'SECTION_STORE_LINK.MOBILE_VERSION' | translate}}</a>
             </div>
         </div>
     </div>

@@ -10,6 +10,7 @@ import { EnumsService } from '../../services/enums/enums.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
+import {UrlParserService} from "../../services/url-parser/url-parser.service";
 
 @Component({
     selector: 'app-search-bar',
@@ -48,7 +49,7 @@ export class SearchBarComponent implements OnInit {
         }
     }
 
-    constructor(private _activatedRouter: ActivatedRoute, private _fb: FormBuilder, private _enums: EnumsService, private _component: ElementRef, private _locationService: LocationService, private _userService: UserService) {
+    constructor(private _urlParserService: UrlParserService, private _router: Router, private _activatedRouter: ActivatedRoute, private _fb: FormBuilder, private _enums: EnumsService, private _component: ElementRef, private _locationService: LocationService, private _userService: UserService) {
     }
 
     ngOnInit() {
@@ -109,7 +110,15 @@ export class SearchBarComponent implements OnInit {
             delete newSearchParams.page;
         }
 
-        this.onSubmitSearchBar.emit(newSearchParams);
+        console.log(newSearchParams);
+        if (this._router.url === '/') {
+            const mainQueryParams = this._urlParserService.parseUrl(newSearchParams);
+            this._router.navigate(['/search'], {queryParams: mainQueryParams});
+        } else {
+            this.onSubmitSearchBar.emit(newSearchParams);
+        }
+
+
     }
 
     searchBarToggle(e) {

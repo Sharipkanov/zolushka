@@ -49,6 +49,7 @@ export class PageProfileComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.preloaders.total = true;
         const user_info = this._userService.info();
         if (user_info === undefined) {
             this._userService.onChangeUserInfo.subscribe(res => {
@@ -102,6 +103,7 @@ export class PageProfileComponent implements OnInit {
         this.enums = this._enums.getEnums();
 
         this._userService.profilePageInfo().subscribe(res => {
+            console.log(res);
             this.model = res;
             this.model['_bodyCondition'] = [];
             this.model['_sexualSection'] = [];
@@ -123,6 +125,8 @@ export class PageProfileComponent implements OnInit {
                     }
                 }
             }
+
+            this.preloaders.total = false;
         });
     }
 

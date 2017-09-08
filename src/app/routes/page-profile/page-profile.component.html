@@ -2,8 +2,10 @@
     <div class="container">
         <div class="profile-wrapper fw-flex">
             <div class="profile-left">
-                <div class="profile__info fw-mb-30 panel fw-br-5">
-                    <div class="profile__info-image">
+                <div class="profile__info fw-mb-30 panel fw-br-5 fw-position-relative">
+                    <app-preloader *ngIf="preloaders.total"></app-preloader>
+                    <div class="profile__info-image fw-position-relative">
+                        <app-preloader *ngIf="preloaders.avatar"></app-preloader>
                         <img alt="" class="profile__info-avatar fw-width-1-1"
                              src="{{(user_info['avatar']) ? user_info['avatar']['_links']['thumbnail'] : './assets/images/default-avatar.svg'}}"/>
                     </div>
@@ -25,8 +27,8 @@
                             </div>
                         </div>
                         <div class="profile__info-parameters fw-fw-600">
-                            <span class="fw-mr-15" *ngIf="!!model['weight']">Вес {{ model['weight'] }}кг</span>
-                            <span *ngIf="!!model['height']">Рост {{ model['height'] }} см</span>
+                            <span class="fw-mr-15" *ngIf="!!model['weight']">{{'ENUMS.weight' | translate}} {{ model['weight'] }}кг</span>
+                            <span *ngIf="!!model['height']">{{'ENUMS.height' | translate}} {{ model['height'] }} см</span>
                         </div>
                         <div class="profile__info-additions-params fw-mt-10"
                              *ngIf="!!model['_bodyCondition'] && !!model['_bodyCondition'].length">
@@ -40,17 +42,18 @@
                             <i class="icon-profile-crown"></i>
                         </div>
                         <div class="club-extend__content fw-mb-20 fw-fw-600 fw-fz-16">
-                            Станьте членом эксклюзивного клуба «Золушка Project» – подключите премиум-доступ!
+                            {{'COMPONENTS.PROFILE_PREMIUM_PLATE.BECOME_MEMBER' | translate}}
                         </div>
                         <div class="club-extend__button">
-                            <a class="button button--primary fw-width-1-1">Купить премиум</a>
+                            <a class="button button--primary fw-width-1-1">{{'BUTTONS.BUY_PREMIUM' | translate}}</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="profile-right fw-flex-grow">
                 <div class="profile__top-bar panel fw-br-5 fw-mb-30">
-                    <div class="profile__name fw-flex fw-flex-space-between fw-flex-middle fw-mb-30">
+                    <div class="profile__name fw-flex fw-flex-space-between fw-flex-middle fw-mb-30 fw-position-relative">
+                        <app-preloader *ngIf="preloaders.total"></app-preloader>
                         <div class="profile__name-left">
                             <div class="profile__name-title fw-fw-600 fw-mb-5" *ngIf="model['name']">
                                 {{ model['name'] }}{{ (model['age']) ? ' ' + model['age'] + 'лет' : '' }}, {{
@@ -65,14 +68,14 @@
                         <div class="profile__name-right">
                             <a routerLink="/profile-edit" class="button button--default">
                                 <div class="button-empty__text">
-                                    <span class="fw-inline-block fw-mr-5">Редактировать анкету</span>
+                                    <span class="fw-inline-block fw-mr-5">{{'BUTTONS.EDIT_PROFILE' | translate}}</span>
                                     <i class="icon-pencil"></i>
                                 </div>
                             </a>
                         </div>
                     </div>
                     <div class="profile__photos">
-                        <div class="profile__photos-title fw-fz-16 fw-mb-10 fw-fw-600">Фотографии</div>
+                        <div class="profile__photos-title fw-fz-16 fw-mb-10 fw-fw-600">{{'PAGE_PROFILE.PHOTOS' | translate}}</div>
                         <div class="fw-flex">
                             <div class="profile__photos-item fw-flex fw-flex-shrink-no fw-pr-10">
                                 <div class="fw-height-proportional-100 fw-width-1-1">
@@ -112,9 +115,10 @@
                     </div>
                 </div>
                 <div class="profile__more">
-                    <div class="profile__more-left">
+                    <div class="profile__more-left fw-position-relative">
+                        <app-preloader *ngIf="preloaders.total"></app-preloader>
                         <div class="profile__about panel fw-br-5 fw-mb-30">
-                            <div class="fw-fz-16 fw-fw-600 fw-mb-30">О себе</div>
+                            <div class="fw-fz-16 fw-fw-600 fw-mb-30">{{'ENUMS.aboutMe' | translate}}</div>
                             <div class="profile__about-content">
                                 {{ model['aboutMe'] }}
                             </div>
@@ -125,18 +129,18 @@
                                 <i class="icon-invisible-hat"></i>
                             </div>
                             <div class="profile__invisible-content fw-mb-30">
-                                Вы находитесь в режиме онлайн и другие пользователи видят, что вы на сайте. Вы
-                                можете включить режим невидимки и абсолютно анонимно находится на сайте
+                                {{'COMPONENTS.PROFILE_INVISIBLE_PLATE.MAIN_TEXT' | translate}}
                             </div>
                             <div>
-                                <a href="#" class="profile__invisible-link">Стать невидимкой</a>
+                                <a href="#" class="profile__invisible-link">{{'COMPONENTS.PROFILE_INVISIBLE_PLATE.BECOME_INVISIBLE' | translate}}</a>
                             </div>
                         </div>
                     </div>
                     <div class="profile__more-right">
-                        <div class="profile__data panel fw-br-5">
+                        <div class="profile__data panel fw-br-5 fw-position-relative">
+                            <app-preloader *ngIf="preloaders.total"></app-preloader>
                             <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">Цели знакомства</div>
+                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.relationshipTypes' | translate}}</div>
                                 <div class="profile__data-content">
                                     <span *ngFor="let item of model['relationshipTypes']; let isLast=last">
                                         {{item['title']}}{{isLast ? '' : ', '}}
@@ -144,15 +148,15 @@
                                 </div>
                             </div>
                             <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">Сексуальные
-                                    предпочтения
+                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">
+                                    {{'ENUMS.sexualPreference' | translate}}
                                 </div>
                                 <div class="profile__data-content">
                                     <span *ngIf="!!model['_sexualSection'] && !!model['_sexualSection'].length">{{ model['_sexualSection'].join(', ') }}</span>
                                 </div>
                             </div>
                             <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">Интересы</div>
+                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.interests' | translate}}</div>
                                 <div class="profile__data-content">
                                     <span *ngFor="let item of model['hobbies']; let isLast=last">
                                         {{item['title']}}{{isLast ? '' : ', '}}
@@ -160,19 +164,19 @@
                                 </div>
                             </div>
                             <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">Дети</div>
+                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.childrenExist' | translate}}</div>
                                 <div class="profile__data-content">
                                     {{ (model['childrenExist']) ? model['childrenExist']['title'] : '' }}
                                 </div>
                             </div>
                             <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">Иностранные языки</div>
+                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.internationalLanguages' | translate}}</div>
                                 <div class="profile__data-content">
                                     Английский
                                 </div>
                             </div>
                             <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">Образование</div>
+                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.education' | translate}}</div>
                                 <div class="profile__data-content">
                                     Высшее
                                 </div>

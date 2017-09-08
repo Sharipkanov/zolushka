@@ -22,7 +22,10 @@ export class PageProfileEditComponent implements OnInit {
     public gallery = [];
     public gallery_info = new IGalleryInfo();
 
-    public queryInProcess: boolean = false;
+    public preloaders = {
+        photos: false,
+        profile: false
+    };
 
     public onAllDataGet: EventEmitter<any> = new EventEmitter();
 
@@ -33,9 +36,10 @@ export class PageProfileEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.queryInProcess = true;
+        this.preloaders.photos = true;
+        this.preloaders.profile = true;
         this._userService.getPhotos('?size=1000').subscribe(response => {
-            this.queryInProcess = false;
+            this.preloaders.photos = false;
             this.gallery_info = response;
             if (response._embedded) {
                 this.gallery = this.gallery_info._embedded.images;
@@ -59,6 +63,8 @@ export class PageProfileEditComponent implements OnInit {
                             .setValue(this.model['birthdateDecoded']['year']);
                     }
                 }
+
+                this.preloaders.profile = false;
             }
         });
 
@@ -120,6 +126,7 @@ export class PageProfileEditComponent implements OnInit {
 
     saveProfileData(e) {
         e.preventDefault();
+        this.preloaders.profile = true;
 
         const form = this.FProfile.value;
         const data = {
@@ -143,12 +150,10 @@ export class PageProfileEditComponent implements OnInit {
         };
 
         this._userService.profileUpdate(data).subscribe(response => {
-            console.log(response);
             if (response.id !== undefined) {
                 this.model = response;
-            } else {
-
             }
+            this.preloaders.profile = false;
         }, error => {
             console.log(error);
         });
@@ -156,23 +161,23 @@ export class PageProfileEditComponent implements OnInit {
 
     uploadPhoto(e) {
         e.preventDefault();
-        this.queryInProcess = true;
+        this.preloaders.photos = true;
 
         this._userService.uploadPhoto(e.target, 1000).subscribe((data) => {
                 this.gallery = data._embedded.images;
                 console.log(data);
-                this.queryInProcess = false;
+                this.preloaders.photos = false;
             },
             error => console.log(error)
         );
     }
 
     removePhoto(id: number, index) {
-        this.queryInProcess = true;
+        this.preloaders.photos = true;
         this._userService.removePhoto(id).subscribe(res => {
             this.gallery.splice(index, 1);
             console.log(res);
-            this.queryInProcess = false;
+            this.preloaders.photos = false;
         });
     }
 

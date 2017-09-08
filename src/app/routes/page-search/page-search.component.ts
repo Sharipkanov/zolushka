@@ -8,6 +8,7 @@ import { IPagination, IPaginationUserSearch } from "../../interfaces/pagination.
 import { StorageService } from "../../services/storage/storage.service";
 import { UserService } from "../../services/user/user.service";
 import { PopupsService } from "../../services/popups/popups.service";
+import {UrlParserService} from "../../services/url-parser/url-parser.service";
 
 @Component({
     selector: 'app-page-search',
@@ -24,7 +25,7 @@ export class PageSearchComponent implements OnInit {
         filters: false
     };
 
-    constructor(private _popupsService: PopupsService, private _storageService: StorageService, private _router: Router, private _activatedRouter: ActivatedRoute, private _usersService: UsersService, private _userService: UserService) {
+    constructor(private _urlParserService: UrlParserService, private _popupsService: PopupsService, private _storageService: StorageService, private _router: Router, private _activatedRouter: ActivatedRoute, private _usersService: UsersService, private _userService: UserService) {
     }
 
     ngOnInit() {
@@ -57,25 +58,7 @@ export class PageSearchComponent implements OnInit {
     }
 
     searchUsersQuery(searchObject) {
-        const queryArray = {};
-
-        for (const key in searchObject) {
-            if (!!searchObject[key]) {
-                if (Object.prototype.toString.call(searchObject[key]) === '[object Array]') {
-                    queryArray[key] = [];
-                    for (let i = 0; i < searchObject[key].length; i++) {
-                        if (!searchObject[key][i].id) {
-                            continue;
-                        }
-                        queryArray[key].push(searchObject[key][i].id);
-                    }
-                } else if (!!searchObject[key]['id']) {
-                    queryArray[key] = searchObject[key].id.toString();
-                } else if (typeof searchObject[key] === 'string' || typeof searchObject[key] === 'number') {
-                    queryArray[key] = searchObject[key].toString();
-                }
-            }
-        }
+        const queryArray = this._urlParserService.parseUrl(searchObject);
 
         this._router.navigate(['/search'], { queryParams: queryArray });
     }
