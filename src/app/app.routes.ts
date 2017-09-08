@@ -19,10 +19,11 @@ const appRoutes: Routes = [
     {path: 'search', component: PageSearchComponent},
     {path: 'components', component: PageComponentsComponent},
     {path: 'about', component: PageAboutComponent},
+    {path: 'profile/he/:profile_id', component: PageProfileComponent},
+    {path: 'profile/she/:profile_id', component: PageProfileComponent},
     {path: 'profile', component: PageProfileComponent, canActivate: [UserService]},
     {path: 'profile-edit', component: PageProfileEditComponent, canActivate: [UserService]},
     {path: 'profile-views', component: PageProfileViewsComponent, canActivate: [UserService]},
-    {path: 'profile/:id', component: PageProfileComponent},
     {path: 'mailing', component: PageMailingComponent, canActivate: [UserService]},
     {path: '**', component: PageNotFoundComponent}
 ];

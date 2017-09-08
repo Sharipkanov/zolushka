@@ -4,7 +4,7 @@ import {EnumsService} from '../../services/enums/enums.service';
 import {IUserInfo} from '../../interfaces/user-info.interface';
 import {IGalleryInfo} from '../../interfaces/gallery-info.interface';
 import {OwlCarousel} from 'ngx-owl-carousel';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-page-profile',
@@ -24,7 +24,11 @@ export class PageProfileComponent implements OnInit {
         photos: false,
         avatar: false
     };
+
+    public selfProfile = false;
+
     public photoCurrentItem: number = 0;
+    public profile_id;
 
     @ViewChild('photoCarousel') photoCarousel: OwlCarousel;
 
@@ -45,10 +49,14 @@ export class PageProfileComponent implements OnInit {
     public gallery: any = [];
     public gallery_info: any = new IGalleryInfo();
 
-    constructor(private _userService: UserService, private _enums: EnumsService) {
+    constructor(private _activatedRouter: ActivatedRoute, private _userService: UserService, private _enums: EnumsService) {
     }
 
     ngOnInit() {
+        this.profile_id = this._activatedRouter.snapshot.params['profile_id'];
+        if (!this.profile_id) {
+            this.selfProfile = true;
+        }
         this.preloaders.total = true;
         const user_info = this._userService.info();
         if (user_info === undefined) {
@@ -62,13 +70,12 @@ export class PageProfileComponent implements OnInit {
         this.getProfilPageInfo();
 
         this.getProfilePhotos();
-
     }
 
     getProfilePhotos(link: string = null) {
         const _self = this;
         this.preloaders.photos = true;
-        _self._userService.getPhotos(link).subscribe((response) => {
+        _self._userService.getPhotos(link, this.profile_id).subscribe((response) => {
             _self.gallery_info = response;
             if (response._embedded) {
                 for (let i = 0; i < _self.gallery_info._embedded.images.length; i++) {
@@ -102,8 +109,8 @@ export class PageProfileComponent implements OnInit {
     getProfilPageInfo() {
         this.enums = this._enums.getEnums();
 
-        this._userService.profilePageInfo().subscribe(res => {
-            console.log(res);
+        this._userService.profilePageInfo(this.profile_id).subscribe(res => {
+            console.log(this.profile_id, res);
             this.model = res;
             this.model['_bodyCondition'] = [];
             this.model['_sexualSection'] = [];

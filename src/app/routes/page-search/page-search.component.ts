@@ -67,6 +67,7 @@ export class PageSearchComponent implements OnInit {
         this.preloaders.userGrid = true;
         this._usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
             this.users = <IPaginationUserSearch>users;
+            console.log(this.users);
             this.preloaders.userGrid = false;
         }, error => {
             if (this.filter === 'realPhoto') {

@@ -53,7 +53,6 @@ import {PageProfileEditComponent} from './routes/page-profile-edit/page-profile-
 import {HttpService} from './services/http/http.service';
 import {DateService} from './services/date/date.service';
 import {EnumsService} from './services/enums/enums.service';
-import {PageWalletComponent} from './routes/wallet/page-wallet/page-wallet.component';
 import {OwlModule} from 'ngx-owl-carousel';
 import {PreloaderComponent} from './components/preloader/preloader.component';
 import {PageMailingComponent} from './routes/page-mailing/page-mailing.component';
@@ -72,7 +71,7 @@ import { MassMediaComponent } from './components/mass-media/mass-media.component
 import { PopupNoticeConfirmedPhotosComponent } from './components/popups/popup-notice-confirmed-photos/popup-notice-confirmed-photos.component';
 import { PopupRegBeforeFilterByOnlineComponent } from './components/popups/popup-reg-before-filter-by-online/popup-reg-before-filter-by-online.component';
 import { PopupRegBeforeFilterByRealPhotoComponent } from './components/popups/popup-reg-before-filter-by-real-photo/popup-reg-before-filter-by-real-photo.component'
-import {UrlParserService} from "./services/url-parser/url-parser.service";
+import {UrlParserService} from './services/url-parser/url-parser.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -121,7 +120,6 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         PopupsComponent,
         PageProfileComponent,
         PageProfileEditComponent,
-        PageWalletComponent,
         PreloaderComponent,
         PageMailingComponent,
         PageProfileViewsComponent,

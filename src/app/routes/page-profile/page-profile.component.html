@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="profile__extend panel fw-br-5" *ngIf="!user_info['premium']">
+                <div class="profile__extend panel fw-br-5" *ngIf="!user_info['premium'] && selfProfile">
                     <div class="club-extend">
                         <div class="club-extend__icon-wrapper fw-mb-20 fw-text-center">
                             <i class="icon-profile-crown"></i>
@@ -65,7 +65,7 @@
                                 <span class="fw-color-green-light fw-inline-block fw-fz-13">On-line</span>
                             </div>
                         </div>
-                        <div class="profile__name-right">
+                        <div class="profile__name-right" *ngIf="selfProfile">
                             <a routerLink="/profile-edit" class="button button--default">
                                 <div class="button-empty__text">
                                     <span class="fw-inline-block fw-mr-5">{{'BUTTONS.EDIT_PROFILE' | translate}}</span>
@@ -77,7 +77,7 @@
                     <div class="profile__photos">
                         <div class="profile__photos-title fw-fz-16 fw-mb-10 fw-fw-600">{{'PAGE_PROFILE.PHOTOS' | translate}}</div>
                         <div class="fw-flex">
-                            <div class="profile__photos-item fw-flex fw-flex-shrink-no fw-pr-10">
+                            <div class="profile__photos-item fw-flex fw-flex-shrink-no fw-pr-10" *ngIf="selfProfile">
                                 <div class="fw-height-proportional-100 fw-width-1-1">
                                     <label class="profile-add-new-photo fw-fz-13">
                                         <i class="icon-camera-purple"></i>

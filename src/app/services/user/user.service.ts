@@ -11,8 +11,6 @@ export class UserService implements CanActivate {
     onChangeToken: EventEmitter<String> = new EventEmitter<String>();
     onChangeUserInfo: EventEmitter<Object> = new EventEmitter<Object>();
 
-    public user = {};
-
     constructor(private _router: Router, private _http: Http, @Inject(StorageService) private _storageService: StorageService) {
     }
 
@@ -92,9 +90,13 @@ export class UserService implements CanActivate {
             .map(res => res.json());
     }
 
-    profilePageInfo() {
+    profilePageInfo(profile_id = null) {
         const headers = this.setHeaders();
-        return this._http.get(`/api/api/client/`, {headers: headers})
+        let url = `/api/api/client/`;
+        if (profile_id) {
+            url += `${profile_id}`;
+        }
+        return this._http.get(url, {headers: headers})
             .map(res => res.json());
     }
 
@@ -127,9 +129,13 @@ export class UserService implements CanActivate {
         }
     }
 
-    getPhotos(link: string = null) {
+    getPhotos(link: string = null, profile_id = null) {
         const headers = this.setHeaders();
         let query = `/api/media/client/images`;
+
+        if (!!profile_id) {
+            query = `/api/media/client/${profile_id}/images`;
+        }
 
         if (link && link !== undefined) {
             query += '/' + link;
