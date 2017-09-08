@@ -22,6 +22,7 @@ const appRoutes: Routes = [
     {path: 'profile', component: PageProfileComponent, canActivate: [UserService]},
     {path: 'profile-edit', component: PageProfileEditComponent, canActivate: [UserService]},
     {path: 'profile-views', component: PageProfileViewsComponent, canActivate: [UserService]},
+    {path: 'profile/:id', component: PageProfileComponent},
     {path: 'mailing', component: PageMailingComponent, canActivate: [UserService]},
     {path: '**', component: PageNotFoundComponent}
 ];
