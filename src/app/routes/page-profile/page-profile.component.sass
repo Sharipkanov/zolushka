@@ -52,7 +52,7 @@
 	border-radius: 5px
 
 .profile__info-content
-	padding: 20px 20px 25px
+	padding: 20px
 
 .club-extend
 	background: url("/assets/images/pages/profile/profile-up.jpg") no-repeat center center / cover
@@ -332,3 +332,55 @@
 		margin-right: -5px
 		margin-top: 1px
 		border-color: transparent #f7f8ff transparent transparent
+		
+.profile__info-more
+	&:hover
+		.profile__info-more-dropdown
+			opacity: 1
+			visibility: visible
+			margin-top: 0
+			
+		.icon-form-triangle
+			+transform(rotate(-180deg))
+
+.profile__info-more-dropdown
+	+transition()
+	position: absolute
+	opacity: 0
+	visibility: hidden
+	right: -20px
+	margin-top: 20px
+	top: 100%
+	padding-top: 5px
+	min-width: 220px
+	
+	ul
+		background-color: #fff
+		box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15)
+		padding: 0 20px
+		
+	li
+		padding: 10px 0
+		cursor: pointer
+		position: relative
+		
+		&:after
+			display: block
+			content: ''
+			position: absolute
+			top: 0
+			left: -20px
+			right: calc(100% + 20px)
+			bottom: 0
+			background-color: rgba(#000, 0.05)
+			+transition()
+		
+		&:not(:last-child)
+			border-bottom: 1px solid #e3e3e6
+			
+		&:hover
+			&:after
+				right: -20px
+
+.profile__info-more-label
+	cursor: pointer

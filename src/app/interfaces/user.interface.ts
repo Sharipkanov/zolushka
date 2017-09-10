@@ -7,6 +7,7 @@ export class IUser {
   city: ICity = <ICity>{};
   lastOnline: string = null;
   age: number;
+  type: number;
   countPhotos: number;
   aboutMe: string = null;
   online: boolean = false;

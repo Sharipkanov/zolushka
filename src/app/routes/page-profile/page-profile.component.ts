@@ -5,6 +5,9 @@ import {IUserInfo} from '../../interfaces/user-info.interface';
 import {IGalleryInfo} from '../../interfaces/gallery-info.interface';
 import {OwlCarousel} from 'ngx-owl-carousel';
 import {ActivatedRoute, Router} from '@angular/router';
+import { IUser } from "../../interfaces/user.interface";
+import { IDialog } from "../../interfaces/dialog.interface";
+import { DialogService } from "../../services/dialog/dialog.service";
 
 @Component({
     selector: 'app-page-profile',
@@ -49,7 +52,7 @@ export class PageProfileComponent implements OnInit {
     public gallery: any = [];
     public gallery_info: any = new IGalleryInfo();
 
-    constructor(private _activatedRouter: ActivatedRoute, private _userService: UserService, private _enums: EnumsService) {
+    constructor(private _dialogService: DialogService, private _activatedRouter: ActivatedRoute, private _userService: UserService, private _enums: EnumsService) {
     }
 
     ngOnInit() {
@@ -160,4 +163,10 @@ export class PageProfileComponent implements OnInit {
      cropPhoto(id: number, index) {
      console.log('crop photo')
      }*/
+
+    openChat(user: IUser) {
+        const dialog = new IDialog();
+        dialog.clientTo = user;
+        this._dialogService.onAddNewDialog.emit(dialog);
+    }
 }

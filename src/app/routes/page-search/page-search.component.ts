@@ -32,9 +32,6 @@ export class PageSearchComponent implements OnInit {
         this.gridType = !parseInt(this._storageService.get('catalogGridType'), 0);
 
         const queryParams = { ...this._activatedRouter.snapshot.queryParams };
-        if (!queryParams['type']) {
-            queryParams['type'] = 200;
-        }
 
         if (!!queryParams['realPhoto']) {
             this.filter = 'realPhoto';
@@ -46,7 +43,7 @@ export class PageSearchComponent implements OnInit {
             this.filter = 'all';
         }
 
-        this.searchUsers(queryParams);
+        // this.searchUsers(queryParams);
 
         this._activatedRouter.queryParams.subscribe(params => {
             const myParams = { ...params };
@@ -67,7 +64,6 @@ export class PageSearchComponent implements OnInit {
         this.preloaders.userGrid = true;
         this._usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
             this.users = <IPaginationUserSearch>users;
-            console.log(this.users);
             this.preloaders.userGrid = false;
         }, error => {
             if (this.filter === 'realPhoto') {
