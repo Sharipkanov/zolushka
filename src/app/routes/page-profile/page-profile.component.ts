@@ -5,9 +5,9 @@ import {IUserInfo} from '../../interfaces/user-info.interface';
 import {IGalleryInfo} from '../../interfaces/gallery-info.interface';
 import {OwlCarousel} from 'ngx-owl-carousel';
 import {ActivatedRoute, Router} from '@angular/router';
-import { IUser } from "../../interfaces/user.interface";
-import { IDialog } from "../../interfaces/dialog.interface";
-import { DialogService } from "../../services/dialog/dialog.service";
+import { IUser } from '../../interfaces/user.interface';
+import { IDialog } from '../../interfaces/dialog.interface';
+import { DialogService } from '../../services/dialog/dialog.service';
 
 @Component({
     selector: 'app-page-profile',
