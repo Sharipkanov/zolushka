@@ -1,236 +1,237 @@
 <div class="profile-page">
-    <div class="container">
-        <div class="profile-wrapper fw-flex">
-            <div class="profile-left">
-                <div class="profile__info fw-mb-30 panel fw-br-5 fw-position-relative">
-                    <app-preloader *ngIf="preloaders.total"></app-preloader>
-                    <div class="profile__info-image fw-position-relative">
-                        <app-preloader *ngIf="preloaders.avatar"></app-preloader>
-                        <img alt="" class="profile__info-avatar fw-width-1-1"
-                             src="{{(user_info['avatar']) ? user_info['avatar']['_links']['thumbnail'] : './assets/images/default-avatar.svg'}}"/>
-                    </div>
-                    <div class="profile__info-content">
-                        <div class="profile__info-contact fw-mb-20 fw-flex fw-flex-middle" *ngIf="!selfProfile">
-                            <div class="fw-mr-10">
-                                <a class="icon-chat-subshape fw-color-white" (click)="openChat(model)">
-                                    <i class="icon-chat-shape fw-mr-10 fw-ml-10"></i>
-                                    <span class="fw-mr-10">Написать</span>
-                                </a>
-                            </div>
-                            <div class="fw-mr-10">
-                                <a class="icon-phone-subshape">
-                                    <i class="icon-phone-shape"></i>
-                                </a>
-                            </div>
-                            <div>
-                                <a class="icon-star-subshape">
-                                    <i class="icon-star-shape"></i>
-                                </a>
-                            </div>
-                            <div class="fw-ml-auto">
-                                <div class="profile__info-more fw-position-relative">
-                                    <div class="profile__info-more-label fw-color-purple">
-                                        <span class="fw-mr-5">Еще</span>
-                                        <i class="icon-form-triangle fw-transition"></i>
-                                    </div>
-                                    <div class="profile__info-more-dropdown">
-                                        <ul>
-                                            <li>Пожаловаться</li>
-                                            <li>Заблокировать</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profile__info-statistic fw-mb-20">
-                            <div class="fw-flex fw-flex-space-between fw-flex-middle fw-fz-16 fw-fw-600">
-                                <div class="fw-flex fw-flex-middle">
-                                    <i class="icon-profile-views fw-mr-5"></i>
-                                    2349
-                                </div>
-                                <div class="fw-flex fw-flex-middle">
-                                    <i class="icon-profile-comments fw-mr-5"></i>
-                                    102
-                                </div>
-                                <div class="fw-flex fw-flex-middle">
-                                    <i class="icon-profile-search fw-mr-5"></i>
-                                    2349
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profile__info-parameters fw-fw-600">
-                            <span class="fw-mr-15" *ngIf="!!model['weight']">{{'ENUMS.weight' | translate}} {{ model['weight'] }}кг</span>
-                            <span *ngIf="!!model['height']">{{'ENUMS.height' | translate}} {{ model['height'] }} см</span>
-                        </div>
-                        <div class="profile__info-additions-params fw-mt-10"
-                             *ngIf="!!model['_bodyCondition'] && !!model['_bodyCondition'].length">
-                            {{ model['_bodyCondition'].join(', ') }}
-                        </div>
-                    </div>
+  <div class="container">
+    <div class="profile-wrapper fw-flex">
+      <div class="profile-left">
+        <div class="profile__info fw-mb-30 panel fw-br-5 fw-position-relative">
+          <app-preloader *ngIf="preloaders.total"></app-preloader>
+          <div class="profile__info-image fw-position-relative">
+            <app-preloader *ngIf="preloaders.avatar"></app-preloader>
+            <img alt="" class="profile__info-avatar fw-width-1-1"
+                 src="{{(user_info['avatar']) ? user_info['avatar']['_links']['thumbnail'] : './assets/images/default-avatar.svg'}}"/>
+          </div>
+          <div class="profile__info-content">
+            <div class="profile__info-contact fw-mb-20 fw-flex fw-flex-middle" *ngIf="!selfProfile">
+              <div class="fw-mr-10">
+                <a class="icon-chat-subshape fw-color-white" (click)="openChat(model)">
+                  <i class="icon-chat-shape fw-mr-10 fw-ml-10"></i>
+                  <span class="fw-mr-10">Написать</span>
+                </a>
+              </div>
+              <div class="fw-mr-10">
+                <a class="icon-phone-subshape">
+                  <i class="icon-phone-shape"></i>
+                </a>
+              </div>
+              <div>
+                <a class="icon-star-subshape">
+                  <i class="icon-star-shape"></i>
+                </a>
+              </div>
+              <div class="fw-ml-auto">
+                <div class="profile__info-more fw-position-relative">
+                  <div class="profile__info-more-label fw-color-purple">
+                    <span class="fw-mr-5">Еще</span>
+                    <i class="icon-form-triangle fw-transition"></i>
+                  </div>
+                  <div class="profile__info-more-dropdown">
+                    <ul>
+                      <li>Пожаловаться</li>
+                      <li>Заблокировать</li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="profile__extend panel fw-br-5" *ngIf="!user_info['premium'] && selfProfile">
-                    <div class="club-extend">
-                        <div class="club-extend__icon-wrapper fw-mb-20 fw-text-center">
-                            <i class="icon-profile-crown"></i>
-                        </div>
-                        <div class="club-extend__content fw-mb-20 fw-fw-600 fw-fz-16">
-                            {{'COMPONENTS.PROFILE_PREMIUM_PLATE.BECOME_MEMBER' | translate}}
-                        </div>
-                        <div class="club-extend__button">
-                            <a class="button button--primary fw-width-1-1">{{'BUTTONS.BUY_PREMIUM' | translate}}</a>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-            <div class="profile-right fw-flex-grow">
-                <div class="profile__top-bar panel fw-br-5 fw-mb-30">
-                    <div class="profile__name fw-flex fw-flex-space-between fw-flex-middle fw-mb-30 fw-position-relative">
-                        <app-preloader *ngIf="preloaders.total"></app-preloader>
-                        <div class="profile__name-left">
-                            <div class="profile__name-title fw-fw-600 fw-mb-5" *ngIf="model['name']">
-                                {{ model['name'] }}{{ (model['age']) ? ' ' + model['age'] + 'лет' : '' }}, {{
-                                (model['zodiacsign']) ? model['zodiacsign'] + ', ' : '' }}{{ (model['city']) ?
-                                model['city']['title'] : '' }}
-                            </div>
-                            <div>
-                                <i class="icon-online-status online fw-mr-5"></i>
-                                <span class="fw-color-green-light fw-inline-block fw-fz-13">On-line</span>
-                            </div>
-                        </div>
-                        <div class="profile__name-right" *ngIf="selfProfile">
-                            <a routerLink="/profile-edit" class="button button--default">
-                                <div class="button-empty__text">
-                                    <span class="fw-inline-block fw-mr-5">{{'BUTTONS.EDIT_PROFILE' | translate}}</span>
-                                    <i class="icon-pencil"></i>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="profile__photos">
-                        <div class="profile__photos-title fw-fz-16 fw-mb-10 fw-fw-600">{{'PAGE_PROFILE.PHOTOS' |
-                            translate}}
-                        </div>
-                        <div class="fw-flex">
-                            <div class="profile__photos-item fw-flex fw-flex-shrink-no fw-pr-10" *ngIf="selfProfile">
-                                <div class="fw-height-proportional-100 fw-width-1-1">
-                                    <label class="profile-add-new-photo fw-fz-13">
-                                        <i class="icon-camera-purple"></i>
-                                        <!--<i class="icon-camera-white fw-mb-10"></i>-->
-                                        <!--<span>Добавить фото</span>-->
-                                        <input type="file" multiple (change)="uploadPhoto($event)" class="fw-hidden">
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="fw-flex-grow fw-min-width-0 fw-position-relative">
-                                <owl-carousel class="profile__photos-carousel" #photoCarousel [options]="owlSettings"
-                                              [items]="gallery">
-                                    <div class="profile__photos-image-wrapper fw-height-proportional-100 fw-width-1-1"
-                                         *ngFor="let item of gallery; let i = index;">
-                                        <div class="profile__photos-image-hover profile-edit__photos-link">
-                                            <img alt="" class="profile__photos-image"
-                                                 src="{{ item._links.thumbnail.href }}"/>
-                                            <a *ngIf="selfProfile" class="profile-edit__photo-icon-left">
-                                                <i class="icon-circle-edit"></i>
-                                            </a>
-                                            <a *ngIf="selfProfile" class="profile-edit__photo-icon-right">
-                                                <i class="icon-circle-remove"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </owl-carousel>
-                                <app-preloader *ngIf="preloaders.photos"></app-preloader>
-                            </div>
-                            <!--<div class="profile__photos-item" *ngFor="let item of gallery">
-                                <a href="#" class="profile__photos-image-hover">
-                                    <img alt="" class="profile__photos-image fw-inline-block"
-                                         src="{{ item._links.thumbnail.href }}"/>
-                                </a>
-                            </div>-->
-                        </div>
-                    </div>
+            <div class="profile__info-statistic fw-mb-20">
+              <div class="fw-flex fw-flex-space-between fw-flex-middle fw-fz-16 fw-fw-600">
+                <div class="fw-flex fw-flex-middle">
+                  <i class="icon-profile-views fw-mr-5"></i>
+                  2349
                 </div>
-                <div class="profile__more">
-                    <div class="profile__more-left fw-position-relative">
-                        <app-preloader *ngIf="preloaders.total"></app-preloader>
-                        <div class="profile__about panel fw-br-5 fw-mb-30">
-                            <div class="fw-fz-16 fw-fw-600 fw-mb-30">{{'ENUMS.aboutMe' | translate}}</div>
-                            <div class="profile__about-content">
-                                {{ model['aboutMe'] }}
-                            </div>
-                        </div>
-
-                        <div class="profile__invisible panel fw-br-5" *ngIf="user_info['clientState'] !== 'invisible'">
-                            <div class="fw-mb-20">
-                                <i class="icon-invisible-hat"></i>
-                            </div>
-                            <div class="profile__invisible-content fw-mb-30">
-                                {{'COMPONENTS.PROFILE_INVISIBLE_PLATE.MAIN_TEXT' | translate}}
-                            </div>
-                            <div>
-                                <a href="#" class="profile__invisible-link">{{'COMPONENTS.PROFILE_INVISIBLE_PLATE.BECOME_INVISIBLE'
-                                    | translate}}</a>
-                            </div>
-                        </div>
+                <div class="fw-flex fw-flex-middle">
+                  <i class="icon-profile-comments fw-mr-5"></i>
+                  102
+                </div>
+                <div class="fw-flex fw-flex-middle">
+                  <i class="icon-profile-search fw-mr-5"></i>
+                  2349
+                </div>
+              </div>
+            </div>
+            <div class="profile__info-parameters fw-fw-600">
+              <span class="fw-mr-15"
+                    *ngIf="!!model['weight']">{{'ENUMS.weight' | translate}} {{ model['weight'] }}кг</span>
+              <span *ngIf="!!model['height']">{{'ENUMS.height' | translate}} {{ model['height'] }} см</span>
+            </div>
+            <div class="profile__info-additions-params fw-mt-10"
+                 *ngIf="!!model['_bodyCondition'] && !!model['_bodyCondition'].length">
+              {{ model['_bodyCondition'].join(', ') }}
+            </div>
+          </div>
+        </div>
+        <div class="profile__extend panel fw-br-5" *ngIf="!user_info['premium'] && selfProfile">
+          <div class="club-extend">
+            <div class="club-extend__icon-wrapper fw-mb-20 fw-text-center">
+              <i class="icon-profile-crown"></i>
+            </div>
+            <div class="club-extend__content fw-mb-20 fw-fw-600 fw-fz-16">
+              {{'COMPONENTS.PROFILE_PREMIUM_PLATE.BECOME_MEMBER' | translate}}
+            </div>
+            <div class="club-extend__button">
+              <a class="button button--primary fw-width-1-1">{{'BUTTONS.BUY_PREMIUM' | translate}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="profile-right fw-flex-grow">
+        <div class="profile__top-bar panel fw-br-5 fw-mb-30">
+          <div class="profile__name fw-flex fw-flex-space-between fw-flex-middle fw-mb-30 fw-position-relative">
+            <app-preloader *ngIf="preloaders.total"></app-preloader>
+            <div class="profile__name-left">
+              <div class="profile__name-title fw-fw-600 fw-mb-5" *ngIf="model['name']">
+                {{ model['name'] }}{{ (model['age']) ? ' ' + model['age'] + 'лет' : '' }}, {{
+                (model['zodiacsign']) ? model['zodiacsign'] + ', ' : '' }}{{ (model['city']) ?
+                model['city']['title'] : '' }}
+              </div>
+              <div>
+                <i class="icon-online-status online fw-mr-5"></i>
+                <span class="fw-color-green-light fw-inline-block fw-fz-13">On-line</span>
+              </div>
+            </div>
+            <div class="profile__name-right" *ngIf="selfProfile">
+              <a routerLink="/profile-edit" class="button button--default">
+                <div class="button-empty__text">
+                  <span class="fw-inline-block fw-mr-5">{{'BUTTONS.EDIT_PROFILE' | translate}}</span>
+                  <i class="icon-pencil"></i>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="profile__photos">
+            <div class="profile__photos-title fw-fz-16 fw-mb-10 fw-fw-600">{{'PAGE_PROFILE.PHOTOS' |
+              translate}}
+            </div>
+            <div class="fw-flex">
+              <div class="profile__photos-item fw-flex fw-flex-shrink-no fw-pr-10" *ngIf="selfProfile">
+                <div class="fw-height-proportional-100 fw-width-1-1">
+                  <label class="profile-add-new-photo fw-fz-13">
+                    <i class="icon-camera-purple"></i>
+                    <!--<i class="icon-camera-white fw-mb-10"></i>-->
+                    <!--<span>Добавить фото</span>-->
+                    <input type="file" multiple (change)="uploadPhoto($event)" class="fw-hidden">
+                  </label>
+                </div>
+              </div>
+              <div class="fw-flex-grow fw-min-width-0 fw-position-relative">
+                <owl-carousel class="profile__photos-carousel" #photoCarousel [options]="owlSettings"
+                              [items]="gallery">
+                  <div class="profile__photos-image-wrapper fw-height-proportional-100 fw-width-1-1"
+                       *ngFor="let item of gallery; let i = index;">
+                    <div class="profile__photos-image-hover profile-edit__photos-link">
+                      <img alt="" class="profile__photos-image"
+                           src="{{ item._links.thumbnail.href }}"/>
+                      <a *ngIf="selfProfile" class="profile-edit__photo-icon-left">
+                        <i class="icon-circle-edit"></i>
+                      </a>
+                      <a *ngIf="selfProfile" class="profile-edit__photo-icon-right">
+                        <i class="icon-circle-remove"></i>
+                      </a>
                     </div>
-                    <div class="profile__more-right">
-                        <div class="profile__data panel fw-br-5 fw-position-relative">
-                            <app-preloader *ngIf="preloaders.total"></app-preloader>
-                            <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.relationshipTypes'
-                                    | translate}}
-                                </div>
-                                <div class="profile__data-content">
+                  </div>
+                </owl-carousel>
+                <app-preloader *ngIf="preloaders.photos"></app-preloader>
+              </div>
+              <!--<div class="profile__photos-item" *ngFor="let item of gallery">
+                  <a href="#" class="profile__photos-image-hover">
+                      <img alt="" class="profile__photos-image fw-inline-block"
+                           src="{{ item._links.thumbnail.href }}"/>
+                  </a>
+              </div>-->
+            </div>
+          </div>
+        </div>
+        <div class="profile__more">
+          <div class="profile__more-left fw-position-relative">
+            <app-preloader *ngIf="preloaders.total"></app-preloader>
+            <div class="profile__about panel fw-br-5 fw-mb-30">
+              <div class="fw-fz-16 fw-fw-600 fw-mb-30">{{'ENUMS.aboutMe' | translate}}</div>
+              <div class="profile__about-content">
+                {{ model['aboutMe'] }}
+              </div>
+            </div>
+
+            <div class="profile__invisible panel fw-br-5" *ngIf="user_info['clientState'] !== 'invisible'">
+              <div class="fw-mb-20">
+                <i class="icon-invisible-hat"></i>
+              </div>
+              <div class="profile__invisible-content fw-mb-30">
+                {{'COMPONENTS.PROFILE_INVISIBLE_PLATE.MAIN_TEXT' | translate}}
+              </div>
+              <div>
+                <a href="#" class="profile__invisible-link">{{'COMPONENTS.PROFILE_INVISIBLE_PLATE.BECOME_INVISIBLE'
+                  | translate}}</a>
+              </div>
+            </div>
+          </div>
+          <div class="profile__more-right">
+            <div class="profile__data panel fw-br-5 fw-position-relative">
+              <app-preloader *ngIf="preloaders.total"></app-preloader>
+              <div class="profile__data-item">
+                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.relationshipTypes'
+                  | translate}}
+                </div>
+                <div class="profile__data-content">
                                     <span *ngFor="let item of model['relationshipTypes']; let isLast=last">
                                         {{item['title']}}{{isLast ? '' : ', '}}
                                     </span>
-                                </div>
-                            </div>
-                            <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">
-                                    {{'ENUMS.sexualPreference' | translate}}
-                                </div>
-                                <div class="profile__data-content">
-                                    <span *ngIf="!!model['_sexualSection'] && !!model['_sexualSection'].length">{{ model['_sexualSection'].join(', ') }}</span>
-                                </div>
-                            </div>
-                            <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.interests' |
-                                    translate}}
-                                </div>
-                                <div class="profile__data-content">
+                </div>
+              </div>
+              <div class="profile__data-item">
+                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">
+                  {{'ENUMS.sexualPreference' | translate}}
+                </div>
+                <div class="profile__data-content">
+                  <span *ngIf="!!model['_sexualSection'] && !!model['_sexualSection'].length">{{ model['_sexualSection'].join(', ') }}</span>
+                </div>
+              </div>
+              <div class="profile__data-item">
+                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.interests' |
+                  translate}}
+                </div>
+                <div class="profile__data-content">
                                     <span *ngFor="let item of model['hobbies']; let isLast=last">
                                         {{item['title']}}{{isLast ? '' : ', '}}
                                     </span>
-                                </div>
-                            </div>
-                            <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.childrenExist' |
-                                    translate}}
-                                </div>
-                                <div class="profile__data-content">
-                                    {{ (model['childrenExist']) ? model['childrenExist']['title'] : '' }}
-                                </div>
-                            </div>
-                            <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">
-                                    {{'ENUMS.internationalLanguages' | translate}}
-                                </div>
-                                <div class="profile__data-content">
-                                    Английский
-                                </div>
-                            </div>
-                            <div class="profile__data-item">
-                                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.education' |
-                                    translate}}
-                                </div>
-                                <div class="profile__data-content">
-                                    Высшее
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+              </div>
+              <div class="profile__data-item">
+                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.childrenExist' |
+                  translate}}
+                </div>
+                <div class="profile__data-content">
+                  {{ (model['childrenExist']) ? model['childrenExist']['title'] : '' }}
+                </div>
+              </div>
+              <div class="profile__data-item">
+                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">
+                  {{'ENUMS.internationalLanguages' | translate}}
+                </div>
+                <div class="profile__data-content">
+                  Английский
+                </div>
+              </div>
+              <div class="profile__data-item">
+                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.education' |
+                  translate}}
+                </div>
+                <div class="profile__data-content">
+                  Высшее
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

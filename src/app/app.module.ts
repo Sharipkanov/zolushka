@@ -72,6 +72,12 @@ import { PopupNoticeConfirmedPhotosComponent } from './components/popups/popup-n
 import { PopupRegBeforeFilterByOnlineComponent } from './components/popups/popup-reg-before-filter-by-online/popup-reg-before-filter-by-online.component';
 import { PopupRegBeforeFilterByRealPhotoComponent } from './components/popups/popup-reg-before-filter-by-real-photo/popup-reg-before-filter-by-real-photo.component'
 import {UrlParserService} from './services/url-parser/url-parser.service';
+import { PageBlogComponent } from './routes/page-blog/page-blog.component';
+import { BlogItemCartComponent } from './components/blog-item-cart/blog-item-cart.component';
+import { BlogBottomCategoriesComponent } from './components/blog-bottom-categories/blog-bottom-categories.component';
+import { PageBlogItemComponent } from './routes/page-blog-item/page-blog-item.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { BottomGridComponent } from './components/bottom-grid/bottom-grid.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -129,7 +135,13 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         MassMediaComponent,
         PopupNoticeConfirmedPhotosComponent,
         PopupRegBeforeFilterByOnlineComponent,
-        PopupRegBeforeFilterByRealPhotoComponent
+        PopupRegBeforeFilterByRealPhotoComponent,
+        PageBlogComponent,
+        BlogItemCartComponent,
+        BlogBottomCategoriesComponent,
+        PageBlogItemComponent,
+        CommentsComponent,
+        BottomGridComponent
     ],
     imports: [
         BrowserModule,

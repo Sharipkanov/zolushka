@@ -1,0 +1,45 @@
+<div class="comments">
+  <div class="fw-fz-20 fw-fw-600 fw-mb-30">2 комментария</div>
+
+  <form action="#" class="comments-form fw-mb-15">
+    <div class="fw-flex fw-width-1-1">
+      <div class="comments__avatar padding-top fw-mr-15">
+        <img src="http://placehold.it/36" class="comments__avatar-image fw-brp-50" alt="">
+      </div>
+      <div class="fw-flex-grow">
+        <div class="input-box fw-radius-3 fw-mb-15">
+          <app-input-box [placeholder]="'Присоединиться к обсуждению'"></app-input-box>
+        </div>
+        <div class="fw-text-right">
+          <button class="button button--primary button--small">Отправить</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div class="comments__list">
+    <!--{% for i in 1..5 %}-->
+    <div class="comments__item fw-mb-15 fw-flex fw-width-1-1">
+      <div class="comments__avatar fw-mr-15">
+        <img src="http://placehold.it/36" class="comments__avatar-image fw-brp-50" alt="">
+      </div>
+      <div class="fw-flex-grow">
+        <div class="comments__item-header fw-mb-10">
+          <span class="comments__item-name fw-mr-15 fw-fw-600">Наталья</span>
+          <span class="comments__item-time">
+              вчера  в 18:30
+          </span>
+        </div>
+        <div class="comments__item-content fw-mb-10">
+          <div class="field-note__comment no-max-width">
+            Спасибо за советы!
+          </div>
+        </div>
+        <div class="fw-text-right">
+          <a href="#" class="button-reset">Ответить</a>
+        </div>
+      </div>
+    </div>
+    <!--{% endfor %}-->
+  </div>
+</div>

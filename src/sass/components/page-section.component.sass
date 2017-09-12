@@ -1,3 +1,6 @@
+@import "../../sass/mixins/mixins"
+@import "../../sass/colors"
+
 .page-section
   padding: 40px 0
 
@@ -113,3 +116,30 @@
 .page-title
   font-size: 26px
   font-weight: 600
+
+.page-content-area
+  color: $colorBlack
+  line-height: 1.5
+
+  p,
+  h1, h2, h3, h4, h5, h6
+    max-width: 800px
+
+  p:not(:last-child)
+    margin-bottom: 20px
+
+  h2
+    margin: 20px 0
+    font-size: 24px
+    color: $colorBlack
+
+  ol, ul
+    list-style: decimal
+    padding-left: 20px
+    margin: 20px 0
+
+    li
+      padding-left: 10px
+
+  ul
+    list-style: disc

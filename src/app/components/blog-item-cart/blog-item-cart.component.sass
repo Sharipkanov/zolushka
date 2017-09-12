@@ -1,0 +1,25 @@
+@import "../../../sass/mixins/mixins"
+@import "../../../sass/colors"
+
+.blog-item
+  border-radius: 5px
+
+.blog-item__header
+  padding: 20px
+
+.blog-item__header-link
+  height: 60px
+  display: block
+  overflow: hidden
+  +transition()
+
+  &:hover
+    //font-size: 18px
+    color: #a149a9
+
+.blog-item__image
+  border-radius: 100%
+
+.blog-item__content
+  padding: 20px
+  line-height: 1.5

@@ -21,7 +21,6 @@ export class PageHomeComponent implements OnInit {
 
     if (this._userService.token().length > 0) {
       this.logged = true;
-
       this._getTopUsers(2);
       this._getNewUsers(7);
     } else {
