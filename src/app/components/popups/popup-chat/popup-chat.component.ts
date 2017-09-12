@@ -20,7 +20,7 @@ export class PopupChatComponent implements OnInit, OnDestroy {
 
     public folders = [];
     public filterParams = {};
-    public dialogs: IPagination = <IPagination>{};
+    public dialogs: IPagination = new IPagination();
     public dialog: IDialog;
     public dialogKey: number;
     public messages = [];

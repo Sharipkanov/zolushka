@@ -6,8 +6,11 @@
           <app-preloader *ngIf="preloaders.total"></app-preloader>
           <div class="profile__info-image fw-position-relative">
             <app-preloader *ngIf="preloaders.avatar"></app-preloader>
-            <img alt="" class="profile__info-avatar fw-width-1-1"
+            <img alt="" class="profile__info-avatar fw-width-1-1 fw-vam"
                  src="{{(user_info['avatar']) ? user_info['avatar']['_links']['thumbnail'] : './assets/images/default-avatar.svg'}}"/>
+            <div class="profile__info-photo-approve fw-pr-20 fw-pl-20 fw-pb-20" *ngIf="selfProfile && !!model.type && model.type.id === 200">
+              <a class="button button--success fw-width-1-1">Подтвердить фото</a>
+            </div>
           </div>
           <div class="profile__info-content">
             <div class="profile__info-contact fw-mb-20 fw-flex fw-flex-middle" *ngIf="!selfProfile">
@@ -61,7 +64,9 @@
             <div class="profile__info-parameters fw-fw-600">
               <span class="fw-mr-15"
                     *ngIf="!!model['weight']">{{'ENUMS.weight' | translate}} {{ model['weight'] }}кг</span>
-              <span *ngIf="!!model['height']">{{'ENUMS.height' | translate}} {{ model['height'] }} см</span>
+              <span class="fw-mr-15"
+                    *ngIf="!!model['height']">{{'ENUMS.height' | translate}} {{ model['height'] }} см</span>
+              <span *ngIf="!!model['breastSize']">{{'ENUMS.breast' | translate}} {{ model['breastSize'] }}</span>
             </div>
             <div class="profile__info-additions-params fw-mt-10"
                  *ngIf="!!model['_bodyCondition'] && !!model['_bodyCondition'].length">
@@ -69,7 +74,7 @@
             </div>
           </div>
         </div>
-        <div class="profile__extend panel fw-br-5" *ngIf="!user_info['premium'] && selfProfile">
+        <div class="profile__extend panel fw-br-5" *ngIf="!user_info['premium'] && selfProfile && !!model.type && model.type.id === 100">
           <div class="club-extend">
             <div class="club-extend__icon-wrapper fw-mb-20 fw-text-center">
               <i class="icon-profile-crown"></i>
@@ -85,7 +90,7 @@
       </div>
       <div class="profile-right fw-flex-grow">
         <div class="profile__top-bar panel fw-br-5 fw-mb-30">
-          <div class="profile__name fw-flex fw-flex-space-between fw-flex-middle fw-mb-30 fw-position-relative">
+          <div class="profile__name fw-flex fw-flex-space-between fw-flex-middle fw-position-relative">
             <app-preloader *ngIf="preloaders.total"></app-preloader>
             <div class="profile__name-left">
               <div class="profile__name-title fw-fw-600 fw-mb-5" *ngIf="model['name']">
@@ -107,7 +112,7 @@
               </a>
             </div>
           </div>
-          <div class="profile__photos">
+          <div class="profile__photos fw-mt-30" *ngIf="!!gallery.length">
             <div class="profile__photos-title fw-fz-16 fw-mb-10 fw-fw-600">{{'PAGE_PROFILE.PHOTOS' |
               translate}}
             </div>
@@ -124,7 +129,7 @@
               </div>
               <div class="fw-flex-grow fw-min-width-0 fw-position-relative">
                 <owl-carousel class="profile__photos-carousel" #photoCarousel [options]="owlSettings"
-                              [items]="gallery">
+                              [items]="gallery" *ngIf="!!gallery.length">
                   <div class="profile__photos-image-wrapper fw-height-proportional-100 fw-width-1-1"
                        *ngFor="let item of gallery; let i = index;">
                     <div class="profile__photos-image-hover profile-edit__photos-link">
@@ -153,7 +158,7 @@
         <div class="profile__more">
           <div class="profile__more-left fw-position-relative">
             <app-preloader *ngIf="preloaders.total"></app-preloader>
-            <div class="profile__about panel fw-br-5 fw-mb-30">
+            <div class="profile__about panel fw-br-5 fw-mb-30" *ngIf="!!model['aboutMe']">
               <div class="fw-fz-16 fw-fw-600 fw-mb-30">{{'ENUMS.aboutMe' | translate}}</div>
               <div class="profile__about-content">
                 {{ model['aboutMe'] }}
@@ -168,25 +173,40 @@
                 {{'COMPONENTS.PROFILE_INVISIBLE_PLATE.MAIN_TEXT' | translate}}
               </div>
               <div>
-                <a href="#" class="profile__invisible-link">{{'COMPONENTS.PROFILE_INVISIBLE_PLATE.BECOME_INVISIBLE'
+                <a class="profile__invisible-link">{{'COMPONENTS.PROFILE_INVISIBLE_PLATE.BECOME_INVISIBLE'
                   | translate}}</a>
+              </div>
+            </div>
+
+            <div class="panel fw-br-5 fw-pt-20 fw-pl-20 fw-pr-20 fw-pb-20" *ngIf="!!model.type && model.type.id === 200">
+              <div class="block-title fw-fz-24">{{'COMPONENTS.PROFILE.ON_TOP_PLATE.TITLE' | translate}}</div>
+              <div class="fw-text-600 fw-fz-15 fw-mb-30">{{'COMPONENTS.PROFILE.ON_TOP_PLATE.YOUR_PLACE' | translate}}</div>
+              <!--TODO insert search place-->
+              <div class="fw-mb-30 fw-text-center">
+                <div class="round-icon-area"><i class="icon-rocket"></i></div>
+              </div>
+              <div class="fw-mb-25">
+                {{'COMPONENTS.PROFILE.ON_TOP_PLATE.INCREASE_RATING' | translate}}
+              </div>
+              <div>
+                <a class="button button--primary fw-width-1-1">{{'BUTTONS.UP_PROFILE' | translate}}</a>
               </div>
             </div>
           </div>
           <div class="profile__more-right">
             <div class="profile__data panel fw-br-5 fw-position-relative">
               <app-preloader *ngIf="preloaders.total"></app-preloader>
-              <div class="profile__data-item">
+              <div class="profile__data-item" *ngIf="!!model['relationshipTypes'] && !!model['relationshipTypes'].length">
                 <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.relationshipTypes'
                   | translate}}
                 </div>
                 <div class="profile__data-content">
-                                    <span *ngFor="let item of model['relationshipTypes']; let isLast=last">
-                                        {{item['title']}}{{isLast ? '' : ', '}}
-                                    </span>
+                  <span *ngFor="let item of model['relationshipTypes']; let isLast=last">
+                      {{item['title']}}{{isLast ? '' : ', '}}
+                  </span>
                 </div>
               </div>
-              <div class="profile__data-item">
+              <div class="profile__data-item" *ngIf="!!model['_sexualSection'] && !!model['_sexualSection'].length">
                 <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">
                   {{'ENUMS.sexualPreference' | translate}}
                 </div>
@@ -194,17 +214,17 @@
                   <span *ngIf="!!model['_sexualSection'] && !!model['_sexualSection'].length">{{ model['_sexualSection'].join(', ') }}</span>
                 </div>
               </div>
-              <div class="profile__data-item">
+              <div class="profile__data-item" *ngIf="!!model['hobbies'] && !!model['hobbies'].length">
                 <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.interests' |
                   translate}}
                 </div>
                 <div class="profile__data-content">
-                                    <span *ngFor="let item of model['hobbies']; let isLast=last">
-                                        {{item['title']}}{{isLast ? '' : ', '}}
-                                    </span>
+                  <span *ngFor="let item of model['hobbies']; let isLast=last">
+                      {{item['title']}}{{isLast ? '' : ', '}}
+                  </span>
                 </div>
               </div>
-              <div class="profile__data-item">
+              <div class="profile__data-item" *ngIf="!!model['childrenExist']">
                 <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.childrenExist' |
                   translate}}
                 </div>
