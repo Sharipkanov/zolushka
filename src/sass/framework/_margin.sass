@@ -25,6 +25,10 @@
   .fw-mr-#{$margin-right}
     margin-right: #{$margin-right}px
 
+@each $margin-right in 15
+  .fw-mr-#{$margin-right}-inverse
+    margin-right: -#{$margin-right}px
+
 @each $margin-bottom in 5, 10, 15, 20, 25, 30, 40, 50, 120
   .fw-mb-#{$margin-bottom}
     margin-bottom: #{$margin-bottom}px

@@ -7,8 +7,9 @@
           <div class="profile__info-image fw-position-relative">
             <app-preloader *ngIf="preloaders.avatar"></app-preloader>
             <img alt="" class="profile__info-avatar fw-width-1-1 fw-vam"
-                 src="{{(user_info['avatar']) ? user_info['avatar']['_links']['thumbnail'] : './assets/images/default-avatar.svg'}}"/>
-            <div class="profile__info-photo-approve fw-pr-20 fw-pl-20 fw-pb-20" *ngIf="selfProfile && !!model.type && model.type.id === 200">
+                 src="{{(user_info['avatar']) ? user_info['avatar']['_links']['original']['href'] : './assets/images/default-avatar.svg'}}"/>
+            <div class="profile__info-photo-approve fw-pr-20 fw-pl-20 fw-pb-20"
+                 *ngIf="selfProfile && !!model.type && model.type.id === 200 && !!user_info['avatar']">
               <a class="button button--success fw-width-1-1">Подтвердить фото</a>
             </div>
           </div>
@@ -45,7 +46,7 @@
                 </div>
               </div>
             </div>
-            <div class="profile__info-statistic fw-mb-20">
+            <div class="profile__info-statistic" *ngIf="selfProfile">
               <div class="fw-flex fw-flex-space-between fw-flex-middle fw-fz-16 fw-fw-600">
                 <div class="fw-flex fw-flex-middle">
                   <i class="icon-profile-views fw-mr-5"></i>
@@ -61,12 +62,14 @@
                 </div>
               </div>
             </div>
-            <div class="profile__info-parameters fw-fw-600">
+            <div class="profile__info-parameters fw-fw-600 fw-mt-20"
+                 *ngIf="!!model.weight || !!model.height || !!model.breastSize">
               <span class="fw-mr-15"
                     *ngIf="!!model['weight']">{{'ENUMS.weight' | translate}} {{ model['weight'] }}кг</span>
               <span class="fw-mr-15"
                     *ngIf="!!model['height']">{{'ENUMS.height' | translate}} {{ model['height'] }} см</span>
-              <span *ngIf="!!model['breastSize']">{{'ENUMS.breast' | translate}} {{ model['breastSize'] }}</span>
+              <span
+                  *ngIf="!!model['breastSize']">{{'ENUMS.breast' | translate}} {{ model['breastSize']['title'] }}</span>
             </div>
             <div class="profile__info-additions-params fw-mt-10"
                  *ngIf="!!model['_bodyCondition'] && !!model['_bodyCondition'].length">
@@ -74,7 +77,8 @@
             </div>
           </div>
         </div>
-        <div class="profile__extend panel fw-br-5" *ngIf="!user_info['premium'] && selfProfile && !!model.type && model.type.id === 100">
+        <div class="profile__extend panel fw-br-5"
+             *ngIf="!user_info['premium'] && selfProfile && !!model.type && model.type.id === 100">
           <div class="club-extend">
             <div class="club-extend__icon-wrapper fw-mb-20 fw-text-center">
               <i class="icon-profile-crown"></i>
@@ -178,9 +182,11 @@
               </div>
             </div>
 
-            <div class="panel fw-br-5 fw-pt-20 fw-pl-20 fw-pr-20 fw-pb-20" *ngIf="!!model.type && model.type.id === 200">
+            <div class="panel fw-br-5 fw-pt-20 fw-pl-20 fw-pr-20 fw-pb-20"
+                 *ngIf="!!model.type && model.type.id === 200 && selfProfile">
               <div class="block-title fw-fz-24">{{'COMPONENTS.PROFILE.ON_TOP_PLATE.TITLE' | translate}}</div>
-              <div class="fw-text-600 fw-fz-15 fw-mb-30">{{'COMPONENTS.PROFILE.ON_TOP_PLATE.YOUR_PLACE' | translate}}</div>
+              <div class="fw-text-600 fw-fz-15 fw-mb-30">{{'COMPONENTS.PROFILE.ON_TOP_PLATE.YOUR_PLACE' | translate}}
+              </div>
               <!--TODO insert search place-->
               <div class="fw-mb-30 fw-text-center">
                 <div class="round-icon-area"><i class="icon-rocket"></i></div>
@@ -194,29 +200,29 @@
             </div>
           </div>
           <div class="profile__more-right">
-            <div class="profile__data panel fw-br-5 fw-position-relative">
+            <div class="profile__data panel fw-br-5 fw-position-relative" *ngIf="!!model.relationshipTypes">
               <app-preloader *ngIf="preloaders.total"></app-preloader>
-              <div class="profile__data-item" *ngIf="!!model['relationshipTypes'] && !!model['relationshipTypes'].length">
-                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.relationshipTypes'
-                  | translate}}
+              <div class="profile__data-item" *ngIf="!!model.relationshipTypes && !!model.relationshipTypes.length">
+                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">
+                  {{'ENUMS.relationshipTypes' | translate}}
                 </div>
                 <div class="profile__data-content">
-                  <span *ngFor="let item of model['relationshipTypes']; let isLast=last">
-                      {{item['title']}}{{isLast ? '' : ', '}}
+                  <span *ngFor="let item of model.relationshipTypes; let isLast=last">
+                    {{item['title']}}{{isLast ? '' : ', '}}
                   </span>
                 </div>
               </div>
-              <div class="profile__data-item" *ngIf="!!model['_sexualSection'] && !!model['_sexualSection'].length">
+              <div class="profile__data-item" *ngIf="!!model._sexualSection && !!model._sexualSection.length">
                 <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">
                   {{'ENUMS.sexualPreference' | translate}}
                 </div>
                 <div class="profile__data-content">
-                  <span *ngIf="!!model['_sexualSection'] && !!model['_sexualSection'].length">{{ model['_sexualSection'].join(', ') }}</span>
+                  <span *ngIf="!!model._sexualSection && !!model._sexualSection.length">{{ model._sexualSection.join(', ') }}</span>
                 </div>
               </div>
-              <div class="profile__data-item" *ngIf="!!model['hobbies'] && !!model['hobbies'].length">
-                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.interests' |
-                  translate}}
+              <div class="profile__data-item" *ngIf="!!model.hobbies && !!model.hobbies.length">
+                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">
+                  {{'ENUMS.interests' | translate}}
                 </div>
                 <div class="profile__data-content">
                   <span *ngFor="let item of model['hobbies']; let isLast=last">
@@ -224,12 +230,12 @@
                   </span>
                 </div>
               </div>
-              <div class="profile__data-item" *ngIf="!!model['childrenExist']">
-                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.childrenExist' |
-                  translate}}
+              <div class="profile__data-item" *ngIf="!!model.childrenExist">
+                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">
+                  {{'ENUMS.childrenExist' | translate}}
                 </div>
                 <div class="profile__data-content">
-                  {{ (model['childrenExist']) ? model['childrenExist']['title'] : '' }}
+                  {{ model.childrenExist.title}}
                 </div>
               </div>
               <div class="profile__data-item">
@@ -240,12 +246,12 @@
                   Английский
                 </div>
               </div>
-              <div class="profile__data-item">
-                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">{{'ENUMS.education' |
-                  translate}}
+              <div class="profile__data-item" *ngIf="!!model.higherEducation">
+                <div class="profile__data-title fw-fw-600 fw-fz-16 fw-mb-5">
+                  {{'ENUMS.education' | translate}}
                 </div>
                 <div class="profile__data-content">
-                  Высшее
+                  {{ model.higherEducation }}
                 </div>
               </div>
             </div>

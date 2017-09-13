@@ -3,7 +3,7 @@ import {IDefaultEnum, IEnumEye, IEnumHairColor, IEnumPhysique, IEnumType} from '
 import {ICity} from './city.interface';
 export class IProfile {
   aboutMe: string = '';
-  // appearance:
+  appearance: IDefaultEnum = <IDefaultEnum>{};
   avatar: IUserAvatar = <IUserAvatar>{};
   birthdate: string = '';
   breastSize: IDefaultEnum = <IDefaultEnum>{};

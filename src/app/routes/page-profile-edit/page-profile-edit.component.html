@@ -1,271 +1,279 @@
 <div class="profile-edit page-section">
-    <div class="container">
-        <div class="profile-edit__header fw-mb-30">
-            <div class="profile-edit__title fw-fz-16 fw-fw-600 fw-mb-30">{{'PAGE_PROFILE_EDIT.PAGE_TITLE' | translate}}</div>
-            <div>
-                <div class="fw-fz-15 fw-mb-5 fw-fw-600">{{'PAGE_PROFILE_EDIT.PHOTOS_SUB_TITLE' | translate}}</div>
-                <div class="fw-fz-13 fw-mb-20 profile-edit__descr">
-                    {{'PAGE_PROFILE_EDIT.PHOTOS_SUB_TITLE_DESCRIPTION' | translate}}
-                </div>
-                <div class="profile-edit__photos fw-grid fw-grid-8 fw-position-relative">
-                    <div class="profile-edit__photos-item" *ngFor="let item of gallery; let i = index;">
-                        <a class="profile-edit__photos-link">
-                            <img class="profile-edit__photos-image" src="{{ item._links.thumbnail.href }}" alt="">
-                            <a (click)="cropPhoto(item.id, i)" class="profile-edit__photo-icon-left">
-                                <i class="icon-circle-edit"></i>
-                            </a>
-                            <a (click)="removePhoto(item.id, i)" class="profile-edit__photo-icon-right">
-                                <i class="icon-circle-remove"></i>
-                            </a>
-                        </a>
-                        <span class="profile-edit__photos-main" *ngIf="item.isAvatar">{{'PAGE_PROFILE_EDIT.MAIN_PHOTO' | translate}}</span>
-                    </div>
-                    <div class="profile-edit__photos-item">
-                        <label class="profile-edit__photos-add">
-                            <i class="icon-camera-purple"></i>
-                            <input type="file" multiple (change)="uploadPhoto($event)" class="fw-hidden">
-                        </label>
-                    </div>
-                    <app-preloader *ngIf="preloaders.photos"></app-preloader>
-                </div>
-            </div>
+  <div class="container">
+    <div class="profile-edit__header fw-mb-30">
+      <div class="profile-edit__title fw-fz-16 fw-fw-600 fw-mb-30">{{'PAGE_PROFILE_EDIT.PAGE_TITLE' | translate}}</div>
+      <div>
+        <div class="fw-fz-15 fw-mb-5 fw-fw-600">{{'PAGE_PROFILE_EDIT.PHOTOS_SUB_TITLE' | translate}}</div>
+        <div class="fw-fz-13 fw-mb-20 profile-edit__descr">
+          {{'PAGE_PROFILE_EDIT.PHOTOS_SUB_TITLE_DESCRIPTION' | translate}}
         </div>
-        <form [formGroup]="FProfile" (ngSubmit)="saveProfileData($event)" class="profile-edit__form fw-position-relative">
-            <app-preloader *ngIf="preloaders.profile"></app-preloader>
-            <div class="form-section">
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.name' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-input-box formControlName="name" [placeholder]="'Ваше имя'"></app-input-box>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.birthdate' | translate}}
-                    </div>
-                    <div class="field-input" formGroupName="birthdate">
-                        <div class="fw-grid fw-grid-12">
-                            <div class="fw-width-1-3">
-                                <app-select-box formControlName="day" [iconClass]="'icon-form-triangle'"
-                                                [items]="enums['datePicker']['day']"></app-select-box>
-                            </div>
-                            <div class="fw-width-1-3">
-                                <app-select-box formControlName="month" [iconClass]="'icon-form-triangle'"
-                                                [items]="enums['datePicker']['month']"></app-select-box>
-                            </div>
-                            <div class="fw-width-1-3">
-                                <app-select-box formControlName="year" [iconClass]="'icon-form-triangle'"
-                                                [items]="enums['datePicker']['year']"></app-select-box>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-                <div class="form-line fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.aboutMe' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <div class="textarea-box">
-                            <app-textarea-box formControlName="aboutMe"
-                                              [placeholder]="'О себе'"></app-textarea-box>
-                        </div>
-                    </div>
-                    <div class="field-note">
-                        <div class="field-note__comment max-width">
-                            {{'PAGE_PROFILE_EDIT.ABOUT_ME_NOTIFICATION' | translate}}
-                        </div>
-                    </div>
-                </div>
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.relationshipTypes' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-select-box formControlName="relationshipTypes"
-                                        [items]="enums['relationshipTypes']" [multiple]="true"></app-select-box>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-            </div>
-            <div class="form-section">
-                <div class="form-line fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.addPhone' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <div class="fw-flex fw-mb-15">
-                            <div class="fw-flex-grow fw-mr-15">
-                                <app-input-box [placeholder]="'Введите номер телефона'"></app-input-box>
-                            </div>
-                            <div>
-                                <a href="#" class="button button--primary">{{'BUTTONS.CONNECT' | translate}}</a>
-                            </div>
-                        </div>
-                        <div class="fw-flex">
-                            <app-checbox-box [name]="'phone_allow'"
-                                             [items]="[{label: 'PAGE_PROFILE_EDIT.PHONE_SMS_INFO' | translate, checked: false}]"></app-checbox-box>
-                        </div>
-                    </div>
-                    <div class="field-note">
-                        <div class="field-note__comment max-width">
-                            {{'PAGE_PROFILE_EDIT.PHONE_NOTIFICATION' | translate}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-section">
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.height' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <div class="fw-width-2-3">
-                            <app-input-box formControlName="height" [tooltip]="'см'"></app-input-box>
-                        </div>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.weight' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <div class="fw-width-2-3">
-                            <div class="input-box">
-                                <app-input-box formControlName="weight" [tooltip]="'кг'"></app-input-box>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.appearance' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-select-box formControlName="appearance"
-                                        [items]="enums['appearance']"></app-select-box>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.physique' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-select-box formControlName="physique"
-                                        [items]="enums['physique']"></app-select-box>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.hairColor' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-select-box formControlName="hairColor"
-                                        [items]="enums['hairColor']"></app-select-box>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.eyeColor' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-select-box formControlName="eyeColor"
-                                        [items]="enums['eyeColor']"></app-select-box>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-            </div>
-            <div class="form-section">
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.sexualPeriodicity' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-select-box formControlName="sexualPeriodicity"
-                                        [items]="enums['sexualPeriodicity']"></app-select-box>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-                <div class="form-line fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.sexualRole' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-radio-box-label formControlName="sexualRole" [items]="enums['sexualRole']"
-                        ></app-radio-box-label>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-                <div class="form-line fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.sexualKinds' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-checbox-box-label formControlName="sexualKinds" [items]="enums['sexualKinds']"
-                                               [typeArray]="true"></app-checbox-box-label>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.sexualPreference' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-radio-box-label formControlName="sexualPreference" [items]="enums['sexualPreference']"
-                                             [combined]="true"></app-radio-box-label>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.hobbies' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-select-box [placeholder]="'Интересы'" formControlName="hobbies"
-                                        [items]="enums['hobbies']" [multiple]="true"></app-select-box>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-            </div>
-            <div class="form-section">
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.relationshipState' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-radio-box-label formControlName="relationshipState" [items]="enums['relationshipState']"
-                                             [combined]="true"></app-radio-box-label>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-            </div>
-            <div class="form-section no-border fw-mb-30">
-                <div class="form-line fw-flex fw-flex-middle fw-mb-30">
-                    <div class="field-title">
-                        {{'ENUMS.childrenExist' | translate}}
-                    </div>
-                    <div class="field-input">
-                        <app-radio-box-label formControlName="childrenExist"
-                                             [items]="enums['childrenExist']"
-                                             [combined]="true"></app-radio-box-label>
-                    </div>
-                    <div class="field-note"></div>
-                </div>
-            </div>
-            <div class="form-buttons">
-                <button class="button button--primary fw-mr-10">{{'BUTTONS.SAVE' | translate}}</button>
-                <a routerLink="/profile" class="button button--default fw-mr-25"><span class="button-empty__text">{{'BUTTONS.WATCH_SELF_PROFILE' | translate}}</span></a>
-                <span class="fw-color-grey"><button type="reset"
-                                                    class="fw-reset fw-color-grey">{{'BUTTONS.REVERT_CHANGES' | translate}}</button></span>
-            </div>
-        </form>
+        <div class="profile-edit__photos fw-grid fw-grid-8 fw-position-relative">
+          <div class="profile-edit__photos-item" *ngFor="let item of gallery; let i = index;">
+            <a class="profile-edit__photos-link">
+              <img class="profile-edit__photos-image" (click)="setAvatar(item)" src="{{ item._links.thumbnail.href }}" alt="">
+              <a (click)="cropPhoto(item.id, i)" class="profile-edit__photo-icon-left">
+                <i class="icon-circle-edit"></i>
+              </a>
+              <a (click)="removePhoto(item.id, i)" class="profile-edit__photo-icon-right">
+                <i class="icon-circle-remove"></i>
+              </a>
+            </a>
+            <span class="profile-edit__photos-main"
+                  *ngIf="item.isAvatar">{{'PAGE_PROFILE_EDIT.MAIN_PHOTO' | translate}}</span>
+          </div>
+          <div class="profile-edit__photos-item">
+            <label class="profile-edit__photos-add">
+              <i class="icon-camera-purple"></i>
+              <input type="file" multiple (change)="uploadPhoto($event)" class="fw-hidden">
+            </label>
+          </div>
+          <app-preloader *ngIf="preloaders.photos"></app-preloader>
+        </div>
+      </div>
     </div>
+    <form [formGroup]="FProfile" (ngSubmit)="saveProfileData($event)" class="profile-edit__form fw-position-relative">
+      <app-preloader *ngIf="preloaders.profile"></app-preloader>
+      <div class="form-section">
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.name' | translate}}
+          </div>
+          <div class="field-input">
+            <app-input-box formControlName="name" [placeholder]="'Ваше имя'"></app-input-box>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.birthdate' | translate}}
+          </div>
+          <div class="field-input" formGroupName="birthdate">
+            <div class="fw-grid fw-grid-12">
+              <div class="fw-width-1-3">
+                <app-select-box formControlName="day" [iconClass]="'icon-form-triangle'"
+                                [items]="enums['datePicker']['day']"></app-select-box>
+              </div>
+              <div class="fw-width-1-3">
+                <app-select-box formControlName="month" [iconClass]="'icon-form-triangle'"
+                                [items]="enums['datePicker']['month']"></app-select-box>
+              </div>
+              <div class="fw-width-1-3">
+                <app-select-box formControlName="year" [iconClass]="'icon-form-triangle'"
+                                [items]="enums['datePicker']['year']"></app-select-box>
+              </div>
+            </div>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.aboutMe' | translate}}
+          </div>
+          <div class="field-input">
+            <div class="textarea-box">
+              <app-textarea-box formControlName="aboutMe"
+                                [placeholder]="'О себе'"></app-textarea-box>
+            </div>
+          </div>
+          <div class="field-note">
+            <div class="field-note__comment max-width">
+              {{'PAGE_PROFILE_EDIT.ABOUT_ME_NOTIFICATION' | translate}}
+            </div>
+          </div>
+        </div>
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.relationshipTypes' | translate}}
+          </div>
+          <div class="field-input">
+            <app-select-box formControlName="relationshipTypes"
+                            [items]="enums['relationshipTypes']" [multiple]="true"></app-select-box>
+          </div>
+          <div class="field-note"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-line fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.addPhone' | translate}}
+          </div>
+          <div class="field-input">
+            <div class="fw-flex fw-mb-15">
+              <div class="fw-flex-grow fw-mr-15">
+                <app-input-box [placeholder]="'Введите номер телефона'"></app-input-box>
+              </div>
+              <div>
+                <a class="button button--primary">{{'BUTTONS.CONNECT' | translate}}</a>
+              </div>
+            </div>
+            <div class="fw-flex">
+              <app-checbox-box [name]="'phone_allow'"
+                               [items]="[{label: 'PAGE_PROFILE_EDIT.PHONE_SMS_INFO' | translate, checked: false}]"></app-checbox-box>
+            </div>
+          </div>
+          <div class="field-note">
+            <div class="field-note__comment max-width">
+              {{'PAGE_PROFILE_EDIT.PHONE_NOTIFICATION' | translate}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.height' | translate}}
+          </div>
+          <div class="field-input">
+            <div class="fw-width-2-3">
+              <app-input-box formControlName="height" [tooltip]="'см'"></app-input-box>
+            </div>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.weight' | translate}}
+          </div>
+          <div class="field-input">
+            <div class="fw-width-2-3">
+              <app-input-box formControlName="weight" [tooltip]="'кг'"></app-input-box>
+            </div>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30" *ngIf="model.type">
+          <div class="field-title">
+            {{'ENUMS.breast' | translate}}
+          </div>
+          <div class="field-input">
+            <app-radio-box-label [classes]="'radiobox--dark'" formControlName="breastSize" [items]="enums['breastSize']"></app-radio-box-label>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.appearance' | translate}}
+          </div>
+          <div class="field-input">
+            <app-select-box formControlName="appearance"
+                            [items]="enums['appearance']"></app-select-box>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.physique' | translate}}
+          </div>
+          <div class="field-input">
+            <app-select-box formControlName="physique"
+                            [items]="enums['physique']"></app-select-box>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.hairColor' | translate}}
+          </div>
+          <div class="field-input">
+            <app-select-box formControlName="hairColor"
+                            [items]="enums['hairColor']"></app-select-box>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.eyeColor' | translate}}
+          </div>
+          <div class="field-input">
+            <app-select-box formControlName="eyeColor"
+                            [items]="enums['eyeColor']"></app-select-box>
+          </div>
+          <div class="field-note"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.sexualPeriodicity' | translate}}
+          </div>
+          <div class="field-input">
+            <app-select-box formControlName="sexualPeriodicity"
+                            [items]="enums['sexualPeriodicity']"></app-select-box>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.sexualRole' | translate}}
+          </div>
+          <div class="field-input">
+            <app-radio-box-label formControlName="sexualRole" [items]="enums['sexualRole']"
+            ></app-radio-box-label>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.sexualKinds' | translate}}
+          </div>
+          <div class="field-input">
+            <app-checbox-box-label formControlName="sexualKinds" [items]="enums['sexualKinds']"
+                                   [typeArray]="true"></app-checbox-box-label>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.sexualPreference' | translate}}
+          </div>
+          <div class="field-input">
+            <app-radio-box-label formControlName="sexualPreference" [items]="enums['sexualPreference']"
+                                 [combined]="true"></app-radio-box-label>
+          </div>
+          <div class="field-note"></div>
+        </div>
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.hobbies' | translate}}
+          </div>
+          <div class="field-input">
+            <app-select-box [placeholder]="'Интересы'" formControlName="hobbies"
+                            [items]="enums['hobbies']" [multiple]="true"></app-select-box>
+          </div>
+          <div class="field-note"></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.relationshipState' | translate}}
+          </div>
+          <div class="field-input">
+            <app-radio-box-label formControlName="relationshipState" [items]="enums['relationshipState']"
+                                 [combined]="true"></app-radio-box-label>
+          </div>
+          <div class="field-note"></div>
+        </div>
+      </div>
+      <div class="form-section no-border fw-mb-30">
+        <div class="form-line fw-flex fw-flex-middle fw-mb-30">
+          <div class="field-title">
+            {{'ENUMS.childrenExist' | translate}}
+          </div>
+          <div class="field-input">
+            <app-radio-box-label formControlName="childrenExist"
+                                 [items]="enums['childrenExist']"
+                                 [combined]="true"></app-radio-box-label>
+          </div>
+          <div class="field-note"></div>
+        </div>
+      </div>
+      <div class="form-buttons">
+        <button class="button button--primary fw-mr-10">{{'BUTTONS.SAVE' | translate}}</button>
+        <a routerLink="/profile" class="button button--default fw-mr-25"><span class="button-empty__text">{{'BUTTONS.WATCH_SELF_PROFILE' | translate}}</span></a>
+        <span class="fw-color-grey"><button type="reset"
+                                            class="fw-reset fw-color-grey">{{'BUTTONS.REVERT_CHANGES' | translate}}</button></span>
+      </div>
+    </form>
+  </div>
 </div>

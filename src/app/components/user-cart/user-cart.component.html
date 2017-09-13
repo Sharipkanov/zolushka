@@ -2,9 +2,9 @@
      (click)="goToProfile($event, user)">
     <div class="user-cart__thumbnail">
         <img class="user-cart__image" alt=""
-             src="{{(!!user.avatar) ? user.avatar['thumb'] : '/assets/images/default-avatar.svg'}}" *ngIf="!small">
+             src="{{(!!user.avatar) ? user.avatar._links.original.href : '/assets/images/default-avatar.svg'}}" *ngIf="!small">
         <img class="user-cart__image" alt=""
-             src="{{(!!user.avatar) ? user.avatar['thumb'] : '/assets/images/default-avatar.svg'}}" *ngIf="small">
+             src="{{(!!user.avatar) ? user.avatar._links.thumbnail.href : '/assets/images/default-avatar.svg'}}" *ngIf="small">
         <div class="user-cart__photos{{(!!user.photoApproved) ? ' user-cart__photos--approved' : ''}}"
              *ngIf="user.countPhotos > 0">
             <i class="{{(!!user.photoApproved) ? 'icon-user-cart-camera-checked' : 'icon-user-cart-camera-red'}} fw-mr-5"></i>

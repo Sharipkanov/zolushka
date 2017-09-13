@@ -13,14 +13,16 @@ export class NavigationComponent implements OnInit {
     @Input()
     public user_info = new IUserInfo();
 
-    constructor(private _popupsService: PopupsService, private _user: UserService) {
+    constructor(private _popupsService: PopupsService, private _userService: UserService) {
     }
 
     ngOnInit() {
+        this.user_info = this._userService.info();
+        console.log(this.user_info);
     }
 
     navigationLogout() {
-        this._user.logout();
+        this._userService.logout();
     }
 
     openChat(e) {

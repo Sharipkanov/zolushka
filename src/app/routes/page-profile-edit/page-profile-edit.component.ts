@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {EnumsService} from '../../services/enums/enums.service';
 import {IEnums} from '../../interfaces/enums.interface';
 import {IGalleryInfo} from '../../interfaces/gallery-info.interface';
+import {IProfile} from "../../interfaces/profile.interface";
 
 @Component({
     selector: 'app-page-profile-edit',
@@ -15,7 +16,7 @@ export class PageProfileEditComponent implements OnInit {
 
     public FProfile: FormGroup;
 
-    public model = {};
+    public model: IProfile = <IProfile>{};
     public enums = new IEnums();
     public enumsDone: boolean = false;
     public modelDone: boolean = false;
@@ -69,9 +70,12 @@ export class PageProfileEditComponent implements OnInit {
         });
 
         this._userService.profilePageInfo().subscribe(res => {
-            if (res === undefined) {
-                this._userService.onChangeUserInfo.subscribe(() => {
-                    this.model = this._userService.profilePageInfo();
+            console.log(res);
+            /*if (res === undefined) {
+                this._userService.onChangeUserInfo.subscribe((newModel) => {
+                    console.log(newModel);
+                    console.log(this._userService.profilePageInfo());
+                    // this.model = this._userService.profilePageInfo();
 
                     if (!!res['birthdate']) {
                         this.model['birthdateDecoded'] = this._dateService.dateDecode(res['birthdate']);
@@ -79,7 +83,7 @@ export class PageProfileEditComponent implements OnInit {
 
                     this.onAllDataGet.emit('modelDone');
                 });
-            } else {
+            } else {*/
                 this.model = res;
 
                 if (!!res['birthdate']) {
@@ -87,7 +91,7 @@ export class PageProfileEditComponent implements OnInit {
                 }
 
                 this.onAllDataGet.emit('modelDone');
-            }
+            // }
         });
 
         this._enums.getEnums().subscribe(response => {
@@ -104,6 +108,7 @@ export class PageProfileEditComponent implements OnInit {
             height: '',
             weight: '',
             phone: '',
+            breastSize: null,
             birthdate: this._fb.group({
                 day: null,
                 month: null,
@@ -132,6 +137,7 @@ export class PageProfileEditComponent implements OnInit {
         const data = {
             name: form.name,
             aboutMe: form.aboutMe,
+            breastSize: form.breastSize,
             birthdate: this._dateService.dateEncode(form.birthdate),
             height: parseInt(form.height, 0),
             weight: parseInt(form.weight, 0),
@@ -183,5 +189,11 @@ export class PageProfileEditComponent implements OnInit {
 
     cropPhoto(id: number, index) {
         console.log('crop photo')
+    }
+
+    setAvatar(avatar) {
+        this._userService.setAvatar(avatar.id).subscribe((res) => {
+            this._userService.info(res);
+        });
     }
 }
