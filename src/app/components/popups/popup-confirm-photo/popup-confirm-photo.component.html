@@ -1,0 +1,48 @@
+<div class="popup-wrapper" (click)="closePopup($event)" [ngClass]="{'popup--active':visible}">
+  <div class="popup popup-confirm-photo fw-bg-white fw-pt-20 fw-pb-20 fw-pl-20 fw-pr-20 fw-br-10 fw-width-610">
+    <div class="fw-text-center fw-fz-24 fw-mb-5">
+      Подтвердите свое фото
+    </div>
+    <div class="fw-mb-20 fw-text-center fw-text-600 fw-fz-16">
+      Увеличьте ваши шансы на успех!
+    </div>
+    <div class="fw-grid fw-grid-30">
+      <div class=" fw-flex-shrink-no fw-width-3-5">
+        <div class="popup-confirm-photo__step popup-confirm-photo__step-1">
+          <p class="fw-fz-13 fw-mb-15">Напишите ваш ID на бумаге и сделайте фото с ним, как показано на примере</p>
+          <div class="fw-text-center fw-mb-20">
+            <p class="fw-text-600">Ваш ID</p>
+            <p class="fw-fz-26 fw-text-600">{{user.id}}</p>
+          </div>
+        </div>
+        <div class="popup-confirm-photo__step popup-confirm-photo__step-2">
+          <div>
+            Загрузи фото на сайт через форму ниже
+          </div>
+          <div>
+            Фотография нужна только для подтверждения, без отображения в альбоме.
+          </div>
+        </div>
+      </div>
+      <div class="fw-flex-shrink-no fw-width-2-5">
+        <img alt="" class="fw-width-1-1" src="http://placehold.it/220x220"/>
+      </div>
+    </div>
+    <div class="fw-mt-20">
+      <label>
+        <input type="file" class="fw-hidden" (change)="uploadeConfirmationPhoto($event)">
+        <span class="form-upload-area fw-block fw-text-center">
+          <span class="fw-block fw-text-center fw-mb-10">
+            <i class="icon-camera-purple"></i>
+          </span>
+          <span>
+            Перетащите сюда селфи с цифрами или <a class="fw-color-purple">загрузите</a> с компьютера
+          </span>
+        </span>
+      </label>
+    </div>
+    <div class="fw-text-center">
+      <button class="button button--primary" disabled>Отправить</button>
+    </div>
+  </div>
+</div>

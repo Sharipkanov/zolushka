@@ -6,11 +6,13 @@
           <app-preloader *ngIf="preloaders.total"></app-preloader>
           <div class="profile__info-image fw-position-relative">
             <app-preloader *ngIf="preloaders.avatar"></app-preloader>
-            <img alt="" class="profile__info-avatar fw-width-1-1 fw-vam"
+            <img *ngIf="selfProfile" alt="" class="profile__info-avatar fw-width-1-1 fw-vam"
                  src="{{(user_info['avatar']) ? user_info['avatar']['_links']['original']['href'] : './assets/images/default-avatar.svg'}}"/>
+            <img *ngIf="!selfProfile" alt="" class="profile__info-avatar fw-width-1-1 fw-vam"
+                 src="{{(model.avatar) ? model.avatar._links.original.href : './assets/images/default-avatar.svg'}}"/>
             <div class="profile__info-photo-approve fw-pr-20 fw-pl-20 fw-pb-20"
-                 *ngIf="selfProfile && !!model.type && model.type.id === 200 && !!user_info['avatar']">
-              <a class="button button--success fw-width-1-1">Подтвердить фото</a>
+                 *ngIf="selfProfile && !!model.type && model.type.id === 200 && !!user_info.avatar">
+              <a class="button button--success fw-width-1-1" (click)="confirmPhotoDialog($event)">Подтвердить фото</a>
             </div>
           </div>
           <div class="profile__info-content">
@@ -116,7 +118,7 @@
               </a>
             </div>
           </div>
-          <div class="profile__photos fw-mt-30" *ngIf="!!gallery.length">
+          <div class="profile__photos fw-mt-30" *ngIf="!!gallery.length || selfProfile">
             <div class="profile__photos-title fw-fz-16 fw-mb-10 fw-fw-600">{{'PAGE_PROFILE.PHOTOS' |
               translate}}
             </div>

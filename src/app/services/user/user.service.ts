@@ -36,6 +36,7 @@ export class UserService implements CanActivate {
   }
 
   login(data: ILogin) {
+    this._storageService.remove('user_info');
     const headers: Headers = new Headers();
 
     headers.append('Authorization', 'Basic ' + btoa(data.email + ':' + data.password));
@@ -59,6 +60,7 @@ export class UserService implements CanActivate {
   }
 
   logout() {
+    this._storageService.remove('user_info');
     this.removeToken();
   }
 
@@ -163,6 +165,10 @@ export class UserService implements CanActivate {
 
     return this._http.get(`/api/api/client/set-avatar/${id}`, {headers: headers})
       .map((response: Response) => response.json());
+  }
+
+  confirmPhoto() {
+    console.log('confirm');
   }
 
   setHeaders(type: object = null) {

@@ -78,6 +78,7 @@ import { BlogBottomCategoriesComponent } from './components/blog-bottom-categori
 import { PageBlogItemComponent } from './routes/page-blog-item/page-blog-item.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { BottomGridComponent } from './components/bottom-grid/bottom-grid.component';
+import { PopupConfirmPhotoComponent } from './components/popups/popup-confirm-photo/popup-confirm-photo.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -141,7 +142,8 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         BlogBottomCategoriesComponent,
         PageBlogItemComponent,
         CommentsComponent,
-        BottomGridComponent
+        BottomGridComponent,
+        PopupConfirmPhotoComponent
     ],
     imports: [
         BrowserModule,

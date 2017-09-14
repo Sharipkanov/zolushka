@@ -150,7 +150,7 @@
                              (click)="openMessages(i)">
                             <div>
                                 <a class="list__thumbnail">
-                                    <img src="{{ !!dialog.clientTo.avatar ? dialog.clientTo.avatar : 'http://placehold.it/50x50' }}"
+                                    <img src="{{ !!dialog.clientTo.avatar ? dialog.clientTo.avatar._links.thumbnail.href : './assets/images/default-navigation-avatar.svg' }}"
                                          alt="">
                                 </a>
                             </div>
@@ -158,7 +158,7 @@
                                 <div class="list__user" [ngClass]="{'list__user--offline': !dialog.clientTo.online}">
                                     {{dialog.clientTo.name}}, {{dialog.clientTo.age}}
                                 </div>
-                                <p class="list__message" [ngClass]="{'list__message--active': !!dialog.lastMessage}">
+                                <p class="list__message" [ngClass]="{'list__message--active': !!dialog.lastMessage, 'list__message--no-massages': !dialog.lastMessage}">
                                     {{!!dialog.lastMessage ? dialog.lastMessage : 'Нет сообщений'}}</p>
                                 <p class="list__time">{{!!dialog.lastMessageCreated ? dialog.lastMessageCreated :
                                     ''}}</p>

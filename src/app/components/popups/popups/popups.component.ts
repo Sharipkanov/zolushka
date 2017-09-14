@@ -30,6 +30,10 @@ export class PopupsComponent implements OnInit {
         regBeforeFilterByRealPhoto: {
             active: false,
             visible: false
+        },
+        confirmPhoto: {
+            active: true,
+            visible: true
         }
     };
 

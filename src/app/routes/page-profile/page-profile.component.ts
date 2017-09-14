@@ -9,6 +9,7 @@ import {IUser} from '../../interfaces/user.interface';
 import {IDialog} from '../../interfaces/dialog.interface';
 import {DialogService} from '../../services/dialog/dialog.service';
 import {IProfile} from '../../interfaces/profile.interface';
+import {PopupsService} from "../../services/popups/popups.service";
 
 @Component({
   selector: 'app-page-profile',
@@ -53,7 +54,7 @@ export class PageProfileComponent implements OnInit {
   public gallery: any = [];
   public gallery_info: any = new IGalleryInfo();
 
-  constructor(private _dialogService: DialogService, private _activatedRouter: ActivatedRoute, private _userService: UserService, private _enums: EnumsService) {
+  constructor(private _popupsService: PopupsService, private _dialogService: DialogService, private _activatedRouter: ActivatedRoute, private _userService: UserService, private _enums: EnumsService) {
   }
 
   ngOnInit() {
@@ -94,6 +95,7 @@ export class PageProfileComponent implements OnInit {
   owlBinding(response) {
     const _self = this;
     if (!this.gallery.length) {
+      this.preloaders.photos = false;
       return;
     }
     setTimeout(() => {
@@ -171,5 +173,11 @@ export class PageProfileComponent implements OnInit {
     const dialog = new IDialog();
     dialog.clientTo = user;
     this._dialogService.onAddNewDialog.emit(dialog);
+  }
+
+  confirmPhotoDialog(e: Event) {
+    e.preventDefault();
+
+    this._popupsService.openPopup('confirmPhoto');
   }
 }
