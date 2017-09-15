@@ -10,17 +10,14 @@ export class PopupsService {
   constructor() { }
 
   openPopup(popup_name: string) {
-
     this.onOpenPopup.emit(popup_name);
   }
 
   closePopup(popup_name: string) {
-
     this.onClosePopup.emit(popup_name);
   }
 
   changePopup(changePopupObject: object) {
-
     this.onChangePopup.emit(changePopupObject);
   }
 

@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="profile__info-content">
-            <div class="profile__info-contact fw-mb-20 fw-flex fw-flex-middle" *ngIf="!selfProfile">
+            <div class="profile__info-contact fw-flex fw-flex-middle" *ngIf="!selfProfile">
               <div class="fw-mr-10">
                 <a class="icon-chat-subshape fw-color-white" (click)="openChat(model)">
                   <i class="icon-chat-shape fw-mr-10 fw-ml-10"></i>
@@ -48,7 +48,7 @@
                 </div>
               </div>
             </div>
-            <div class="profile__info-statistic" *ngIf="selfProfile">
+            <div class="profile__info-statistic fw-mt-20" *ngIf="selfProfile">
               <div class="fw-flex fw-flex-space-between fw-flex-middle fw-fz-16 fw-fw-600">
                 <div class="fw-flex fw-flex-middle">
                   <i class="icon-profile-views fw-mr-5"></i>
@@ -171,7 +171,7 @@
               </div>
             </div>
 
-            <div class="profile__invisible panel fw-br-5" *ngIf="user_info['clientState'] !== 'invisible'">
+            <div class="profile__invisible panel fw-br-5" *ngIf="selfProfile && user_info['clientState'] !== 'invisible'">
               <div class="fw-mb-20">
                 <i class="icon-invisible-hat"></i>
               </div>

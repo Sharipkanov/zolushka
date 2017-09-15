@@ -187,6 +187,12 @@
             <a class="fw-fw-600 fw-fz-15 fw-flex fw-flex-middle"><i
                 class="icon-shape-heart-purple fw-mr-5"></i>Сохранить поиск</a>
           </div>
+          <div class="search-bar__saved-parameters saved-parameters">
+            <div class="saved-parameters__item">
+              <span (click)="activateSavedParameters('param')">высокий блондин</span>
+              <i class="icon-close" (click)="removeSavedParameters('remove param')"></i>
+            </div>
+          </div>
           <div>
             <button type="submit" class="button button--primary fw-width-1-1">Показать 133 анкеты</button>
           </div>

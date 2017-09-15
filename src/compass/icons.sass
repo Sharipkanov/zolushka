@@ -25,11 +25,11 @@
 @each $name in phone, chat, invisible, message, app
   .icon-#{$name}-about
     +sprite(icon-#{$name}-about)
-    
-@each $name in header-cog, header-wallet, camera-purple, camera-white, profile-views, profile-comments, profile-search, profile-crown, invisible-hat, pencil, profile-blocked, profile-activated, profile-invisible, footer-googleplay, footer-apple, circle-remove, circle-edit, grey-confidential, grey-app-store, grey-google-play, mm-wmj, mm-mail-online, mm-metro, mm-tatler, catalog-grid, catalog-grid-active, catalog-listing, catalog-listing-active, purchases-photo-approve, phone-shape, chat-shape, star-shape, rocket
+
+@each $name in header-cog, header-wallet, camera-purple, camera-white, profile-views, profile-comments, profile-search, profile-crown, invisible-hat, pencil, profile-blocked, profile-activated, profile-invisible, footer-googleplay, footer-apple, circle-remove, circle-edit, grey-confidential, grey-app-store, grey-google-play, mm-wmj, mm-mail-online, mm-metro, mm-tatler, catalog-grid, catalog-grid-active, catalog-listing, catalog-listing-active, purchases-photo-approve, phone-shape, chat-shape, star-shape, rocket, confirm-photo-question
   .icon-#{$name}
     +sprite(icon-#{$name})
-    
+
 .icon-online-status
   display: inline-block
   vertical-align: middle
@@ -37,7 +37,7 @@
   height: 8px
   border-radius: 100%
   background-color: $colorGrey
-  
+
   &.online
     background-color: $colorGreenLight
 
@@ -66,7 +66,7 @@
 @each $chat in cog, cog-active, close, call, messages, messages-active, lips, lips-active, phone, phone-active, check, check-active, bell, bell-active, star, star-active, hand, hand-active, folder, folder-active, search, send, smile, smile-active, photo, gift, gift-active, call-green, message
   .icon-chat-#{$chat}
     +sprite(icon-chat-#{$chat})
-    
+
 .icon-phone-subshape, .icon-star-subshape, .icon-chat-subshape
   min-height: 36px
   min-width: 36px
@@ -76,13 +76,13 @@
   align-items: center
   justify-content: center
   +transition()
-  
+
   &:hover
     box-shadow: inset 0 0 0 1000px rgba(#000, 0.2)
 
 .icon-star-subshape
   background-color: #ffc12d
-  
+
 .icon-chat-subshape
   background-color: #bd0fe1
   box-shadow: none

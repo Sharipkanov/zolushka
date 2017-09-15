@@ -17,17 +17,17 @@
             <div class="fw-width-1-2">
                 <form [formGroup]="FRegistration" (ngSubmit)="userRegister($event)">
                     <div class="fw-mb-10">
-                        <app-input-box [placeholder]="'E-mail'" [error]="!!errors['email']" [type]="'email'" [classes]="'fw-br-3'" formControlName="email"></app-input-box>
+                        <app-input-box [placeholder]="'E-mail'" [error]="!!errors['email']" [type]="'email'" formControlName="email"></app-input-box>
 
                         <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['email']">{{errors['email']}}</div>
                     </div>
                     <div class="fw-mb-10">
-                        <app-input-box [placeholder]="'Придумайте пароль'" [error]="!!errors['password']" [type]="'password'" [classes]="'fw-br-3'" formControlName="password"></app-input-box>
+                        <app-input-box [placeholder]="'Придумайте пароль'" [error]="!!errors['password']" [type]="'password'" formControlName="password"></app-input-box>
 
                         <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['password']">{{errors['password']}}</div>
                     </div>
                     <div class="fw-mb-10">
-                        <app-input-box [placeholder]="'Имя'" [classes]="'fw-br-3'" [error]="!!errors['name']" formControlName="name"></app-input-box>
+                        <app-input-box [placeholder]="'Имя'" [error]="!!errors['name']" formControlName="name"></app-input-box>
                         <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['name']">{{errors['name']}}</div>
                     </div>
                     <div class="fw-mb-10">

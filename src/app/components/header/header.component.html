@@ -20,7 +20,7 @@
           <a class="fw-mr-15"><i class="icon-appstore-white"></i></a>
           <a><i class="icon-googleplay-white"></i></a>
         </div>
-        <div class="fw-flex fw-flex-middle fw-pl-20">
+        <div class="fw-flex fw-flex-middle fw-pl-20" *ngIf="!logged">
           <ul class="header-menu__list fw-flex fw-flex-middle">
             <li class="header-menu__item fw-pr-12">
               <a routerLink="search" routerLinkActive="active">{{ 'LINKS.SEARCH' | translate }}</a>

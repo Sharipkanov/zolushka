@@ -63,13 +63,15 @@ export class PageProfileComponent implements OnInit {
       this.selfProfile = true;
     }
     this.preloaders.total = true;
-    const user_info = this._userService.info();
-    if (user_info === undefined) {
-      this._userService.onChangeUserInfo.subscribe(res => {
-        this.user_info = res;
-      });
-    } else {
-      this.user_info = user_info;
+    if (this.selfProfile) {
+      const user_info = this._userService.info();
+      if (user_info === undefined) {
+        this._userService.onChangeUserInfo.subscribe(res => {
+          this.user_info = res;
+        });
+      } else {
+        this.user_info = user_info;
+      }
     }
 
     this.getProfilPageInfo();

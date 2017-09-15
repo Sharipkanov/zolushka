@@ -102,7 +102,7 @@ export class UserService implements CanActivate {
     const headers = this.setHeaders();
     let url = `/api/api/client/`;
     if (profile_id) {
-      url += `${profile_id}`;
+      url += `profile/${profile_id}`;
     }
     return this._http.get(url, {headers: headers})
       .map(res => res.json());
@@ -142,7 +142,7 @@ export class UserService implements CanActivate {
     let query = `/api/media/client/images`;
 
     if (!!profile_id) {
-      query = `/api/media/client/${profile_id}/images`;
+      query = `/api/media/client/profile/${profile_id}/images`;
     }
 
     if (link && link !== undefined) {

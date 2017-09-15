@@ -16,15 +16,16 @@
   cursor: pointer
   vertical-align: middle
 
-  &[disabled]
-    opacity: 0.4
-
   &.button--small
     padding: 0 10px
     height: 32px
     line-height: 30px
     font-size: 13px
     font-weight: 300
+
+  &.button--long
+    padding-left: 40px
+    padding-right: 40px
 
   &:hover
     border-color: $colorGreyDark
@@ -96,6 +97,9 @@
 
     &:hover
       box-shadow: 0 0 0 500px rgba(#000, 0.3) inset
+
+    &[disabled]
+      background-color: $colorGrey
 
   &.button--success
     border-color: $colorGreen

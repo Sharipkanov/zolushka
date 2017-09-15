@@ -1,6 +1,7 @@
-<app-popup-login *ngIf="popups['login']['active']" [visible]="popups['login']['visible']"></app-popup-login>
-<app-popup-chat *ngIf="popups['chat']['active']" [visible]="popups['chat']['visible']"></app-popup-chat>
-<app-popup-notice-confirmed-photos *ngIf="popups['buyConfirmedPhotos']['active']" [visible]="popups['buyConfirmedPhotos']['visible']"></app-popup-notice-confirmed-photos>
-<app-popup-reg-before-filter-by-online *ngIf="popups['regBeforeFilterByOnline']['active']" [visible]="popups['regBeforeFilterByOnline']['visible']"></app-popup-reg-before-filter-by-online>
-<app-popup-reg-before-filter-by-real-photo *ngIf="popups['regBeforeFilterByRealPhoto']['active']" [visible]="popups['regBeforeFilterByRealPhoto']['visible']"></app-popup-reg-before-filter-by-real-photo>
-<app-popup-confirm-photo *ngIf="popups['confirmPhoto']['active']" [visible]="popups['confirmPhoto']['visible']"></app-popup-confirm-photo>
+<app-popup-login *ngIf="popups.login" [visible]="popups.login"></app-popup-login>
+<app-popup-chat *ngIf="popups.chat" [visible]="popups.chat"></app-popup-chat>
+<app-popup-notice-confirmed-photos *ngIf="popups.buyConfirmedPhotos" [visible]="popups.buyConfirmedPhotos"></app-popup-notice-confirmed-photos>
+<app-popup-reg-before-filter-by-online *ngIf="popups.regBeforeFilterByOnline" [visible]="popups.regBeforeFilterByOnline"></app-popup-reg-before-filter-by-online>
+<app-popup-reg-before-filter-by-real-photo *ngIf="popups.regBeforeFilterByRealPhoto" [visible]="popups.regBeforeFilterByRealPhoto"></app-popup-reg-before-filter-by-real-photo>
+<app-popup-confirm-photo *ngIf="popups.confirmPhoto" [visible]="popups.confirmPhoto"></app-popup-confirm-photo>
+<app-popup-reg-to-dialog *ngIf="popups.regToDialog" [visible]="popups.regToDialog"></app-popup-reg-to-dialog>

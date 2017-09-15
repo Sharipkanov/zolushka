@@ -221,4 +221,12 @@ export class SearchBarComponent implements OnInit {
             }
         }
     }
+
+    removeSavedParameters(param) {
+        console.log(param);
+    }
+
+    activateSavedParameters(param) {
+        console.log(param);
+    }
 }

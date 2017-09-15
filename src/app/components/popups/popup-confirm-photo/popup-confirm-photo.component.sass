@@ -1,2 +1,45 @@
-.popup-confirm-photo__step-1
+.popup-confirm-photo__step
   padding-left: 35px
+  position: relative
+
+  &-1
+    &:after
+      display: block
+      content: '1'
+      position: absolute
+      top: 0
+      background-color: #fff
+      width: 24px
+      height: 24px
+      line-height: 20px
+      box-sizing: border-box
+      border-radius: 100%
+      border: 2px solid #3fd0a5
+      color: #3fd0a5
+      text-align: center
+      left: 0
+      font-size: 13px
+      font-weight: 600
+      z-index: 1
+
+    &:before
+      display: block
+      content: ''
+      position: absolute
+      left: 11px
+      height: 100%
+      top: 0
+      border-right: 1px dotted #3fd0a5
+
+  &-2
+    &--icon
+      top: -3px
+      left: 0
+      width: 24px
+      height: 24px
+      border-radius: 100%
+      background-color: #3fd0a5
+      display: block
+      position: absolute
+      line-height: 20px
+      text-align: center
