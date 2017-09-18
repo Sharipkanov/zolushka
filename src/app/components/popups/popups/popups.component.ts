@@ -1,43 +1,65 @@
-import { Component, HostListener, OnInit, ViewEncapsulation } from '@angular/core';
-import { UserService } from '../../../services/user/user.service';
-import { PopupsService } from '../../../services/popups/popups.service';
+import {Component, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
+import {UserService} from '../../../services/user/user.service';
+import {PopupsService} from '../../../services/popups/popups.service';
 
 @Component({
-    selector: 'app-popups',
-    templateUrl: './popups.component.html',
-    styleUrls: ['./popups.component.sass'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-popups',
+  templateUrl: './popups.component.html',
+  styleUrls: ['./popups.component.sass'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PopupsComponent implements OnInit {
 
-    public popups = {
-        login: false,
-        chat: false,
-        buyConfirmedPhotos: false,
-        regBeforeFilterByOnline: false,
-        regBeforeFilterByRealPhoto: false,
-        confirmPhoto: false,
-        regToDialog: false
-    };
+  public popups = {
+    login: false,
+    chat: false,
+    buyConfirmedPhotos: false,
+    regBeforeFilterByOnline: false,
+    regBeforeFilterByRealPhoto: false,
+    confirmPhoto: false,
+    regToDialog: false,
+    saveSearch: false,
+  };
 
-    constructor(private _popupsService: PopupsService) {
-    }
+  public openingAnimation = false;
 
-    ngOnInit() {
-        this._popupsService.onOpenPopup.subscribe((popup_name: string) => {
-            this.openPopup(popup_name);
-        });
+  constructor(private _popupsService: PopupsService) {
+  }
 
-        this._popupsService.onClosePopup.subscribe((popup_name: string) => {
-            this.closePopup(popup_name);
-        });
-    }
+  ngOnInit() {
+    this._popupsService.onOpenPopup.subscribe((popup_name: string) => {
+      this.openPopup(popup_name);
+    });
 
-    openPopup(popup_name: string) {
-        this.popups[popup_name] = true;
-    }
+    this._popupsService.onClosePopup.subscribe((popup_name: string) => {
+      this.closePopup(null, popup_name);
+    });
+  }
 
-    closePopup(popup_name: string) {
+  openPopup(popup_name: string) {
+    this.popups[popup_name] = true;
+    setTimeout(() => {
+      this.openingAnimation = true;
+    }, 20);
+  }
+
+  closePopup(e: Event, popup_name: string = null) {
+    if (e) {
+      const target: HTMLElement = <HTMLElement>e.target;
+
+      if (target.classList.contains('popup-wrapper') || target.classList.contains('js-close-popup') || target.closest('.js-close-popup')) {
+        this.openingAnimation = false;
+        setTimeout(() => {
+          for (const key in this.popups) {
+            this.popups[key] = false;
+          }
+        }, 300);
+      }
+    } else {
+      this.openingAnimation = false;
+      setTimeout(() => {
         this.popups[popup_name] = false;
+      }, 300);
     }
+  }
 }

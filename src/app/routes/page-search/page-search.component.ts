@@ -20,6 +20,7 @@ export class PageSearchComponent implements OnInit {
   public users: IPaginationUserSearch = <IPaginationUserSearch>{};
   public gridType: boolean = true;
   public filter: string = 'all';
+  public firstLoad = true;
   public preloaders = {
     userGrid: false,
     filters: false
@@ -70,6 +71,7 @@ export class PageSearchComponent implements OnInit {
     this._usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
       this.users = <IPaginationUserSearch>users;
       this.preloaders.userGrid = false;
+      this.firstLoad = false;
     }, error => {
       if (this.filter === 'realPhoto') {
         this._popupsService.openPopup('buyConfirmedPhotos');

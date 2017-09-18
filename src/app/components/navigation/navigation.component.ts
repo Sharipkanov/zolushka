@@ -26,6 +26,8 @@ export class NavigationComponent implements OnInit {
     } else {
       this.user_info = userInfo;
     }
+
+    console.log(this.user_info)
   }
 
   navigationLogout() {

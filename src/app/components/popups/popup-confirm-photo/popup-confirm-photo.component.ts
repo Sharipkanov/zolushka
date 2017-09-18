@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PopupsService} from '../../../services/popups/popups.service';
+import {Component, OnInit} from '@angular/core';
 import {IProfile} from '../../../interfaces/profile.interface';
 import {UserService} from '../../../services/user/user.service';
 
@@ -10,22 +9,15 @@ import {UserService} from '../../../services/user/user.service';
 })
 export class PopupConfirmPhotoComponent implements OnInit {
 
-  @Input() visible: boolean = false;
-  @Input() user: IProfile = <IProfile>{};
+  public user: IProfile = <IProfile>{};
 
-  constructor(private _popupsService: PopupsService, private _userService: UserService) { }
+  constructor(private _userService: UserService) { }
 
   ngOnInit() {
     this.user = this._userService.info();
   }
 
-  closePopup(e) {
-    if (e.target.classList.contains('popup-wrapper') || e.target.classList.contains('js-close-popup')) {
-      this._popupsService.closePopup('confirmPhoto');
-    }
-  }
-
-  uploadeConfirmationPhoto(e: Event) {
+  uploadConfirmationPhoto(e: Event) {
     console.log('upload', e);
   }
 }

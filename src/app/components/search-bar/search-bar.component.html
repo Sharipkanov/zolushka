@@ -182,15 +182,18 @@
         <div class="search-bar__grid">
           <div class="fw-flex fw-flex-space-between">
             <button type="reset" (click)="resetForm($event)" class="fw-reset fw-fw-600 fw-fz-15 fw-flex fw-flex-middle">
-              <i class="icon-shape-remove-purple fw-mr-5"></i>Сбросить
+              <i class="icon-shape-remove-purple fw-mr-5"></i>
+              Сбросить
             </button>
-            <a class="fw-fw-600 fw-fz-15 fw-flex fw-flex-middle"><i
-                class="icon-shape-heart-purple fw-mr-5"></i>Сохранить поиск</a>
+            <a class="fw-fw-600 fw-fz-15 fw-flex fw-flex-middle" (click)="openSaveSearchDialog($event)">
+              <i class="icon-shape-heart-purple fw-mr-5"></i>
+              Сохранить поиск
+            </a>
           </div>
           <div class="search-bar__saved-parameters saved-parameters">
-            <div class="saved-parameters__item">
+            <div class="saved-parameters__item fw-mr-10">
               <span (click)="activateSavedParameters('param')">высокий блондин</span>
-              <i class="icon-close" (click)="removeSavedParameters('remove param')"></i>
+              <i class="icon-remove-saved-params" (click)="removeSavedParameters('remove param')"></i>
             </div>
           </div>
           <div>

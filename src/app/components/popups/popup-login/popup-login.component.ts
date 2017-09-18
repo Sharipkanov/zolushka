@@ -10,9 +10,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class PopupLoginComponent implements OnInit {
 
-    @Input() visible: boolean = false;
-
     public FLogin: FormGroup;
+    public preloader = false;
 
     constructor(private fb: FormBuilder, private _popupsService: PopupsService, private _userService: UserService) {
     }
@@ -30,20 +29,21 @@ export class PopupLoginComponent implements OnInit {
         });
     }
 
-    closePopup(e) {
-        if (e.target.classList.contains('popup-wrapper') || e.target.classList.contains('js-close-popup')) {
-            this._popupsService.closePopup('login');
-        }
-    }
-
     loginFormSubmit(e) {
         e.preventDefault();
+        this.preloader = true;
 
         const data = {
             email: this.FLogin.value.email,
             password: this.FLogin.value.password
         };
 
-        this._userService.login(data);
+        this._userService.login(data).subscribe(res => {
+            console.log(res);
+            this.preloader = false;
+        }, error => {
+            console.log(error);
+            this.preloader = false;
+        });
     }
 }

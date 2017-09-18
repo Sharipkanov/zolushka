@@ -44,16 +44,25 @@
     &:hover
       box-shadow: 0 0 5px #443a91
 
+  &.button--empty
+    color: $colorPurple
+    border-color: $colorPurple
+    background: $colorWhite
+
+    &:hover
+      color: $colorWhite
+      background-color: $colorPurple
+
   &.button--default
     color: $colorPurple
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1)
+    //box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1)
     border-color: $colorGrey
     background: $colorWhite
 
     &:hover
       color: $colorPurple
       border-color: rgba($colorPurple, .5)
-      box-shadow: 0 1px 5px 0 rgba($colorPurple, 0.5)
+      //box-shadow: 0 1px 5px 0 rgba($colorPurple, 0.5)
 
   &.button--transparent
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1)

@@ -109,7 +109,7 @@
 
 
     > .search-bar__saved-parameters
-      width: 50%
+      flex-basis: 50%
 
   .search-bar__extend
     font-weight: 600
@@ -252,3 +252,42 @@
   right: 0
   background-color: rgba(#f3f3f3, 0.8)
   z-index: 1
+  
+.saved-parameters
+  text-align: left
+
+.saved-parameters__item
+  border-radius: 30px
+  line-height: 26px
+  color: #fff
+  background-color: #443a91
+  display: inline-block
+  vertical-align: middle
+  padding: 0 10px 0 25px
+  position: relative
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.12), 0 0 2px 0 #443A91
+  cursor: pointer
+
+  .icon-remove-saved-params
+    position: absolute
+    left: 6px
+    top: 50%
+    width: 12px
+    height: 12px
+    display: block
+    +transform(translate(0, -50%) rotate(45deg))
+
+    &:after, &:before
+      position: absolute
+      content: ''
+      display: block
+      width: 100%
+      height: 2px
+      left: 50%
+      top: 50%
+      +transform(translate(-50%, -50%))
+      background-color: #fff
+
+    &:before
+      width: 2px
+      height: 100%

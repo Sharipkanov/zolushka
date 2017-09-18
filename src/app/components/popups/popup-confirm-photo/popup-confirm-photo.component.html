@@ -1,49 +1,47 @@
-<div class="popup-wrapper" (click)="closePopup($event)" [ngClass]="{'popup--active':visible}">
-  <div class="popup popup-confirm-photo fw-bg-white fw-pt-20 fw-pb-20 fw-pl-20 fw-pr-20 fw-br-10 fw-width-610">
-    <div class="fw-text-center fw-fz-24 fw-mb-5">
-      Подтвердите свое фото
-    </div>
-    <div class="fw-mb-20 fw-text-center fw-text-600 fw-fz-16">
-      Увеличьте ваши шансы на успех!
-    </div>
-    <div class="fw-flex">
-      <div class=" fw-flex-shrink-no fw-flex-grow fw-flex-basis-no fw-mr-30 fw-fz-13">
-        <div class="popup-confirm-photo__step popup-confirm-photo__step-1">
-          <p class="fw-mb-15">Напишите ваш ID на бумаге и сделайте фото с ним, как показано на примере</p>
-          <div class="fw-text-center fw-pb-20">
-            <p class="fw-text-600">Ваш ID</p>
-            <p class="fw-fz-26 fw-text-600">{{user.id}}</p>
-          </div>
-        </div>
-        <div class="popup-confirm-photo__step popup-confirm-photo__step-2">
-          <div class="popup-confirm-photo__step-2--icon">
-            <i class="icon-confirm-photo-question"></i>
-          </div>
-          <div class="fw-mb-10">
-            Загрузи фото на сайт через форму ниже
-          </div>
-          <div class="fw-color-grey-dark">
-            Фотография нужна только для подтверждения, без отображения в альбоме.
-          </div>
+<div class="popup popup-confirm-photo fw-bg-white fw-pt-20 fw-pb-20 fw-pl-20 fw-pr-20 fw-br-10 fw-width-610">
+  <div class="fw-text-center fw-fz-24 fw-mb-5">
+    Подтвердите свое фото
+  </div>
+  <div class="fw-mb-20 fw-text-center fw-text-600 fw-fz-16">
+    Увеличьте ваши шансы на успех!
+  </div>
+  <div class="fw-flex">
+    <div class=" fw-flex-shrink-no fw-flex-grow fw-flex-basis-no fw-mr-30 fw-fz-13">
+      <div class="popup-confirm-photo__step popup-confirm-photo__step-1">
+        <p class="fw-mb-15">Напишите ваш ID на бумаге и сделайте фото с ним, как показано на примере</p>
+        <div class="fw-text-center fw-pb-20">
+          <p class="fw-text-600">Ваш ID</p>
+          <p class="fw-fz-26 fw-text-600">{{user.id}}</p>
         </div>
       </div>
-      <div class="fw-flex-shrink-no fw-width-220">
-        <img alt="" class="fw-width-1-1 fw-br-5" src="./assets/images/popups/photo-confirm/photo-confirm-example.jpg"/>
-      </div>
-    </div>
-    <div class="fw-mt-20">
-      <div class="form-upload-area fw-block fw-text-center">
-        <input type="file" class="form-upload-area__input" (change)="uploadeConfirmationPhoto($event)">
-        <div class="fw-block fw-text-center fw-mb-10">
-          <i class="icon-camera-purple"></i>
+      <div class="popup-confirm-photo__step popup-confirm-photo__step-2">
+        <div class="popup-confirm-photo__step-2--icon">
+          <i class="icon-confirm-photo-question"></i>
         </div>
-        <div>
-          Перетащите сюда селфи с цифрами или <br><a class="fw-color-purple">загрузите</a> с компьютера
+        <div class="fw-mb-10">
+          Загрузи фото на сайт через форму ниже
+        </div>
+        <div class="fw-color-grey-dark">
+          Фотография нужна только для подтверждения, без отображения в альбоме.
         </div>
       </div>
     </div>
-    <div class="fw-text-center fw-mt-20">
-      <button class="button button--primary button--long" disabled>Отправить</button>
+    <div class="fw-flex-shrink-no fw-width-220">
+      <img alt="" class="fw-width-1-1 fw-br-5" src="./assets/images/popups/photo-confirm/photo-confirm-example.jpg"/>
     </div>
+  </div>
+  <div class="fw-mt-20">
+    <div class="form-upload-area fw-block fw-text-center">
+      <input type="file" class="form-upload-area__input" (change)="uploadConfirmationPhoto($event)">
+      <div class="fw-block fw-text-center fw-mb-10">
+        <i class="icon-camera-purple"></i>
+      </div>
+      <div>
+        Перетащите сюда селфи с цифрами или <br><a class="fw-color-purple">загрузите</a> с компьютера
+      </div>
+    </div>
+  </div>
+  <div class="fw-text-center fw-mt-20">
+    <button class="button button--primary button--long" disabled>Отправить</button>
   </div>
 </div>

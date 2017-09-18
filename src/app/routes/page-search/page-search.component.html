@@ -1,7 +1,7 @@
 <app-search-bar (onSubmitSearchBar)="searchUsersQuery($event)"></app-search-bar>
 
-<section class="fw-pt-20 fw-pb-20">
-  <div class="container">
+<section class="catalog fw-pt-20 fw-pb-20">
+  <div class="container" *ngIf="!!users._embedded">
     <div class="catalog__header">
       <div class="catalog__header-filter">
         <a class="catalog__header-filter-link" [ngClass]="{'active': filter === 'all'}" (click)="changeFilter('all')">Все</a>
@@ -32,6 +32,34 @@
     </div>
     <div class="fw-mt-30">
       <app-pagination [pagination]="users"></app-pagination>
+    </div>
+  </div>
+
+  <div class="fw-position-relative" *ngIf="!firstLoad">
+    <app-preloader *ngIf="preloaders.userGrid"></app-preloader>
+    <div class="catalog__placeholder fw-text-center fw-mt-50" *ngIf="!users._embedded">
+      <div class="fw-mb-15">
+        <i class="icon-catalog-geo-placeholder"></i>
+      </div>
+      <div>
+        Пользователей в вашем городе не найдено, показаны девушки из ближайших городов <br>
+        <a class="fw-color-purple fw-text-underline--hover">Москва</a>, <a
+          class="fw-color-purple fw-text-underline--hover">Санкт-Петербург</a>, <a
+          class="fw-color-purple fw-text-underline--hover">Нижний-Новогород</a>
+      </div>
+    </div>
+
+    <div class="catalog__placeholder fw-text-center fw-mt-50" *ngIf="!users._embedded">
+      <div class="fw-mb-15">
+        <i class="icon-catalog-search-placeholder"></i>
+      </div>
+      <div class="fw-mb-20">
+        К сожалению, по заданным параметрам мы не нашли ни одного пользователя, <br>по пробуйте расширить критерии
+        поиска.
+      </div>
+      <div>
+        <a routerLink="/search" class="button button--empty">Сбросить поисковые параметры</a>
+      </div>
     </div>
   </div>
 </section>

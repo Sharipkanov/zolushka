@@ -81,6 +81,7 @@ import { BottomGridComponent } from './components/bottom-grid/bottom-grid.compon
 import { PopupConfirmPhotoComponent } from './components/popups/popup-confirm-photo/popup-confirm-photo.component';
 import { PreloaderLineComponent } from './components/preloader-line/preloader-line.component';
 import { PopupRegToDialogComponent } from './components/popups/popup-reg-to-dialog/popup-reg-to-dialog.component';
+import { PopupSaveSearchComponent } from './components/popups/popup-save-search/popup-save-search.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -147,7 +148,8 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         BottomGridComponent,
         PopupConfirmPhotoComponent,
         PreloaderLineComponent,
-        PopupRegToDialogComponent
+        PopupRegToDialogComponent,
+        PopupSaveSearchComponent
     ],
     imports: [
         BrowserModule,

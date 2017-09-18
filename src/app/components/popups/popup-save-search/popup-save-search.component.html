@@ -1,0 +1,11 @@
+<div class="popup popup--standard popup-save-search fw-text-center fw-width-610">
+  <div class="fw-fz-24 fw-text-600 fw-mb-30">Название поиска</div>
+  <form [formGroup]="FSaveSearch" (submit)="saveSearch($event)" class="fw-mb-40 fw-ml-auto fw-mr-auto fw-width-290">
+    <div class="fw-mb-15">
+      <app-input-box formControlName="searchName" [placeholder]="'Придумайте название'"></app-input-box>
+    </div>
+    <button class="button button--primary fw-width-1-1">{{ 'BUTTONS.SAVE' | translate}}</button>
+  </form>
+
+  <a class="button-reset js-close-popup">Отмена</a>
+</div>

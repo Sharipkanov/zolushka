@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user/user.service';
 import {UrlParserService} from "../../services/url-parser/url-parser.service";
+import {PopupsService} from "../../services/popups/popups.service";
 
 @Component({
     selector: 'app-search-bar',
@@ -49,7 +50,7 @@ export class SearchBarComponent implements OnInit {
         }
     }
 
-    constructor(private _urlParserService: UrlParserService, private _router: Router, private _activatedRouter: ActivatedRoute, private _fb: FormBuilder, private _enums: EnumsService, private _component: ElementRef, private _locationService: LocationService, private _userService: UserService) {
+    constructor(private _popupsService: PopupsService, private _urlParserService: UrlParserService, private _router: Router, private _activatedRouter: ActivatedRoute, private _fb: FormBuilder, private _enums: EnumsService, private _component: ElementRef, private _locationService: LocationService, private _userService: UserService) {
     }
 
     ngOnInit() {
@@ -228,5 +229,9 @@ export class SearchBarComponent implements OnInit {
 
     activateSavedParameters(param) {
         console.log(param);
+    }
+
+    openSaveSearchDialog(e: Event) {
+        this._popupsService.openPopup('saveSearch')
     }
 }

@@ -1,6 +1,6 @@
 import {ILink} from './link.interface';
 import {IDialog} from './dialog.interface';
-import {IUser} from "./user.interface";
+import {IUser} from './user.interface';
 
 export interface IEmbedded {
     content: Array<any>

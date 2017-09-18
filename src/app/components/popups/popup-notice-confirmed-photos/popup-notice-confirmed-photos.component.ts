@@ -8,16 +8,8 @@ import {PopupsService} from '../../../services/popups/popups.service';
 })
 export class PopupNoticeConfirmedPhotosComponent implements OnInit {
 
-  @Input() visible: boolean = false;
-
-  constructor(private _popupsService: PopupsService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  closePopup(e) {
-    if (e.target.classList.contains('popup-wrapper') || e.target.classList.contains('js-close-popup')) {
-      this._popupsService.closePopup('buyConfirmedPhotos');
-    }
   }
 }

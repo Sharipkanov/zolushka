@@ -1,5 +1,7 @@
 {
-  "PAGE_PROFILE": {
-    "PHOTOS": "Фотографии"
+  "PAGES": {
+    "PROFILE": {
+      "PHOTOS": "Фотографии"
+    }
   }
 }
