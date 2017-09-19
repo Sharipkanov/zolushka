@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PageLoaderService} from '../../services/page-loader/page-loader.service';
 
 @Component({
   selector: 'app-preloader-line',
@@ -7,9 +8,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreloaderLineComponent implements OnInit {
 
-  constructor() { }
+  public interval;
+  public preloaderProgress: number = 0;
+
+  constructor(private _pageLoaderService: PageLoaderService) {
+  }
 
   ngOnInit() {
+    this._pageLoaderService.onStartLoad.subscribe(() => {
+      this.initPreloader();
+    });
+
+    this._pageLoaderService.onEndLoad.subscribe(() => {
+      this.stopPreloader();
+    });
+  }
+
+  initPreloader() {
+    console.log('start')
+    clearInterval(this.interval);
+    this.interval = setInterval(() => {
+      this.preloaderProgress += ((100 - this.preloaderProgress) * 0.03);
+
+      if (this.preloaderProgress > 100) {
+        clearInterval(this.interval);
+      }
+    }, 100);
+  }
+
+  stopPreloader() {
+    console.log('hi')
+    clearInterval(this.interval);
+    if (this.preloaderProgress > 0) {
+      this.preloaderProgress = 100;
+    }
+    setTimeout(() => {
+      this.preloaderProgress = 0;
+    }, 1000);
   }
 
 }

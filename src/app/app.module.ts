@@ -50,7 +50,6 @@ import {PopupsComponent} from './components/popups/popups/popups.component';
 import {PopupsService} from './services/popups/popups.service';
 import {PageProfileComponent} from './routes/page-profile/page-profile.component';
 import {PageProfileEditComponent} from './routes/page-profile-edit/page-profile-edit.component';
-import {HttpService} from './services/http/http.service';
 import {DateService} from './services/date/date.service';
 import {EnumsService} from './services/enums/enums.service';
 import {OwlModule} from 'ngx-owl-carousel';
@@ -82,6 +81,7 @@ import { PopupConfirmPhotoComponent } from './components/popups/popup-confirm-ph
 import { PreloaderLineComponent } from './components/preloader-line/preloader-line.component';
 import { PopupRegToDialogComponent } from './components/popups/popup-reg-to-dialog/popup-reg-to-dialog.component';
 import { PopupSaveSearchComponent } from './components/popups/popup-save-search/popup-save-search.component';
+import {PageLoaderService} from './services/page-loader/page-loader.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -178,7 +178,7 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         MockBackend,
         BaseRequestOptions,
         PopupsService,
-        HttpService,
+        PageLoaderService,
         DateService,
         EnumsService,
         DialogService,

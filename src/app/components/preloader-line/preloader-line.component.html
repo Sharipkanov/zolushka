@@ -1,3 +1,3 @@
-<p>
-  preloader-line works!
-</p>
+<div class="preloader--line">
+  <div class="preloader--line__progressbar" *ngIf="!!preloaderProgress" [style.width]="preloaderProgress + '%'"></div>
+</div>

@@ -9,6 +9,7 @@ import {StorageService} from "../../services/storage/storage.service";
 import {UserService} from "../../services/user/user.service";
 import {PopupsService} from "../../services/popups/popups.service";
 import {UrlParserService} from "../../services/url-parser/url-parser.service";
+import {PageLoaderService} from "../../services/page-loader/page-loader.service";
 
 @Component({
   selector: 'app-page-search',
@@ -26,10 +27,11 @@ export class PageSearchComponent implements OnInit {
     filters: false
   };
 
-  constructor(private _urlParserService: UrlParserService, private _popupsService: PopupsService, private _storageService: StorageService, private _router: Router, private _activatedRouter: ActivatedRoute, private _usersService: UsersService, private _userService: UserService) {
+  constructor(private _pageLoaderService: PageLoaderService, private _urlParserService: UrlParserService, private _popupsService: PopupsService, private _storageService: StorageService, private _router: Router, private _activatedRouter: ActivatedRoute, private _usersService: UsersService, private _userService: UserService) {
   }
 
   ngOnInit() {
+    this._pageLoaderService.onStartLoad.emit();
     const storageGridType = this._storageService.get('catalogGridType');
     if (storageGridType === null) {
       this.gridType = true;
@@ -68,15 +70,18 @@ export class PageSearchComponent implements OnInit {
 
   searchUsers(data = null) {
     this.preloaders.userGrid = true;
+    this._pageLoaderService.onStartLoad.emit();
     this._usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
       this.users = <IPaginationUserSearch>users;
       this.preloaders.userGrid = false;
       this.firstLoad = false;
+      this._pageLoaderService.onEndLoad.emit();
     }, error => {
       if (this.filter === 'realPhoto') {
         this._popupsService.openPopup('buyConfirmedPhotos');
         this.preloaders.userGrid = false;
       }
+      this._pageLoaderService.onEndLoad.emit();
     });
   }
 
