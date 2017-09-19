@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, ElementRef, AfterViewInit, HostListener } from '@angular/core';
+import {Component, OnInit, Input, ViewEncapsulation, ElementRef, AfterViewInit, HostListener} from '@angular/core';
 
 @Component({
   selector: 'app-dropdown',
@@ -19,11 +19,17 @@ export class DropdownComponent implements AfterViewInit, OnInit {
   @HostListener('document:click', ['$event'])
   clickOutsideOfComponent(e) {
     if (!this._component.nativeElement.contains(e.target)) {
-      this.dropdown.classList.remove(this.dropdownActiveClass);
+      const dropdownList = document.querySelectorAll(this.dropdownActiveClass);
+      console.log(dropdownList);
+      for (let i = 0; i < dropdownList.length; i++) {
+        dropdownList[i].classList.remove(this.dropdownActiveClass);
+      }
+      // this.dropdown.classList.remove(this.dropdownActiveClass);
     }
   }
 
-  constructor(private _component: ElementRef) { }
+  constructor(private _component: ElementRef) {
+  }
 
   ngOnInit() {
 

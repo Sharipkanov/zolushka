@@ -60,7 +60,6 @@ export class PopupChatComponent implements OnInit, OnDestroy {
             this.dialogs._embedded.content.unshift(dialog);
             this.dialog = new IDialog(dialog);
             this.messages = [];
-            this._popupsService.openPopup('chat');
         });
     }
 
@@ -68,7 +67,7 @@ export class PopupChatComponent implements OnInit, OnDestroy {
         console.log('scroll');
     }
 
-    closePopup(e) {
+    /*closePopup(e) {
         if (e.target.classList.contains('popup-wrapper') || e.target.classList.contains('js-close-popup') || !!e.target.closest('.js-close-popup')) {
             this._popupsService.closePopup('chat');
 
@@ -77,7 +76,7 @@ export class PopupChatComponent implements OnInit, OnDestroy {
                 delete this.dialog;
             }
         }
-    }
+    }*/
 
     getDialogs(update: boolean = true) {
         this._dialogService.getDialogs(this.filterParams).subscribe((response: IPaginationDialogs) => {

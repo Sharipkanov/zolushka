@@ -14,9 +14,7 @@ import {PopupsService} from "../../services/popups/popups.service";
 @Component({
   selector: 'app-page-profile',
   templateUrl: './page-profile.component.html',
-  styleUrls: [
-    './page-profile.component.sass'
-  ],
+  styleUrls: ['./page-profile.component.sass'],
   encapsulation: ViewEncapsulation.None
 })
 export class PageProfileComponent implements OnInit {
@@ -174,6 +172,7 @@ export class PageProfileComponent implements OnInit {
   openChat(user: IUser) {
     const dialog = new IDialog();
     dialog.clientTo = user;
+    this._popupsService.openPopup('chat');
     this._dialogService.onAddNewDialog.emit(dialog);
   }
 

@@ -192,7 +192,7 @@
         margin-top: 20px
         border-radius: 5px
 
-.search-bar__dropdown-wrapper
+.search-bar__dropdown-wrapper, .custom-ion-slider
   .dropdown
     align-self: stretch
     align-items: center
@@ -220,6 +220,11 @@
     border: none
     border-radius: 50%
     top: 0
+
+  .dropdown.dropdown--active
+    .search--dark-focus-input
+      background-color: rgba(#d2d1dd,0.3)
+      box-shadow: 0 5px 0 rgba(#d2d1dd,0.3), 0 -5px 0 rgba(#d2d1dd,0.3)
 
 .search-bar__dropdown-wrapper
   .dropdown.dropdown--active

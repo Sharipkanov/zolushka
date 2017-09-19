@@ -4,7 +4,7 @@ import { IUser } from '../../interfaces/user.interface';
 import { PopupsService } from '../../services/popups/popups.service';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { IDialog } from '../../interfaces/dialog.interface';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-cart',
@@ -18,7 +18,7 @@ export class UserCartComponent implements OnInit {
 
     public favoritesPreloader: boolean = false;
 
-    constructor(private _router: Router, private _dialogService: DialogService) {
+    constructor(private _popupsService: PopupsService, private _router: Router, private _dialogService: DialogService) {
     }
 
     ngOnInit() {
@@ -27,6 +27,7 @@ export class UserCartComponent implements OnInit {
     openChat(user: IUser) {
         const dialog = new IDialog();
         dialog.clientTo = user;
+        this._popupsService.openPopup('chat');
         this._dialogService.onAddNewDialog.emit(dialog);
     }
 

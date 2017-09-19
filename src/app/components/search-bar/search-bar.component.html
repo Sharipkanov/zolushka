@@ -32,7 +32,7 @@
           </a>
           <div class="dropdown__content">
             <div>
-              <ion-range-slider class="fw-mt-inverse-20" #sliderElement
+              <ion-range-slider class="fw-mt-inverse-20"
                                 type="double"
                                 min="19"
                                 max="80"
@@ -65,21 +65,40 @@
           </div>
         </div>
         <div class="search-bar__grid">
-          <div>
-            <div class="fw-flex search-bar__custom-input">
-              <div>
-                Рост от
+          <div class="custom-ion-slider">
+            <div class="dropdown">
+              <a class="dropdown__trigger fw-width-1-1" (click)="dropdownEvent($event)">
+                <div class="fw-flex search-bar__custom-input">
+                  <div>
+                    Рост от
+                  </div>
+                  <div class="search-bar__custom-input--box fw-mr-5">
+                    <input type="text" readonly value="{{FSearchBar.value.minHeight.id}}" class="fw-block fw-text-center fw-width-1-1 fw-reset search--dark-focus-input" maxlength="3" minlength="3" placeholder="170">
+                  </div>
+                  <div>
+                    &mdash; до
+                  </div>
+                  <div class="search-bar__custom-input--box">
+                    <input type="text" readonly value="{{FSearchBar.value.maxHeight.id}}" class="fw-block fw-text-center fw-width-1-1 fw-reset search--dark-focus-input" maxlength="3" minlength="3" placeholder="190">
+                  </div>
+                  <div class="input-box__tooltip fw-ml-auto fw-mr-10">см</div>
+                </div>
+              </a>
+              <div class="dropdown__content">
+                <div>
+                  <ion-range-slider class="fw-mt-inverse-20"
+                                    type="double"
+                                    min="150"
+                                    max="200"
+                                    from="{{rangeSliderValues.minHeight}}"
+                                    to="{{rangeSliderValues.maxHeight}}"
+                                    hide_min_max="true"
+                                    hide_from_to="true"
+                                    (onUpdate)="searchOnChangeHeight($event)"
+                                    (onChange)="searchOnChangeHeight($event)"
+                                    (onFinish)="searchOnChangeHeight($event)"></ion-range-slider>
+                </div>
               </div>
-              <div class="search-bar__custom-input--box fw-mr-5">
-                <input type="text" formControlName="minHeight" class="fw-block fw-text-center fw-width-1-1 fw-reset" maxlength="3" minlength="3" placeholder="170">
-              </div>
-              <div>
-                &mdash; до
-              </div>
-              <div class="search-bar__custom-input--box">
-                <input type="text" formControlName="maxHeight" class="fw-block fw-text-center fw-width-1-1 fw-reset" maxlength="3" minlength="3" placeholder="190">
-              </div>
-              <div class="input-box__tooltip fw-ml-auto fw-mr-10">см</div>
             </div>
           </div>
           <div>
@@ -105,21 +124,40 @@
               </div>
             </div>
           </div>
-          <div>
-            <div class="fw-flex search-bar__custom-input">
-              <div>
-                Вес от
+          <div class="custom-ion-slider">
+            <div class="dropdown">
+              <a class="dropdown__trigger fw-width-1-1" (click)="dropdownEvent($event)">
+                <div class="fw-flex search-bar__custom-input">
+                  <div>
+                    Вес от
+                  </div>
+                  <div class="search-bar__custom-input--box fw-mr-5">
+                    <input type="text" readonly value="{{FSearchBar.value.minWeight.id}}" class="fw-block fw-text-center fw-width-1-1 fw-reset search--dark-focus-input" maxlength="3" minlength="2" placeholder="50">
+                  </div>
+                  <div>
+                    &mdash; до
+                  </div>
+                  <div class="search-bar__custom-input--box">
+                    <input type="text" readonly value="{{FSearchBar.value.maxWeight.id}}" class="fw-block fw-text-center fw-width-1-1 fw-reset search--dark-focus-input" maxlength="3" minlength="2" placeholder="62">
+                  </div>
+                  <div class="input-box__tooltip fw-ml-auto fw-mr-10">кг</div>
+                </div>
+              </a>
+              <div class="dropdown__content">
+                <div>
+                  <ion-range-slider class="fw-mt-inverse-20"
+                                    type="double"
+                                    min="40"
+                                    max="120"
+                                    from="{{rangeSliderValues.minWeight}}"
+                                    to="{{rangeSliderValues.maxWeight}}"
+                                    hide_min_max="true"
+                                    hide_from_to="true"
+                                    (onUpdate)="searchOnChangeWeight($event)"
+                                    (onChange)="searchOnChangeWeight($event)"
+                                    (onFinish)="searchOnChangeWeight($event)"></ion-range-slider>
+                </div>
               </div>
-              <div class="search-bar__custom-input--box fw-mr-5">
-                <input type="text" formControlName="minWeight" class="fw-block fw-text-center fw-width-1-1 fw-reset" maxlength="3" minlength="2" placeholder="50">
-              </div>
-              <div>
-                &mdash; до
-              </div>
-              <div class="search-bar__custom-input--box">
-                <input type="text" formControlName="maxWeight" class="fw-block fw-text-center fw-width-1-1 fw-reset" maxlength="3" minlength="2" placeholder="62">
-              </div>
-              <div class="input-box__tooltip fw-ml-auto fw-mr-10">кг</div>
             </div>
           </div>
           <div>
