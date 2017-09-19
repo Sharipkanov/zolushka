@@ -90,12 +90,13 @@
     justify-content: space-between
     flex-wrap: wrap
     margin-left: -30px
-    align-items: center
-    padding-bottom: -15px
+    align-items: flex-start
+    //margin-bottom: -15px
     padding-top: 20px
 
     + .search-bar__grid
-      padding-bottom: 20px
+      padding-bottom: 5px
+      padding-top: 0
 
     > *
       flex-basis: 25%
@@ -110,6 +111,8 @@
 
     > .search-bar__saved-parameters
       flex-basis: 50%
+      padding-top: 7px
+      margin-bottom: 0
 
   .search-bar__extend
     font-weight: 600
@@ -296,3 +299,6 @@
     &:before
       width: 2px
       height: 100%
+
+.search-bar__left-buttons
+  line-height: 40px
