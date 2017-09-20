@@ -58,6 +58,16 @@ export class PageSearchComponent implements OnInit {
       if (!myParams['type']) {
         myParams['type'] = 200;
       }
+      if (!!myParams['realPhoto']) {
+        this.filter = 'realPhoto';
+      } else if (!!myParams['online']) {
+        this.filter = myParams['online'];
+      } else if (!!myParams['newDays']) {
+        this.filter = myParams['newDays'];
+      } else {
+        this.filter = 'all';
+      }
+
       this.searchUsers(myParams);
     });
   }
@@ -68,14 +78,26 @@ export class PageSearchComponent implements OnInit {
     this._router.navigate(['/search'], {queryParams: queryArray});
   }
 
+  animateUserCards() {
+    if (!!this.users._embedded) {
+      for (let i = 0; i < this.users._embedded.clientCard.length; i++) {
+        setTimeout(() => {
+          this.users._embedded.clientCard[i]._animated = true;
+        }, i * 200);
+      }
+    }
+  }
+
   searchUsers(data = null) {
     this.preloaders.userGrid = true;
+    console.log('emit')
     this._pageLoaderService.onStartLoad.emit();
     this._usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
       this.users = <IPaginationUserSearch>users;
       this.preloaders.userGrid = false;
       this.firstLoad = false;
       this._pageLoaderService.onEndLoad.emit();
+      this.animateUserCards();
     }, error => {
       if (this.filter === 'realPhoto') {
         this._popupsService.openPopup('buyConfirmedPhotos');

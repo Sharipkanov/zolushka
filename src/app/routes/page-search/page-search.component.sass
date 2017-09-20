@@ -38,3 +38,14 @@
 
     > [class*="-active"]
       display: block
+
+.the-user-cart
+  +transition(all 1s ease)
+  position: relative
+  top: 50px
+  opacity: 0
+  display: block
+
+  &--animated
+    top: 0
+    opacity: 1

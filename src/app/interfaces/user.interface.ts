@@ -12,6 +12,7 @@ export class IUser {
   aboutMe: string = null;
   online: boolean = false;
   top: boolean;
+  _animated: boolean = false;
 
   constructor() {}
 }
