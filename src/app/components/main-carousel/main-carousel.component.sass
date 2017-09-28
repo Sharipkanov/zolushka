@@ -1,0 +1,47 @@
+@import "../../../sass/mixins/mixins"
+
+.main-na__slider
+  padding: 50px 0
+  .container
+    max-width: 1000px
+
+.main-na__carousel
+  .owl-nav
+    text-align: center
+
+  .owl-next, .owl-prev
+    display: inline-block
+    font-size: 0
+    width: 40px
+    height: 40px
+    background: #bd0fe1
+    border-radius: 100%
+    margin: 0 8px
+    position: relative
+    +transition()
+
+    &:after
+      width: 35%
+      height: 35%
+      border-top: 2px solid #fff
+      border-right: 2px solid #fff
+      position: absolute
+      content: ''
+      top: 32.5%
+      left: 32.5%
+      display: block
+      transform: rotate(45deg)
+      margin-left: -8%
+
+    &:hover
+      background: #bd0fe1*0.8
+
+  .owl-prev
+    &:after
+      transform: rotate(-135deg)
+      margin-left: 8%
+
+
+.main-na__carousel-content
+  p:not(:last-child)
+    margin-bottom: 20px

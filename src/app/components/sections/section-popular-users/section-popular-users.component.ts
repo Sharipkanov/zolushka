@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UsersService } from '../../../services/users/users.service';
 import { IUser } from  '../../../interfaces/user.interface';
+import {IPaginationUserSearch} from "../../../interfaces/pagination.interface";
 
 @Component({
   selector: 'app-section-popular-users',
@@ -10,13 +11,13 @@ import { IUser } from  '../../../interfaces/user.interface';
   providers: [ UsersService ]
 })
 export class SectionPopularUsersComponent implements OnInit {
-  public users: Array<IUser> = [];
+  public users: IPaginationUserSearch = new IPaginationUserSearch();
 
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
-    this.usersService.getPopularUsers().subscribe((users: Array<IUser>) => {
-      this.users = users;
+    this.usersService.getPopularUsers(12, 100).subscribe((users: IPaginationUserSearch) => {
+      this.users = <IPaginationUserSearch>users;
     });
   }
 

@@ -26,7 +26,7 @@
     <div class="user-cart__information information fw-flex-grow">
         <div [ngClass]="{'fw-flex fw-flex-middle fw-mb-10': !gridType}">
             <a class="user-cart__name" [ngClass]="{'fw-mr-10': !gridType}"> {{(!!user.name) ? user.name : ''}}{{(user.age) ? ', ' + user.age : '' }}</a>
-            <div class="user-cart__geo" [ngClass]="{'fw-mb-5': gridType}">{{(!!user.city) ? user.city.title : ''}}{{(!!user.city.country) ? ', ' + user.city.country.title : '' }}
+            <div class="user-cart__geo fw-text-ellipsis" [ngClass]="{'fw-mb-5': gridType}">{{(!!user.city) ? user.city.title : ''}}{{(!!user.city.country) ? ', ' + user.city.country.title : '' }}
             </div>
         </div>
         <div class="user-cart__status {{(user.online) ? 'user-cart__status--online' : ''}}">{{(user.online) ? 'On-line'

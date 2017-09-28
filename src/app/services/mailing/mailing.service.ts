@@ -1,43 +1,83 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {UserService} from '../user/user.service';
+import {IMailing} from '../../interfaces/mailing.interface';
 
 @Injectable()
 export class MailingService {
 
-  constructor() { }
-
-  createMailing() {
-
+  constructor(private _http: Http, private _userService: UserService) {
   }
 
-  editMailing() {
+  createMailing(data: IMailing, serviceId: number) {
+    const headers = this._userService.setHeaders({json: true});
 
+    return this._http.post(`/api/api/client/mailing/service/${serviceId}`, data, {headers: headers}).map((response: Response) => response.json());
   }
 
-  stopMailing() {
+  editMailing(data: IMailing, id: number) {
+    const headers = this._userService.setHeaders({json: true});
 
+    return this._http.post(`/api/api/client/mailing/${id}`, data, {headers: headers}).map((response: Response) => response.json());
   }
 
-  getActiveMailing() {
+  stopMailing(id: number) {
+    const headers = this._userService.setHeaders({json: true});
 
+    return this._http.get(`/api/api/client/mailing/${id}/stop`, {headers: headers}).map((response: Response) => response.json());
+  }
+
+  addMailingFeedback(id: number) {
+    const headers = this._userService.setHeaders({json: true});
+
+    // TODO узнать какой ментод и поправить если будет необходимость
+    return this._http.get(`/api/api/client/mailing/${id}/responded`, {headers: headers}).map((response: Response) => response.json());
+  }
+
+  getActiveMailing(id: number = null) {
+    const headers = this._userService.setHeaders({json: true});
+    let url = `/api/api/client/mailing`;
+
+    if (id) {
+      url += `/${id}`;
+    }
+
+    return this._http.get(url, {headers: headers}).map((response: Response) => response.json())
   }
 
   getActiveMailingList() {
+    const headers = this._userService.setHeaders({json: true});
 
+    return this._http.get(`/api/api/client/mailing/list`, {headers: headers}).map((response: Response) => response.json());
   }
 
   getMailingArchive() {
+    const headers = this._userService.setHeaders({json: true});
 
+    return this._http.get(`/api/api/client/mailing/list/archive`, {headers: headers}).map((response: Response) => response.json());
   }
 
-  getMailingGirls() {
+  getMailingGirls(id: number = null) {
+    const headers = this._userService.setHeaders({json: true});
 
+    let url = `/api/api/client/mailing/responsed`;
+
+    if (id) {
+      url = `/api/api/client/mailing/${id}/responsed`;
+    }
+
+    return this._http.get(url, {headers: headers}).map((response: Response) => response.json());
+  }
+
+  getMailingBlacklist(id: number) {
+    const headers = this._userService.setHeaders({json: true});
+
+    return this._http.get(`/api/api/client/mailing/${id}/blacklist`, {headers: headers}).map((response: Response) => response.json());
   }
 
   getMailingDialogs() {
+    const headers = this._userService.setHeaders({json: true});
 
-  }
-
-  addMailingFeedback() {
-
+    return this._http.get(`/api/api/client/mailing/dialog-clients`, {headers: headers}).map((response: Response) => response.json());
   }
 }

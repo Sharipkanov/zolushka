@@ -2062,3 +2062,23 @@
   background-color: #bd0fe1;
   box-shadow: none;
 }
+
+.icon-main-na__video-play {
+  background: #bd0fe1;
+  border-radius: 100%;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: block;
+}
+.icon-main-na__video-play:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 50%;
+  border: 10px solid transparent;
+  border-left: 12px solid #fff;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: 8px;
+}

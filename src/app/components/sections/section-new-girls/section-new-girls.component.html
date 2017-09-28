@@ -1,11 +1,16 @@
 <section class="section-new-girls fw-pt-20 fw-pb-20">
   <div class="container">
     <div class="fw-overflow fw-br-5 fw-grid">
-      <div class="fw-width-1-6 fw-bg-blue fw-pl-10 fw-pr-10 fw-pb-10 fw-pt-10 fw-flex fw-flex-start fw-flex-column fw-flex-right">
+      <div
+          class="fw-width-1-6 fw-bg-blue fw-pl-10 fw-pr-10 fw-pb-10 fw-pt-10 fw-flex fw-flex-start fw-flex-column fw-flex-right">
         <p class="fw-fw-600 fw-fz-26 fw-mb-10 fw-color-white">Новые золушки</p>
-        <p><a href="#" class="button button--transparent button--small"><span class="button--transparent__text">Смотреть всех</span></a></p>
+        <p>
+          <a class="button button--transparent button--small" routerLink="/search">
+            <span class="button--transparent__text">Смотреть всех</span>
+          </a>
+        </p>
       </div>
-      <div class="fw-width-1-6 fw-height-proportional-100" *ngFor="let user of users">
+      <div class="fw-width-1-6 fw-height-proportional-100" *ngFor="let user of users._embedded.clientCard">
         <app-user-cart-thumbnail [small]="true" [user]="user"></app-user-cart-thumbnail>
       </div>
     </div>

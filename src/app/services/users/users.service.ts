@@ -9,25 +9,19 @@ export class UsersService {
     }
 
     getNewUsers(count: number) {
-        return this._http.get(`api.zolushka.ru/users/new/${count}`).map((response: Response) => response.json());
+        return this._http.get(`/api/api/client/search?size=${count}&type=200`).map((response: Response) => response.json());
     }
 
-    getTopUsers(count: number) {
-        return this._http.get(`api.zolushka.ru/users/top/${count}`).map((response: Response) => response.json());
+    getTopUsers(count: number, type: number = 200) {
+        return this._http.get(`/api/api/client/search?size=${count}&type=${type}`).map((response: Response) => response.json());
     }
 
-    getPopularUsers() {
-        return this._http.get('api.zolushka.ru/users/popular').map((response: Response) => response.json());
+    getPopularUsers(count: number, type: number = 200) {
+        return this._http.get(`/api/api/client/search?size=${count}&type=${type}`).map((response: Response) => response.json());
     }
 
     searchUsers(searchArray = null) {
-        // const params: URLSearchParams = new URLSearchParams();
         const headers = this._userService.setHeaders({json: true});
-        /*if (!!searchArray) {
-            for (const key in searchArray) {
-                params.set(key, searchArray[key]);
-            }
-        }*/
 
         return this._http.get('/api/api/client/search', {search: searchArray, headers: headers}).map((response: Response) => response.json());
     }

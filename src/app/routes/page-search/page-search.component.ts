@@ -90,7 +90,6 @@ export class PageSearchComponent implements OnInit {
 
   searchUsers(data = null) {
     this.preloaders.userGrid = true;
-    console.log('emit')
     this._pageLoaderService.onStartLoad.emit();
     this._usersService.searchUsers(data).subscribe((users: IPaginationUserSearch) => {
       this.users = <IPaginationUserSearch>users;

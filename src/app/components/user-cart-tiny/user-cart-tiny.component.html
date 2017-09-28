@@ -1,9 +1,9 @@
-<div class="user-cart-tiny">
+<a class="user-cart-tiny fw-block" routerLink="/profile/{{(user.type === 200) ? 'she' : 'he'}}/{{user.id}}">
   <div class="user-cart-tiny__thumbnail">
-    <img src="{{(user.thumbnail.length) ? user.thumbnail: 'http://placehold.it/160x160'}}" class="fw-image-cover" alt="">
+    <img src="{{(user.avatar) ? user.avatar._links.small.href: '/assets/images/default-avatar.svg'}}" class="fw-image-cover" alt="">
   </div>
   <div>
-    <app-user-info-status [status]="user.status" [firstName]="user.firstName" [externalInfo]="user.age"></app-user-info-status>
-    <p class="fw-color-grey" *ngIf="user.city.length">{{user.city}}</p>
+    <app-user-info-status [status]="user.online" [firstName]="user.name" [externalInfo]="user.age"></app-user-info-status>
+    <p class="fw-color-grey fw-text-ellipsis" *ngIf="user.city">{{user.city.title}}</p>
   </div>
-</div>
+</a>

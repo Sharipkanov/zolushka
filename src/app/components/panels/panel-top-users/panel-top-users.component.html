@@ -1,16 +1,19 @@
-<div class="panel fw-pt-10">
+<div class="panel fw-pt-10 fw-position-relative">
   <div class="fw-flex fw-pb-10 fw-flex-middle">
     <p class="fw-flex-grow"><i class="icon-top-female-badge"></i></p>
-    <a href="#" class="link fw-mr-5 fw-flex-shrink-no fw-fw-600 fw-mr-10">Смотреть мужской топ</a>
+    <a (click)="changeGender($event)" class="link fw-mr-5 fw-flex-shrink-no fw-fw-600 fw-mr-10">Смотреть
+      {{(currentGender === 200) ? 'мужской' : 'женский'}} топ</a>
   </div>
   <div class="fw-pl-20 fw-pr-20 fw-pb-20 fw-pt-20">
     <div class="fw-grid fw-grid-15">
-      <div class="fw-width-1-5" *ngFor="let user of users">
-        <a href="#"><app-user-cart-tiny [user]="user"></app-user-cart-tiny></a>
+      <div class="fw-width-1-5" *ngFor="let user of users._embedded.clientCard">
+        <app-user-cart-tiny [user]="user"></app-user-cart-tiny>
       </div>
     </div>
   </div>
   <div class="fw-bg-light fw-mt-25">
-    <a href="#" class="fw-flex fw-flex-center fw-color-purple fw-fw-600 fw-pt-15 fw-pb-15">Смотреть все</a>
+    <a routerLink="/search" [queryParams]="currentGender === 100 ? {type: 100} : null"
+       class="fw-flex fw-flex-center fw-color-purple fw-fw-600 fw-pt-15 fw-pb-15">Смотреть все</a>
   </div>
+  <app-preloader *ngIf="preloader"></app-preloader>
 </div>

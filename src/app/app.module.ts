@@ -82,6 +82,8 @@ import { PreloaderLineComponent } from './components/preloader-line/preloader-li
 import { PopupRegToDialogComponent } from './components/popups/popup-reg-to-dialog/popup-reg-to-dialog.component';
 import { PopupSaveSearchComponent } from './components/popups/popup-save-search/popup-save-search.component';
 import {PageLoaderService} from './services/page-loader/page-loader.service';
+import { MainInstallAppComponent } from './components/main-install-app/main-install-app.component';
+import { MainCarouselComponent } from './components/main-carousel/main-carousel.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -149,7 +151,9 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         PopupConfirmPhotoComponent,
         PreloaderLineComponent,
         PopupRegToDialogComponent,
-        PopupSaveSearchComponent
+        PopupSaveSearchComponent,
+        MainInstallAppComponent,
+        MainCarouselComponent
     ],
     imports: [
         BrowserModule,

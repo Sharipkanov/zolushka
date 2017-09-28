@@ -1,21 +1,21 @@
-<div class="user-cart-thumbnail{{(small) ? ' user-cart-thumbnail--small' : ''}}{{(classes.length) ? ' ' + classes : ''}}{{(unmax) ? ' user-cart-thumbnail--unmax' : ''}}">
-  <img src="{{(user.thumbnail.length) ? user.thumbnail : 'http://placehold.it/220x220'}}" alt="" class="user-cart-thumbnail__image">
+<div class="user-cart-thumbnail{{(small) ? ' user-cart-thumbnail--small' : ''}}{{(classes.length) ? ' ' + classes : ''}}{{(unmax) ? ' user-cart-thumbnail--unmax' : ''}}" (click)="openProfile($event, user)">
+  <img src="{{(user.avatar) ? user.avatar._links.medium.href : '/assets/images/default-avatar.svg'}}" alt="" class="user-cart-thumbnail__image">
   <div class="user-cart-thumbnail__cover">
     <p class="user-cart-thumbnail__text">
-      {{(user.firstName.length) ? user.firstName : '' }}{{(user.age) ? ', ' + user.age : '' }}
+      {{(user.name.length) ? user.name : '' }}{{(user.age) ? ', ' + user.age : '' }}
       <br>
-      {{(user.city.length) ? user.city : '' }}{{(user.country) ? ', ' + user.country : '' }}
+      {{(user.city) ? user.city.title : '' }}{{(user.city.country.title) ? ', ' + user.city.country.title : '' }}
     </p>
     <div class="user-cart-thumbnail__info">
       <div>
         <a href="#" class="user-cart-thumbnail__link">
           <i class="icon-user-cart-camera-small"></i>
-          <span class="user-cart-thumbnail__photo-count">{{(user.photos.length) ? user.photos.length : 0}}</span>
+          <span class="user-cart-thumbnail__photo-count">{{(user.countPhotos) ? user.countPhotos : 0}}</span>
         </a>
       </div>
       <div>
-        <a href="#" class="user-cart-thumbnail__link"><i class="icon-user-cart-chat-small"></i></a>
-        <a href="#" class="user-cart-thumbnail__link"><i class="icon-user-cart-phone-small"></i></a>
+        <a (click)="openChat(user)" class="user-cart-thumbnail__link js-open-chat"><i class="icon-user-cart-chat-small"></i></a>
+        <a class="user-cart-thumbnail__link js-start-call"><i class="icon-user-cart-phone-small"></i></a>
       </div>
     </div>
   </div>

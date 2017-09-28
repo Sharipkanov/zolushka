@@ -7,12 +7,29 @@
         <div class="fw-width-1-2">
           <app-panel-top-users [users]="usersInTop"></app-panel-top-users>
         </div>
-        <div class="fw-width-1-2">1</div>
+        <div class="fw-width-1-2 fw-flex">
+          <div class="main-na__video fw-cursor-pointer fw-flex panel-section fw-flex-grow">
+            <i class="icon-main-na__video-play"></i>
+            <div class="main-na__video-info fw-flex fw-flex-space-between fw-width-1-1">
+              <div class="main-na__video-title">
+                Мнение видео блогеров <br>
+                о Золушка project
+              </div>
+              <div class="main-na__video-time">
+                12:05
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <app-section-popular-users></app-section-popular-users>
+  <app-section-popular-users class="fw-block fw-mb-30"></app-section-popular-users>
+
+  <app-main-install-app></app-main-install-app>
+
+  <app-main-carousel></app-main-carousel>
 
   <app-section-registration></app-section-registration>
 </div>

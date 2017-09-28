@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../../services/user/user.service';
-import { IUser } from '../../interfaces/user.interface';
 import { UsersService } from '../../services/users/users.service';
+import {IPaginationUserSearch} from '../../interfaces/pagination.interface';
 
 @Component({
   selector: 'app-page-home',
@@ -12,8 +12,8 @@ import { UsersService } from '../../services/users/users.service';
 })
 export class PageHomeComponent implements OnInit {
   public logged: boolean;
-  public usersInTop: Array<IUser> = [];
-  public usersNew: Array<IUser> = [];
+  public usersInTop: IPaginationUserSearch = new IPaginationUserSearch();
+  public usersNew: IPaginationUserSearch = new IPaginationUserSearch();
 
   constructor(private _userService: UserService, private _usersService: UsersService) { }
 
@@ -30,7 +30,6 @@ export class PageHomeComponent implements OnInit {
     this._userService.onChangeToken.subscribe((token: string) => {
       if (token.length) {
         this.logged = true;
-
         this._getTopUsers(2);
         this._getNewUsers(7);
       } else {
@@ -40,14 +39,14 @@ export class PageHomeComponent implements OnInit {
   }
 
   private _getTopUsers(count) {
-    this._usersService.getTopUsers(count).subscribe((users: Array<IUser>) => {
-      this.usersInTop = users;
+    this._usersService.getTopUsers(count).subscribe((users: IPaginationUserSearch) => {
+      this.usersInTop = <IPaginationUserSearch>users;
     });
   }
 
   private _getNewUsers(count) {
-    this._usersService.getNewUsers(count).subscribe((users: Array<IUser>) => {
-      this.usersNew = users;
+    this._usersService.getNewUsers(count).subscribe((users: IPaginationUserSearch) => {
+      this.usersNew = <IPaginationUserSearch>users;
     });
   }
 
