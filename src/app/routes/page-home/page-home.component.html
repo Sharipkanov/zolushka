@@ -25,13 +25,13 @@
     </div>
   </section>
 
-  <app-section-popular-users class="fw-block fw-mb-30"></app-section-popular-users>
+  <app-section-popular-users *ngIf="!logged" class="fw-block fw-mb-30"></app-section-popular-users>
 
-  <app-main-install-app></app-main-install-app>
+  <app-main-install-app *ngIf="!logged"></app-main-install-app>
 
-  <app-main-carousel></app-main-carousel>
+  <app-main-carousel *ngIf="!logged"></app-main-carousel>
 
-  <app-section-registration></app-section-registration>
+  <app-section-registration *ngIf="!logged"></app-section-registration>
 </div>
 
 <div *ngIf="logged" class="container">
@@ -42,7 +42,7 @@
       </div>
       <div class="fw-width-1-2">
         <div class="fw-grid fw-grid-30">
-          <div class="fw-width-1-2" *ngFor="let user of usersInTop">
+          <div class="fw-width-1-2" *ngFor="let user of usersInTop._embedded.clientCard">
             <app-user-cart [user]="user" [small]="true"></app-user-cart>
           </div>
         </div>
