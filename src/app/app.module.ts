@@ -66,141 +66,147 @@ import {PaginationComponent} from './components/pagination/pagination.component'
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import { MassMediaComponent } from './components/mass-media/mass-media.component';
-import { PopupNoticeConfirmedPhotosComponent } from './components/popups/popup-notice-confirmed-photos/popup-notice-confirmed-photos.component';
-import { PopupRegBeforeFilterByOnlineComponent } from './components/popups/popup-reg-before-filter-by-online/popup-reg-before-filter-by-online.component';
-import { PopupRegBeforeFilterByRealPhotoComponent } from './components/popups/popup-reg-before-filter-by-real-photo/popup-reg-before-filter-by-real-photo.component'
+import {MassMediaComponent} from './components/mass-media/mass-media.component';
+import {PopupNoticeConfirmedPhotosComponent} from './components/popups/popup-notice-confirmed-photos/popup-notice-confirmed-photos.component';
+import {PopupRegBeforeFilterByOnlineComponent} from './components/popups/popup-reg-before-filter-by-online/popup-reg-before-filter-by-online.component';
+import {PopupRegBeforeFilterByRealPhotoComponent} from './components/popups/popup-reg-before-filter-by-real-photo/popup-reg-before-filter-by-real-photo.component'
 import {UrlParserService} from './services/url-parser/url-parser.service';
-import { PageBlogComponent } from './routes/page-blog/page-blog.component';
-import { BlogItemCartComponent } from './components/blog-item-cart/blog-item-cart.component';
-import { BlogBottomCategoriesComponent } from './components/blog-bottom-categories/blog-bottom-categories.component';
-import { PageBlogItemComponent } from './routes/page-blog-item/page-blog-item.component';
-import { CommentsComponent } from './components/comments/comments.component';
-import { BottomGridComponent } from './components/bottom-grid/bottom-grid.component';
-import { PopupConfirmPhotoComponent } from './components/popups/popup-confirm-photo/popup-confirm-photo.component';
-import { PreloaderLineComponent } from './components/preloader-line/preloader-line.component';
-import { PopupRegToDialogComponent } from './components/popups/popup-reg-to-dialog/popup-reg-to-dialog.component';
-import { PopupSaveSearchComponent } from './components/popups/popup-save-search/popup-save-search.component';
+import {PageBlogComponent} from './routes/page-blog/page-blog.component';
+import {BlogItemCartComponent} from './components/blog-item-cart/blog-item-cart.component';
+import {BlogBottomCategoriesComponent} from './components/blog-bottom-categories/blog-bottom-categories.component';
+import {PageBlogItemComponent} from './routes/page-blog-item/page-blog-item.component';
+import {CommentsComponent} from './components/comments/comments.component';
+import {BottomGridComponent} from './components/bottom-grid/bottom-grid.component';
+import {PopupConfirmPhotoComponent} from './components/popups/popup-confirm-photo/popup-confirm-photo.component';
+import {PreloaderLineComponent} from './components/preloader-line/preloader-line.component';
+import {PopupRegToDialogComponent} from './components/popups/popup-reg-to-dialog/popup-reg-to-dialog.component';
+import {PopupSaveSearchComponent} from './components/popups/popup-save-search/popup-save-search.component';
 import {PageLoaderService} from './services/page-loader/page-loader.service';
-import { MainInstallAppComponent } from './components/main-install-app/main-install-app.component';
-import { MainCarouselComponent } from './components/main-carousel/main-carousel.component';
-import { IndexPanelViewsComponent } from './components/index-panel-views/index-panel-views.component';
-import { IndexPanelBlogComponent } from './components/index-panel-blog/index-panel-blog.component';
-import { IndexPanelDayPersonComponent } from './components/index-panel-day-person/index-panel-day-person.component';
-import { IndexPanelChatListComponent } from './components/index-panel-chat-list/index-panel-chat-list.component';
-import { IndexPanelMailingFeedbackComponent } from './components/index-panel-mailing-feedback/index-panel-mailing-feedback.component';
-import { MailingFeedbacksCarouselComponent } from './components/mailing-feedbacks-carousel/mailing-feedbacks-carousel.component';
+import {MainInstallAppComponent} from './components/main-install-app/main-install-app.component';
+import {MainCarouselComponent} from './components/main-carousel/main-carousel.component';
+import {IndexPanelViewsComponent} from './components/index-panel-views/index-panel-views.component';
+import {IndexPanelBlogComponent} from './components/index-panel-blog/index-panel-blog.component';
+import {IndexPanelDayPersonComponent} from './components/index-panel-day-person/index-panel-day-person.component';
+import {IndexPanelChatListComponent} from './components/index-panel-chat-list/index-panel-chat-list.component';
+import {IndexPanelMailingFeedbackComponent} from './components/index-panel-mailing-feedback/index-panel-mailing-feedback.component';
+import {MailingFeedbacksCarouselComponent} from './components/mailing-feedbacks-carousel/mailing-feedbacks-carousel.component';
+import {PopupMailingBlacklistComponent} from './components/popups/popup-mailing-blacklist/popup-mailing-blacklist.component';
+import {UsersService} from "./services/users/users.service";
+import {MailingService} from "./services/mailing/mailing.service";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http);
 }
 
 const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', options: {}};
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        FooterComponent,
-        HeaderComponent,
-        UserCartComponent,
-        PageNotFoundComponent,
-        PageHomeComponent,
-        PageAboutComponent,
-        DownloadBoxComponent,
-        SocialsCircleListComponent,
-        InputBoxComponent,
-        TextareaBoxComponent,
-        ChecboxBoxComponent,
-        ChecboxBoxLabelComponent,
-        RadioBoxLabelComponent,
-        SelectBoxComponent,
-        SelectSearchBoxComponent,
-        PageComponentsComponent,
-        SearchBarComponent,
-        RadioBoxComponent,
-        SectionStoreLinkComponent,
-        SectionNewGirlsComponent,
-        SectionRegistrationComponent,
-        UserCartThumbnailComponent,
-        PanelTopUsersComponent,
-        UserCartTinyComponent,
-        UserInfoStatusComponent,
-        PageRegistrationComponent,
-        SectionRegistrationInfoComponent,
-        PanelGiftComponent,
-        SectionPopularUsersComponent,
-        PageSearchComponent,
-        NavigationComponent,
-        DropdownComponent,
-        PanelNewGirlsComponent,
-        PopupLoginComponent,
-        PopupsComponent,
-        PageProfileComponent,
-        PageProfileEditComponent,
-        PreloaderComponent,
-        PageMailingComponent,
-        PageProfileViewsComponent,
-        ChatListComponent,
-        PopupChatComponent,
-        PaginationComponent,
-        MassMediaComponent,
-        PopupNoticeConfirmedPhotosComponent,
-        PopupRegBeforeFilterByOnlineComponent,
-        PopupRegBeforeFilterByRealPhotoComponent,
-        PageBlogComponent,
-        BlogItemCartComponent,
-        BlogBottomCategoriesComponent,
-        PageBlogItemComponent,
-        CommentsComponent,
-        BottomGridComponent,
-        PopupConfirmPhotoComponent,
-        PreloaderLineComponent,
-        PopupRegToDialogComponent,
-        PopupSaveSearchComponent,
-        MainInstallAppComponent,
-        MainCarouselComponent,
-        IndexPanelViewsComponent,
-        IndexPanelBlogComponent,
-        IndexPanelDayPersonComponent,
-        IndexPanelChatListComponent,
-        IndexPanelMailingFeedbackComponent,
-        MailingFeedbacksCarouselComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutes,
-        HttpModule,
-        JsonpModule,
-        FormsModule,
-        ReactiveFormsModule,
-        OwlModule,
-        PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
-        SocketIoModule.forRoot(config),
-        IonRangeSliderModule,
-        HttpClientModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        })
-    ],
-    providers: [
-        StorageService,
-        UserService,
-        BackendProvider,
-        MockBackend,
-        BaseRequestOptions,
-        PopupsService,
-        PageLoaderService,
-        DateService,
-        EnumsService,
-        DialogService,
-        UrlParserService
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    HeaderComponent,
+    UserCartComponent,
+    PageNotFoundComponent,
+    PageHomeComponent,
+    PageAboutComponent,
+    DownloadBoxComponent,
+    SocialsCircleListComponent,
+    InputBoxComponent,
+    TextareaBoxComponent,
+    ChecboxBoxComponent,
+    ChecboxBoxLabelComponent,
+    RadioBoxLabelComponent,
+    SelectBoxComponent,
+    SelectSearchBoxComponent,
+    PageComponentsComponent,
+    SearchBarComponent,
+    RadioBoxComponent,
+    SectionStoreLinkComponent,
+    SectionNewGirlsComponent,
+    SectionRegistrationComponent,
+    UserCartThumbnailComponent,
+    PanelTopUsersComponent,
+    UserCartTinyComponent,
+    UserInfoStatusComponent,
+    PageRegistrationComponent,
+    SectionRegistrationInfoComponent,
+    PanelGiftComponent,
+    SectionPopularUsersComponent,
+    PageSearchComponent,
+    NavigationComponent,
+    DropdownComponent,
+    PanelNewGirlsComponent,
+    PopupLoginComponent,
+    PopupsComponent,
+    PageProfileComponent,
+    PageProfileEditComponent,
+    PreloaderComponent,
+    PageMailingComponent,
+    PageProfileViewsComponent,
+    ChatListComponent,
+    PopupChatComponent,
+    PaginationComponent,
+    MassMediaComponent,
+    PopupNoticeConfirmedPhotosComponent,
+    PopupRegBeforeFilterByOnlineComponent,
+    PopupRegBeforeFilterByRealPhotoComponent,
+    PageBlogComponent,
+    BlogItemCartComponent,
+    BlogBottomCategoriesComponent,
+    PageBlogItemComponent,
+    CommentsComponent,
+    BottomGridComponent,
+    PopupConfirmPhotoComponent,
+    PreloaderLineComponent,
+    PopupRegToDialogComponent,
+    PopupSaveSearchComponent,
+    MainInstallAppComponent,
+    MainCarouselComponent,
+    IndexPanelViewsComponent,
+    IndexPanelBlogComponent,
+    IndexPanelDayPersonComponent,
+    IndexPanelChatListComponent,
+    IndexPanelMailingFeedbackComponent,
+    MailingFeedbacksCarouselComponent,
+    PopupMailingBlacklistComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutes,
+    HttpModule,
+    JsonpModule,
+    FormsModule,
+    ReactiveFormsModule,
+    OwlModule,
+    PerfectScrollbarModule.forRoot(PERFECT_SCROLLBAR_CONFIG),
+    SocketIoModule.forRoot(config),
+    IonRangeSliderModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
+  ],
+  providers: [
+    StorageService,
+    UserService,
+    UsersService,
+    BackendProvider,
+    MockBackend,
+    BaseRequestOptions,
+    PopupsService,
+    PageLoaderService,
+    DateService,
+    EnumsService,
+    DialogService,
+    UrlParserService,
+    MailingService
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

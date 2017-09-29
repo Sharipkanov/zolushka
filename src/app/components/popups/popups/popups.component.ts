@@ -19,6 +19,7 @@ export class PopupsComponent implements OnInit {
     confirmPhoto: false,
     regToDialog: false,
     saveSearch: false,
+    mailingBlacklist: false
   };
 
   public openingAnimation = false;

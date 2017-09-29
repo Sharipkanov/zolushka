@@ -28,3 +28,7 @@
 <app-popup-save-search *ngIf="popups.saveSearch"
                          [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"
                          (click)="closePopup($event)"></app-popup-save-search>
+
+<app-popup-mailing-blacklist *ngIf="popups.mailingBlacklist"
+                         [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"
+                         (click)="closePopup($event)"></app-popup-mailing-blacklist>

@@ -75,7 +75,7 @@
                 <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14 fw-color-grey-dark">Исключить
                   пользователей</p></div>
                 <div class="fw-width-290">
-                  <a class="button button--blue button--small">
+                  <a class="button button--blue button--small" (click)="openBlackList($event)">
                     <i class="icon-plus icon-plus--purple-dark fw-mr-3"></i>
                     <span class="fw-inline-block fw-fz-14 fw-text-600 fw-vam">Выбрать</span>
                   </a>
@@ -101,7 +101,5 @@
       </div>
     </div>
   </div>
-  <div class="fw-mt-40">
-
-  </div>
 </div>
+<app-bottom-grid class="fw-block"></app-bottom-grid>

@@ -1,3 +1,12 @@
-<p>
-  bottom-grid works!
-</p>
+<div class="bottom-grid fw-mb-15-inverse">
+  <div class="container">
+    <div class="bottom-grid__list">
+      <div class="bottom-grid__item" *ngFor="let user of users._embedded.clientCard">
+        <a routerLink="/profile/{{user.type === 200 ? 'she' : 'he'}}/{{user.id}}" class="bottom-grid__link">
+          <img alt="" class="bottom-grid__image"
+               src="{{user.avatar ? user.avatar._links.small.href : '/assets/images/default-avatar.svg'}}"/>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UsersService} from '../../services/users/users.service';
+import {IPaginationUserSearch} from '../../interfaces/pagination.interface';
 
 @Component({
   selector: 'app-bottom-grid',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BottomGridComponent implements OnInit {
 
-  constructor() { }
+  public users: IPaginationUserSearch = new IPaginationUserSearch();
+
+  constructor(private _usersService: UsersService) {
+  }
 
   ngOnInit() {
+    this._usersService.getBottomGridUsers(8).subscribe((users: IPaginationUserSearch) => {
+      this.users = <IPaginationUserSearch>users;
+    });
   }
 
 }

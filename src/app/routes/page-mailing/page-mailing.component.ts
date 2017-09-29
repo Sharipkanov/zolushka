@@ -3,6 +3,7 @@ import {EnumsService} from '../../services/enums/enums.service';
 import {ISelectSearchBoxItem} from '../../interfaces/form/select-search-box-item.interface';
 import {LocationService} from '../../services/location/location.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {PopupsService} from "../../services/popups/popups.service";
 
 @Component({
   selector: 'app-page-mailing',
@@ -17,7 +18,7 @@ export class PageMailingComponent implements OnInit {
   public errors = [];
 
   public FMailing: FormGroup;
-  constructor(private _fb: FormBuilder, private _enums: EnumsService, private _locationService: LocationService) { }
+  constructor(private _popupsService: PopupsService, private _fb: FormBuilder, private _enums: EnumsService, private _locationService: LocationService) { }
 
   ngOnInit() {
     this.FMailing = this._fb.group({
@@ -49,5 +50,11 @@ export class PageMailingComponent implements OnInit {
 
   getLocations(locationName) {
     this.initLocation(locationName);
+  }
+
+  openBlackList(e: Event) {
+    e.preventDefault();
+
+    this._popupsService.openPopup('mailingBlacklist');
   }
 }

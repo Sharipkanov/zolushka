@@ -12,6 +12,10 @@ export class UsersService {
         return this._http.get(`/api/api/client/search?size=${count}&type=200`).map((response: Response) => response.json());
     }
 
+    getBottomGridUsers(count: number) {
+        return this._http.get(`/api/api/client/search?size=${count}&type=200`).map((response: Response) => response.json());
+    }
+
     getTopUsers(count: number, type: number = 200) {
         return this._http.get(`/api/api/client/search?size=${count}&type=${type}`).map((response: Response) => response.json());
     }
