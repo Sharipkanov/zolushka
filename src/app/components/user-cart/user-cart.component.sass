@@ -10,6 +10,13 @@
   flex-grow: 1
   position: relative
 
+  &.user-cart__short-height-image
+    .user-cart__thumbnail
+      max-height: 340px
+
+  &.user-cart__no-box-shadow
+    box-shadow: none
+
   &.user-cart--unstyled
     box-shadow: 0
 
@@ -20,7 +27,7 @@
       box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15), 0 0 5px 2px $colorRed
 
   &:hover
-    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15), 0 0 3px 1px $colorRedLight
+    //box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15), 0 0 3px 1px $colorRedLight
 
     .user-cart__cover
       background: rgba($colorBlack, 0.1)

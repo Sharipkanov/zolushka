@@ -84,6 +84,11 @@ import { PopupSaveSearchComponent } from './components/popups/popup-save-search/
 import {PageLoaderService} from './services/page-loader/page-loader.service';
 import { MainInstallAppComponent } from './components/main-install-app/main-install-app.component';
 import { MainCarouselComponent } from './components/main-carousel/main-carousel.component';
+import { IndexPanelViewsComponent } from './components/index-panel-views/index-panel-views.component';
+import { IndexPanelBlogComponent } from './components/index-panel-blog/index-panel-blog.component';
+import { IndexPanelDayPersonComponent } from './components/index-panel-day-person/index-panel-day-person.component';
+import { IndexPanelChatListComponent } from './components/index-panel-chat-list/index-panel-chat-list.component';
+import { IndexPanelMailingFeedbackComponent } from './components/index-panel-mailing-feedback/index-panel-mailing-feedback.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -153,7 +158,12 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         PopupRegToDialogComponent,
         PopupSaveSearchComponent,
         MainInstallAppComponent,
-        MainCarouselComponent
+        MainCarouselComponent,
+        IndexPanelViewsComponent,
+        IndexPanelBlogComponent,
+        IndexPanelDayPersonComponent,
+        IndexPanelChatListComponent,
+        IndexPanelMailingFeedbackComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,5 +1,5 @@
 <div class="user-cart{{(!!user.top) ? ' user-cart--in-top' : ''}}" attr.data-grid="{{gridType}}"
-     (click)="goToProfile($event, user)">
+     (click)="goToProfile($event, user)" ngClass="{{classes}}">
     <div class="user-cart__thumbnail">
         <img class="user-cart__image" alt=""
              src="{{(!!user.avatar) ? user.avatar._links.original.href : '/assets/images/default-avatar.svg'}}" *ngIf="!small">
@@ -32,7 +32,7 @@
         <div class="user-cart__status {{(user.online) ? 'user-cart__status--online' : ''}}">{{(user.online) ? 'On-line'
             : 'Off-line'}}
         </div>
-        <div class="user-cart__message" [ngClass]="{'fw-hidden': gridType}" *ngIf="!!user.aboutMe">
+        <div class="user-cart__message" [ngClass]="{'fw-hidden': (gridType || extanded)}" *ngIf="!!user.aboutMe || extanded">
             {{user.aboutMe}}
         </div>
     </div>

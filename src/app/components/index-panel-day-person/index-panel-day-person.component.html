@@ -1,0 +1,10 @@
+<article class="panel fw-position-relative panel-person-of-day" *ngIf="!!users._embedded.clientCard">
+  <div class="fw-pt-20 fw-pb-20 fw-pl-20 fw-pr-20">
+    <div class="fw-fw-600 fw-fz-16 fw-color-dark">
+        Девушка дня
+    </div>
+  </div>
+  <div class="panel-section__footer">
+    <app-user-cart [classes]="'user-cart__short-height-image user-cart__no-box-shadow'" [extanded]="true" [gridType]="true" [user]="user" *ngFor="let user of users._embedded.clientCard"></app-user-cart>
+  </div>
+</article>

@@ -19,10 +19,8 @@ export class PanelNewGirlsComponent implements OnInit {
     if (!this.users._embedded.clientCard) {
       this._usersService.getNewUsers(7).subscribe((users: IPaginationUserSearch) => {
         this.users = <IPaginationUserSearch>users;
-
-        // console.log(users);
+        console.log(users);
       });
     }
   }
-
 }

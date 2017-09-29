@@ -1,5 +1,5 @@
 <div class="user-cart-thumbnail{{(small) ? ' user-cart-thumbnail--small' : ''}}{{(classes.length) ? ' ' + classes : ''}}{{(unmax) ? ' user-cart-thumbnail--unmax' : ''}}" (click)="openProfile($event, user)">
-  <img src="{{(user.avatar) ? user.avatar._links.medium.href : '/assets/images/default-avatar.svg'}}" alt="" class="user-cart-thumbnail__image">
+  <img src="{{(!!user.avatar) ? user.avatar._links.medium.href : '/assets/images/default-avatar.svg'}}" alt="" class="user-cart-thumbnail__image">
   <div class="user-cart-thumbnail__cover">
     <p class="user-cart-thumbnail__text">
       {{(user.name.length) ? user.name : '' }}{{(user.age) ? ', ' + user.age : '' }}

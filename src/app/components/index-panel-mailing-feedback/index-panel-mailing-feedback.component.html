@@ -1,0 +1,22 @@
+<article class="panel fw-position-relative panel-section-mailing-feedback">
+  <div class="fw-pt-20 fw-pb-20 fw-pl-20 fw-pr-20 fw-flex fw-flex-space-between fw-flex-middle fw-position-relative">
+    <div class="fw-fw-600 fw-fz-16 fw-color-dark fw-flex-shrink-no">
+      <span class="fw-badge fw-badge--style-2 fw-inline-block">
+        Просмотры
+        <span class="fw-badge__text" *ngIf="!!users.page.totalElements">{{users.page.totalElements}}</span>
+      </span>
+    </div>
+  </div>
+  <div class="panel-section__content fw-pl-20 fw-pr-20">
+    <div class="fw-grid fw-grid-10">
+      <div class="fw-width-1-5" *ngFor="let user of users._embedded.clientCard">
+        <app-user-cart-tiny [user]="user"></app-user-cart-tiny>
+      </div>
+    </div>
+  </div>
+  <div class="fw-bg-light fw-mt-20">
+    <a routerLink="/mailing"
+       class="fw-flex fw-flex-center fw-color-purple fw-fw-600 fw-pt-15 fw-pb-15">Смотреть все</a>
+  </div>
+  <app-preloader *ngIf="preloader"></app-preloader>
+</article>

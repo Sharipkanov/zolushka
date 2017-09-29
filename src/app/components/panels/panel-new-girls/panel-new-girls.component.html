@@ -1,19 +1,19 @@
-<div class="panel panel-new-girls fw-box-shadow fw-br-5 fw-overflow" *ngIf="users.length">
+<div class="panel panel-new-girls fw-box-shadow fw-br-5 fw-overflow" *ngIf="users._embedded.clientCard">
   <div class="fw-pt-20 fw-pb-20 fw-pl-20 fw-pr-20">
-    <p class="fw-fw-600 fw-fz-16 fw-color-dark"><span class="fw-badge fw-badge--style-2">Новые золушки <span class="fw-badge__text">99</span></span></p>
+    <p class="fw-fw-600 fw-fz-16 fw-color-dark"><span class="fw-badge fw-badge--style-2">Новые золушки <span class="fw-badge__text">{{users.page.totalElements}}</span></span></p>
   </div>
   <div class="panel-new-girls__grid">
-    <div class="panel-new-girls__item"><app-user-cart-thumbnail [user]="users[0]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
-    <div class="panel-new-girls__item"><app-user-cart-thumbnail [user]="users[1]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
-    <div class="panel-new-girls__item"><app-user-cart-thumbnail [user]="users[2]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
-    <div class="panel-new-girls__item"><app-user-cart-thumbnail [user]="users[3]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
+    <div class="panel-new-girls__item"><app-user-cart-thumbnail *ngIf="!!users._embedded.clientCard[0]" [user]="users._embedded.clientCard[0]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
+    <div class="panel-new-girls__item"><app-user-cart-thumbnail *ngIf="!!users._embedded.clientCard[1]" [user]="users._embedded.clientCard[1]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
+    <div class="panel-new-girls__item"><app-user-cart-thumbnail *ngIf="!!users._embedded.clientCard[2]" [user]="users._embedded.clientCard[2]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
+    <div class="panel-new-girls__item"><app-user-cart-thumbnail *ngIf="!!users._embedded.clientCard[3]" [user]="users._embedded.clientCard[3]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
     <div class="panel-new-girls__item">
-      <div class="panel-new-girls__item"><app-user-cart-thumbnail [user]="users[4]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
-      <div class="panel-new-girls__item"><app-user-cart-thumbnail [user]="users[5]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
-      <div class="panel-new-girls__item"><app-user-cart-thumbnail [user]="users[6]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
+      <div class="panel-new-girls__item"><app-user-cart-thumbnail *ngIf="!!users._embedded.clientCard[4]" [user]="users._embedded.clientCard[4]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
+      <div class="panel-new-girls__item"><app-user-cart-thumbnail *ngIf="!!users._embedded.clientCard[5]" [user]="users._embedded.clientCard[5]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
+      <div class="panel-new-girls__item"><app-user-cart-thumbnail *ngIf="!!users._embedded.clientCard[6]" [user]="users._embedded.clientCard[6]" [classes]="'panel-new-girls__cart'" [unmax]="true"></app-user-cart-thumbnail></div>
     </div>
   </div>
   <div class="fw-bg-light">
-    <a href="#" class="fw-flex fw-flex-center fw-color-purple fw-fw-600 fw-pt-15 fw-pb-15">Смотреть все</a>
+    <a routerLink="/search" class="fw-flex fw-flex-center fw-color-purple fw-fw-600 fw-pt-15 fw-pb-15">Смотреть все</a>
   </div>
 </div>

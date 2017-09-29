@@ -2037,6 +2037,46 @@
   }
 }
 
+.icon-chat-direct {
+  background-image: url('../images/icons-s0196956790.png');
+  background-position: 0 -680px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  height: 16px;
+  width: 16px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-resolution: 1.5dppx) {
+  .icon-chat-direct {
+    background-image: url('../images/icons-2x-sd1aca287cc.png');
+    background-size: 217px auto;
+    background-position: 0 -628px;
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.icon-chat-mobile {
+  background-image: url('../images/icons-s0196956790.png');
+  background-position: 0 -938px;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  height: 16px;
+  width: 11px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3 / 2), (min-resolution: 1.5dppx) {
+  .icon-chat-mobile {
+    background-image: url('../images/icons-2x-sd1aca287cc.png');
+    background-size: 217px auto;
+    background-position: 0 -861px;
+    height: 16px;
+    width: 11px;
+  }
+}
+
 .icon-phone-subshape, .icon-star-subshape, .icon-chat-subshape {
   min-height: 36px;
   min-width: 36px;

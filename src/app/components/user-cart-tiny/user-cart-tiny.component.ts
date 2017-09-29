@@ -9,6 +9,7 @@ import { IUser } from '../../interfaces/user.interface';
 })
 export class UserCartTinyComponent implements OnInit {
   @Input() user: IUser;
+  @Input() classes: string = '';
 
   constructor() { }
 

@@ -27,25 +27,34 @@
 
   <app-section-popular-users *ngIf="!logged" class="fw-block fw-mb-30"></app-section-popular-users>
 
-  <app-main-install-app *ngIf="!logged"></app-main-install-app>
+  <app-main-install-app *ngIf="!logged" class="fw-block"></app-main-install-app>
 
-  <app-main-carousel *ngIf="!logged"></app-main-carousel>
+  <app-main-carousel *ngIf="!logged" class="fw-block"></app-main-carousel>
 
-  <app-section-registration *ngIf="!logged"></app-section-registration>
+  <app-section-registration *ngIf="!logged" class="fw-block"></app-section-registration>
 </div>
 
 <div *ngIf="logged" class="container">
   <div class="fw-pt-40 fw-pb-40">
     <div class="fw-grid fw-grid-30">
       <div class="fw-width-1-2">
-        <app-panel-new-girls></app-panel-new-girls>
+        <app-panel-new-girls class="fw-block fw-mb-30"></app-panel-new-girls>
+
+        <app-index-panel-views class="fw-block fw-mb-30"></app-index-panel-views>
+
+        <app-index-panel-blog class="fw-block"></app-index-panel-blog>
       </div>
       <div class="fw-width-1-2">
-        <div class="fw-grid fw-grid-30">
-          <div class="fw-width-1-2" *ngFor="let user of usersInTop._embedded.clientCard">
-            <app-user-cart [user]="user" [small]="true"></app-user-cart>
+        <app-index-panel-day-person class="fw-block fw-mb-30"></app-index-panel-day-person>
+        <app-index-panel-chat-list class="fw-block fw-mb-30"></app-index-panel-chat-list>
+        <div class="fw-mb-30">
+          <div class="fw-grid fw-grid-30">
+            <div class="fw-width-1-2" *ngFor="let user of usersInTop._embedded.clientCard">
+              <app-user-cart [small]="true" [user]="user"></app-user-cart>
+            </div>
           </div>
         </div>
+        <app-index-panel-mailing-feedback class="fw-block"></app-index-panel-mailing-feedback>
       </div>
     </div>
   </div>

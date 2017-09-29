@@ -1,0 +1,18 @@
+<article class="panel fw-position-relative panel-section-chat-list">
+  <div class="fw-pt-20 fw-pb-20 fw-pl-20 fw-pr-20">
+    <div class="fw-fw-600 fw-fz-16 fw-color-dark">
+      <span class="fw-badge fw-badge--style-2 fw-inline-block">
+        Последние сообщения
+        <span class="fw-badge__text">10</span>
+      </span>
+    </div>
+  </div>
+  <div class="panel-section__content">
+    <app-chat-list></app-chat-list>
+  </div>
+  <div class="fw-bg-light">
+    <a (click)="openChat()"
+       class="fw-flex fw-flex-center fw-color-purple fw-fw-600 fw-pt-15 fw-pb-15">Смотреть все</a>
+  </div>
+  <app-preloader *ngIf="preloader"></app-preloader>
+</article>

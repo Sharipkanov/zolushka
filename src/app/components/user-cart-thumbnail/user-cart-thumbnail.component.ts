@@ -35,6 +35,7 @@ export class UserCartThumbnailComponent implements OnInit {
   }
 
   openChat(user: IUser) {
+    console.log('chat')
     if (this._userService.token()) {
       const dialog = new IDialog();
       dialog.clientTo = user;

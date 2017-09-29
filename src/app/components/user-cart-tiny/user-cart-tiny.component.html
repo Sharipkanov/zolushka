@@ -1,4 +1,4 @@
-<a class="user-cart-tiny fw-block" routerLink="/profile/{{(user.type === 200) ? 'she' : 'he'}}/{{user.id}}">
+<a class="user-cart-tiny fw-block" ngClass="{{classes}}" routerLink="/profile/{{(user.type === 200) ? 'she' : 'he'}}/{{user.id}}">
   <div class="user-cart-tiny__thumbnail">
     <img src="{{(user.avatar) ? user.avatar._links.small.href: '/assets/images/default-avatar.svg'}}" class="fw-image-cover" alt="">
   </div>
