@@ -16,18 +16,6 @@ export class PageMailingComponent implements OnInit {
   public locations: Array<ISelectSearchBoxItem> = [];
   public errors = [];
 
-  public carouselOptions = {
-    responsive: {
-      0: {
-        items: 1,
-        dots: true,
-        nav: true
-      }
-    }
-  };
-
-  public owlReviews = [];
-
   public FMailing: FormGroup;
   constructor(private _fb: FormBuilder, private _enums: EnumsService, private _locationService: LocationService) { }
 

@@ -97,32 +97,11 @@
             </form>
           </div>
         </section>
-        <section class="panel-section panel-section--rounded fw-box-shadow fw-padding-20 fw-mt-20"
-                 *ngIf="!!owlReviews.length">
-          <div class="panel-section__content panel-section__content--boxed">
-            <p class="fw-fw-600 fw-fz-16 fw-mb-30">Отзывы</p>
-            <owl-carousel [options]="carouselOptions" [items]="owlReviews" class="carousel-navs carousel-dots">
-              <div *ngFor="let item of owlReviews" class="item fw-flex fw-flex-middle fw-flex-center">
-                <div class="fw-flex fw-flex-middle fw-mw-335">
-                  <div class="fw-mr-10 fw-flex-shrink-no">
-                    <a href="#"><img src="http://placehold.it/50x50" class="fw-brp-50" alt=""></a>
-                  </div>
-                  <div class="fw-flex-grow">
-                    <p class="fw-fw-600 fw-fz-14">Maxim 35, Москва</p>
-                    <p class="fw-fz-14 fw-text-italic fw-color-semipurple">На все, про все ушло 15 минут, через
-                      час мы уже пили кофе в центре..</p>
-                  </div>
-                </div>
-              </div>
-            </owl-carousel>
-          </div>
-        </section>
+        <app-mailing-feedbacks-carousel></app-mailing-feedbacks-carousel>
       </div>
     </div>
   </div>
   <div class="fw-mt-40">
-    <owl-carousel>
 
-    </owl-carousel>
   </div>
 </div>

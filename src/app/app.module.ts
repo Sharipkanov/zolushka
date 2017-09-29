@@ -89,6 +89,7 @@ import { IndexPanelBlogComponent } from './components/index-panel-blog/index-pan
 import { IndexPanelDayPersonComponent } from './components/index-panel-day-person/index-panel-day-person.component';
 import { IndexPanelChatListComponent } from './components/index-panel-chat-list/index-panel-chat-list.component';
 import { IndexPanelMailingFeedbackComponent } from './components/index-panel-mailing-feedback/index-panel-mailing-feedback.component';
+import { MailingFeedbacksCarouselComponent } from './components/mailing-feedbacks-carousel/mailing-feedbacks-carousel.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -164,6 +165,7 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
         IndexPanelDayPersonComponent,
         IndexPanelChatListComponent,
         IndexPanelMailingFeedbackComponent,
+        MailingFeedbacksCarouselComponent,
     ],
     imports: [
         BrowserModule,
