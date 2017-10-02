@@ -1,59 +1,59 @@
 <div class="popup popup--rounded popup--standard popup-mailing-blacklist">
-  <div class="popup__container">
-    <a href="#" class="js-close-popup popup__close"><i class="icon-remove icon-remove--purple-dark"></i></a>
-    <p class="fw-fw-600 fw-fz-16">Выберите пользователей, которые не будут видеть рассылку</p>
+  <a class="js-close-popup popup__close"><i class="icon-remove icon-remove--purple-dark"></i></a>
+  <p class="fw-fw-600 fw-fz-16">Выберите пользователей, которые не будут видеть рассылку</p>
 
-    <div class="fw-mt-25">
-      <div class="input-box">
-        <app-input-box [placeholder]="'Введите имя'"></app-input-box>
-      </div>
+  <div class="fw-mt-25">
+    <div class="input-box">
+      <app-input-box [placeholder]="'Введите имя'" (keyup)="filterBlacklist($event)"></app-input-box>
     </div>
+  </div>
 
-    <form action="" class="form">
-      <div class="js-scroll-pane fw-height-378 fw-mt-20">
-        <perfect-scrollbar class="popup-mailing__blacklist-scroll">
-          <label class=" fw-mb-20 fw-flex fw-flex-middle">
-            <!--{% if remove %}-->
-            <span
-                class="fw-img-square-34 rounded fw-mr-10 fw-flex-shrink-no fw-bg-purple fw-flex fw-flex-middle fw-flex-center">
+  <form action="" class="form">
+    <div class="js-scroll-pane fw-height-378 fw-mt-20">
+      <perfect-scrollbar class="popup-mailing__blacklist-scroll">
+        <label class=" fw-mb-20 fw-flex fw-flex-middle">
+          <!--{% if remove %}-->
+          <span *ngIf="selectedAll"
+                class="fw-width-34 fw-height-34 fw-brp-50 fw-mr-10 fw-flex-shrink-no fw-bg-purple fw-flex fw-flex-middle fw-flex-center">
               <i class="icon-remove icon-remove--light icon-remove--larger"></i></span>
-            <!--{% else %}-->
-            <span
-                class="fw-img-square-34 rounded fw-mr-10 fw-flex-shrink-no fw-bg-purple fw-flex fw-flex-middle fw-flex-center">
+          <!--{% else %}-->
+          <span *ngIf="!selectedAll"
+                class="fw-width-34 fw-height-34 fw-brp-50 fw-mr-10 fw-flex-shrink-no fw-bg-purple fw-flex fw-flex-middle fw-flex-center">
               <i class="icon-checked"></i></span>
-            <!--{% endif %}-->
-            <span class="fw-flex-grow user-checkbox-list">
-              <input type="checkbox" data-no-style="" class="fw-hidden" name="test">
+          <!--{% endif %}-->
+          <span class="fw-flex-grow user-checkbox-list">
+              <input type="checkbox" data-no-style="" class="fw-hidden" name="test" (change)="switchBlacklist()">
               <span class="fw-fw-600 fw-fz-14 fw-color-purple">Выбрать всех</span>
             </span>
-          </label>
-          <!--{% for i in 1..9  %}-->
-          <label class="fw-mb-20 fw-flex fw-flex-middle" *ngFor="let user of girls._embedded.clientCard">
+        </label>
+        <!--{% for i in 1..9  %}-->
+        <div *ngFor="let user of girls._embedded.clientCard">
+          <label class="fw-mb-20 fw-flex fw-flex-middle" *ngIf="!user._hidden">
             <span class="fw-width-34 rounded fw-mr-10 fw-flex-shrink-no">
               <img
                   src="{{(user.avatar) ? user.avatar._links.small.href : '/assets/images/default-navigation-avatar.svg'}}"
                   alt="" class="fw-width-1-1 fw-brp-50">
             </span>
             <span class="fw-flex-grow user-checkbox-list fw-block">
-              <input type="checkbox" data-no-style="" class="fw-hidden" name="test">
-              <span class="fw-fw-600 fw-fz-14">{{user.name}}, {{user.age}}</span>
+              <input type="checkbox" class="fw-hidden" (change)="switchBlacklist(user)">
+              <span class="user-checkbox-list__detector fw-fw-600 fw-fz-14" [ngClass]="{'checked-user': user._selected}">{{user.name}}, {{user.age}}</span>
             </span>
           </label>
-        </perfect-scrollbar>
-        <!--{% endfor %}-->
-        <!--<label class="fw-flex fw-flex-middle">
-          <div class="fw-img-square-34 rounded fw-mr-10 fw-flex-shrink-no"><img src="http://placehold.it/34x34" alt=""></div>
-          <div class="fw-flex-grow user-checkbox-list">
-            <input type="checkbox" data-no-style="" class="fw-hidden" name="test">
-            <p class="fw-fw-600 fw-fz-14">Машрия, 32</p>
-          </div>
-        </label>-->
-      </div>
-      <hr class="hr-small">
-      <div class="fw-text-center fw-mt-30">
-        <button class="button button--primary">Сохранить</button>
-      </div>
-    </form>
-  </div>
+        </div>
+      </perfect-scrollbar>
+      <!--{% endfor %}-->
+      <!--<label class="fw-flex fw-flex-middle">
+        <div class="fw-img-square-34 rounded fw-mr-10 fw-flex-shrink-no"><img src="http://placehold.it/34x34" alt=""></div>
+        <div class="fw-flex-grow user-checkbox-list">
+          <input type="checkbox" data-no-style="" class="fw-hidden" name="test">
+          <p class="fw-fw-600 fw-fz-14">Машрия, 32</p>
+        </div>
+      </label>-->
+    </div>
+    <hr class="hr-small">
+    <div class="fw-text-center fw-mt-30">
+      <button class="button button--primary">Сохранить</button>
+    </div>
+  </form>
   <app-preloader *ngIf="preloader"></app-preloader>
 </div>

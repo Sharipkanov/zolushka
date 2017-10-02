@@ -1,31 +1,37 @@
 .popup-wrapper
-	position: fixed
-	top: 0
-	left: 0
-	bottom: 0
-	right: 0
-	background-color: rgba(#2a2645, 0.8)
-	z-index: 1001
-	display: flex
-	padding: 20px
-	opacity: 0
-	visibility: hidden
-	transition: all 0.3s ease
-	
-	&.popup--active
-		opacity: 1
-		visibility: visible
-		.popup
-			transform: scale(1)
-			
-.popup
-	margin: auto
-	transition: all 0.3s ease
-	transform: scale(0.8)
-	box-sizing: border-box
+  position: fixed
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  background-color: rgba(#2a2645, 0.8)
+  z-index: 1001
+  display: flex
+  padding: 20px
+  opacity: 0
+  visibility: hidden
+  transition: all 0.3s ease
 
-	&.popup--standard
-		background-color: #fff
-		border-radius: 10px
-		padding: 30px
-	
+  &.popup--active
+    opacity: 1
+    visibility: visible
+    .popup
+      transform: scale(1)
+
+.popup
+  margin: auto
+  transition: all 0.3s ease
+  transform: scale(0.8)
+  box-sizing: border-box
+  overflow: hidden
+
+  &.popup--standard
+    background-color: #fff
+    border-radius: 10px
+    padding: 30px
+
+
+.popup__close
+  position: absolute
+  top: 20px
+  right: 20px

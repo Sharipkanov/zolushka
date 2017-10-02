@@ -21,3 +21,8 @@ export class IUserAvatar {
   id: number = null;
   _links: IImages = <IImages>{};
 }
+
+export class IUserBlacklisted extends IUser {
+  _selected: boolean = false;
+  _hidden: boolean = false;
+}

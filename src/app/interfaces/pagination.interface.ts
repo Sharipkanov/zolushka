@@ -1,6 +1,6 @@
 import {ILink} from './link.interface';
 import {IDialog} from './dialog.interface';
-import {IUser} from './user.interface';
+import {IUser, IUserBlacklisted} from './user.interface';
 
 export interface IEmbedded {
     content: Array<any>
@@ -12,6 +12,10 @@ export interface IEmbeddedDialogs extends IEmbedded {
 
 export interface IEmbeddedUserSearch extends IEmbedded {
     clientCard: Array<IUser>;
+}
+
+export interface IEmbeddedBlacklistUsers extends IEmbedded {
+    clientCard: Array<IUserBlacklisted>;
 }
 
 export class IPagination {
@@ -57,6 +61,14 @@ export class IPaginationDialogs extends IPagination {
 
 export class IPaginationUserSearch extends IPagination {
     _embedded: IEmbeddedUserSearch = <IEmbeddedUserSearch>{};
+
+    constructor(data = null) {
+        super(data);
+    }
+}
+
+export class IPaginationBlacklistUsers extends IPaginationUserSearch {
+    _embedded: IEmbeddedBlacklistUsers = <IEmbeddedBlacklistUsers>{};
 
     constructor(data = null) {
         super(data);

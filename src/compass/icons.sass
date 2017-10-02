@@ -105,3 +105,74 @@
     left: 50%
     transform: translate(-50%, -50%)
     margin-left: 8px
+
+.icon-remove
+  position: relative
+  width: 12px
+  height: 12px
+  display: inline-block
+
+  &::before,
+  &::after
+    position: absolute
+    top: 0
+    background-color: #808080
+    content: ''
+    display: block
+    width: 2px
+    height: 100%
+
+  &.icon-remove--larger
+    width: 14px
+    height: 14px
+
+    &::before
+      left: 6px
+    &::after
+      right: 6px
+
+  &.icon-remove--light
+    &::after,
+    &::before
+      background-color: #fff
+
+  &.icon-remove--purple-dark
+    &::after,
+    &::before
+      background-color: #443a91
+
+  &::before
+    left: 5px
+    transform: rotate(45deg)
+
+  &::after
+    right: 5px
+    transform: rotate(-45deg)
+
+.icon-checked
+  position: relative
+  width: 16px
+  height: 16px
+
+  &::after,
+  &::before
+    content: ''
+    display: block
+    position: absolute
+    background-color: #fff
+
+  &::after
+    transform: translateY(-50%) rotate(135deg)
+    top: calc(50% + 2px)
+    right: 10px
+    width: 2px
+    height: 8px
+    border-radius: 5px
+
+  &::before
+    transform: translateY(-50%) rotate(45deg)
+    top: 50%
+    right: 4px
+    width: 2px
+    height: 13px
+    border-radius: 5px

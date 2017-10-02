@@ -1,4 +1,4 @@
-.mailing-blacklist-popup
+.popup-mailing-blacklist
   &.popup
     max-width: 500px
 
@@ -7,3 +7,44 @@
 
 .popup-mailing__blacklist-scroll
   height: 300px
+
+.user-checkbox-list
+  .user-checkbox-list__detector
+    width: 100%
+    display: block
+    box-sizing: border-box
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+    padding-right: 30px
+    position: relative
+
+    &::after,
+    &::before
+      content: ''
+      display: none
+      position: absolute
+      background-color: #3fd0a5
+
+    &::after
+      transform: translateY(-50%)
+      top: 50%
+      right: 20px
+      width: 2px
+      height: 4px
+      transform: rotate(135deg)
+      border-radius: 5px
+
+    &::before
+      transform: translateY(-50%) rotate(45deg)
+      top: 50%
+      right: 15px
+      width: 2px
+      height: 11px
+      border-radius: 5px
+
+  .user-checkbox-list__detector
+    &.checked-user
+      &::after,
+      &::before
+        display: block

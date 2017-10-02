@@ -10,6 +10,7 @@ import {PopupsService} from '../../../services/popups/popups.service';
 })
 export class PopupsComponent implements OnInit {
 
+  public HTML = document.getElementsByTagName('html')[0];
   public popups = {
     login: false,
     chat: false,
@@ -39,6 +40,7 @@ export class PopupsComponent implements OnInit {
 
   openPopup(popup_name: string) {
     this.popups[popup_name] = true;
+    this.HTML.classList.add('popup--opened');
     setTimeout(() => {
       this.openingAnimation = true;
     }, 20);
@@ -62,5 +64,7 @@ export class PopupsComponent implements OnInit {
         this.popups[popup_name] = false;
       }, 300);
     }
+
+    this.HTML.classList.remove('popup--opened');
   }
 }
