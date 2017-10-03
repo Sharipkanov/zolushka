@@ -91,8 +91,11 @@ import {IndexPanelChatListComponent} from './components/index-panel-chat-list/in
 import {IndexPanelMailingFeedbackComponent} from './components/index-panel-mailing-feedback/index-panel-mailing-feedback.component';
 import {MailingFeedbacksCarouselComponent} from './components/mailing-feedbacks-carousel/mailing-feedbacks-carousel.component';
 import {PopupMailingBlacklistComponent} from './components/popups/popup-mailing-blacklist/popup-mailing-blacklist.component';
-import {UsersService} from "./services/users/users.service";
-import {MailingService} from "./services/mailing/mailing.service";
+import {UsersService} from './services/users/users.service';
+import {MailingService} from './services/mailing/mailing.service';
+import {MailingArchiveListPlateComponent} from './components/mailing-archive-list-plate/mailing-archive-list-plate.component';
+import { MailingCreatePlateComponent } from './components/mailing-create-plate/mailing-create-plate.component';
+import { MailingOtherMailingsListingPlateComponent } from './components/mailing-other-mailings-listing-plate/mailing-other-mailings-listing-plate.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -170,6 +173,9 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
     IndexPanelMailingFeedbackComponent,
     MailingFeedbacksCarouselComponent,
     PopupMailingBlacklistComponent,
+    MailingArchiveListPlateComponent,
+    MailingCreatePlateComponent,
+    MailingOtherMailingsListingPlateComponent,
   ],
   imports: [
     BrowserModule,

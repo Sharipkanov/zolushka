@@ -1,0 +1,123 @@
+<section class="panel-section fw-box-shadow">
+  <div class="panel-section__content panel-section__content--boxed">
+    <div *ngIf="firstLoadExtend">
+      <app-mailing-feedbacks-carousel></app-mailing-feedbacks-carousel>
+    </div>
+    <form [formGroup]="FMailing" class="form" (submit)="createMailing($event)">
+      <p class="fw-fw-600 fw-fz-16">Создать рассылку</p>
+      <p class="fw-mt-10 fw-fz-14 fw-fw-600">Укажите кому показывать рассылку </p>
+      <div class="fw-flex fw-flex-middle fw-mt-20">
+        <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14">Возраст</p>
+        </div>
+        <div class="fw-width-290 fw-flex-shrink-no">
+          <div class="custom-ion-slider">
+            <div class="dropdown">
+              <a class="dropdown__trigger fw-width-1-1" (click)="dropdownEvent($event)">
+                <div class="fw-flex search-bar__custom-input">
+                  <div>
+                    от
+                  </div>
+                  <div class="search-bar__custom-input--box fw-mr-5">
+                    <input type="text" readonly value="{{FMailing.value.ageFrom}}"
+                           class="fw-block fw-text-center fw-width-1-1 fw-reset search--dark-focus-input"
+                           maxlength="3" minlength="3" placeholder="19">
+                  </div>
+                  <div>
+                    &mdash; до
+                  </div>
+                  <div class="search-bar__custom-input--box">
+                    <input type="text" readonly value="{{FMailing.value.ageTo}}"
+                           class="fw-block fw-text-center fw-width-1-1 fw-reset search--dark-focus-input"
+                           maxlength="3" minlength="3" placeholder="27">
+                  </div>
+                  <div class="input-box__tooltip fw-ml-auto fw-mr-10">лет</div>
+                </div>
+              </a>
+              <div class="dropdown__content">
+                <div>
+                  <ion-range-slider class="fw-mt-inverse-20"
+                                    type="double"
+                                    min="19"
+                                    max="60"
+                                    from="{{rangeSliderValues.ageFrom}}"
+                                    to="{{rangeSliderValues.ageTo}}"
+                                    hide_min_max="true"
+                                    hide_from_to="true"
+                                    (onUpdate)="searchOnChangeAge($event)"
+                                    (onChange)="searchOnChangeAge($event)"
+                                    (onFinish)="searchOnChangeAge($event)"></ion-range-slider>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fw-flex fw-flex-start fw-mt-20">
+        <div class="fw-flex-grow fw-pt-10">
+          <p class="fw-fw-600 fw-fz-14">Город</p>
+        </div>
+        <div class="fw-width-290 fw-flex-shrink-no">
+          <app-select-search-box [classes]="'search-bar__select-search-box'" ngDefaultControl
+                                 (search)="getLocations($event)" [placeholder]="'Город'"
+                                 [iconClass]="'icon-form-navigator'" [items]="locations"
+                                 formControlName="city"></app-select-search-box>
+          <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['city']">
+            {{errors['city']}}
+          </div>
+          <div class="fw-flex fw-flex-middle fw-mt-10">
+            <app-checbox-box [items]="[{label: 'Показывать в других городах', name: 'allCities', value: 1}]"></app-checbox-box>
+          </div>
+        </div>
+      </div>
+      <div class="fw-flex fw-flex-middle fw-mt-20">
+        <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14">Цели
+          знакомства</p></div>
+        <div class="fw-width-290 fw-flex-shrink-no">
+          <app-select-box formControlName="relationshipTypes" [items]="relationshipTypes" [multiple]="true"
+                          [placeholder]="'Цели знакомств'"></app-select-box>
+        </div>
+      </div>
+      <div class="fw-flex fw-flex-middle fw-mt-20">
+        <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14">Исключить
+          пользователей</p></div>
+        <div class="fw-width-290 fw-flex-shrink-no">
+          <a class="button button--blue button--small" (click)="openBlackList($event)"
+             *ngIf="!blacklisted._embedded.clientCard">
+            <i class="icon-plus icon-plus--purple-dark fw-mr-3"></i>
+            <span class="fw-inline-block fw-fz-14 fw-text-600 fw-vam">Выбрать</span>
+          </a>
+
+          <div class="fw-flex fw-flex-middle" *ngIf="!!blacklisted._embedded.clientCard"
+               (click)="openBlackList($event)">
+            <div class="fw-flex-grow fw-flex-shrink fw-overflow">
+              <div class="fw-flex fw-overflow fw-mr-5">
+                        <span *ngFor="let blackslistItem of blacklisted._embedded.clientCard; let i = index;"
+                              [ngClass]="{'fw-ml-5-inverse': i > 0}" class="fw-mt-5 fw-flex-shrink-no"><img
+                            src="{{blackslistItem.avatar ? blackslistItem.avatar._links.small.href : '/assets/images/default-navigation-avatar.svg'}}"
+                            alt="" class="fw-brp-50 fw-width-27"></span>
+              </div>
+            </div>
+            <div class="fw-flex-shrink-no"
+                 *ngIf="blacklisted.page.totalElements - blacklisted._embedded.clientCard.length > 0"><a
+                class="fw-link fw-color-purple fw-text-underline--hover">и еще {{blacklisted.page.totalElements
+              - blacklisted._embedded.clientCard.length}}</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="fw-mt-20 fw-mb-20">
+        <div class="fw-flex-grow fw-mb-10">
+          <p class="fw-fw-600 fw-fz-14">Текст рассылки</p>
+        </div>
+        <div>
+          <app-textarea-box formControlName="text"
+                            [placeholder]="'Пример: втречусь сегодня с очаровашкой модельной внешности, в Вас ласка, с меня подарок'"></app-textarea-box>
+        </div>
+      </div>
+      <div class="fw-text-center">
+        <p class="fw-fz-14 fw-mb-15 fw-fw-600"> Стоимость рассылки на 9 часов 200 ₽.</p>
+        <button class="button button--primary">Создать рассылку</button>
+      </div>
+    </form>
+  </div>
+  <app-preloader *ngIf="preloader"></app-preloader>
+</section>

@@ -27,7 +27,6 @@ export class PreloaderLineComponent implements OnInit {
   initPreloader() {
     clearInterval(this.interval);
     this.interval = setInterval(() => {
-      console.log(this.preloaderProgress);
       this.preloaderProgress += ((100 - this.preloaderProgress) * 0.03);
 
       if (this.preloaderProgress > 100) {

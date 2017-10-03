@@ -53,6 +53,7 @@ export class PopupsComponent implements OnInit {
       if (target.classList.contains('popup-wrapper') || target.classList.contains('js-close-popup') || target.closest('.js-close-popup')) {
         this.openingAnimation = false;
         setTimeout(() => {
+          this.HTML.classList.remove('popup--opened');
           for (const key in this.popups) {
             this.popups[key] = false;
           }
@@ -61,10 +62,9 @@ export class PopupsComponent implements OnInit {
     } else {
       this.openingAnimation = false;
       setTimeout(() => {
+        this.HTML.classList.remove('popup--opened');
         this.popups[popup_name] = false;
       }, 300);
     }
-
-    this.HTML.classList.remove('popup--opened');
   }
 }

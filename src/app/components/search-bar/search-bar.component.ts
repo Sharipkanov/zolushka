@@ -135,8 +135,6 @@ export class SearchBarComponent implements OnInit {
     } else {
       this.onSubmitSearchBar.emit(newSearchParams);
     }
-
-
   }
 
   searchBarToggle(e) {

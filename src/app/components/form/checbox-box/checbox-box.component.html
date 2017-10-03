@@ -1,6 +1,6 @@
 <div class="checkbox-box{{(classes.length) ? ' ' + classes : ''}}" *ngFor="let item of items">
   <label>
-    <input type="checkbox" name="{{name}}" [checked]="item.checked">
+    <input type="checkbox" name="{{item.name}}" [checked]="item.checked" value="{{item.value}}">
     <span></span>
     <span>{{item.label}}</span>
   </label>

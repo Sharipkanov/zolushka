@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {IPaginationBlacklistUsers} from '../../../interfaces/pagination.interface';
 import {MailingService} from '../../../services/mailing/mailing.service';
-import {IUserBlacklisted} from "../../../interfaces/user.interface";
+import {IUserBlacklisted} from '../../../interfaces/user.interface';
+import {PopupsService} from '../../../services/popups/popups.service';
 
 @Component({
   selector: 'app-popup-mailing-blacklist',
@@ -14,7 +15,7 @@ export class PopupMailingBlacklistComponent implements OnInit {
   public preloader: boolean = false;
   public selectedAll = false;
 
-  constructor(private _mailingService: MailingService) {
+  constructor(private _mailingService: MailingService, private _popupsService: PopupsService) {
   }
 
   ngOnInit() {
@@ -59,11 +60,24 @@ export class PopupMailingBlacklistComponent implements OnInit {
     const inputVal = target.value;
 
     for (let i = 0; i < this.girls._embedded.clientCard.length; i++) {
-      if (inputVal !== '' && this.girls._embedded.clientCard[i].name.indexOf(inputVal)) {
-        this.girls._embedded.clientCard[i]._hidden = true;
-      } else {
-        this.girls._embedded.clientCard[i]._hidden = false;
+      (inputVal !== '' && this.girls._embedded.clientCard[i].name.indexOf(inputVal))
+        ? this.girls._embedded.clientCard[i]._hidden = true
+        : this.girls._embedded.clientCard[i]._hidden = false
+    }
+  }
+
+  saveBlacklist() {
+    const response: IPaginationBlacklistUsers = new IPaginationBlacklistUsers();
+    response._embedded.clientCard = [];
+    for (let i = 0; i < this.girls._embedded.clientCard.length; i++) {
+      if (this.girls._embedded.clientCard[i]._selected) {
+        response._embedded.clientCard.push(this.girls._embedded.clientCard[i]);
       }
     }
+
+    response.page.totalElements = response._embedded.clientCard.length;
+
+    this._mailingService.onBlacklistEdit.emit(response);
+    this._popupsService.closePopup('mailingBlacklist');
   }
 }

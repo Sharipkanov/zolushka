@@ -1,0 +1,25 @@
+<section class="panel-section fw-box-shadow fw-br-5">
+  <div class="panel-section__content panel-section__content--boxed">
+    <div class="fw-flex fw-flex-space-between fw-flex-middle fw-mb-15">
+      <div class="fw-text-500 fw-fz-18">Рассылки по всем городам</div>
+      <div>
+        <a href="#" class="fw-color-purple fw-text-underline--hover">Все города</a>
+      </div>
+    </div>
+    <div class="fw-flex fw-flex-wrap fw-flex-middle fw-pb-20">
+      <a href="#" class="checkbox-box-label active"><span>Все</span></a>
+      <a href="#" class="checkbox-box-label"><span>Женские</span></a>
+      <a href="#" class="checkbox-box-label"><span>Мужские</span></a>
+    </div>
+    <div>
+      <div class="fw-flex fw-flex-middle fw-mb-20" *ngFor="let item of [1,1,1,1,1]">
+        <div class="fw-width-50 rounded fw-mr-10 fw-flex-shrink-no"><img src="{{item.avatar ? item.avatar : '/assets/images/default-navigation-avatar.svg'}}" class="fw-width-1-1 fw-brp-50" alt=""></div>
+        <div class="fw-flex-grow">
+          <p class="fw-fw-600 fw-fz-14 fw-mb-5"><a href="#" class="fw-text-ellipsis fw-has-user-status fw-has-user-status--offline">Alex, 39 Москва</a></p>
+          <p class="fw-fz-13 fw-mb-5 fw-text-ellipsis">Нужна компания на 24 января в сауну 4-5 девушек для веселой тус...</p>
+          <p class="fw-color-grey fw-fz-13">09.12.2016 01:42</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

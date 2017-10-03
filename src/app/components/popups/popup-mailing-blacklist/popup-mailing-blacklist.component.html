@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <form action="" class="form">
+  <div class="form">
     <div class="js-scroll-pane fw-height-378 fw-mt-20">
       <perfect-scrollbar class="popup-mailing__blacklist-scroll">
         <label class=" fw-mb-20 fw-flex fw-flex-middle">
@@ -52,8 +52,8 @@
     </div>
     <hr class="hr-small">
     <div class="fw-text-center fw-mt-30">
-      <button class="button button--primary">Сохранить</button>
+      <span class="button button--primary" (click)="saveBlacklist()">Сохранить</span>
     </div>
-  </form>
+  </div>
   <app-preloader *ngIf="preloader"></app-preloader>
 </div>

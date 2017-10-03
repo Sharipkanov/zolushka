@@ -1,10 +1,14 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {UserService} from '../user/user.service';
 import {IMailing} from '../../interfaces/mailing.interface';
+import {IPaginationBlacklistUsers} from '../../interfaces/pagination.interface';
 
 @Injectable()
 export class MailingService {
+
+  public onBlacklistEdit: EventEmitter<IPaginationBlacklistUsers> = new EventEmitter();
+  public onCreateMailing: EventEmitter<IMailing> = new EventEmitter();
 
   constructor(private _http: Http, private _userService: UserService) {
   }
