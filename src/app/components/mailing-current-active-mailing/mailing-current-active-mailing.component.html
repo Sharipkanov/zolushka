@@ -1,0 +1,60 @@
+<p class="fw-fw-300 fw-fz-30 fw-mb-30 fw-text-center">Текущая рассылка</p>
+<div class="fw-grid fw-grid-30">
+  <div class="fw-width-1-2">
+    <p class="fw-fw-600 fw-fz-16">Проявили интерес</p>
+    <div *ngIf="activeMailing.responded">
+      <div class="user-list">
+        <div class="fw-flex fw-flex-middle fw-mt-20">
+          <div class="fw-flex-shrink-no fw-img-square-100 rounded fw-mr-20">
+            <img src="http://placehold.it/100x100" alt="">
+          </div>
+          <div class="fw-flex-grow fw-flex-shrink fw-flex-basis-0">
+            <div class="fw-width-1-1 fw-flex fw-fz-13">
+              <p class="fw-flex-shrink-no">Сегодня 16:53</p>
+              <p class="fw-flex-grow fw-color-purple fw-fz-14 fw-ml-5 fw-mw-260 fw-text-ellipsis">Перешла из
+                мобильного приложения</p>
+            </div>
+            <p class="fw-width-1-1 fw-fw-600 fw-fz-14 fw-mt-10">Саша 22, Россия, Санкт-Петербург</p>
+            <p class="fw-width-1-1 fw-mt-10 fw-text-ellipsis fw-hus fw-text-warmgrey fw-fz-13 fw-hus--style-2 fw-hus-reverse user-list__time">
+              была 13 часов назад</p>
+          </div>
+        </div>
+        <a href="#" class="violet-button"><i class="icon-message-light fw-mr-5"></i> Написать</a>
+      </div>
+    </div>
+    <div *ngIf="!activeMailing.responded">
+      <div class="fw-text-center fw-mt-50">
+        <div class="fw-mw-335 fw-inline-block">
+          <i class="icon-sandtime"></i>
+          <p class="fw-fz-13 fw-mt-25">Увы, пока ни одной девушки не откликнулось.
+            По пробуйте сделать текст Вашего объявления более привлекательным, заполните подробнее вашу анкету, добавьте фотографию в профиль или подождите еще не много.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fw-width-1-2">
+    <div class="panel-box panel-box--rounded panel-box--bordered panel-box--overflow-no fw-mb-30">
+      <div class="fw-flex fw-flex-between fw-flex-middle">
+        <p class="fw-text-warmgrey fw-fz-13">01.03.2017 10:19</p>
+      </div>
+      <p class="fw-fw-600 fw-fz-14 fw-mt-10">21-25, Москва, провести вечер, показывается во всех городах</p>
+      <p class="fw-mt-10 fw-fz-13">Привет! Предлагаю встретиться 04.11, вечером. Хочу познакомиться с пермским
+        гостеприимством и темпераментом. Жду ответа и надею…</p>
+      <p class="fw-mt-20 fw-fw-600 fw-fz-14">Исключенные пользователи</p>
+      <div>
+        <div class="fw-flex fw-flex-middle">
+          <div class="fw-flex-grow fw-mr-10 fw-overflow-no fw-mw-87">
+            <div class="fw-flex fw-flex-wrap">
+              <a href="#" class="fw-tooltip fw-width-27 fw-mt-5 fw-mr-3 fw-flex-shrink-no"
+                 data-title="Маша, 23"><img src="http://placehold.it/50x50" alt="" class="fw-brp-50 fw-width-1-1"></a>
+            </div>
+          </div>
+          <div class="fw-flex-shrink-no"><a href="#" class="fw-link fw-link-purple">и еще 22</a></div>
+        </div>
+      </div>
+      <hr class="hr-small">
+      <a href="#" class="fw-link fw-link-purple fw-fz-14">Редактировать</a>
+    </div>
+  </div>
+</div>

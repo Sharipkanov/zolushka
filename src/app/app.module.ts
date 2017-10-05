@@ -96,6 +96,8 @@ import {MailingService} from './services/mailing/mailing.service';
 import {MailingArchiveListPlateComponent} from './components/mailing-archive-list-plate/mailing-archive-list-plate.component';
 import { MailingCreatePlateComponent } from './components/mailing-create-plate/mailing-create-plate.component';
 import { MailingOtherMailingsListingPlateComponent } from './components/mailing-other-mailings-listing-plate/mailing-other-mailings-listing-plate.component';
+import { MailingCurrentActiveMailingComponent } from './components/mailing-current-active-mailing/mailing-current-active-mailing.component';
+import { MailingEditingComponent } from './components/mailing-editing/mailing-editing.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -176,6 +178,8 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
     MailingArchiveListPlateComponent,
     MailingCreatePlateComponent,
     MailingOtherMailingsListingPlateComponent,
+    MailingCurrentActiveMailingComponent,
+    MailingEditingComponent,
   ],
   imports: [
     BrowserModule,

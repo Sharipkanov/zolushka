@@ -19,6 +19,7 @@ import {PageLoaderService} from "../../services/page-loader/page-loader.service"
 export class PageMailingComponent implements OnInit {
   public activeMailing: IMailing = null;
   public mailingArchive: IPaginationMailingArchive = new IPaginationMailingArchive();
+  public editingMailing: IMailing;
 
   public answers;
 
@@ -41,8 +42,7 @@ export class PageMailingComponent implements OnInit {
     });
 
     this._mailingService.getMailingArchive().subscribe((res: IPaginationMailingArchive) => {
-      // this.mailingArchive = res;
-      console.log(res);
+      this.mailingArchive = res;
     });
 
     this._mailingService.getActiveMailing().subscribe((res: IMailing) => {
@@ -51,7 +51,11 @@ export class PageMailingComponent implements OnInit {
       this._pageLoaderService.onEndLoad.emit();
     }, error => {
       this.activeMailing = undefined;
-      this._pageLoaderService.onEndLoad.emit();
+      this._pageLoaderService.onEndLoad.emit()
     });
+  }
+
+  openEditMailingPlate(mailing: IMailing) {
+    this.editingMailing = mailing;
   }
 }
