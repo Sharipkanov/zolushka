@@ -1,41 +1,43 @@
-<div class="page-section" *ngIf="activeMailing !== null && !editingMailing">
+<div class="page-section" *ngIf="activeMailing !== null">
   <div class="container">
-    <div *ngIf="!activeMailing && !mailingArchive._embedded.mailing" class="fw-grid fw-grid-30">
-      <div class="fw-width-1-2">
-        <app-mailing-other-mailings-listing-plate></app-mailing-other-mailings-listing-plate>
+    <div *ngIf="!editingMailing">
+      <div *ngIf="!activeMailing && !mailingArchive._embedded.mailing" class="fw-grid fw-grid-30">
+        <div class="fw-width-1-2">
+          <app-mailing-other-mailings-listing-plate></app-mailing-other-mailings-listing-plate>
+        </div>
+        <div class="fw-width-1-2">
+          <section class="panel-section fw-box-shadow">
+            <div class="panel-section__content panel-section__content--boxed">
+              <app-mailing-create-plate [firstLoadExtend]="true"></app-mailing-create-plate>
+            </div>
+          </section>
+        </div>
       </div>
-      <div class="fw-width-1-2">
-        <section class="panel-section fw-box-shadow">
-          <div class="panel-section__content panel-section__content--boxed">
-            <app-mailing-create-plate [firstLoadExtend]="true"></app-mailing-create-plate>
-          </div>
-        </section>
-      </div>
+
+      <section *ngIf="activeMailing" class="panel-section panel-section--rounded panel-section--overflow-no fw-mh-500">
+        <div class="panel-section__content panel-section__content--boxed">
+          <app-mailing-current-active-mailing [activeMailing]="activeMailing"></app-mailing-current-active-mailing>
+        </div>
+      </section>
+
+      <section class="fw-grid fw-grid-30">
+        <div class="fw-width-1-2">
+          <section class="panel-section fw-box-shadow">
+            <div class="panel-section__content panel-section__content--boxed">
+              <app-mailing-create-plate *ngIf="mailingArchive._embedded.mailing"></app-mailing-create-plate>
+            </div>
+          </section>
+        </div>
+        <div class="fw-width-1-2">
+          <app-mailing-archive-list-plate (editMailing)="openEditMailingPlate($event)" [mailingArchive]="mailingArchive"
+                                          class="fw-block fw-mb-30"
+                                          *ngIf="mailingArchive._embedded.mailing"></app-mailing-archive-list-plate>
+        </div>
+      </section>
     </div>
 
-    <section *ngIf="activeMailing" class="panel-section panel-section--rounded panel-section--overflow-no fw-mh-500">
-      <div class="panel-section__content panel-section__content--boxed">
-        <app-mailing-current-active-mailing [activeMailing]="activeMailing"></app-mailing-current-active-mailing>
-      </div>
-    </section>
-
-    <section class="fw-grid fw-grid-30">
-      <div class="fw-width-1-2">
-        <section class="panel-section fw-box-shadow">
-          <div class="panel-section__content panel-section__content--boxed">
-            <app-mailing-create-plate *ngIf="mailingArchive._embedded.mailing"></app-mailing-create-plate>
-          </div>
-        </section>
-      </div>
-      <div class="fw-width-1-2">
-        <app-mailing-archive-list-plate (editMailing)="openEditMailingPlate($event)" [mailingArchive]="mailingArchive"
-                                        class="fw-block fw-mb-30"
-                                        *ngIf="mailingArchive._embedded.mailing"></app-mailing-archive-list-plate>
-      </div>
-    </section>
+    <app-mailing-editing [editingMailing]="editingMailing" *ngIf="editingMailing"></app-mailing-editing>
   </div>
 </div>
-
-<app-mailing-editing [editingMailing]="editingMailing"></app-mailing-editing>
 
 <app-bottom-grid class="fw-block" *ngIf="activeMailing !== null && !activeMailing && !editingMailing"></app-bottom-grid>

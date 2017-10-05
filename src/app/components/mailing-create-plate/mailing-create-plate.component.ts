@@ -1,12 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PopupsService} from '../../services/popups/popups.service';
-import {IPaginationBlacklistUsers} from '../../interfaces/pagination.interface';
-import {EnumsService} from '../../services/enums/enums.service';
-import {MailingService} from '../../services/mailing/mailing.service';
-import {ISelectSearchBoxItem} from '../../interfaces/form/select-search-box-item.interface';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {LocationService} from '../../services/location/location.service';
-import {IMailing} from '../../interfaces/mailing.interface';
+import { Component, Input, OnInit } from '@angular/core';
+import { PopupsService } from '../../services/popups/popups.service';
+import { IPaginationBlacklistUsers } from '../../interfaces/pagination.interface';
+import { EnumsService } from '../../services/enums/enums.service';
+import { MailingService } from '../../services/mailing/mailing.service';
+import { ISelectSearchBoxItem } from '../../interfaces/form/select-search-box-item.interface';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { LocationService } from '../../services/location/location.service';
+import { IMailing } from '../../interfaces/mailing.interface';
+import { ISelectBoxItem } from "../../interfaces/form/select-box-item.interface";
 
 @Component({
   selector: 'app-mailing-create-plate',
@@ -15,12 +16,15 @@ import {IMailing} from '../../interfaces/mailing.interface';
 })
 export class MailingCreatePlateComponent implements OnInit {
   @Input() firstLoadExtend: boolean = false;
-  public relationshipTypes = [];
+  @Input() editingMailing: IMailing;
+
+  public relationshipTypes: Array<ISelectBoxItem>;
   public locations: Array<ISelectSearchBoxItem> = [];
   public errors = [];
   public blacklisted: IPaginationBlacklistUsers = new IPaginationBlacklistUsers();
 
   public preloader: boolean = false;
+  public showForm: boolean = false;
 
   public rangeSliderValues = {
     ageFrom: 19,
@@ -33,10 +37,17 @@ export class MailingCreatePlateComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.editingMailing) {
+      this.rangeSliderValues.ageFrom = this.editingMailing.ageFrom,
+      this.rangeSliderValues.ageTo = this.editingMailing.ageTo
+    }
+
+    this.showForm = false;
     this.preloader = true;
     this._enums.getEnums('relationship-types').subscribe(response => {
       this.relationshipTypes = response;
       this.preloader = false;
+      this.renderForm();
     });
 
     this.initLocation();
@@ -45,18 +56,17 @@ export class MailingCreatePlateComponent implements OnInit {
       blacklisted._embedded.clientCard.splice(6, blacklisted._embedded.clientCard.length);
       this.blacklisted = blacklisted;
     });
-
-    this.renderForm();
   }
 
   renderForm() {
     this.FMailing = this._fb.group({
-      city: 0,
-      ageFrom: this.rangeSliderValues.ageFrom,
-      ageTo: this.rangeSliderValues.ageTo,
-      text: '',
-      relationshipTypes: {id: null},
+      city: !!this.editingMailing ? this.editingMailing.city : null,
+      ageFrom: !!this.editingMailing ? this.editingMailing.ageFrom : this.rangeSliderValues.ageFrom,
+      ageTo: !!this.editingMailing ? this.editingMailing.ageTo : this.rangeSliderValues.ageTo,
+      text: !!this.editingMailing ? this.editingMailing.text : null,
+      relationshipTypes: !!this.editingMailing ? [this.editingMailing.relationshipTypes] : null,
     });
+    this.showForm = true;
   }
 
   initLocation(locationName: string = null) {
@@ -80,6 +90,11 @@ export class MailingCreatePlateComponent implements OnInit {
   }
 
   searchOnChangeAge(e) {
+    this.FMailing.controls['ageFrom'].setValue(e.from);
+    this.FMailing.controls['ageTo'].setValue(e.to);
+  }
+
+  searchOnChangeAgeFinish(e) {
     this.FMailing.controls['ageFrom'].setValue(e.from);
     this.FMailing.controls['ageTo'].setValue(e.to);
   }

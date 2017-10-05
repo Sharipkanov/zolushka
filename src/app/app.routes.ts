@@ -14,6 +14,7 @@ import {PageMailingComponent} from './routes/page-mailing/page-mailing.component
 import {PageProfileViewsComponent} from './routes/page-profile-views/page-profile-views.component';
 import {PageBlogComponent} from './routes/page-blog/page-blog.component';
 import {PageBlogItemComponent} from './routes/page-blog-item/page-blog-item.component';
+import { PageMailingEditComponent } from './routes/page-mailing-edit/page-mailing-edit.component';
 
 const appRoutes: Routes = [
     {path: '', component: PageHomeComponent, pathMatch: 'full'},
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
     {path: 'profile-edit', component: PageProfileEditComponent, canActivate: [UserService]},
     {path: 'profile-views', component: PageProfileViewsComponent, canActivate: [UserService]},
     {path: 'mailing', component: PageMailingComponent, canActivate: [UserService]},
+    {path: 'mailing/edit/:mailing_id', component: PageMailingEditComponent, canActivate: [UserService]},
     {path: 'blog', component: PageBlogComponent},
     {path: 'blog/:slug', component: PageBlogItemComponent},
     {path: '**', component: PageNotFoundComponent}

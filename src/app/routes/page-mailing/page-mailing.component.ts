@@ -21,8 +21,6 @@ export class PageMailingComponent implements OnInit {
   public mailingArchive: IPaginationMailingArchive = new IPaginationMailingArchive();
   public editingMailing: IMailing;
 
-  public answers;
-
   @HostListener('document:click', ['$event'])
   clickOutsideOfComponent(e) {
     if (!e.target.closest('.dropdown') && document.querySelector('.dropdown.dropdown--active')) {
@@ -57,5 +55,6 @@ export class PageMailingComponent implements OnInit {
 
   openEditMailingPlate(mailing: IMailing) {
     this.editingMailing = mailing;
+    console.log('editing mailing', this.editingMailing)
   }
 }
