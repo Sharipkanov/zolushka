@@ -38,8 +38,8 @@ export class MailingCreatePlateComponent implements OnInit {
 
   ngOnInit() {
     if (this.editingMailing) {
-      this.rangeSliderValues.ageFrom = this.editingMailing.ageFrom,
-      this.rangeSliderValues.ageTo = this.editingMailing.ageTo
+      this.rangeSliderValues.ageFrom = this.editingMailing.ageFrom;
+      this.rangeSliderValues.ageTo = this.editingMailing.ageTo;
     }
 
     this.showForm = false;
