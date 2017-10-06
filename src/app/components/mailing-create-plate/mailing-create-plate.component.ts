@@ -134,7 +134,7 @@ export class MailingCreatePlateComponent implements OnInit {
     e.preventDefault();
     this.preloader = true;
     const MailingData = this.FMailing.value;
-    MailingData['blacklist'] = this.blacklisted._embedded.clientCard;
+    MailingData['blackList'] = this.blacklisted._embedded.clientCard;
     if (this.editingMailing) {
       console.log(MailingData);
       this._mailingService.editMailing(MailingData, this.editingMailing.id).subscribe((res: IMailing) => {
