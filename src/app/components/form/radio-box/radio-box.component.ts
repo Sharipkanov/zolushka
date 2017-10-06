@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
-import { IRadioBoxItem } from '../../../interfaces/form/radio-box-item.interface';
-import { RadioBoxLabelComponent } from "../radio-box-label/radio-box-label.component";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'app-radio-box',

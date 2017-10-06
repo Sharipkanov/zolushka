@@ -9,7 +9,7 @@ import {IUser} from '../../interfaces/user.interface';
 import {IDialog} from '../../interfaces/dialog.interface';
 import {DialogService} from '../../services/dialog/dialog.service';
 import {IProfile} from '../../interfaces/profile.interface';
-import {PopupsService} from "../../services/popups/popups.service";
+import {PopupsService} from '../../services/popups/popups.service';
 
 @Component({
   selector: 'app-page-profile',

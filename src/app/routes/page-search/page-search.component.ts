@@ -1,15 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {UsersService} from '../../services/users/users.service';
-import {IUser} from '../../interfaces/user.interface';
-import {SearchBarComponent} from "../../components/search-bar/search-bar.component";
-import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
-import {IPagination, IPaginationUserSearch} from "../../interfaces/pagination.interface";
-import {StorageService} from "../../services/storage/storage.service";
-import {UserService} from "../../services/user/user.service";
-import {PopupsService} from "../../services/popups/popups.service";
-import {UrlParserService} from "../../services/url-parser/url-parser.service";
-import {PageLoaderService} from "../../services/page-loader/page-loader.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {IPaginationUserSearch} from '../../interfaces/pagination.interface';
+import {StorageService} from '../../services/storage/storage.service';
+import {UserService} from '../../services/user/user.service';
+import {PopupsService} from '../../services/popups/popups.service';
+import {UrlParserService} from '../../services/url-parser/url-parser.service';
+import {PageLoaderService} from '../../services/page-loader/page-loader.service';
 
 @Component({
   selector: 'app-page-search',

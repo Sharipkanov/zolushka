@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IPaginationMailingArchive} from '../../interfaces/pagination.interface';
+import {IPaginationBlacklistUsers, IPaginationMailingArchive} from '../../interfaces/pagination.interface';
 import {IMailing} from '../../interfaces/mailing.interface';
+import {PopupsService} from "../../services/popups/popups.service";
+import {MailingService} from "../../services/mailing/mailing.service";
+import {IUserBlacklisted} from "../../interfaces/user.interface";
 
 @Component({
   selector: 'app-mailing-archive-list-plate',
@@ -10,15 +13,28 @@ import {IMailing} from '../../interfaces/mailing.interface';
 export class MailingArchiveListPlateComponent implements OnInit {
 
   @Input() mailingArchive: IPaginationMailingArchive = new IPaginationMailingArchive();
-  @Output() editMailing = new EventEmitter<IMailing>();
 
-  constructor() { }
-
-  ngOnInit() {
-    console.log(this.mailingArchive)
+  constructor(private _popupsService: PopupsService, private _mailingService: MailingService) {
   }
 
-  editArchive(mailing: IMailing) {
-    this.editMailing.emit(mailing);
+  ngOnInit() {
+    for (let i = 0; i < this.mailingArchive._embedded.mailing.length; i++) {
+      this._mailingService.getMailingBlacklist(this.mailingArchive._embedded.mailing[i].id).subscribe((res: IPaginationBlacklistUsers) => {
+        if (res._embedded) {
+          this.mailingArchive._embedded.mailing[i].blackList = res._embedded.content;
+        }
+      });
+
+      this._mailingService.getMailingResponded(this.mailingArchive._embedded.mailing[i].id).subscribe((res: IPaginationBlacklistUsers) => {
+        if (res._embedded) {
+          this.mailingArchive._embedded.mailing[i].respondList = res._embedded.content;
+        }
+      });
+    }
+  }
+
+  openBlackList(e: Event) {
+    e.preventDefault();
+    this._popupsService.openPopup('mailingBlacklist');
   }
 }

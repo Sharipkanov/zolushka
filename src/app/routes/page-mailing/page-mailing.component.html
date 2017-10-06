@@ -1,6 +1,6 @@
 <div class="page-section" *ngIf="activeMailing !== null">
   <div class="container">
-    <div *ngIf="!editingMailing">
+    <div>
       <div *ngIf="!activeMailing && !mailingArchive._embedded.mailing" class="fw-grid fw-grid-30">
         <div class="fw-width-1-2">
           <app-mailing-other-mailings-listing-plate></app-mailing-other-mailings-listing-plate>
@@ -14,13 +14,51 @@
         </div>
       </div>
 
-      <section *ngIf="activeMailing" class="panel-section panel-section--rounded panel-section--overflow-no fw-mh-500">
+      <section *ngIf="activeMailing" class="panel-section fw-padding-20 fw-box-shadow panel-section--rounded panel-section--overflow-no fw-min-height-500">
         <div class="panel-section__content panel-section__content--boxed">
-          <app-mailing-current-active-mailing [activeMailing]="activeMailing"></app-mailing-current-active-mailing>
+          <p class="fw-fw-300 fw-fz-30 fw-mb-30 fw-text-center">Текущая рассылка</p>
+          <div class="fw-grid fw-grid-30">
+            <div class="fw-width-1-2">
+              <p class="fw-fw-600 fw-fz-16">Проявили интерес</p>
+              <div *ngIf="activeMailing.responded">
+                <div class="user-list">
+                  <div class="fw-flex fw-flex-middle fw-mt-20">
+                    <div class="fw-flex-shrink-no fw-img-square-100 rounded fw-mr-20">
+                      <img src="http://placehold.it/100x100" alt="">
+                    </div>
+                    <div class="fw-flex-grow fw-flex-shrink fw-flex-basis-0">
+                      <div class="fw-width-1-1 fw-flex fw-fz-13">
+                        <p class="fw-flex-shrink-no">Сегодня 16:53</p>
+                        <p class="fw-flex-grow fw-color-purple fw-fz-14 fw-ml-5 fw-mw-260 fw-text-ellipsis">Перешла из
+                          мобильного приложения</p>
+                      </div>
+                      <p class="fw-width-1-1 fw-fw-600 fw-fz-14 fw-mt-10">Саша 22, Россия, Санкт-Петербург</p>
+                      <p class="fw-width-1-1 fw-mt-10 fw-text-ellipsis fw-hus fw-text-warmgrey fw-fz-13 fw-hus--style-2 fw-hus-reverse user-list__time">
+                        была 13 часов назад</p>
+                    </div>
+                  </div>
+                  <a href="#" class="violet-button"><i class="icon-message-light fw-mr-5"></i> Написать</a>
+                </div>
+              </div>
+              <div *ngIf="!activeMailing.responded">
+                <div class="fw-text-center fw-mt-50">
+                  <div class="fw-mw-335 fw-inline-block">
+                    <i class="icon-mailing-no-reply"></i>
+                    <p class="fw-fz-13 fw-mt-25">Увы, пока ни одной девушки не откликнулось.
+                      По пробуйте сделать текст Вашего объявления более привлекательным, заполните подробнее вашу анкету, добавьте фотографию в профиль или подождите еще не много.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="fw-width-1-2">
+              <app-mailing-current-active-mailing [mailing]="activeMailing"></app-mailing-current-active-mailing>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="fw-grid fw-grid-30">
+      <section class="fw-grid fw-grid-30" *ngIf="!activeMailing">
         <div class="fw-width-1-2">
           <section class="panel-section fw-box-shadow">
             <div class="panel-section__content panel-section__content--boxed">
@@ -29,14 +67,12 @@
           </section>
         </div>
         <div class="fw-width-1-2">
-          <app-mailing-archive-list-plate (editMailing)="openEditMailingPlate($event)" [mailingArchive]="mailingArchive"
-                                          class="fw-block fw-mb-30"
+          <app-mailing-archive-list-plate [mailingArchive]="mailingArchive"
+                                          class="fw-block"
                                           *ngIf="mailingArchive._embedded.mailing"></app-mailing-archive-list-plate>
         </div>
       </section>
     </div>
-
-    <app-mailing-editing [editingMailing]="editingMailing" *ngIf="editingMailing"></app-mailing-editing>
   </div>
 </div>
 

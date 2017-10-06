@@ -1,68 +1,85 @@
 <section class="fw-pt-40 fw-pb-20">
-    <div class="container medium-container">
-        <p class="fw-fz-24 fw-text-center fw-mb-20">{{ "REGISTRATION_PAGE.TITLE" | translate }}</p>
-        <div class="fw-grid fw-grid-30">
-            <div class="fw-width-1-2 fw-fz-14">
-                <p>{{ "REGISTRATION_PAGE.FIRST_SENTENCE" | translate }}</p>
-                <p class="fw-mt-20">{{ "REGISTRATION_PAGE.SECOND_SENTENCE" | translate }}</p>
-                <div class="fw-mt-40">
-                    <app-panel-gift></app-panel-gift>
-                </div>
-                <div class="fw-mt-50 fw-flex fw-flex-wrap fw-flex-space-between">
-                    <a href="#"><i class="icon-grey-confidential"></i></a>
-                    <a href="#"><i class="icon-grey-app-store"></i></a>
-                    <a href="#"><i class="icon-grey-google-play"></i></a>
-                </div>
-            </div>
-            <div class="fw-width-1-2">
-                <form [formGroup]="FRegistration" (ngSubmit)="userRegister($event)">
-                    <div class="fw-mb-10">
-                        <app-input-box [placeholder]="'E-mail'" [error]="!!errors['email']" [type]="'email'" formControlName="email"></app-input-box>
-
-                        <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['email']">{{errors['email']}}</div>
-                    </div>
-                    <div class="fw-mb-10">
-                        <app-input-box [placeholder]="'Придумайте пароль'" [error]="!!errors['password']" [type]="'password'" formControlName="password"></app-input-box>
-
-                        <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['password']">{{errors['password']}}</div>
-                    </div>
-                    <div class="fw-mb-10">
-                        <app-input-box [placeholder]="'Имя'" [error]="!!errors['name']" formControlName="name"></app-input-box>
-                        <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['name']">{{errors['name']}}</div>
-                    </div>
-                    <div class="fw-mb-10">
-                        <app-select-search-box [classes]="'search-bar__select-search-box'" ngDefaultControl (search)="getLocations($event)" [placeholder]="'Город'" [iconClass]="'icon-form-navigator'" [items]="locations" formControlName="city"></app-select-search-box>
-                        <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['city']">{{errors['city']}}</div>
-                    </div>
-                    <div class="fw-mb-10">
-                        <app-radio-box-label [fullWidth]="true" [combined]="true" [items]="type_picker" formControlName="type"></app-radio-box-label>
-                        <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['type']">{{errors['type']}}</div>
-                    </div>
-                    <div class="fw-mb-10 fw-grid fw-grid-15" formGroupName="birthdate">
-                        <div class="fw-width-1-3">
-                            <app-select-box [placeholder]="'ENUMS.datepicker.day' | translate" [iconClass]="'icon-form-triangle'" formControlName="day" ngDefaultControl [items]="date_picker['day']"></app-select-box>
-                        </div>
-                        <div class="fw-width-1-3">
-                            <app-select-box [placeholder]="'ENUMS.datepicker.month' | translate" [iconClass]="'icon-form-triangle'" formControlName="month" ngDefaultControl [items]="date_picker['month']"></app-select-box>
-                        </div>
-                        <div class="fw-width-1-3">
-                            <app-select-box [placeholder]="'ENUMS.datepicker.year' | translate" [iconClass]="'icon-form-triangle'" formControlName="year" ngDefaultControl [items]="date_picker['year']"></app-select-box>
-                        </div>
-                        <div class="fw-error-message fw-color-red fw-mt-10-inverse fw-width-1-1" *ngIf="!!errors['birthdate']">{{errors['birthdate']}}</div>
-                    </div>
-                    <div class="fw-mt-15">
-                        <button type="submit" class="button button--primary fw-width-1-1">Зарегистрироваться</button>
-                    </div>
-                </form>
-            </div>
+  <div class="container medium-container">
+    <p class="fw-fz-24 fw-text-center fw-mb-20">{{ "PAGES.REGISTRATION.TITLE" | translate }}</p>
+    <div class="fw-grid fw-grid-30">
+      <div class="fw-width-1-2 fw-fz-14">
+        <p>{{ "PAGES.REGISTRATION.FIRST_SENTENCE" | translate }}</p>
+        <p class="fw-mt-20">{{ "PAGES.REGISTRATION.SECOND_SENTENCE" | translate }}</p>
+        <div class="fw-mt-40">
+          <app-panel-gift></app-panel-gift>
         </div>
-        <div class="fw-text-center fw-mt-35">
-            <div><a href="#" class="fw-mr-5 link link--purple">Забыли пароль?</a> <a href="#" class="link link--purple">Войти</a>
-            </div>
-            <p>Продолжая, Вы принимаете условия <a href="#" class="link link--purple">пользовательского соглашения</a>,
-                правила, а также подтверждаете что Вам есть 18 лет.</p>
+        <div class="fw-mt-50 fw-flex fw-flex-wrap fw-flex-space-between">
+          <a href="#"><i class="icon-grey-confidential"></i></a>
+          <a href="#"><i class="icon-grey-app-store"></i></a>
+          <a href="#"><i class="icon-grey-google-play"></i></a>
         </div>
+      </div>
+      <div class="fw-width-1-2">
+        <form [formGroup]="FRegistration" (ngSubmit)="userRegister($event)">
+          <div class="fw-mb-10">
+            <app-input-box [placeholder]="'FORMS.INPUTS.EMAIL' | translate" [error]="!!errors['email']" [type]="'email'"
+                           formControlName="email"></app-input-box>
+
+            <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['email']">{{errors['email']}}</div>
+          </div>
+          <div class="fw-mb-10">
+            <app-input-box [placeholder]="'FORMS.INPUTS.THINK_PASSWORD' | translate" [error]="!!errors['password']"
+                           [type]="'password'" formControlName="password"></app-input-box>
+
+            <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['password']">{{errors['password']}}</div>
+          </div>
+          <div class="fw-mb-10">
+            <app-input-box [placeholder]="'FORMS.INPUTS.NAME' | translate" [error]="!!errors['name']"
+                           formControlName="name"></app-input-box>
+            <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['name']">{{errors['name']}}</div>
+          </div>
+          <div class="fw-mb-10">
+            <app-select-search-box [classes]="'search-bar__select-search-box'" ngDefaultControl
+                                   (search)="getLocations($event)" [placeholder]="'FORMS.SELECTBOX.CITY' | translate"
+                                   [iconClass]="'icon-form-navigator'" [items]="locations"
+                                   formControlName="city"></app-select-search-box>
+            <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['city']">{{errors['city']}}</div>
+          </div>
+          <div class="fw-mb-10">
+            <app-radio-box-label [fullWidth]="true" [combined]="true" [items]="type_picker"
+                                 formControlName="type"></app-radio-box-label>
+            <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['type']">{{errors['type']}}</div>
+          </div>
+          <div class="fw-mb-10 fw-grid fw-grid-15" formGroupName="birthdate">
+            <div class="fw-width-1-3">
+              <app-select-box [placeholder]="'ENUMS.datepicker.day' | translate" [iconClass]="'icon-form-triangle'"
+                              formControlName="day" ngDefaultControl [items]="date_picker['day']"></app-select-box>
+            </div>
+            <div class="fw-width-1-3">
+              <app-select-box [placeholder]="'ENUMS.datepicker.month' | translate" [iconClass]="'icon-form-triangle'"
+                              formControlName="month" ngDefaultControl [items]="date_picker['month']"></app-select-box>
+            </div>
+            <div class="fw-width-1-3">
+              <app-select-box [placeholder]="'ENUMS.datepicker.year' | translate" [iconClass]="'icon-form-triangle'"
+                              formControlName="year" ngDefaultControl [items]="date_picker['year']"></app-select-box>
+            </div>
+            <div class="fw-error-message fw-color-red fw-mt-10-inverse fw-width-1-1" *ngIf="!!errors['birthdate']">
+              {{errors['birthdate']}}
+            </div>
+          </div>
+          <div class="fw-mt-15">
+            <button type="submit" class="button button--primary fw-width-1-1">{{'BUTTONS.TO_REGISTER' | translate}}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+    <div class="fw-text-center fw-mt-35">
+      <div>
+        <a href="#" class="fw-mr-5 link link--purple">{{'LINKS.FORGOT_PASSWORD' | translate}}</a>
+        <a class="link link--purple js-open-popup" data-popup-target="login">{{'BUTTONS.TO_LOGIN' | translate}}</a>
+      </div>
+      <p>
+        Продолжая, Вы принимаете условия <a href="#" class="link link--purple">{{'LINKS.OF_USER_TERMS' | translate}}</a>,
+        правила, а также подтверждаете что Вам есть 18 лет.
+      </p>
+    </div>
+  </div>
 </section>
 <hr class="hr">
 <app-mass-media class="fw-block fw-mb-40"></app-mass-media>

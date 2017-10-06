@@ -70,13 +70,13 @@
               <a class="dropdown__trigger fw-width-1-1" (click)="dropdownEvent($event)">
                 <div class="fw-flex search-bar__custom-input">
                   <div>
-                    Рост от
+                    Рост {{ 'FORMS.RANGE_INPUTS.FROM' | translate }}
                   </div>
                   <div class="search-bar__custom-input--box fw-mr-5">
                     <input type="text" readonly value="{{FSearchBar.value.minHeight.id}}" class="fw-block fw-text-center fw-width-1-1 fw-reset search--dark-focus-input" maxlength="3" minlength="3" placeholder="170">
                   </div>
                   <div>
-                    &mdash; до
+                    &mdash; {{ 'FORMS.RANGE_INPUTS.TO' | translate }}
                   </div>
                   <div class="search-bar__custom-input--box">
                     <input type="text" readonly value="{{FSearchBar.value.maxHeight.id}}" class="fw-block fw-text-center fw-width-1-1 fw-reset search--dark-focus-input" maxlength="3" minlength="3" placeholder="190">

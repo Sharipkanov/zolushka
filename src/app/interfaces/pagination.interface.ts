@@ -1,7 +1,7 @@
 import {ILink} from './link.interface';
 import {IDialog} from './dialog.interface';
 import {IUser, IUserBlacklisted} from './user.interface';
-import {IMailing} from "./mailing.interface";
+import {IMailing} from './mailing.interface';
 
 export interface IEmbedded {
     content: Array<any>

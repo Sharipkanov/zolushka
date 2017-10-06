@@ -239,7 +239,7 @@ export class PopupChatComponent implements OnInit, OnDestroy {
     applyFilter(data = null) {
         this.preloaders.dialogs = true;
         if (data !== null) {
-            for (const key in data) {
+            for (const key of Object.keys(data)) {
                 if (key !== 'folderId') {
                     for (const Key in this.filterParams) {
                         if (key !== Key && Key !== 'folderId') {

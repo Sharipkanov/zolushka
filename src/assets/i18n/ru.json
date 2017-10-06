@@ -10,6 +10,7 @@
 		"REVERT_CHANGES": "Отменить изменения",
 		"CONNECT": "Подключить",
 		"EDIT_PROFILE": "Редактировать анкету",
+		"EDIT": "Редактировать",
 		"UP_PROFILE": "Поднять анкету",
 		"STOP_MAILING": "Остановить рассылку"
 	},
@@ -48,16 +49,23 @@
 		"internationalLanguages": "Иностранные языки",
 		"education": "Образование"
 	},
-	"INPUTS": {
-		"NAME": "Имя",
-		"PASSWORD": "Пароль",
-		"EMAIL": "E-mail"
-	},
-	"SELECTBOX": {
-		"CITY": "Город",
-		"DAY": "День",
-		"MONTH": "Месяц",
-		"YEAR": "Год рождения"
+	"FORMS": {
+		"INPUTS": {
+			"NAME": "Имя",
+			"PASSWORD": "Пароль",
+			"THINK_PASSWORD": "Придумайте пароль",
+			"EMAIL": "E-mail"
+		},
+		"SELECTBOX": {
+			"CITY": "Город",
+			"DAY": "День",
+			"MONTH": "Месяц",
+			"YEAR": "Год рождения"
+		},
+		"RANGE_INPUTS": {
+			"FROM": "от",
+			"TO": "до"
+		}
 	},
 	"LINKS": {
 		"ABOUT_PROJECT": "О проекте",
@@ -73,7 +81,10 @@
 		"PROFILE": "Профиль",
 		"SETTINGS": "Настройки",
 		"WALLET": "Кошелек",
-		"LOG_OUT": "Выход"
+		"LOG_OUT": "Выход",
+		"FORGOT_PASSWORD": "Забыли пароль?",
+		"OF_USER_TERMS": "пользовательского соглашения",
+		"USER_TERMS": "пользовательское соглашение"
 	},
 	"REGISTRATION_MAIN": {
 		"TITLE": "Регистрация",
@@ -106,23 +117,6 @@
 		"GET_BUTTON_TEXT": "Получить",
 		"INPUT_PLACEHOLDER": "Например: + 7(123) 456-78-90"
 	},
-	"FOOTER": {
-		"CONFIDENTIALITY_TOP": "Конфиденциальность",
-		"CONFIDENTIALITY_BOTTOM": "и безопасность",
-		"COPYRIGHT": "© «Золушка project». Лучший on-line сервис по поиску спонсоров и содержанок, 2015-2017",
-		"ADMIN_TEXT": "Администрация не несёт ответственности за размещённые анкеты - вся информация на сайте предоставлена посетителями."
-	},
-	"HEADER": {
-		"MINUTES_LEFT": "Осталось минут",
-		"CONTACTS_LEFT": "Осталось контактов",
-		"SEARCH_PLACE": "Место в поиске",
-		"MINUTES_LEFT__SHORT": "Минут",
-		"CONTACTS_LEFT__SHORT": "Контактов",
-		"SEARCH_PLACE__SHORT": "В поиске",
-		"INSTALL_APP": "Установить<br>приложение",
-		"HEADER_NOT_AUTH_INDEX_TITLE": "Лучший on-line сервис по поиску <br>содержанок и спонсоров",
-		"HEADER_NOT_AUTH_INDEX_PRESENT": "Дарим 36 часов премиум доступа <br>Всем мужчинам прошедшим регистрацию"
-	},
 	"PAGES": {
 		"PROFILE_EDIT": {
 			"PAGE_TITLE": "Политикой сайта запрещено указывать контактые данные в графе «о себе», а так же использовать не цензурную лексику.",
@@ -148,5 +142,22 @@
 		"SEARCH": {
 			"": ""
 		}
+	},
+	"FOOTER": {
+		"CONFIDENTIALITY_TOP": "Конфиденциальность",
+		"CONFIDENTIALITY_BOTTOM": "и безопасность",
+		"COPYRIGHT": "© «Золушка project». Лучший on-line сервис по поиску спонсоров и содержанок, 2015-2017",
+		"ADMIN_TEXT": "Администрация не несёт ответственности за размещённые анкеты - вся информация на сайте предоставлена посетителями."
+	},
+	"HEADER": {
+		"MINUTES_LEFT": "Осталось минут",
+		"CONTACTS_LEFT": "Осталось контактов",
+		"SEARCH_PLACE": "Место в поиске",
+		"MINUTES_LEFT__SHORT": "Минут",
+		"CONTACTS_LEFT__SHORT": "Контактов",
+		"SEARCH_PLACE__SHORT": "В поиске",
+		"INSTALL_APP": "Установить<br>приложение",
+		"HEADER_NOT_AUTH_INDEX_TITLE": "Лучший on-line сервис по поиску <br>содержанок и спонсоров",
+		"HEADER_NOT_AUTH_INDEX_PRESENT": "Дарим 36 часов премиум доступа <br>Всем мужчинам прошедшим регистрацию"
 	}
 }

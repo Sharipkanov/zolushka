@@ -69,9 +69,18 @@
     content: ''
     background-color: #6ec100
     
-  &.fw-has-user-status--offline
+  &--offline
     &:after
       background-color: #999999
+
+  &--backside
+    padding-right: 0
+    padding-left: 12px
+
+    &:after
+      right: auto
+      left: 0
+
 
 .fw-text-ellipsis
   white-space: nowrap
@@ -90,3 +99,7 @@
 
 .fw-cursor-pointer
   cursor: pointer
+  
+.hr-small
+  background-color: $colorGrey
+  border: none

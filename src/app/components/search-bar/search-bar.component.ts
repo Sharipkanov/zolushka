@@ -168,7 +168,7 @@ export class SearchBarComponent implements OnInit {
   renderFormChosenValues() {
     const filterParams = this._activatedRouter.snapshot.queryParams;
     const newFilterObject = {};
-    for (const key in filterParams) {
+    for (const key of Object.keys(filterParams)) {
       const Value = filterParams[key];
       if (Object.prototype.toString.call(Value) === '[object Array]') {
         newFilterObject[key] = [];

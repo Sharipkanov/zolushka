@@ -1,8 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 
 import {UsersService} from '../../../services/users/users.service';
-import {IUser} from '../../../interfaces/user.interface';
-import {IPaginationUserSearch} from "../../../interfaces/pagination.interface";
+import {IPaginationUserSearch} from '../../../interfaces/pagination.interface';
 
 @Component({
   selector: 'app-panel-top-users',

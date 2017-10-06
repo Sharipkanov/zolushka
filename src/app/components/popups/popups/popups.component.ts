@@ -1,5 +1,4 @@
-import {Component, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
-import {UserService} from '../../../services/user/user.service';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {PopupsService} from '../../../services/popups/popups.service';
 
 @Component({
@@ -9,7 +8,7 @@ import {PopupsService} from '../../../services/popups/popups.service';
   encapsulation: ViewEncapsulation.None
 })
 export class PopupsComponent implements OnInit {
-
+  public props;
   public HTML = document.getElementsByTagName('html')[0];
   public popups = {
     login: false,
@@ -29,8 +28,8 @@ export class PopupsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._popupsService.onOpenPopup.subscribe((popup_name: string) => {
-      this.openPopup(popup_name);
+    this._popupsService.onOpenPopup.subscribe((data) => {
+      this.openPopup(data);
     });
 
     this._popupsService.onClosePopup.subscribe((popup_name: string) => {
@@ -38,8 +37,9 @@ export class PopupsComponent implements OnInit {
     });
   }
 
-  openPopup(popup_name: string) {
-    this.popups[popup_name] = true;
+  openPopup({popup, data}) {
+    this.popups[popup] = true;
+    this.props = data;
     this.HTML.classList.add('popup--opened');
     setTimeout(() => {
       this.openingAnimation = true;
@@ -54,7 +54,7 @@ export class PopupsComponent implements OnInit {
         this.openingAnimation = false;
         setTimeout(() => {
           this.HTML.classList.remove('popup--opened');
-          for (const key in this.popups) {
+          for (const key of Object.keys(this.popups)) {
             this.popups[key] = false;
           }
         }, 300);
@@ -66,5 +66,7 @@ export class PopupsComponent implements OnInit {
         this.popups[popup_name] = false;
       }, 300);
     }
+
+    this.props = null;
   }
 }

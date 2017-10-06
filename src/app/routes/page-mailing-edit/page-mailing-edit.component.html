@@ -1,3 +1,21 @@
-<p>
-  page-mailing-edit works!
-</p>
+<div class="page-section">
+  <div class="container">
+    <section class="panel-section panel-section--rounded panel-section--overflow-no fw-mh-500">
+      <div class="panel-section__content panel-section__content--boxed">
+        <p class="fw-fw-300 fw-fz-30 fw-mb-30 fw-text-center">Архив моих рассылок</p>
+        <div class="fw-grid fw-grid-30" *ngIf="mailing">
+          <div class="fw-width-1-2">
+            <p class="fw-fw-600 fw-fz-16 fw-mb-10 fw-pl-20">Проявили интерес</p>
+            <div>
+              <app-mailing-user-list-cart class="fw-block" [user]="item" *ngFor="let item of [1,1,1,1]"></app-mailing-user-list-cart>
+            </div>
+          </div>
+
+          <div class="fw-width-1-2">
+            <app-mailing-create-plate *ngIf="mailing" [editingMailing]="mailing"></app-mailing-create-plate>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

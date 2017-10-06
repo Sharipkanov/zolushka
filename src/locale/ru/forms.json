@@ -1,13 +1,20 @@
 {
-  "INPUTS": {
-    "NAME": "Имя",
-    "PASSWORD": "Пароль",
-    "EMAIL": "E-mail"
-  },
-  "SELECTBOX": {
-    "CITY": "Город",
-    "DAY": "День",
-    "MONTH": "Месяц",
-    "YEAR": "Год рождения"
+  "FORMS": {
+    "INPUTS": {
+      "NAME": "Имя",
+      "PASSWORD": "Пароль",
+      "THINK_PASSWORD": "Придумайте пароль",
+      "EMAIL": "E-mail"
+    },
+    "SELECTBOX": {
+      "CITY": "Город",
+      "DAY": "День",
+      "MONTH": "Месяц",
+      "YEAR": "Год рождения"
+    },
+    "RANGE_INPUTS": {
+      "FROM": "от",
+      "TO": "до"
+    }
   }
 }

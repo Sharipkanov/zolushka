@@ -61,7 +61,7 @@ export class MailingService {
     return this._http.get(`/api/api/client/mailing/list/archive`, {headers: headers}).map((response: Response) => response.json());
   }
 
-  getMailingGirls(id: number = null) {
+  getMailingResponded(id: number = null) {
     const headers = this._userService.setHeaders({json: true});
 
     let url = `/api/api/client/mailing/responsed`;

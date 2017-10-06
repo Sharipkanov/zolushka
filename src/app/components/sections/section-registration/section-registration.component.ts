@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {EnumsService} from "../../../services/enums/enums.service";
-import {DateService} from "../../../services/date/date.service";
-import {LocationService} from "../../../services/location/location.service";
-import {UserService} from "../../../services/user/user.service";
-import {ISelectSearchBoxItem} from "../../../interfaces/form/select-search-box-item.interface";
-import {Router} from "@angular/router";
-import {PopupsService} from "../../../services/popups/popups.service";
+import {EnumsService} from '../../../services/enums/enums.service';
+import {DateService} from '../../../services/date/date.service';
+import {LocationService} from '../../../services/location/location.service';
+import {UserService} from '../../../services/user/user.service';
+import {ISelectSearchBoxItem} from '../../../interfaces/form/select-search-box-item.interface';
+import {Router} from '@angular/router';
+import {PopupsService} from '../../../services/popups/popups.service';
 
 @Component({
     selector: 'app-section-registration',

@@ -1,0 +1,18 @@
+<div class="user-list">
+  <div class="fw-flex fw-flex-middle">
+    <div class="fw-flex-shrink-no fw-width-100 fw-mr-20 fw-fz-0">
+      <img src="{{user.avatar ? user.avatar._links.medium.href : '/assets/images/default-avatar.svg'}}" class="fw-width-1-1 fw-inline-block fw-vam fw-brp-50" alt="">
+    </div>
+    <div class="fw-flex-grow fw-flex-shrink fw-flex-basis-0 fw-position-relative">
+      <div class="fw-width-1-1 fw-flex fw-fz-13">
+        <p class="fw-flex-shrink-no">Сегодня 16:53</p>
+        <p class="fw-flex-grow fw-color-purple fw-fz-14 fw-ml-5 fw-mw-260 fw-text-ellipsis">Перешла из
+          мобильного приложения</p>
+      </div>
+      <p class="fw-width-1-1 fw-fw-600 fw-fz-14 fw-mt-10">Саша 22, Россия, Санкт-Петербург</p>
+      <p class="fw-mt-20 fw-mb-10 fw-text-ellipsis fw-inline-block fw-has-user-status fw-has-user-status--offline fw-has-user-status--backside fw-color-grey-dark fw-fz-13 user-list__time">
+        была 13 часов назад</p>
+      <a class="button button--primary button--round" (click)="openChat(user)"><i class="icon-chat-shape fw-mr-5"></i> Написать</a>
+    </div>
+  </div>
+</div>

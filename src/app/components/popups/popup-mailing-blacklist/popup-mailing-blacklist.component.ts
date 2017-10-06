@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {IPaginationBlacklistUsers} from '../../../interfaces/pagination.interface';
 import {MailingService} from '../../../services/mailing/mailing.service';
 import {IUserBlacklisted} from '../../../interfaces/user.interface';
@@ -10,6 +10,7 @@ import {PopupsService} from '../../../services/popups/popups.service';
   styleUrls: ['./popup-mailing-blacklist.component.sass']
 })
 export class PopupMailingBlacklistComponent implements OnInit {
+  @Input() props;
 
   public girls: IPaginationBlacklistUsers = new IPaginationBlacklistUsers();
   public preloader: boolean = false;

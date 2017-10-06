@@ -1,11 +1,11 @@
 import {Component, OnInit, Input, ViewEncapsulation} from '@angular/core';
 
 import {IUser} from '../../interfaces/user.interface';
-import {Router} from "@angular/router";
-import {PopupsService} from "../../services/popups/popups.service";
-import {IDialog} from "../../interfaces/dialog.interface";
-import {DialogService} from "../../services/dialog/dialog.service";
-import {UserService} from "../../services/user/user.service";
+import {Router} from '@angular/router';
+import {PopupsService} from '../../services/popups/popups.service';
+import {IDialog} from '../../interfaces/dialog.interface';
+import {DialogService} from '../../services/dialog/dialog.service';
+import {UserService} from '../../services/user/user.service';
 
 @Component({
   selector: 'app-user-cart-thumbnail',

@@ -4,29 +4,38 @@
     <div class="panel-box panel-box--rounded panel-box--bordered panel-box--overflow-no fw-mt-20" *ngFor="let mailing of mailingArchive._embedded.mailing">
       <div class="fw-flex fw-flex-space-between fw-flex-middle">
         <p class="fw-color-grey-dark fw-fz-13">01.03.2017 10:19</p>
-        <p><a class="fw-link fw-color-purple fw-text-underline--hover fw-fz-14" (click)="editArchive(mailing)">Редактировать и возобновить</a></p>
+        <p><a class="fw-link fw-color-purple fw-text-underline--hover fw-fz-14" routerLink="/mailing/edit/{{mailing.id}}">Редактировать и возобновить</a></p>
       </div>
       <p class="fw-fw-600 fw-fz-14 fw-mt-10">{{mailing.ageFrom}}-{{mailing.ageTo}}, {{mailing.city.title}}, <span *ngFor="let relationshipType of mailing.relationshipTypes; let last = last;">{{relationshipType.title}}<span *ngIf="!last">, </span></span>, показывается во всех городах</p>
       <p class="fw-mt-10 fw-fz-13">{{mailing.text}}</p>
-      <p class="fw-mt-20 fw-fw-600 fw-fz-14 fw-mb-5">Проявили интерес</p>
-      <div>
-        <div class="fw-flex fw-flex-middle">
-          <div class="fw-flex-grow fw-mr-10 fw-overflow-no" *ngFor="let blacklist of mailing.blackList">
-            <div class="fw-flex fw-flex-wrap">
-              <a class="fw-tooltip fw-width-27 fw-mt-5 fw-mr-3 fw-flex-shrink-no" data-title="Маша, 23"><img src="http://placehold.it/50x50" alt="" class="fw-brp-50 fw-width-1-1"></a>
+      <div *ngIf="!!mailing.respondList">
+        <p class="fw-mt-20 fw-fw-600 fw-fz-14 fw-mb-5">Проявили интерес</p>
+        <div>
+          <div class="fw-flex fw-flex-middle">
+            <div class="fw-flex-grow fw-mr-10 fw-overflow-no">
+              <div class="fw-flex fw-flex-wrap">
+                <a class="fw-tooltip fw-width-27 fw-mt-5 fw-mr-3 fw-flex-shrink-no" data-title="Маша, 23" *ngFor="let user of mailing.respondList">
+                  <img src="http://placehold.it/50x50" alt="" class="fw-brp-50 fw-width-1-1">
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <p class="fw-mt-20 fw-fw-600 fw-fz-14">Исключенные пользователи</p>
-      <div>
-        <div class="fw-flex fw-flex-middle">
-          <div class="fw-flex-grow fw-mr-10 fw-overflow-no fw-mw-87">
-            <div class="fw-flex fw-flex-wrap">
-              <a class="fw-tooltip fw-width-27 fw-mt-5 fw-mr-3 fw-flex-shrink-no" data-title="Маша, 23"><img src="http://placehold.it/50x50" alt="" class="fw-brp-50 fw-width-1-1"></a>
+      <div *ngIf="!!mailing.blackList">
+        <p class="fw-mt-20 fw-fw-600 fw-fz-14">Исключенные пользователи</p>
+        <div>
+          <div class="fw-flex fw-flex-middle">
+            <div class="fw-flex-grow fw-mr-10 fw-overflow-no fw-mw-87">
+              <div class="fw-flex fw-flex-wrap">
+                <a class="fw-tooltip fw-width-27 fw-mt-5 fw-mr-3 fw-flex-shrink-no" data-title="Маша, 23"><img
+                    src="http://placehold.it/50x50" alt="" class="fw-brp-50 fw-width-1-1"></a>
+              </div>
             </div>
+            <div class="fw-flex-shrink-no"><span
+                class="fw-link fw-color-purple fw-text-underline--hover fw-cursor-pointer"
+                (click)="openBlackList($event)">и еще 22</span></div>
           </div>
-          <div class="fw-flex-shrink-no"><span class="fw-link fw-color-purple fw-text-underline--hover">и еще 22</span></div>
         </div>
       </div>
     </div>

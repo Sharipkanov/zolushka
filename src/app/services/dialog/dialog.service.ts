@@ -33,7 +33,7 @@ export class DialogService {
         let url = `/api/api/dialogs`;
         if (!!filterParams) {
             const out = [];
-            for (const key in filterParams) {
+            for (const key of Object.keys(filterParams)) {
                 out.push(`${key}=${filterParams[key]}`);
             }
             url += '?' + out.join('&');

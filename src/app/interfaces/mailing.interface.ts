@@ -12,4 +12,5 @@ export interface IMailing {
   blackList: Array<IUser>;
   relationshipTypes: Array<IDefaultEnum>;
   responded: boolean;
+  respondList: Array<IUser>;
 }

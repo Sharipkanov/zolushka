@@ -94,11 +94,12 @@ import {PopupMailingBlacklistComponent} from './components/popups/popup-mailing-
 import {UsersService} from './services/users/users.service';
 import {MailingService} from './services/mailing/mailing.service';
 import {MailingArchiveListPlateComponent} from './components/mailing-archive-list-plate/mailing-archive-list-plate.component';
-import { MailingCreatePlateComponent } from './components/mailing-create-plate/mailing-create-plate.component';
-import { MailingOtherMailingsListingPlateComponent } from './components/mailing-other-mailings-listing-plate/mailing-other-mailings-listing-plate.component';
-import { MailingCurrentActiveMailingComponent } from './components/mailing-current-active-mailing/mailing-current-active-mailing.component';
-import { MailingEditingComponent } from './components/mailing-editing/mailing-editing.component';
-import { PageMailingEditComponent } from './routes/page-mailing-edit/page-mailing-edit.component';
+import {MailingCreatePlateComponent} from './components/mailing-create-plate/mailing-create-plate.component';
+import {MailingOtherMailingsListingPlateComponent} from './components/mailing-other-mailings-listing-plate/mailing-other-mailings-listing-plate.component';
+import {MailingCurrentActiveMailingComponent} from './components/mailing-current-active-mailing/mailing-current-active-mailing.component';
+import {PageMailingEditComponent} from './routes/page-mailing-edit/page-mailing-edit.component';
+import { MailingUserListCartComponent } from './components/mailing-user-list-cart/mailing-user-list-cart.component';
+import { MailingUserListingPreviewComponent } from './components/mailing-user-listing-preview/mailing-user-listing-preview.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -180,8 +181,9 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
     MailingCreatePlateComponent,
     MailingOtherMailingsListingPlateComponent,
     MailingCurrentActiveMailingComponent,
-    MailingEditingComponent,
     PageMailingEditComponent,
+    MailingUserListCartComponent,
+    MailingUserListingPreviewComponent,
   ],
   imports: [
     BrowserModule,

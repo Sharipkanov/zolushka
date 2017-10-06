@@ -4,11 +4,11 @@ import {IMailing} from '../../interfaces/mailing.interface';
 @Component({
   selector: 'app-mailing-current-active-mailing',
   templateUrl: './mailing-current-active-mailing.component.html',
-  styleUrls: ['./mailing-current-active-mailing.component.sass']
+  styleUrls: ['./mailing-current-active-mailing.component.sass', '../../../sass/components/panel.component.sass']
 })
 export class MailingCurrentActiveMailingComponent implements OnInit {
 
-  @Input() activeMailing: IMailing = <IMailing>{};
+  @Input() mailing: IMailing = <IMailing>{};
 
   constructor() { }
 

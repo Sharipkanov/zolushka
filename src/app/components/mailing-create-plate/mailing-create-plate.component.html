@@ -2,7 +2,7 @@
   <div *ngIf="firstLoadExtend">
     <app-mailing-feedbacks-carousel></app-mailing-feedbacks-carousel>
   </div>
-  <form [formGroup]="FMailing" *ngIf="showForm" class="form" (submit)="createMailing($event)">
+  <form [formGroup]="FMailing" *ngIf="showForm" class="form" (submit)="saveMailing($event)">
     <p class="fw-fw-600 fw-fz-16" *ngIf="!editingMailing">Создать рассылку</p>
     <p class="fw-mt-10 fw-fz-14 fw-fw-600" *ngIf="!editingMailing">Укажите кому показывать рассылку </p>
     <div class="fw-flex fw-flex-middle" [ngClass]="{'fw-mt-20': !!editingMailing}">
@@ -14,7 +14,7 @@
             <a class="dropdown__trigger fw-width-1-1" (click)="dropdownEvent($event)">
               <div class="fw-flex search-bar__custom-input">
                 <div>
-                  от
+                  {{ 'FORMS.RANGE_INPUTS.FROM' | translate }}
                 </div>
                 <div class="search-bar__custom-input--box fw-mr-5">
                   <input type="text" readonly value="{{FMailing.value.ageFrom}}"
@@ -22,7 +22,7 @@
                          maxlength="3" minlength="3" placeholder="19">
                 </div>
                 <div>
-                  &mdash; до
+                  &mdash; {{ 'FORMS.RANGE_INPUTS.TO' | translate }}
                 </div>
                 <div class="search-bar__custom-input--box">
                   <input type="text" readonly value="{{FMailing.value.ageTo}}"
@@ -73,7 +73,7 @@
       <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14">Цели
         знакомства</p></div>
       <div class="fw-width-290 fw-flex-shrink-no">
-        <app-select-box *ngIf="relationshipTypes" formControlName="relationshipTypes" [items]="relationshipTypes"
+        <app-select-box formControlName="relationshipTypes" [items]="relationshipTypes"
                         [multiple]="true" [placeholder]="'Цели знакомств'"></app-select-box>
       </div>
     </div>
@@ -122,7 +122,7 @@
         <button class="button button--primary fw-width-1-1">{{'BUTTONS.SAVE' | translate}}</button>
       </div>
       <div class="fw-width-1-2">
-        <button class="button button--error fw-width-1-1">{{'BUTTONS.STOP_MAILING' | translate}}</button>
+        <span (click)="stopMailing($event)" class="button button--red fw-width-1-1">{{'BUTTONS.STOP_MAILING' | translate}}</span>
       </div>
     </div>
   </form>

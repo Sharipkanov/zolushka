@@ -5,20 +5,20 @@
     <div class="fw-text-center">
       <form [formGroup]="FRegistration" (ngSubmit)="userRegister($event)" class="fw-width-410 fw-inline-block fw-text-left">
         <div>
-          <app-input-box [error]="!!errors['email']" [placeholder]="'INPUTS.EMAIL' | translate" formControlName="email"></app-input-box>
+          <app-input-box [error]="!!errors['email']" [placeholder]="'FORMS.INPUTS.EMAIL' | translate" formControlName="email"></app-input-box>
           <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['email']">{{errors['email']}}</div>
         </div>
         <div class="fw-mt-15">
-          <app-input-box [error]="!!errors['password']" [type]="'password'" [placeholder]="'INPUTS.PASSWORD' | translate" formControlName="password"></app-input-box>
+          <app-input-box [error]="!!errors['password']" [type]="'password'" [placeholder]="'FORMS.INPUTS.PASSWORD' | translate" formControlName="password"></app-input-box>
           <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['password']">{{errors['password']}}</div>
         </div>
         <div class="fw-mt-15">
-          <app-select-search-box [classes]="'search-bar__select-search-box'" ngDefaultControl (search)="getLocations($event)" [placeholder]="'SELECTBOX.CITY' | translate" [iconClass]="'icon-form-navigator'" [items]="locations" formControlName="city"></app-select-search-box>
+          <app-select-search-box [classes]="'search-bar__select-search-box'" ngDefaultControl (search)="getLocations($event)" [placeholder]="'FORMS.SELECTBOX.CITY' | translate" [iconClass]="'icon-form-navigator'" [items]="locations" formControlName="city"></app-select-search-box>
           <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['city']">{{errors['city']}}</div>
         </div>
         <div class="fw-flex fw-mt-15">
           <div class="fw-flex-grow">
-            <app-input-box [error]="!!errors['name']" [placeholder]="'INPUTS.NAME' | translate" formControlName="name"></app-input-box>
+            <app-input-box [error]="!!errors['name']" [placeholder]="'FORMS.INPUTS.NAME' | translate" formControlName="name"></app-input-box>
             <div class="fw-error-message fw-color-red fw-mt-5" *ngIf="!!errors['name']">{{errors['name']}}</div>
           </div>
           <div class="fw-flex-shrink-no fw-ml-15">
@@ -28,13 +28,13 @@
         </div>
         <div class="fw-grid fw-grid-15 fw-mt-15" formGroupName="birthdate">
           <div class="fw-width-1-3">
-            <app-select-box [iconClass]="'icon-form-triangle'" [placeholder]="'SELECTBOX.DAY' | translate" formControlName="day" ngDefaultControl [items]="date_picker['day']"></app-select-box>
+            <app-select-box [iconClass]="'icon-form-triangle'" [placeholder]="'FORMS.SELECTBOX.DAY' | translate" formControlName="day" ngDefaultControl [items]="date_picker['day']"></app-select-box>
           </div>
           <div class="fw-width-1-3">
-            <app-select-box [iconClass]="'icon-form-triangle'" [placeholder]="'SELECTBOX.MONTH' | translate" formControlName="month" ngDefaultControl [items]="date_picker['month']"></app-select-box>
+            <app-select-box [iconClass]="'icon-form-triangle'" [placeholder]="'FORMS.SELECTBOX.MONTH' | translate" formControlName="month" ngDefaultControl [items]="date_picker['month']"></app-select-box>
           </div>
           <div class="fw-width-1-3">
-            <app-select-box [iconClass]="'icon-form-triangle'" [placeholder]="'SELECTBOX.YEAR' | translate" formControlName="year" ngDefaultControl [items]="date_picker['year']"></app-select-box>
+            <app-select-box [iconClass]="'icon-form-triangle'" [placeholder]="'FORMS.SELECTBOX.YEAR' | translate" formControlName="year" ngDefaultControl [items]="date_picker['year']"></app-select-box>
           </div>
           <div class="fw-error-message fw-color-red fw-mt-10-inverse fw-width-1-1" *ngIf="!!errors['birthdate']">{{errors['birthdate']}}</div>
         </div>
