@@ -54,3 +54,12 @@
   &--box
     width: 25px
     margin-left: 5px
+
+.ng-dirty
+  &.ng-invalid
+    input
+      border-color: $colorRedLight
+
+.ng-invalid
+  input.ng-touched
+    border-color: $colorRedLight

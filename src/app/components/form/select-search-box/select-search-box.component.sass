@@ -54,68 +54,68 @@
     top: 0
     left: 0
 
-  .select-search-box__content
-    position: absolute
-    top: calc(100% + 15px)
+.select-search-box__content
+  position: absolute
+  top: calc(100% + 15px)
+  width: 100%
+  left: 50%
+  z-index: $z-index-dropdown
+  min-width: 170px
+  transition: all .3s ease 0s
+  visibility: hidden
+  opacity: 0
+  background-color: transparent
+  transform: translateX(-50%)
+
+  &.select-search-box__content--top
+    top: initial
+    bottom: calc(100% + 15px)
+
+    > div
+      margin-top: 0
+      margin-bottom: 15px
+
+
+  &.select-search-box__content--right
+    left: initial
+    right: 0
+    transform: translateX(0)
+
+  &.select-search-box__content--left
+    left: 0
+    right: initial
+    transform: translateX(0)
+
+  > ul
+    position: relative
     width: 100%
-    left: 50%
-    z-index: $z-index-dropdown
-    min-width: 170px
-    transition: all .3s ease 0s
-    visibility: hidden
-    opacity: 0
-    background-color: transparent
-    transform: translateX(-50%)
+    display: block
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
+    background: $colorWhite
+    box-sizing: border-box
+    margin-top: 15px
+    overflow: hidden
+    background: $colorWhite
+    padding: 5px 0
 
-    &.select-search-box__content--top
-      top: initial
-      bottom: calc(100% + 15px)
+    li
+      + li
+        margin-top: 10px
 
-      > div
-        margin-top: 0
-        margin-bottom: 15px
+      > a
+        display: block
+        padding: 5px 10px 5px 10px
+        position: relative
 
-
-    &.select-search-box__content--right
-      left: initial
-      right: 0
-      transform: translateX(0)
-
-    &.select-search-box__content--left
-      left: 0
-      right: initial
-      transform: translateX(0)
-
-    > ul
-      position: relative
-      width: 100%
-      display: block
-      box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
-      background: $colorWhite
-      box-sizing: border-box
-      margin-top: 15px
-      overflow: hidden
-      background: $colorWhite
-      padding: 5px 0
-
-      li
-        + li
-          margin-top: 10px
-
-        > a
+        > span
           display: block
-          padding: 5px 10px 5px 10px
-          position: relative
+          text-overflow: ellipsis
+          white-space: nowrap
+          overflow: hidden
+          width: 100%
+          font-weight: 600
 
-          > span
-            display: block
-            text-overflow: ellipsis
-            white-space: nowrap
-            overflow: hidden
-            width: 100%
-            font-weight: 600
-
-            &:not(:first-child)
-              margin-top: 3px
-              font-size: 13px
-              color: $colorGreyDark
+          &:not(:first-child)
+            margin-top: 3px
+            font-size: 13px
+            color: $colorGreyDark

@@ -1,3 +1,21 @@
-<p>
-  mailing-user-listing-preview works!
-</p>
+<a class="button button--blue button--small fw-cursor-pointer" (click)="openBlackList($event)"
+   *ngIf="!users._embedded.clientCard || !users._embedded.clientCard.length">
+  <i class="icon-plus icon-plus--purple-dark fw-mr-3"></i>
+  <span class="fw-inline-block fw-fz-14 fw-text-600 fw-vam">Выбрать</span>
+</a>
+
+<div class="fw-flex fw-flex-middle fw-cursor-pointer" *ngIf="!!users._embedded.clientCard"
+     (click)="openBlackList($event)">
+  <div class="fw-flex-grow fw-flex-shrink fw-overflow">
+    <div class="fw-flex fw-overflow fw-mr-5">
+                        <span *ngFor="let blackslistItem of users._embedded.clientCard; let i = index;"
+                              [ngClass]="{'fw-ml-5-inverse': i > 0}" class="fw-mt-5 fw-flex-shrink-no"><img
+                            src="{{blackslistItem.avatar ? blackslistItem.avatar._links.small.href : '/assets/images/default-navigation-avatar.svg'}}"
+                            alt="" class="fw-brp-50 fw-width-27"></span>
+    </div>
+  </div>
+  <div class="fw-flex-shrink-no"
+       *ngIf="users.page.totalElements - users._embedded.clientCard.length > 0"><a
+      class="fw-link fw-color-purple fw-text-underline--hover">и еще {{users.page.totalElements
+    - users._embedded.clientCard.length}}</a></div>
+</div>

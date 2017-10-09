@@ -54,7 +54,8 @@
 			"NAME": "Имя",
 			"PASSWORD": "Пароль",
 			"THINK_PASSWORD": "Придумайте пароль",
-			"EMAIL": "E-mail"
+			"EMAIL": "E-mail",
+			"FOLDER_NAME": "Название папки"
 		},
 		"SELECTBOX": {
 			"CITY": "Город",
@@ -65,6 +66,9 @@
 		"RANGE_INPUTS": {
 			"FROM": "от",
 			"TO": "до"
+		},
+		"FORM_CONTROL": {
+			"SELECT_ALL": "Выбрать всех"
 		}
 	},
 	"LINKS": {
@@ -94,6 +98,44 @@
 		"NEXT": "Следующая",
 		"PREV": "Предыдущая"
 	},
+	"POPUPS": {
+		"CHAT": {
+			"FILTERS": {
+				"ALL": "Все",
+				"CALLS": "Звонки",
+				"ONLINE": "On-line",
+				"HIDE_DELETED": "Скрыть удаленные",
+				"NEW": "Новые",
+				"FAVORITES": "Избранные",
+				"BLACKLIST": "Черный список"
+			},
+			"FOLDERS": {
+				"ADD_FOLDER": "Добавить папку",
+				"MY_FOLDERS": "Мои папки",
+				"NO_FOLDERS": "У вас нет папок"
+			},
+			"MESSAGES": {
+				"ALL_MESSAGES": "Все сообщения",
+				"NO_MESSAGES": "Нет сообщений",
+				"TODAY": "Сегодня",
+				"INPUT_PLACEHOLDER": "Ваше сообщение",
+				"NEW_ROW_INFO": "Для переноса строки нажмите Shift+Enter",
+				"VIP_PRESENTS": "VIP подарки",
+				"SPECIAL_PRESENTS": "Особенные подарки",
+				"STANDARD_PRESENTS": "Стандартные подарки",
+				"EXCLUSIVE_PRESENTS": "Эксклюзивные подарки",
+				"YEARS": "лет"
+			},
+			"DIALOGS": {
+				"DELETE_DIALOG": "Удалить диалог",
+				"MOVE_TO_FOLDER": "Переместить в другую папку",
+				"ADD_TO_FAVORITES": "Добавить в избранное",
+				"REMOVE_FROM_FAVORITES": "Убрать из избранного",
+				"ADD_TO_BLACKLIST": "Добавить в черный список",
+				"REMOVE_FROM_BLACKLIST": "Убрать из черного списка"
+			}
+		}
+	},
 	"COMPONENTS": {
 		"PROFILE_INVISIBLE_PLATE": {
 			"MAIN_TEXT": "Вы находитесь в режиме онлайн и другие пользователи видят, что вы на сайте. Вы можете включить режим невидимки и абсолютно анонимно находится на сайте",
@@ -116,6 +158,23 @@
 		"GET_APP": "Получить ссылку на <br>приложение",
 		"GET_BUTTON_TEXT": "Получить",
 		"INPUT_PLACEHOLDER": "Например: + 7(123) 456-78-90"
+	},
+	"FOOTER": {
+		"CONFIDENTIALITY_TOP": "Конфиденциальность",
+		"CONFIDENTIALITY_BOTTOM": "и безопасность",
+		"COPYRIGHT": "© «Золушка project». Лучший on-line сервис по поиску спонсоров и содержанок, 2015-2017",
+		"ADMIN_TEXT": "Администрация не несёт ответственности за размещённые анкеты - вся информация на сайте предоставлена посетителями."
+	},
+	"HEADER": {
+		"MINUTES_LEFT": "Осталось минут",
+		"CONTACTS_LEFT": "Осталось контактов",
+		"SEARCH_PLACE": "Место в поиске",
+		"MINUTES_LEFT__SHORT": "Минут",
+		"CONTACTS_LEFT__SHORT": "Контактов",
+		"SEARCH_PLACE__SHORT": "В поиске",
+		"INSTALL_APP": "Установить<br>приложение",
+		"HEADER_NOT_AUTH_INDEX_TITLE": "Лучший on-line сервис по поиску <br>содержанок и спонсоров",
+		"HEADER_NOT_AUTH_INDEX_PRESENT": "Дарим 36 часов премиум доступа <br>Всем мужчинам прошедшим регистрацию"
 	},
 	"PAGES": {
 		"PROFILE_EDIT": {
@@ -142,22 +201,5 @@
 		"SEARCH": {
 			"": ""
 		}
-	},
-	"FOOTER": {
-		"CONFIDENTIALITY_TOP": "Конфиденциальность",
-		"CONFIDENTIALITY_BOTTOM": "и безопасность",
-		"COPYRIGHT": "© «Золушка project». Лучший on-line сервис по поиску спонсоров и содержанок, 2015-2017",
-		"ADMIN_TEXT": "Администрация не несёт ответственности за размещённые анкеты - вся информация на сайте предоставлена посетителями."
-	},
-	"HEADER": {
-		"MINUTES_LEFT": "Осталось минут",
-		"CONTACTS_LEFT": "Осталось контактов",
-		"SEARCH_PLACE": "Место в поиске",
-		"MINUTES_LEFT__SHORT": "Минут",
-		"CONTACTS_LEFT__SHORT": "Контактов",
-		"SEARCH_PLACE__SHORT": "В поиске",
-		"INSTALL_APP": "Установить<br>приложение",
-		"HEADER_NOT_AUTH_INDEX_TITLE": "Лучший on-line сервис по поиску <br>содержанок и спонсоров",
-		"HEADER_NOT_AUTH_INDEX_PRESENT": "Дарим 36 часов премиум доступа <br>Всем мужчинам прошедшим регистрацию"
 	}
 }

@@ -4,9 +4,10 @@
   </div>
   <form [formGroup]="FMailing" *ngIf="showForm" class="form" (submit)="saveMailing($event)">
     <p class="fw-fw-600 fw-fz-16" *ngIf="!editingMailing">Создать рассылку</p>
-    <p class="fw-mt-10 fw-fz-14 fw-fw-600" *ngIf="!editingMailing">Укажите кому показывать рассылку </p>
+    <p class="fw-mt-10 fw-fz-14 fw-fw-600 fw-mb-15" *ngIf="!editingMailing">Укажите кому показывать рассылку </p>
     <div class="fw-flex fw-flex-middle" [ngClass]="{'fw-mt-20': !!editingMailing}">
-      <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14">Возраст</p>
+      <div class="fw-flex-grow">
+        <p class="fw-fw-600 fw-fz-14">Возраст</p>
       </div>
       <div class="fw-width-290 fw-flex-shrink-no">
         <div class="custom-ion-slider">
@@ -70,38 +71,20 @@
       </div>
     </div>
     <div class="fw-flex fw-flex-middle fw-mt-20">
-      <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14">Цели
-        знакомства</p></div>
+      <div class="fw-flex-grow">
+        <p class="fw-fw-600 fw-fz-14">Цели знакомства</p>
+      </div>
       <div class="fw-width-290 fw-flex-shrink-no">
         <app-select-box formControlName="relationshipTypes" [items]="relationshipTypes"
                         [multiple]="true" [placeholder]="'Цели знакомств'"></app-select-box>
       </div>
     </div>
     <div class="fw-flex fw-flex-middle fw-mt-20">
-      <div class="fw-flex-grow"><p class="fw-fw-600 fw-fz-14">Исключить
-        пользователей</p></div>
+      <div class="fw-flex-grow">
+        <p class="fw-fw-600 fw-fz-14">Исключить пользователей</p>
+      </div>
       <div class="fw-width-290 fw-flex-shrink-no">
-        <a class="button button--blue button--small" (click)="openBlackList($event)"
-           *ngIf="!blacklisted._embedded.clientCard">
-          <i class="icon-plus icon-plus--purple-dark fw-mr-3"></i>
-          <span class="fw-inline-block fw-fz-14 fw-text-600 fw-vam">Выбрать</span>
-        </a>
-
-        <div class="fw-flex fw-flex-middle" *ngIf="!!blacklisted._embedded.clientCard"
-             (click)="openBlackList($event)">
-          <div class="fw-flex-grow fw-flex-shrink fw-overflow">
-            <div class="fw-flex fw-overflow fw-mr-5">
-                        <span *ngFor="let blackslistItem of blacklisted._embedded.clientCard; let i = index;"
-                              [ngClass]="{'fw-ml-5-inverse': i > 0}" class="fw-mt-5 fw-flex-shrink-no"><img
-                            src="{{blackslistItem.avatar ? blackslistItem.avatar._links.small.href : '/assets/images/default-navigation-avatar.svg'}}"
-                            alt="" class="fw-brp-50 fw-width-27"></span>
-            </div>
-          </div>
-          <div class="fw-flex-shrink-no"
-               *ngIf="blacklisted.page.totalElements - blacklisted._embedded.clientCard.length > 0"><a
-              class="fw-link fw-color-purple fw-text-underline--hover">и еще {{blacklisted.page.totalElements
-            - blacklisted._embedded.clientCard.length}}</a></div>
-        </div>
+        <app-mailing-user-listing-preview [openBlacklist]="true" [users]="blacklisted"></app-mailing-user-listing-preview>
       </div>
     </div>
     <div class="fw-mt-20 fw-mb-20">
@@ -114,7 +97,7 @@
       </div>
     </div>
     <div class="fw-text-center" *ngIf="!editingMailing">
-      <p class="fw-fz-14 fw-mb-15 fw-fw-600"> Стоимость рассылки на 9 часов 200 ₽.</p>
+      <p class="fw-fz-14 fw-mb-15 fw-fw-600">Стоимость рассылки на 9 часов 200 ₽.</p>
       <button class="button button--primary">Создать рассылку</button>
     </div>
     <div class="fw-grid fw-grid-30" *ngIf="editingMailing">
@@ -122,7 +105,7 @@
         <button class="button button--primary fw-width-1-1">{{'BUTTONS.SAVE' | translate}}</button>
       </div>
       <div class="fw-width-1-2">
-        <span (click)="stopMailing($event)" class="button button--red fw-width-1-1">{{'BUTTONS.STOP_MAILING' | translate}}</span>
+        <span (click)="stopMailingDialing($event)" class="button button--red fw-width-1-1">{{'BUTTONS.STOP_MAILING' | translate}}</span>
       </div>
     </div>
   </form>

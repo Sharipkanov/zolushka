@@ -58,18 +58,17 @@
         </div>
       </section>
 
-      <section class="fw-grid fw-grid-30" *ngIf="!activeMailing">
+      <section class="fw-grid fw-grid-30" *ngIf="!activeMailing && mailingArchive._embedded.mailing">
         <div class="fw-width-1-2">
           <section class="panel-section fw-box-shadow">
             <div class="panel-section__content panel-section__content--boxed">
-              <app-mailing-create-plate *ngIf="mailingArchive._embedded.mailing"></app-mailing-create-plate>
+              <app-mailing-create-plate class="fw-block"></app-mailing-create-plate>
             </div>
           </section>
         </div>
         <div class="fw-width-1-2">
           <app-mailing-archive-list-plate [mailingArchive]="mailingArchive"
-                                          class="fw-block"
-                                          *ngIf="mailingArchive._embedded.mailing"></app-mailing-archive-list-plate>
+                                          class="fw-block"></app-mailing-archive-list-plate>
         </div>
       </section>
     </div>

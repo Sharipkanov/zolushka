@@ -64,107 +64,107 @@
     left: 0
     display: none
 
-  .select-box__content
-    position: absolute
-    top: calc(100% + 15px)
+.select-box__content
+  position: absolute
+  top: calc(100% + 15px)
+  width: 100%
+  left: 50%
+  z-index: $z-index-dropdown
+  min-width: 170px
+  transition: all 5.3s ease 0s
+  visibility: hidden
+  opacity: 0
+  background-color: transparent
+  transform: translateX(-50%)
+
+  &.select-box__content--top
+    top: initial
+    bottom: calc(100% + 15px)
+
+    > div
+      margin-top: 0
+      margin-bottom: 15px
+
+
+  &.select-box__content--right
+    left: initial
+    right: 0
+    transform: translateX(0)
+
+  &.select-box__content--left
+    left: 0
+    right: initial
+    transform: translateX(0)
+
+  > ul
+    position: relative
     width: 100%
-    left: 50%
-    z-index: $z-index-dropdown
-    min-width: 170px
-    transition: all .3s ease 0s
-    visibility: hidden
-    opacity: 0
-    background-color: transparent
-    transform: translateX(-50%)
+    display: block
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
+    background: $colorWhite
+    box-sizing: border-box
+    margin-top: 15px
+    //overflow: hidden
+    background: $colorWhite
+    padding: 5px 0
+    overflow: auto
+    max-height: 300px
 
-    &.select-box__content--top
-      top: initial
-      bottom: calc(100% + 15px)
+    li
+      &[data-selected] > a::before
+        display: block
 
-      > div
-        margin-top: 0
-        margin-bottom: 15px
-
-
-    &.select-box__content--right
-      left: initial
-      right: 0
-      transform: translateX(0)
-
-    &.select-box__content--left
-      left: 0
-      right: initial
-      transform: translateX(0)
-
-    > ul
-      position: relative
-      width: 100%
-      display: block
-      box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15)
-      background: $colorWhite
-      box-sizing: border-box
-      margin-top: 15px
-      //overflow: hidden
-      background: $colorWhite
-      padding: 5px 0
-      overflow: auto
-      max-height: 300px
-
-      li
-        &[data-selected] > a::before
-          display: block
-
-        &[data-select-clear]
-          > a
-            &::after
-              display: none
-
-            > span
-              position: absolute
-              width: 12px
-              height: 12px
-              background-color: transparent
-              left: 11.5px
-              top: 50%
-              transform: translateY(-50%) rotate(45deg)
-
-              &::after,
-              &::before
-                position: absolute
-                display: block
-                content: ''
-                background-color: $colorPurple
-
-              &::after
-                width: 2px
-                height: 100%
-                left: 50%
-                top: 0
-                transform: translateX(-50%)
-
-              &::before
-                width: 100%
-                height: 2px
-                top: 50%
-                transform: translateY(-50%)
-                left: 0
-
+      &[data-select-clear]
         > a
-          display: block
-          padding: 5px 10px 5px 35px
-          position: relative
-          text-overflow: ellipsis
-          white-space: nowrap
-          overflow: hidden
-
-          &::before
-            content: ''
-            width: 10px
-            height: 5px
-            border-left: 2px solid $colorPurple
-            border-bottom: 2px solid $colorPurple
-            position: absolute
-            top: calc(50% - 2px)
-            transform: translateY(-50%) rotate(-45deg)
-            left: 12px
+          &::after
             display: none
+
+          > span
+            position: absolute
+            width: 12px
+            height: 12px
+            background-color: transparent
+            left: 11.5px
+            top: 50%
+            transform: translateY(-50%) rotate(45deg)
+
+            &::after,
+            &::before
+              position: absolute
+              display: block
+              content: ''
+              background-color: $colorPurple
+
+            &::after
+              width: 2px
+              height: 100%
+              left: 50%
+              top: 0
+              transform: translateX(-50%)
+
+            &::before
+              width: 100%
+              height: 2px
+              top: 50%
+              transform: translateY(-50%)
+              left: 0
+
+      > a
+        display: block
+        padding: 5px 10px 5px 35px
+        position: relative
+        text-overflow: ellipsis
+        white-space: nowrap
+        overflow: hidden
+
+        &::before
+          content: ''
+          width: 10px
+          height: 5px
+          border-left: 2px solid $colorPurple
+          border-bottom: 2px solid $colorPurple
+          position: absolute
+          top: calc(50% - 2px)
+          transform: translateY(-50%) rotate(-45deg)
+          left: 12px
+          display: none

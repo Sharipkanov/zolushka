@@ -1,0 +1,40 @@
+{
+  "POPUPS": {
+    "CHAT": {
+      "FILTERS": {
+        "ALL": "Все",
+        "CALLS": "Звонки",
+        "ONLINE": "On-line",
+        "HIDE_DELETED": "Скрыть удаленные",
+        "NEW": "Новые",
+        "FAVORITES": "Избранные",
+        "BLACKLIST": "Черный список"
+      },
+      "FOLDERS": {
+        "ADD_FOLDER": "Добавить папку",
+        "MY_FOLDERS": "Мои папки",
+        "NO_FOLDERS": "У вас нет папок"
+      },
+      "MESSAGES": {
+        "ALL_MESSAGES": "Все сообщения",
+        "NO_MESSAGES": "Нет сообщений",
+        "TODAY": "Сегодня",
+        "INPUT_PLACEHOLDER": "Ваше сообщение",
+        "NEW_ROW_INFO": "Для переноса строки нажмите Shift+Enter",
+        "VIP_PRESENTS": "VIP подарки",
+        "SPECIAL_PRESENTS": "Особенные подарки",
+        "STANDARD_PRESENTS": "Стандартные подарки",
+        "EXCLUSIVE_PRESENTS": "Эксклюзивные подарки",
+        "YEARS": "лет"
+      },
+      "DIALOGS": {
+        "DELETE_DIALOG": "Удалить диалог",
+        "MOVE_TO_FOLDER": "Переместить в другую папку",
+        "ADD_TO_FAVORITES": "Добавить в избранное",
+        "REMOVE_FROM_FAVORITES": "Убрать из избранного",
+        "ADD_TO_BLACKLIST": "Добавить в черный список",
+        "REMOVE_FROM_BLACKLIST": "Убрать из черного списка"
+      }
+    }
+  }
+}

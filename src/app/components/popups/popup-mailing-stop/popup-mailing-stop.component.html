@@ -1,0 +1,12 @@
+<div class="popup fw-pt-40 fw-bg-white fw-pb-40 fw-pr-40 fw-pl-40 fw-text-center fw-br-10 fw-position-relative">
+  <div class="popup__close fw-cursor-pointer js-close-popup"><i class="icon-chat-close"></i></div>
+  <p class="fw-text-600 fw-fz-18 fw-mb-10">Внимание, Вы хотите остановить рассылку.</p>
+  <p class="fw-mb-30">Для восстановления рассылки Вам необходимо будет оплатить ее<br>полную стоимость</p>
+  <div class="fw-mb-20">
+    <span class="button button--primary js-close-popup">Отмена</span>
+  </div>
+  <div>
+    <span class="fw-text-underline--hover fw-color-purple fw-cursor-pointer" (click)="stopMailing($event)">Остановить</span>
+  </div>
+  <app-preloader *ngIf="preloader"></app-preloader>
+</div>

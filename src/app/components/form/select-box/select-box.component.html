@@ -1,4 +1,4 @@
-<div class="select-box{{(classes.length) ? ' ' + classes : ''}}">
+<div class="select-box {{(classes.length) ? ' ' + classes : ''}}">
     <select [attr.multiple]="(multiple) ? '' : null" *ngIf="items.length">
       <option value="" [attr.selected]="(items[0].selected)? '': null">{{items[0].title}}</option>
       <option value="{{item.id}}" *ngFor="let item of items | slice: 1; let i = index" [attr.selected]="(item.selected)? '': null">{{item.title}}</option>

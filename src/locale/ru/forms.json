@@ -4,7 +4,8 @@
       "NAME": "Имя",
       "PASSWORD": "Пароль",
       "THINK_PASSWORD": "Придумайте пароль",
-      "EMAIL": "E-mail"
+      "EMAIL": "E-mail",
+      "FOLDER_NAME": "Название папки"
     },
     "SELECTBOX": {
       "CITY": "Город",
@@ -15,6 +16,9 @@
     "RANGE_INPUTS": {
       "FROM": "от",
       "TO": "до"
+    },
+    "FORM_CONTROL": {
+      "SELECT_ALL": "Выбрать всех"
     }
   }
 }

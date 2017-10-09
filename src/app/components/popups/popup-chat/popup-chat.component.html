@@ -8,7 +8,7 @@
                [ngClass]="{'active': filterParams === {}}">
               <span><i class="icon-chat-messages"></i></span>
               <span><i class="icon-chat-messages-active"></i></span>
-              <span class="fw-ml-5">Все</span>
+              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.ALL' | translate}}</span>
             </a>
           </li>
           <li class="fw-mt-10">
@@ -17,7 +17,7 @@
                [ngClass]="{'active': !!filterParams['online']}">
               <span><i class="icon-chat-lips"></i></span>
               <span><i class="icon-chat-lips-active"></i></span>
-              <span class="fw-ml-5">On-line</span>
+              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.ONLINE' | translate}}</span>
             </a>
           </li>
           <li class="fw-mt-10">
@@ -26,7 +26,7 @@
                [ngClass]="{'active': !!filterParams['calls']}">
               <span><i class="icon-chat-phone"></i></span>
               <span><i class="icon-chat-phone-active"></i></span>
-              <span class="fw-ml-5">Звонки</span>
+              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.CALLS' | translate}}</span>
             </a>
           </li>
           <li class="fw-mt-10">
@@ -35,7 +35,7 @@
                [ngClass]="{'active': !!filterParams['removed']}">
               <span><i class="icon-chat-check"></i></span>
               <span><i class="icon-chat-check-active"></i></span>
-              <span class="fw-ml-5">Скрыть удаленные</span>
+              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.HIDE_DELETED' | translate}}</span>
             </a>
           </li>
           <li class="fw-mt-10">
@@ -44,7 +44,7 @@
                [ngClass]="{'active': !!filterParams['new']}">
               <span><i class="icon-chat-bell"></i></span>
               <span><i class="icon-chat-bell-active"></i></span>
-              <span class="fw-ml-5">Новые</span>
+              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.NEW' | translate}}</span>
             </a>
           </li>
           <li (click)="applyFilter({favorite: 1})" class="fw-mt-10">
@@ -52,7 +52,7 @@
                [ngClass]="{'active': !!filterParams['favorite']}">
               <span><i class="icon-chat-star"></i></span>
               <span><i class="icon-chat-star-active"></i></span>
-              <span class="fw-ml-5">Избранные</span>
+              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.FAVORITES' | translate}}</span>
             </a>
           </li>
           <li (click)="applyFilter({blacklist: 1})" class="fw-mt-10">
@@ -60,13 +60,13 @@
                class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle">
               <span><i class="icon-chat-hand"></i></span>
               <span><i class="icon-chat-hand-active"></i></span>
-              <span class="fw-ml-5">Черный список</span>
+              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.BLACKLIST' | translate}}</span>
             </a>
           </li>
         </ul>
       </div>
       <div class="fw-position-relative fw-mt-40 fw-mb-15 fw-flex fw-flex-grow fw-flex-column">
-        <p class="fw-fz-15 fw-fw-600 fw-flex-shrink-no">Мои папки</p>
+        <p class="fw-fz-15 fw-fw-600 fw-flex-shrink-no">{{'POPUPS.CHAT.FOLDERS.MY_FOLDERS' | translate}}</p>
         <perfect-scrollbar class="fw-flex-grow fw-flex fw-flex-column">
           <ul class="chat__archive-list fw-mt-10" *ngIf="!!folders.length">
             <li class="fw-mt-10" *ngFor="let folder of folders; let i = index;"
@@ -81,8 +81,7 @@
               </a>
             </li>
           </ul>
-          <div *ngIf="!folders.length" class="fw-mt-10 fw-text-600 fw-color-grey-dark">У вас нет папок
-          </div>
+          <div *ngIf="!folders.length" class="fw-mt-10 fw-text-600 fw-color-grey-dark">{{'POPUPS.CHAT.FOLDERS.NO_FOLDERS' | translate}}</div>
         </perfect-scrollbar>
         <app-preloader *ngIf="preloaders.folderList"></app-preloader>
       </div>
@@ -90,15 +89,15 @@
         <a *ngIf="!newFolderForm" (click)="newFolderForm = true"
            class="button button--blue button--small fw-width-1-1 fw-flex fw-flex-middle">
           <i class="icon-plus icon-plus--purple-dark fw-mr-5"></i>
-          <span class="fw-fz-14 fw-text-600 fw-vam">Добавить папку</span>
+          <span class="fw-fz-14 fw-text-600 fw-vam">{{'POPUPS.CHAT.FOLDERS.ADD_FOLDER' | translate}}</span>
         </a>
         <form (submit)="addNewFolder($event)" [formGroup]="FNewFolder" *ngIf="newFolderForm">
           <div class="fw-mb-10">
             <app-input-box formControlName="title" class="fw-width-1-1"
-                           [placeholder]="'Название папки'"></app-input-box>
+                           [placeholder]="'FORMS.INPUTS.FOLDER_NAME' | translate"></app-input-box>
           </div>
           <div>
-            <button class="button button--primary fw-width-1-1">Сохранить</button>
+            <button class="button button--primary fw-width-1-1">{{'BUTTONS.SAVE' | translate}}</button>
           </div>
         </form>
         <app-preloader *ngIf="preloaders.folderForm"></app-preloader>
@@ -106,43 +105,10 @@
     </div>
     <div class="chat__messages">
       <div class="chat__header">
-        <div><p class="fw-fw-600 fw-fz-16">Все сообщения</p></div>
+        <div><p class="fw-fw-600 fw-fz-16">{{'POPUPS.CHAT.MESSAGES.ALL_MESSAGES' | translate}}</p></div>
         <div><a><i class="icon-chat-search"></i></a></div>
       </div>
       <perfect-scrollbar class="chat__list list" (ps-scroll-y)="infineFolderScroll()">
-        <!--<div class="list__item list__inbox list__inbox&#45;&#45;new">
-            <div>
-                <a class="list__thumbnail"><img src="http://placehold.it/50x50" alt=""></a>
-            </div>
-            <div>
-                <a><h4 class="list__user">Альная 19</h4></a>
-                <p class="list__message">Привет, как дела твои?</p>
-                <p class="list__time">19.05.06 21:00:21</p>
-                <a><i class="list__icon icon-chat-message"></i></a>
-            </div>
-        </div>
-        <div class="list__item list__send">
-            <div>
-                <a class="list__thumbnail"><img src="http://placehold.it/50x50" alt=""></a>
-            </div>
-            <div>
-                <a><h4 class="list__user list__user&#45;&#45;offline">Алла, 27</h4></a>
-                <p class="list__message">о отличная идея!</p>
-                <p class="list__time">19.05.06 21:00:21</p>
-                <a><i class="list__icon icon-chat-message"></i></a>
-            </div>
-        </div>
-        <div class="list__item list__inbox">
-            <div>
-                <a class="list__thumbnail"><img src="http://placehold.it/50x50" alt=""></a>
-            </div>
-            <div>
-                <a><h4 class="list__user">Аврора, 23</h4></a>
-                <p class="list__message  list__message&#45;&#45;active">позвони прям тут, можно же</p>
-                <p class="list__time">19.05.06 21:00:21</p>
-                <a><i class="list__icon icon-chat-message"></i></a>
-            </div>
-        </div>-->
         <ng-container *ngIf="!!dialogs._embedded">
           <div class="list__item" *ngFor="let dialog of dialogs._embedded.content; let i = index;"
                [ngClass]="{'list__inbox': (dialogKey === i)}"
@@ -160,7 +126,7 @@
               </div>
               <p class="list__message"
                  [ngClass]="{'list__message--active': !!dialog.lastMessage, 'list__message--no-massages': !dialog.lastMessage}">
-                {{!!dialog.lastMessage ? dialog.lastMessage : 'Нет сообщений'}}</p>
+                {{!!dialog.lastMessage ? dialog.lastMessage : 'POPUPS.CHAT.MESSAGES.NO_MESSAGES' | translate}}</p>
               <p class="list__time">{{!!dialog.lastMessageCreated ? dialog.lastMessageCreated :
                 ''}}</p>
               <span>
@@ -184,7 +150,7 @@
             <p *ngIf="!!dialog" class="fw-has-user-status fw-text-600"
                [ngClass]="{'fw-has-user-status--offline': !dialog.clientTo.online}">
               {{!!dialog ? dialog.clientTo.name : ''}},
-              {{!!dialog ? dialog.clientTo.age : ''}} лет,
+              {{!!dialog ? dialog.clientTo.age : ''}} {{'POPUPS.CHAT.MESSAGES.YEARS' | translate}},
               {{!!dialog ? dialog.clientTo.city.title : ''}}
             </p>
           </div>
@@ -197,15 +163,15 @@
             <i class="icon-chat-cog-active"></i>
 
             <div class="chat__settings">
-              <a class="fw-fz-13" (click)="deleteDialog($event)">Удалить диалог</a>
-              <a class="fw-fz-13">Переместить в другую папку</a>
+              <a class="fw-fz-13" (click)="deleteDialog($event)">{{'POPUPS.CHAT.DIALOGS.DELETE_DIALOG' | translate}}</a>
+              <a class="fw-fz-13">{{'POPUPS.CHAT.DIALOGS.MOVE_TO_FOLDER' | translate}}</a>
               <a class="fw-fz-13" (click)="favoriteDialog($event)">
-                <span *ngIf="!dialog.favorite">Добавить в избранное</span>
-                <span *ngIf="dialog.favorite">Убрать из избранного</span>
+                <span *ngIf="!dialog.favorite">{{'POPUPS.CHAT.DIALOGS.ADD_TO_FAVORITES' | translate}}</span>
+                <span *ngIf="dialog.favorite">{{'POPUPS.CHAT.DIALOGS.REMOVE_FROM_FAVORITES' | translate}}</span>
               </a>
               <a class="fw-fz-13" (click)="blacklistDialog($event)">
-                <span *ngIf="!dialog.blacklist">Добавить в черный список</span>
-                <span *ngIf="dialog.blacklist">Убрать из черного списока</span>
+                <span *ngIf="!dialog.blacklist">{{'POPUPS.CHAT.DIALOGS.ADD_TO_BLACKLIST' | translate}}</span>
+                <span *ngIf="dialog.blacklist">{{'POPUPS.CHAT.DIALOGS.REMOVE_FROM_BLACKLIST' | translate}}</span>
               </a>
               <app-preloader *ngIf="preloaders.dialogAction"></app-preloader>
             </div>
@@ -228,26 +194,15 @@
               </p>
               <p *ngIf="message['incoming']" class="message__time">{{message['createdTime']}}</p>
             </div>
-            <!--<div class="box__message message message&#45;&#45;income">
-                <div class="message__image"><img src="http://placehold.it/32x32" alt=""></div>
-                <p class="message__text">
-                    <span>Привет! Как жизнь?!</span>
-                </p>
-                <p class="message__time">19:10</p>
-            </div>
-            <div class="box__message message">
-                <p class="message__time">19:10</p>
-                <p class="message__text">
-                    <span>Привет! Как жизнь?!</span>
-                </p>
-            </div>-->
           </div>
         </perfect-scrollbar>
         <div class="context__footer fw-flex-shrink-no fw-pt-15" *ngIf="!!dialog">
           <form [formGroup]="FMessage" class="chat__new-message fw-flex" (submit)="sendMessage($event)">
             <app-input-box formControlName="message" class="fw-flex-grow"
-                           [placeholder]="'Ваше сообщение'"></app-input-box>
-            <button type="submit" class="fw-reset"><i class="icon-chat-send fw-brp-50"></i></button>
+                           [placeholder]="'POPUPS.CHAT.MESSAGES.INPUT_PLACEHOLDER' | translate"></app-input-box>
+            <button type="submit" class="fw-reset button--disabled-opacity" [disabled]="FMessage.invalid">
+              <i class="icon-chat-send fw-brp-50"></i>
+            </button>
           </form>
           <div>
             <div class="chat__new-message-option option">
@@ -270,19 +225,21 @@
                 <a><i class="icon-chat-photo"></i></a>
               </div>
               <div>
-                <a class="option__link"><i class="icon-chat-gift"></i><i
-                    class="icon-chat-gift-active"></i></a>
+                <a class="option__link">
+                  <i class="icon-chat-gift"></i>
+                  <i class="icon-chat-gift-active"></i>
+                </a>
                 <div class="option__sub option__sub--presents">
                   <div class="js-scroll-pane">
                     <div>
-                      <p class="fw-fw-600 fw-fz-15 fw-text-center">Особенные подарки</p>
+                      <p class="fw-fw-600 fw-fz-15 fw-text-center">{{'POPUPS.CHAT.MESSAGES.SPECIAL_PRESENTS' | translate}}</p>
                       <div class="option__container">
-                        <a *ngFor="let item of [1,2,3,4,5]" class="fw-img-square"><img
-                            src="http://placehold.it/80x80" alt=""></a>
+                        <a *ngFor="let item of [1,2,3,4,5]" class="fw-img-square">
+                          <img src="http://placehold.it/80x80" alt=""></a>
                       </div>
                     </div>
                     <div class="fw-mt-20">
-                      <p class="fw-fw-600 fw-fz-15 fw-text-center">VIP подарки</p>
+                      <p class="fw-fw-600 fw-fz-15 fw-text-center">{{'POPUPS.CHAT.MESSAGES.VIP_PRESENTS' | translate}}</p>
                       <div class="option__container">
                         <a *ngFor="let item of [1,2,3,4,5]" class="fw-img-square"><img
                             src="http://placehold.it/80x80" alt=""></a>
@@ -292,7 +249,7 @@
                 </div>
               </div>
               <div>
-                <p class="fw-fz-13 fw-text-warmgrey">Для переноса строки нажмите Shift+Enter</p>
+                <p class="fw-fz-13 fw-color-grey">{{'POPUPS.CHAT.MESSAGES.NEW_ROW_INFO' | translate}}</p>
               </div>
             </div>
           </div>

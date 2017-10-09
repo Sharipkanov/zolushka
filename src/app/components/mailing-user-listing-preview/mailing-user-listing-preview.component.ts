@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {IPaginationUserSearch} from '../../interfaces/pagination.interface';
+import {PopupsService} from '../../services/popups/popups.service';
 
 @Component({
   selector: 'app-mailing-user-listing-preview',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MailingUserListingPreviewComponent implements OnInit {
 
-  constructor() { }
+  @Input() users: IPaginationUserSearch = new IPaginationUserSearch();
+  @Input() openBlacklist: boolean = false;
+
+  constructor(private _popupsService: PopupsService) {
+  }
 
   ngOnInit() {
   }
 
+  openBlackList(e: Event) {
+    e.preventDefault();
+
+    if (this.openBlacklist) {
+      this._popupsService.openPopup('mailingBlacklist', {
+        blacklisted: this.users,
+        options: {readonly: !!this.users._embedded.clientCard}
+      });
+    }
+  }
 }

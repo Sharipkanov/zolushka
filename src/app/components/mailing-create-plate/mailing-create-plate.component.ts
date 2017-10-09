@@ -107,11 +107,6 @@ export class MailingCreatePlateComponent implements OnInit {
     this.FMailing.controls['ageTo'].setValue(e.to);
   }
 
-  searchOnChangeAgeFinish(e) {
-    this.FMailing.controls['ageFrom'].setValue(e.from);
-    this.FMailing.controls['ageTo'].setValue(e.to);
-  }
-
   dropdownEvent(e: Event) {
     e.preventDefault();
 
@@ -149,19 +144,10 @@ export class MailingCreatePlateComponent implements OnInit {
     }
   }
 
-  openBlackList(e: Event) {
-    e.preventDefault();
-
-    this._popupsService.openPopup('mailingBlacklist');
-  }
-
-  stopMailing(e: Event) {
+  stopMailingDialing(e: Event) {
     e.preventDefault();
     if (this.editingMailing) {
-      this._mailingService.stopMailing(this.editingMailing.id).subscribe((res) => {
-        this._router.navigate(['/mailing']);
-      })
+      this._popupsService.openPopup('mailingStop', this.editingMailing);
     }
   }
-
 }

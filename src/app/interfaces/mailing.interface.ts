@@ -1,6 +1,7 @@
 import {ICity, ICountry} from './city.interface';
 import {IUser} from './user.interface';
 import {IDefaultEnum} from './enums.interface';
+import {IPaginationBlacklistUsers, IPaginationUserSearch} from "./pagination.interface";
 export interface IMailing {
   id: number;
   ageFrom: number;
@@ -9,8 +10,8 @@ export interface IMailing {
   city: ICity;
   text: string;
   expiresAt: string;
-  blackList: Array<IUser>;
+  _blackList: IPaginationBlacklistUsers;
   relationshipTypes: Array<IDefaultEnum>;
   responded: boolean;
-  respondList: Array<IUser>;
+  _respondList: IPaginationUserSearch;
 }

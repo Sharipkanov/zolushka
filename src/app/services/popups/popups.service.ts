@@ -4,7 +4,7 @@ import { EventEmitter, HostListener, Injectable } from '@angular/core';
 export class PopupsService {
 
   onOpenPopup: EventEmitter<object> = new EventEmitter<object>();
-  onClosePopup: EventEmitter<object> = new EventEmitter<object>();
+  onClosePopup: EventEmitter<string> = new EventEmitter<string>();
   onChangePopup: EventEmitter<object> = new EventEmitter<object>();
 
   constructor() { }
@@ -14,7 +14,7 @@ export class PopupsService {
   }
 
   closePopup(popup_name: string) {
-    this.onClosePopup.emit({popup: popup_name});
+    this.onClosePopup.emit(popup_name);
   }
 
   changePopup(changePopupObject: object) {

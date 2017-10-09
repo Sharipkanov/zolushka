@@ -2,9 +2,12 @@ import {Component, HostListener, OnInit, ViewEncapsulation} from '@angular/core'
 import {EnumsService} from '../../services/enums/enums.service';
 import {ISelectSearchBoxItem} from '../../interfaces/form/select-search-box-item.interface';
 import {LocationService} from '../../services/location/location.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {PopupsService} from '../../services/popups/popups.service';
-import {IPaginationBlacklistUsers, IPaginationMailingArchive} from '../../interfaces/pagination.interface';
+import {
+  IPaginationBlacklistUsers, IPaginationMailingArchive,
+  IPaginationUserSearch
+} from '../../interfaces/pagination.interface';
 import {MailingService} from '../../services/mailing/mailing.service';
 import {IMailing} from '../../interfaces/mailing.interface';
 import {PageLoaderService} from '../../services/page-loader/page-loader.service';
@@ -21,7 +24,8 @@ export class PageMailingComponent implements OnInit {
   public mailingArchive: IPaginationMailingArchive = new IPaginationMailingArchive();
   public editingMailing: IMailing;
 
-  constructor(private _pageLoaderService: PageLoaderService, private _mailingService: MailingService, private _popupsService: PopupsService, private _fb: FormBuilder, private _enums: EnumsService, private _locationService: LocationService) { }
+  constructor(private _pageLoaderService: PageLoaderService, private _mailingService: MailingService, private _popupsService: PopupsService, private _fb: FormBuilder, private _enums: EnumsService, private _locationService: LocationService) {
+  }
 
   ngOnInit() {
     this._pageLoaderService.onStartLoad.emit();
@@ -35,7 +39,12 @@ export class PageMailingComponent implements OnInit {
 
     this._mailingService.getActiveMailing().subscribe((res: IMailing) => {
       this.activeMailing = res;
-      console.log(res);
+      this._mailingService.getMailingBlacklist(this.activeMailing.id).subscribe((blackList: IPaginationBlacklistUsers) => {
+        this.activeMailing._blackList = blackList;
+      });
+      this._mailingService.getMailingRespondList(this.activeMailing.id).subscribe((respondList: IPaginationUserSearch) => {
+        this.activeMailing._respondList = respondList;
+      });
       this._pageLoaderService.onEndLoad.emit();
     }, error => {
       this.activeMailing = undefined;

@@ -2,7 +2,8 @@
   <div class="container">
     <section class="panel-section panel-section--rounded panel-section--overflow-no fw-mh-500">
       <div class="panel-section__content panel-section__content--boxed">
-        <p class="fw-fw-300 fw-fz-30 fw-mb-30 fw-text-center">Архив моих рассылок</p>
+        <p class="fw-fw-300 fw-fz-30 fw-mb-30 fw-text-center" *ngIf="mailing_id">Архив моих рассылок</p>
+        <p class="fw-fw-300 fw-fz-30 fw-mb-30 fw-text-center" *ngIf="!mailing_id">Текущая рассылка</p>
         <div class="fw-grid fw-grid-30" *ngIf="mailing">
           <div class="fw-width-1-2">
             <p class="fw-fw-600 fw-fz-16 fw-mb-10 fw-pl-20">Проявили интерес</p>

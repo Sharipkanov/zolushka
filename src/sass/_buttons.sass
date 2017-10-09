@@ -21,6 +21,11 @@
     border-color: #ff636d
     color: #ff636d
 
+    &:hover
+      background-color: #ff636d
+      color: #fff
+      border-color: #ff636d
+
   &.button--small
     padding: 0 10px
     height: 32px
@@ -125,3 +130,7 @@
     &:hover
       border-color: $colorGreenDark
       background: $colorGreenDark
+
+.button--disabled-opacity
+  &[disabled]
+    opacity: 0.5

@@ -1,34 +1,29 @@
-<app-popup-login *ngIf="popups.login" (click)="closePopup($event)" class="popup-wrapper"
+<app-popup-login *ngIf="popups.login" class="popup-wrapper" data-popup="login"
                  [ngClass]="{'popup--active': openingAnimation}"></app-popup-login>
 
-<app-popup-chat *ngIf="popups.chat"
-                [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper chat-wrapper"
-                (click)="closePopup($event)"></app-popup-chat>
+<app-popup-chat *ngIf="popups.chat" data-popup="chat"
+                [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper chat-wrapper"></app-popup-chat>
 
-<app-popup-notice-confirmed-photos *ngIf="popups.buyConfirmedPhotos"
-                                   [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"
-                                   (click)="closePopup($event)"></app-popup-notice-confirmed-photos>
+<app-popup-notice-confirmed-photos *ngIf="popups.buyConfirmedPhotos" data-popup="buyConfirmedPhotos"
+                                   [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"></app-popup-notice-confirmed-photos>
 
-<app-popup-reg-before-filter-by-real-photo *ngIf="popups.regBeforeFilterByRealPhoto"
-                                           [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"
-                                           (click)="closePopup($event)"></app-popup-reg-before-filter-by-real-photo>
+<app-popup-reg-before-filter-by-real-photo *ngIf="popups.regBeforeFilterByRealPhoto" data-popup="regBeforeFilterByRealPhoto"
+                                           [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"></app-popup-reg-before-filter-by-real-photo>
 
-<app-popup-reg-before-filter-by-online *ngIf="popups.regBeforeFilterByOnline"
-                                       [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"
-                                       (click)="closePopup($event)"></app-popup-reg-before-filter-by-online>
+<app-popup-reg-before-filter-by-online *ngIf="popups.regBeforeFilterByOnline" data-popup="regBeforeFilterByOnline"
+                                       [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"></app-popup-reg-before-filter-by-online>
 
-<app-popup-confirm-photo *ngIf="popups.confirmPhoto"
-                         [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"
-                         (click)="closePopup($event)"></app-popup-confirm-photo>
+<app-popup-confirm-photo *ngIf="popups.confirmPhoto" data-popup="confirmPhoto"
+                         [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"></app-popup-confirm-photo>
 
-<app-popup-reg-to-dialog *ngIf="popups.regToDialog"
-                         [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"
-                         (click)="closePopup($event)"></app-popup-reg-to-dialog>
+<app-popup-reg-to-dialog *ngIf="popups.regToDialog" data-popup="regToDialog"
+                         [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"></app-popup-reg-to-dialog>
 
-<app-popup-save-search *ngIf="popups.saveSearch"
-                         [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"
-                         (click)="closePopup($event)"></app-popup-save-search>
+<app-popup-save-search *ngIf="popups.saveSearch" data-popup="saveSearch"
+                       [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"></app-popup-save-search>
 
-<app-popup-mailing-blacklist *ngIf="popups.mailingBlacklist" [props]="props"
-                         [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"
-                         (click)="closePopup($event)"></app-popup-mailing-blacklist>
+<app-popup-mailing-blacklist *ngIf="popups.mailingBlacklist" [props]="props" data-popup="mailingBlacklist"
+                             [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"></app-popup-mailing-blacklist>
+
+<app-popup-mailing-stop *ngIf="popups.mailingStop" data-popup="mailingStop" [props]="props"
+                        [ngClass]="{'popup--active': openingAnimation}" class="popup-wrapper"></app-popup-mailing-stop>

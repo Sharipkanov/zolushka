@@ -14,33 +14,34 @@ import {PageMailingComponent} from './routes/page-mailing/page-mailing.component
 import {PageProfileViewsComponent} from './routes/page-profile-views/page-profile-views.component';
 import {PageBlogComponent} from './routes/page-blog/page-blog.component';
 import {PageBlogItemComponent} from './routes/page-blog-item/page-blog-item.component';
-import { PageMailingEditComponent } from './routes/page-mailing-edit/page-mailing-edit.component';
+import {PageMailingEditComponent} from './routes/page-mailing-edit/page-mailing-edit.component';
 
 const appRoutes: Routes = [
-    {path: '', component: PageHomeComponent, pathMatch: 'full'},
-    {path: 'registration', component: PageRegistrationComponent},
-    {path: 'search', component: PageSearchComponent},
-    {path: 'components', component: PageComponentsComponent},
-    {path: 'about', component: PageAboutComponent},
-    {path: 'profile/he/:profile_id', component: PageProfileComponent},
-    {path: 'profile/she/:profile_id', component: PageProfileComponent},
-    {path: 'profile', component: PageProfileComponent, canActivate: [UserService]},
-    {path: 'profile-edit', component: PageProfileEditComponent, canActivate: [UserService]},
-    {path: 'profile-views', component: PageProfileViewsComponent, canActivate: [UserService]},
-    {path: 'mailing', component: PageMailingComponent, canActivate: [UserService]},
-    {path: 'mailing/edit/:mailing_id', component: PageMailingEditComponent, canActivate: [UserService]},
-    {path: 'blog', component: PageBlogComponent},
-    {path: 'blog/:slug', component: PageBlogItemComponent},
-    {path: '**', component: PageNotFoundComponent}
+  {path: '', component: PageHomeComponent, pathMatch: 'full'},
+  {path: 'registration', component: PageRegistrationComponent},
+  {path: 'search', component: PageSearchComponent},
+  {path: 'components', component: PageComponentsComponent},
+  {path: 'about', component: PageAboutComponent},
+  {path: 'profile/he/:profile_id', component: PageProfileComponent},
+  {path: 'profile/she/:profile_id', component: PageProfileComponent},
+  {path: 'profile', component: PageProfileComponent, canActivate: [UserService]},
+  {path: 'profile-edit', component: PageProfileEditComponent, canActivate: [UserService]},
+  {path: 'profile-views', component: PageProfileViewsComponent, canActivate: [UserService]},
+  {path: 'mailing', component: PageMailingComponent, canActivate: [UserService]},
+  {path: 'mailing/edit/:mailing_id', component: PageMailingEditComponent, canActivate: [UserService]},
+  {path: 'mailing/edit', component: PageMailingEditComponent, canActivate: [UserService]},
+  {path: 'blog', component: PageBlogComponent},
+  {path: 'blog/:slug', component: PageBlogItemComponent},
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(appRoutes)
-    ],
-    exports: [
-        RouterModule
-    ]
+  imports: [
+    RouterModule.forRoot(appRoutes)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class AppRoutes {
 }

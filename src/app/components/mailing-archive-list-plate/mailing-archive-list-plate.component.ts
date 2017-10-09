@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IPaginationBlacklistUsers, IPaginationMailingArchive} from '../../interfaces/pagination.interface';
+import {
+  IPaginationBlacklistUsers, IPaginationMailingArchive,
+  IPaginationUserSearch
+} from '../../interfaces/pagination.interface';
 import {IMailing} from '../../interfaces/mailing.interface';
 import {PopupsService} from "../../services/popups/popups.service";
 import {MailingService} from "../../services/mailing/mailing.service";
@@ -20,14 +23,16 @@ export class MailingArchiveListPlateComponent implements OnInit {
   ngOnInit() {
     for (let i = 0; i < this.mailingArchive._embedded.mailing.length; i++) {
       this._mailingService.getMailingBlacklist(this.mailingArchive._embedded.mailing[i].id).subscribe((res: IPaginationBlacklistUsers) => {
+        console.log(res)
         if (res._embedded) {
-          this.mailingArchive._embedded.mailing[i].blackList = res._embedded.content;
+          this.mailingArchive._embedded.mailing[i]._blackList = res;
         }
       });
 
-      this._mailingService.getMailingResponded(this.mailingArchive._embedded.mailing[i].id).subscribe((res: IPaginationBlacklistUsers) => {
+      this._mailingService.getMailingRespondList(this.mailingArchive._embedded.mailing[i].id).subscribe((res: IPaginationUserSearch) => {
+        console.log(res)
         if (res._embedded) {
-          this.mailingArchive._embedded.mailing[i].respondList = res._embedded.content;
+          this.mailingArchive._embedded.mailing[i]._respondList = res;
         }
       });
     }

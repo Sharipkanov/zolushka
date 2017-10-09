@@ -19,7 +19,8 @@ export class PopupsComponent implements OnInit {
     confirmPhoto: false,
     regToDialog: false,
     saveSearch: false,
-    mailingBlacklist: false
+    mailingBlacklist: false,
+    mailingStop: false
   };
 
   public openingAnimation = false;
@@ -32,7 +33,7 @@ export class PopupsComponent implements OnInit {
       this.openPopup(data);
     });
 
-    this._popupsService.onClosePopup.subscribe((popup_name: string) => {
+    this._popupsService.onClosePopup.subscribe((popup_name) => {
       this.closePopup(null, popup_name);
     });
   }
@@ -46,7 +47,7 @@ export class PopupsComponent implements OnInit {
     }, 20);
   }
 
-  closePopup(e: Event, popup_name: string = null) {
+  closePopup(e: Event, popup: string = null) {
     if (e) {
       const target: HTMLElement = <HTMLElement>e.target;
 
@@ -57,16 +58,16 @@ export class PopupsComponent implements OnInit {
           for (const key of Object.keys(this.popups)) {
             this.popups[key] = false;
           }
+          this.props = null;
         }, 300);
       }
-    } else {
+    } else if (!!popup) {
       this.openingAnimation = false;
       setTimeout(() => {
         this.HTML.classList.remove('popup--opened');
-        this.popups[popup_name] = false;
+        this.popups[popup] = false;
+        this.props = null;
       }, 300);
     }
-
-    this.props = null;
   }
 }

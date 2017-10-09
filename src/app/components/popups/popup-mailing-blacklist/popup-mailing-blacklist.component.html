@@ -12,21 +12,19 @@
     <div class="js-scroll-pane fw-height-378 fw-mt-20">
       <perfect-scrollbar class="popup-mailing__blacklist-scroll">
         <label class=" fw-mb-20 fw-flex fw-flex-middle">
-          <!--{% if remove %}-->
           <span *ngIf="selectedAll"
                 class="fw-width-34 fw-height-34 fw-brp-50 fw-mr-10 fw-flex-shrink-no fw-bg-purple fw-flex fw-flex-middle fw-flex-center">
-              <i class="icon-remove icon-remove--light icon-remove--larger"></i></span>
-          <!--{% else %}-->
+            <i class="icon-remove icon-remove--light icon-remove--larger"></i>
+          </span>
           <span *ngIf="!selectedAll"
                 class="fw-width-34 fw-height-34 fw-brp-50 fw-mr-10 fw-flex-shrink-no fw-bg-purple fw-flex fw-flex-middle fw-flex-center">
-              <i class="icon-checked"></i></span>
-          <!--{% endif %}-->
+            <i class="icon-checked"></i>
+          </span>
           <span class="fw-flex-grow user-checkbox-list">
-              <input type="checkbox" data-no-style="" class="fw-hidden" name="test" (change)="switchBlacklist()">
-              <span class="fw-fw-600 fw-fz-14 fw-color-purple">Выбрать всех</span>
-            </span>
+            <input type="checkbox" data-no-style="" class="fw-hidden" name="test" (change)="switchBlacklist()">
+            <span class="fw-fw-600 fw-fz-14 fw-color-purple">{{'FORMS.FORM_CONTROL.SELECT_ALL' | translate}}</span>
+          </span>
         </label>
-        <!--{% for i in 1..9  %}-->
         <div *ngFor="let user of girls._embedded.clientCard">
           <label class="fw-mb-20 fw-flex fw-flex-middle" *ngIf="!user._hidden">
             <span class="fw-width-34 rounded fw-mr-10 fw-flex-shrink-no">
@@ -36,19 +34,12 @@
             </span>
             <span class="fw-flex-grow user-checkbox-list fw-block">
               <input type="checkbox" class="fw-hidden" (change)="switchBlacklist(user)">
-              <span class="user-checkbox-list__detector fw-fw-600 fw-fz-14" [ngClass]="{'checked-user': user._selected}">{{user.name}}, {{user.age}}</span>
+              <span class="user-checkbox-list__detector fw-fw-600 fw-fz-14"
+                    [ngClass]="{'checked-user': user._selected}">{{user.name}}, {{user.age}}</span>
             </span>
           </label>
         </div>
       </perfect-scrollbar>
-      <!--{% endfor %}-->
-      <!--<label class="fw-flex fw-flex-middle">
-        <div class="fw-img-square-34 rounded fw-mr-10 fw-flex-shrink-no"><img src="http://placehold.it/34x34" alt=""></div>
-        <div class="fw-flex-grow user-checkbox-list">
-          <input type="checkbox" data-no-style="" class="fw-hidden" name="test">
-          <p class="fw-fw-600 fw-fz-14">Машрия, 32</p>
-        </div>
-      </label>-->
     </div>
     <hr class="hr-small">
     <div class="fw-text-center fw-mt-30">

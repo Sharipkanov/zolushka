@@ -10,7 +10,12 @@ import {PopupsService} from '../../../services/popups/popups.service';
   styleUrls: ['./popup-mailing-blacklist.component.sass']
 })
 export class PopupMailingBlacklistComponent implements OnInit {
-  @Input() props;
+  @Input() props = {
+    blacklisted: new IPaginationBlacklistUsers(),
+    options: {
+      readonly: false
+    }
+  };
 
   public girls: IPaginationBlacklistUsers = new IPaginationBlacklistUsers();
   public preloader: boolean = false;
@@ -21,20 +26,33 @@ export class PopupMailingBlacklistComponent implements OnInit {
 
   ngOnInit() {
     this.preloader = true;
-    this._mailingService.getMailingDialogs().subscribe((girls: IPaginationBlacklistUsers) => {
-      this.girls = <IPaginationBlacklistUsers>girls;
+    if (this.props.options.readonly === true) {
+      this.girls = this.props.blacklisted;
       this.preloader = false;
-    });
+    } else {
+      this._mailingService.getMailingDialogs().subscribe((girls: IPaginationBlacklistUsers) => {
+        this.girls = <IPaginationBlacklistUsers>girls;
+        if (!!this.props.blacklisted._embedded.clientCard) {
+          for (let i = 0; i < this.girls._embedded.clientCard.length; i++) {
+            for (let z = 0; z < this.props.blacklisted._embedded.clientCard.length; z++) {
+              if (this.girls._embedded.clientCard[i].id === this.props.blacklisted._embedded.clientCard[z].id) {
+                this.girls._embedded.clientCard[i]._selected = true;
+              }
+            }
+          }
+        }
+        this.preloader = false;
+      });
+    }
   }
 
   switchBlacklist(user: IUserBlacklisted = null) {
     if (!user) {
       for (let i = 0; i < this.girls._embedded.clientCard.length; i++) {
-        if (this.selectedAll === false) {
-          this.girls._embedded.clientCard[i]._selected = true;
-        } else {
-          this.girls._embedded.clientCard[i]._selected = false;
-        }
+        (this.selectedAll === false)
+          ? this.girls._embedded.clientCard[i]._selected = true
+          : this.girls._embedded.clientCard[i]._selected = false
+
       }
     } else {
       user._selected = !user._selected;
