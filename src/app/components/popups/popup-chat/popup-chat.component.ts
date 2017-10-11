@@ -27,33 +27,20 @@ export class PopupChatComponent implements OnInit, OnDestroy {
   public messages = [];
   public nativeMessage: IPagination = new IPagination();
 
-  public newFolderForm: boolean = false;
   public preloaders = {
-    folderForm: false,
-    folderList: true,
     dialogs: true,
     messages: false,
     dialogAction: false
   };
 
-  public FNewFolder: FormGroup;
   public FMessage: FormGroup;
 
   constructor(private _fb: FormBuilder, private _dialogService: DialogService) {
   }
 
   ngOnInit() {
-    this.FNewFolder = this._fb.group({
-      title: ['', [Validators.required]]
-    });
     this.FMessage = this._fb.group({
       message: ['', [Validators.required, Validators.minLength(1)]]
-    });
-
-    this._dialogService.getFolders().subscribe(response => {
-      // console.log(response);
-      this.folders = response;
-      this.preloaders.folderList = false;
     });
 
     this.getDialogs();
@@ -63,8 +50,6 @@ export class PopupChatComponent implements OnInit, OnDestroy {
       this.dialog = new IDialog(dialog);
       this.messages = [];
     });
-
-    console.log(new Date().getUTCDate(), new Date().getUTCMonth());
   }
 
   infineFolderScroll() {
@@ -129,28 +114,6 @@ export class PopupChatComponent implements OnInit, OnDestroy {
         this.dialogKey = 0;
       }
       this.preloaders.dialogAction = false;
-    });
-  }
-
-  addNewFolder(e) {
-    e.preventDefault();
-    if (!this.FNewFolder.invalid) {
-      this.preloaders.folderForm = true;
-      this._dialogService.addFolder(this.FNewFolder.value).subscribe(response => {
-        this.folders = response;
-        this.preloaders.folderForm = false;
-        this.newFolderForm = false;
-        this.FNewFolder.controls.title.setValue('');
-      });
-    }
-  }
-
-  removeFolder(e, i) {
-    e.preventDefault();
-    this.preloaders.folderList = true;
-    this._dialogService.deleteFolder(this.folders[i]).subscribe(response => {
-      this.folders.splice(i, 1);
-      this.preloaders.folderList = false;
     });
   }
 

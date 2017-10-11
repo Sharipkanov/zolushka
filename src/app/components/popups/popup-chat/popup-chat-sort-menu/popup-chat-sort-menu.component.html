@@ -1,0 +1,62 @@
+<ul class="chat__archive-list">
+  <li class="fw-mt-10 active">
+    <a (click)="applyFilterFn()" class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+       [ngClass]="{'active': filterParams === {}}">
+      <span><i class="icon-chat-messages"></i></span>
+      <span><i class="icon-chat-messages-active"></i></span>
+      <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.ALL' | translate}}</span>
+    </a>
+  </li>
+  <li class="fw-mt-10">
+    <a (click)="applyFilterFn({online: 1})"
+       class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+       [ngClass]="{'active': !!filterParams['online']}">
+      <span><i class="icon-chat-lips"></i></span>
+      <span><i class="icon-chat-lips-active"></i></span>
+      <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.ONLINE' | translate}}</span>
+    </a>
+  </li>
+  <li class="fw-mt-10">
+    <a (click)="applyFilterFn({calls: 1})"
+       class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+       [ngClass]="{'active': !!filterParams['calls']}">
+      <span><i class="icon-chat-phone"></i></span>
+      <span><i class="icon-chat-phone-active"></i></span>
+      <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.CALLS' | translate}}</span>
+    </a>
+  </li>
+  <li class="fw-mt-10">
+    <a (click)="applyFilterFn({removed: 1})"
+       class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+       [ngClass]="{'active': !!filterParams['removed']}">
+      <span><i class="icon-chat-check"></i></span>
+      <span><i class="icon-chat-check-active"></i></span>
+      <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.HIDE_DELETED' | translate}}</span>
+    </a>
+  </li>
+  <li class="fw-mt-10">
+    <a (click)="applyFilterFn({new: 1})"
+       class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+       [ngClass]="{'active': !!filterParams['new']}">
+      <span><i class="icon-chat-bell"></i></span>
+      <span><i class="icon-chat-bell-active"></i></span>
+      <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.NEW' | translate}}</span>
+    </a>
+  </li>
+  <li (click)="applyFilterFn({favorite: 1})" class="fw-mt-10">
+    <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
+       [ngClass]="{'active': !!filterParams['favorite']}">
+      <span><i class="icon-chat-star"></i></span>
+      <span><i class="icon-chat-star-active"></i></span>
+      <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.FAVORITES' | translate}}</span>
+    </a>
+  </li>
+  <li (click)="applyFilterFn({blacklist: 1})" class="fw-mt-10">
+    <a [ngClass]="{'active': !!filterParams['blacklist']}"
+       class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle">
+      <span><i class="icon-chat-hand"></i></span>
+      <span><i class="icon-chat-hand-active"></i></span>
+      <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.BLACKLIST' | translate}}</span>
+    </a>
+  </li>
+</ul>

@@ -1,0 +1,37 @@
+<div class="fw-position-relative fw-mt-40 fw-mb-15 fw-flex fw-flex-grow fw-flex-column">
+  <p class="fw-fz-15 fw-fw-600 fw-flex-shrink-no">{{'POPUPS.CHAT.FOLDERS.MY_FOLDERS' | translate}}</p>
+  <perfect-scrollbar class="fw-flex-grow fw-flex fw-flex-column">
+    <ul class="chat__archive-list fw-mt-10" *ngIf="!!folders.length">
+      <li class="fw-mt-10" *ngFor="let folder of folders; let i = index;"
+          (click)="applyFilterFn({folderId: folder.id})">
+        <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle fw-position-relative fw-text-ellipsis"
+           [ngClass]="{'active': !!filterParams['folderId'] && filterParams['folderId'] === folder.id}">
+          <span><i class="icon-chat-folder"></i></span>
+          <span><i class="icon-chat-folder-active"></i></span>
+          <span class="chat__archive-list--remove" (click)="removeFolder($event, i)"><i
+              class="icon-shape-remove-purple"></i></span>
+          <span class="fw-ml-5">{{folder.title}}</span>
+        </a>
+      </li>
+    </ul>
+    <div *ngIf="!folders.length" class="fw-mt-10 fw-text-600 fw-color-grey-dark">{{'POPUPS.CHAT.FOLDERS.NO_FOLDERS' | translate}}</div>
+  </perfect-scrollbar>
+  <app-preloader *ngIf="preloaders.folderList"></app-preloader>
+</div>
+<div class="fw-mt-auto fw-position-relative fw-flex-shrink-no">
+  <a *ngIf="!newFolderForm" (click)="newFolderForm = true"
+     class="button button--blue button--small fw-width-1-1 fw-flex fw-flex-middle">
+    <i class="icon-plus icon-plus--purple-dark fw-mr-5"></i>
+    <span class="fw-fz-14 fw-text-600 fw-vam">{{'POPUPS.CHAT.FOLDERS.ADD_FOLDER' | translate}}</span>
+  </a>
+  <form (submit)="addNewFolder($event)" [formGroup]="FNewFolder" *ngIf="newFolderForm">
+    <div class="fw-mb-10">
+      <app-input-box formControlName="title" class="fw-width-1-1"
+                     [placeholder]="'FORMS.INPUTS.FOLDER_NAME' | translate"></app-input-box>
+    </div>
+    <div>
+      <button class="button button--primary fw-width-1-1">{{'BUTTONS.SAVE' | translate}}</button>
+    </div>
+  </form>
+</div>
+<app-preloader *ngIf="preloaders.folderForm"></app-preloader>

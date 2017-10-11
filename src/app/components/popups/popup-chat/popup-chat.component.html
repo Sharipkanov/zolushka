@@ -2,105 +2,11 @@
   <div class="chat">
     <div class="chat__archive fw-flex">
       <div class="fw-flex-shrink-no">
-        <ul class="chat__archive-list">
-          <li class="fw-mt-10 active">
-            <a (click)="applyFilter()" class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
-               [ngClass]="{'active': filterParams === {}}">
-              <span><i class="icon-chat-messages"></i></span>
-              <span><i class="icon-chat-messages-active"></i></span>
-              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.ALL' | translate}}</span>
-            </a>
-          </li>
-          <li class="fw-mt-10">
-            <a (click)="applyFilter({online: 1})"
-               class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
-               [ngClass]="{'active': !!filterParams['online']}">
-              <span><i class="icon-chat-lips"></i></span>
-              <span><i class="icon-chat-lips-active"></i></span>
-              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.ONLINE' | translate}}</span>
-            </a>
-          </li>
-          <li class="fw-mt-10">
-            <a (click)="applyFilter({calls: 1})"
-               class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
-               [ngClass]="{'active': !!filterParams['calls']}">
-              <span><i class="icon-chat-phone"></i></span>
-              <span><i class="icon-chat-phone-active"></i></span>
-              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.CALLS' | translate}}</span>
-            </a>
-          </li>
-          <li class="fw-mt-10">
-            <a (click)="applyFilter({removed: 1})"
-               class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
-               [ngClass]="{'active': !!filterParams['removed']}">
-              <span><i class="icon-chat-check"></i></span>
-              <span><i class="icon-chat-check-active"></i></span>
-              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.HIDE_DELETED' | translate}}</span>
-            </a>
-          </li>
-          <li class="fw-mt-10">
-            <a (click)="applyFilter({new: 1})"
-               class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
-               [ngClass]="{'active': !!filterParams['new']}">
-              <span><i class="icon-chat-bell"></i></span>
-              <span><i class="icon-chat-bell-active"></i></span>
-              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.NEW' | translate}}</span>
-            </a>
-          </li>
-          <li (click)="applyFilter({favorite: 1})" class="fw-mt-10">
-            <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle"
-               [ngClass]="{'active': !!filterParams['favorite']}">
-              <span><i class="icon-chat-star"></i></span>
-              <span><i class="icon-chat-star-active"></i></span>
-              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.FAVORITES' | translate}}</span>
-            </a>
-          </li>
-          <li (click)="applyFilter({blacklist: 1})" class="fw-mt-10">
-            <a [ngClass]="{'active': !!filterParams['blacklist']}"
-               class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle">
-              <span><i class="icon-chat-hand"></i></span>
-              <span><i class="icon-chat-hand-active"></i></span>
-              <span class="fw-ml-5">{{'POPUPS.CHAT.FILTERS.BLACKLIST' | translate}}</span>
-            </a>
-          </li>
-        </ul>
+        <app-popup-chat-sort-menu [filterParams]="filterParams"
+                                  (applyFilter)="applyFilter($event)"></app-popup-chat-sort-menu>
       </div>
-      <div class="fw-position-relative fw-mt-40 fw-mb-15 fw-flex fw-flex-grow fw-flex-column">
-        <p class="fw-fz-15 fw-fw-600 fw-flex-shrink-no">{{'POPUPS.CHAT.FOLDERS.MY_FOLDERS' | translate}}</p>
-        <perfect-scrollbar class="fw-flex-grow fw-flex fw-flex-column">
-          <ul class="chat__archive-list fw-mt-10" *ngIf="!!folders.length">
-            <li class="fw-mt-10" *ngFor="let folder of folders; let i = index;"
-                (click)="applyFilter({folderId: folder.id})">
-              <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle fw-position-relative fw-text-ellipsis"
-                 [ngClass]="{'active': !!filterParams['folderId'] && filterParams['folderId'] === folder.id}">
-                <span><i class="icon-chat-folder"></i></span>
-                <span><i class="icon-chat-folder-active"></i></span>
-                <span class="chat__archive-list--remove" (click)="removeFolder($event, i)"><i
-                    class="icon-shape-remove-purple"></i></span>
-                <span class="fw-ml-5">{{folder.title}}</span>
-              </a>
-            </li>
-          </ul>
-          <div *ngIf="!folders.length" class="fw-mt-10 fw-text-600 fw-color-grey-dark">{{'POPUPS.CHAT.FOLDERS.NO_FOLDERS' | translate}}</div>
-        </perfect-scrollbar>
-        <app-preloader *ngIf="preloaders.folderList"></app-preloader>
-      </div>
-      <div class="fw-mt-auto fw-position-relative fw-flex-shrink-no">
-        <a *ngIf="!newFolderForm" (click)="newFolderForm = true"
-           class="button button--blue button--small fw-width-1-1 fw-flex fw-flex-middle">
-          <i class="icon-plus icon-plus--purple-dark fw-mr-5"></i>
-          <span class="fw-fz-14 fw-text-600 fw-vam">{{'POPUPS.CHAT.FOLDERS.ADD_FOLDER' | translate}}</span>
-        </a>
-        <form (submit)="addNewFolder($event)" [formGroup]="FNewFolder" *ngIf="newFolderForm">
-          <div class="fw-mb-10">
-            <app-input-box formControlName="title" class="fw-width-1-1"
-                           [placeholder]="'FORMS.INPUTS.FOLDER_NAME' | translate"></app-input-box>
-          </div>
-          <div>
-            <button class="button button--primary fw-width-1-1">{{'BUTTONS.SAVE' | translate}}</button>
-          </div>
-        </form>
-        <app-preloader *ngIf="preloaders.folderForm"></app-preloader>
+      <div class="fw-position-relative fw-flex-grow fw-flex-column fw-flex">
+        <app-popup-chat-folders class="fw-flex fw-flex-column fw-flex-grow" (applyFilter)="applyFilter($event)" [filterParams]="filterParams" [folders]="folders"></app-popup-chat-folders>
       </div>
     </div>
     <div class="chat__messages">
@@ -232,14 +138,16 @@
                 <div class="option__sub option__sub--presents">
                   <div class="js-scroll-pane">
                     <div>
-                      <p class="fw-fw-600 fw-fz-15 fw-text-center">{{'POPUPS.CHAT.MESSAGES.SPECIAL_PRESENTS' | translate}}</p>
+                      <p class="fw-fw-600 fw-fz-15 fw-text-center">{{'POPUPS.CHAT.MESSAGES.SPECIAL_PRESENTS' |
+                        translate}}</p>
                       <div class="option__container">
                         <a *ngFor="let item of [1,2,3,4,5]" class="fw-img-square">
                           <img src="http://placehold.it/80x80" alt=""></a>
                       </div>
                     </div>
                     <div class="fw-mt-20">
-                      <p class="fw-fw-600 fw-fz-15 fw-text-center">{{'POPUPS.CHAT.MESSAGES.VIP_PRESENTS' | translate}}</p>
+                      <p class="fw-fw-600 fw-fz-15 fw-text-center">{{'POPUPS.CHAT.MESSAGES.VIP_PRESENTS' |
+                        translate}}</p>
                       <div class="option__container">
                         <a *ngFor="let item of [1,2,3,4,5]" class="fw-img-square"><img
                             src="http://placehold.it/80x80" alt=""></a>
