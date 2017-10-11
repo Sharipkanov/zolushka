@@ -52,16 +52,12 @@ export class PopupChatComponent implements OnInit, OnDestroy {
     });
   }
 
-  infineFolderScroll() {
-    console.log('scroll');
-  }
-
   getDialogs(update: boolean = true) {
     this._dialogService.getDialogs(this.filterParams).subscribe((response: IPaginationDialogs) => {
       if (!!response._embedded) {
         if (update) {
           this.dialogs = <IPaginationDialogs>response;
-          // console.log(this.dialogs);
+          console.log(this.dialogs);
         } else {
           for (let i = 0; i < response._embedded.content.length; i++) {
             this.dialogs._embedded.content.push(new IDialog(response._embedded.content[i]));
@@ -70,8 +66,8 @@ export class PopupChatComponent implements OnInit, OnDestroy {
       } else {
         this.dialogs._embedded.content = [];
       }
-      delete this.dialog;
-      this.messages = [];
+      // delete this.dialog;
+      // this.messages = [];
       this.preloaders.dialogs = false;
     });
   }

@@ -1,0 +1,34 @@
+<div class="chat__header">
+  <div><p class="fw-fw-600 fw-fz-16">{{'POPUPS.CHAT.MESSAGES.ALL_MESSAGES' | translate}}</p></div>
+  <div><a><i class="icon-chat-search"></i></a></div>
+</div>
+<perfect-scrollbar class="chat__list list" (ps-scroll-y)="infineFolderScroll()">
+  <ng-container *ngIf="!!dialogs._embedded">
+    <div class="list__item" *ngFor="let dialog of dialogs._embedded.content; let i = index;"
+         [ngClass]="{'list__inbox': (dialogKey === i)}"
+         (click)="openMessagesFn(i)">
+      <div>
+        <a class="list__thumbnail">
+          <img
+              src="{{ !!dialog.clientTo.avatar ? dialog.clientTo.avatar._links.thumbnail.href : './assets/images/default-navigation-avatar.svg' }}"
+              alt="">
+        </a>
+      </div>
+      <div>
+        <div class="list__user" [ngClass]="{'list__user--offline': !dialog.clientTo.online}">
+          {{dialog.clientTo.name}}, {{dialog.clientTo.age}}
+        </div>
+        <p class="list__message"
+           [ngClass]="{'list__message--active': !!dialog.lastMessage, 'list__message--no-massages': !dialog.lastMessage}">
+          {{!!dialog.lastMessage ? dialog.lastMessage : 'POPUPS.CHAT.MESSAGES.NO_MESSAGES' | translate}}</p>
+        <p class="list__time">{{!!dialog.lastMessageCreated ? dialog.lastMessageCreated :
+          ''}}</p>
+        <span>
+                  <!--<i class="list__icon icon-chat-call-green"></i>-->
+                  <i class="list__icon icon-chat-message"></i>
+              </span>
+      </div>
+    </div>
+  </ng-container>
+</perfect-scrollbar>
+<app-preloader *ngIf="preloader"></app-preloader>
