@@ -3,7 +3,7 @@
   <perfect-scrollbar class="fw-flex-grow fw-flex fw-flex-column">
     <ul class="chat__archive-list fw-mt-10" *ngIf="!!folders.length">
       <li class="fw-mt-10" *ngFor="let folder of folders; let i = index;"
-          (click)="applyFilterFn({folderId: folder.id})">
+          (click)="applyFilter({folderId: folder.id})">
         <a class="fw-link fw-link--blue fw-fz-14 fw-flex fw-flex-middle fw-position-relative fw-text-ellipsis"
            [ngClass]="{'active': !!filterParams['folderId'] && filterParams['folderId'] === folder.id}">
           <span><i class="icon-chat-folder"></i></span>

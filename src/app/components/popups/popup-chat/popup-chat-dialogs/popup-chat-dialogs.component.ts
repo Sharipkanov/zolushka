@@ -11,7 +11,8 @@ export class PopupChatDialogsComponent implements OnInit {
   @Input() dialogs: IPaginationDialogs;
   @Input() dialogKey: number = 0;
   @Input() filterParams;
-  @Output() openMessages: EventEmitter<any> = new EventEmitter();
+  @Input() preloader: boolean = false;
+  @Output() onOpenMessages: EventEmitter<any> = new EventEmitter();
 
 
   constructor() { }
@@ -23,8 +24,8 @@ export class PopupChatDialogsComponent implements OnInit {
     console.log('scroll');
   }
 
-  openMessagesFn(data) {
-    this.openMessages.emit(data);
+  openMessages(data) {
+    this.onOpenMessages.emit(data);
   }
 
 }

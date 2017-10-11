@@ -104,6 +104,7 @@ import { PopupMailingStopComponent } from './components/popups/popup-mailing-sto
 import { PopupChatSortMenuComponent } from './components/popups/popup-chat/popup-chat-sort-menu/popup-chat-sort-menu.component';
 import { PopupChatFoldersComponent } from './components/popups/popup-chat/popup-chat-folders/popup-chat-folders.component';
 import { PopupChatDialogsComponent } from './components/popups/popup-chat/popup-chat-dialogs/popup-chat-dialogs.component';
+import { PopupChatDialogHeaderComponent } from './components/popups/popup-chat/popup-chat-dialog-header/popup-chat-dialog-header.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -192,6 +193,7 @@ const config: SocketIoConfig = {url: 'https://api.test.denim.cc:6676/dialog', op
     PopupChatSortMenuComponent,
     PopupChatFoldersComponent,
     PopupChatDialogsComponent,
+    PopupChatDialogHeaderComponent,
   ],
   imports: [
     BrowserModule,

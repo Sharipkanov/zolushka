@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class PopupChatSortMenuComponent implements OnInit {
 
-  @Output() applyFilter: EventEmitter<any> = new EventEmitter();
+  @Output() onApplyFilter: EventEmitter<any> = new EventEmitter();
   @Input() filterParams;
 
   constructor() { }
@@ -15,7 +15,7 @@ export class PopupChatSortMenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  applyFilterFn(data = null) {
-    this.applyFilter.emit(data);
+  applyFilter(data = null) {
+    this.onApplyFilter.emit(data);
   }
 }

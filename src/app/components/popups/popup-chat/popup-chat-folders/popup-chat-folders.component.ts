@@ -11,7 +11,7 @@ export class PopupChatFoldersComponent implements OnInit {
 
   @Input() folders;
   @Input() filterParams;
-  @Output() applyFilter: EventEmitter<any> = new EventEmitter();
+  @Output() onApplyFilter: EventEmitter<any> = new EventEmitter();
 
   public FNewFolder: FormGroup;
   public newFolderForm: boolean = false;
@@ -35,8 +35,8 @@ export class PopupChatFoldersComponent implements OnInit {
     });
   }
 
-  applyFilterFn(data = null) {
-    this.applyFilter.emit(data);
+  applyFilter(data = null) {
+    this.onApplyFilter.emit(data);
   }
 
   addNewFolder(e) {

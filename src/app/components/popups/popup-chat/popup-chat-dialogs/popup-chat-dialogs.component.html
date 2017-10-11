@@ -6,7 +6,7 @@
   <ng-container *ngIf="!!dialogs._embedded">
     <div class="list__item" *ngFor="let dialog of dialogs._embedded.content; let i = index;"
          [ngClass]="{'list__inbox': (dialogKey === i)}"
-         (click)="openMessagesFn(i)">
+         (click)="openMessages(i)">
       <div>
         <a class="list__thumbnail">
           <img

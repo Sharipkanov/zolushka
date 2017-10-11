@@ -72,47 +72,6 @@ export class PopupChatComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteDialog(e) {
-    e.preventDefault();
-    this.preloaders.dialogAction = true;
-    this._dialogService.deleteDialog(this.dialog.token).subscribe(response => {
-      this.dialogs._embedded.content.splice(this.dialogKey, 1);
-      delete this.dialogKey;
-      this.messages = [];
-      this.preloaders.dialogAction = false;
-    });
-  }
-
-  favoriteDialog(e) {
-    e.preventDefault();
-    this.preloaders.dialogAction = true;
-    this._dialogService.favoriteDialog(this.dialog.token).subscribe((response: IDialog) => {
-      this.dialogs[this.dialogKey] = response;
-      if (!!this.filterParams['favorite'] && !this.dialogs[this.dialogKey].favorite) {
-        this.dialogs._embedded.content.splice(this.dialogKey, 1);
-      } else {
-        this.dialogs._embedded.content.unshift(this.dialog);
-        this.dialogKey = 0;
-      }
-      this.preloaders.dialogAction = false;
-    });
-  }
-
-  blacklistDialog(e) {
-    e.preventDefault();
-    this.preloaders.dialogAction = true;
-    this._dialogService.blacklistDialog(this.dialog.token).subscribe((response: IDialog) => {
-      this.dialogs[this.dialogKey] = response;
-      if (!!this.filterParams['blacklist'] && !this.dialogs[this.dialogKey].blacklist) {
-        this.dialogs._embedded.content.splice(this.dialogKey, 1);
-      } else {
-        this.dialogs._embedded.content.unshift(this.dialog);
-        this.dialogKey = 0;
-      }
-      this.preloaders.dialogAction = false;
-    });
-  }
-
   openMessages(i) {
     this.dialogKey = i;
     this.dialog = this.dialogs._embedded.content[this.dialogKey];

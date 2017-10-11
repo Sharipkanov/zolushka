@@ -1,0 +1,38 @@
+<div class="chat__header chat__header--bordered">
+  <div>
+    <a><i *ngIf="!!dialog" class="icon-chat-call"></i></a>
+  </div>
+  <div class="fw-text-center">
+    <div class="fw-inline-block">
+      <p *ngIf="!!dialog" class="fw-has-user-status fw-text-600"
+         [ngClass]="{'fw-has-user-status--offline': !dialog.clientTo.online}">
+        {{!!dialog ? dialog.clientTo.name : ''}},
+        {{!!dialog ? dialog.clientTo.age : ''}} {{'POPUPS.CHAT.MESSAGES.YEARS' | translate}},
+        {{!!dialog ? dialog.clientTo.city.title : ''}}
+      </p>
+    </div>
+    <div><p class="fw-color-grey-dark fw-fz-13" *ngIf="!!dialog">
+      {{dialog.clientTo.lastOnline}}</p></div>
+  </div>
+  <div class="fw-relative fw-flex fw-flex-middle">
+    <div class="fw-mr-15 chat__settings-link fw-cursor-pointer" *ngIf="!!dialog">
+      <i class="icon-chat-cog"></i>
+      <i class="icon-chat-cog-active"></i>
+
+      <div class="chat__settings">
+        <a class="fw-fz-13" (click)="deleteDialog($event)">{{'POPUPS.CHAT.DIALOGS.DELETE_DIALOG' | translate}}</a>
+        <a class="fw-fz-13">{{'POPUPS.CHAT.DIALOGS.MOVE_TO_FOLDER' | translate}}</a>
+        <a class="fw-fz-13" (click)="favoriteDialog($event)">
+          <span *ngIf="!dialog.favorite">{{'POPUPS.CHAT.DIALOGS.ADD_TO_FAVORITES' | translate}}</span>
+          <span *ngIf="dialog.favorite">{{'POPUPS.CHAT.DIALOGS.REMOVE_FROM_FAVORITES' | translate}}</span>
+        </a>
+        <a class="fw-fz-13" (click)="blacklistDialog($event)">
+          <span *ngIf="!dialog.blacklist">{{'POPUPS.CHAT.DIALOGS.ADD_TO_BLACKLIST' | translate}}</span>
+          <span *ngIf="dialog.blacklist">{{'POPUPS.CHAT.DIALOGS.REMOVE_FROM_BLACKLIST' | translate}}</span>
+        </a>
+        <app-preloader *ngIf="preloader"></app-preloader>
+      </div>
+    </div>
+    <a class="js-close-popup"><i class="icon-chat-close"></i></a>
+  </div>
+</div>
