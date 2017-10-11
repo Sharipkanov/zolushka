@@ -101,40 +101,40 @@
 	"POPUPS": {
 		"CHAT": {
 			"FILTERS": {
-				"ALL": "Все",
-				"CALLS": "Звонки",
+				"ALL": "All",
+				"CALLS": "Calls",
 				"ONLINE": "On-line",
-				"HIDE_DELETED": "Скрыть удаленные",
-				"NEW": "Новые",
-				"FAVORITES": "Избранные",
-				"BLACKLIST": "Черный список"
+				"HIDE_DELETED": "Hide deleted",
+				"NEW": "New",
+				"FAVORITES": "Favorites",
+				"BLACKLIST": "Black list"
 			},
 			"FOLDERS": {
-				"ADD_FOLDER": "Добавить папку",
-				"MY_FOLDERS": "Мои папки",
-				"NO_FOLDERS": "У вас нет папок"
+				"ADD_FOLDER": "Add folder",
+				"MY_FOLDERS": "My folders",
+				"NO_FOLDERS": "You don't have folders"
 			},
 			"MESSAGES": {
-				"ALL_MESSAGES": "Все сообщения",
-				"NO_MESSAGES": "Нет сообщений",
-				"TODAY": "Сегодня",
-				"INPUT_PLACEHOLDER": "Ваше сообщение",
-				"NEW_ROW_INFO": "Для переноса строки нажмите Shift+Enter",
-				"VIP_PRESENTS": "VIP подарки",
-				"YEARS": "лет"
+				"ALL_MESSAGES": "All messages",
+				"NO_MESSAGES": "No messages",
+				"TODAY": "Today",
+				"INPUT_PLACEHOLDER": "Type message",
+				"NEW_ROW_INFO": "To move the line, press Shift + Enter",
+				"VIP_PRESENTS": "VIP presents",
+				"YEARS": "years"
 			},
 			"PRESENTS": {
-				"SPECIAL": "Особенные подарки",
-				"STANDARD": "Стандартные подарки",
-				"EXCLUSIVE": "Эксклюзивные подарки"
+				"SPECIAL": "Special presents",
+				"STANDARD": "Standard presents",
+				"EXCLUSIVE": "Exclusive presents"
 			},
 			"DIALOGS": {
-				"DELETE_DIALOG": "Удалить диалог",
-				"MOVE_TO_FOLDER": "Переместить в другую папку",
-				"ADD_TO_FAVORITES": "Добавить в избранное",
-				"REMOVE_FROM_FAVORITES": "Убрать из избранного",
-				"ADD_TO_BLACKLIST": "Добавить в черный список",
-				"REMOVE_FROM_BLACKLIST": "Убрать из черного списка"
+				"DELETE_DIALOG": "Delete dialog",
+				"MOVE_TO_FOLDER": "Move to folder",
+				"ADD_TO_FAVORITES": "Add to favorites",
+				"REMOVE_FROM_FAVORITES": "Remove from favorites",
+				"ADD_TO_BLACKLIST": "Add to black list",
+				"REMOVE_FROM_BLACKLIST": "Remove from black list"
 			}
 		}
 	},
@@ -188,9 +188,6 @@
 			"PHONE_NOTIFICATION": "Пользователи не будут видеть ваш номер телефона, при совершении звонков и отправке СМС, а так же в анкете на сайте.",
 			"MAIN_PHOTO": "Основная"
 		},
-		"PROFILE": {
-			"PHOTOS": "Фотографии"
-		},
 		"REGISTRATION": {
 			"TITLE": "Бесплатная регистрация",
 			"FIRST_SENTENCE": "Регистрация на портале – это быстрый способ найти партнера для серьездных или легких увлечений.",
@@ -199,6 +196,9 @@
 				"TOP_TEXT": "Дарим 36 часов премиум доступа",
 				"BOTTOM_TEXT": "Всем мужчинам прошедшим регистрацию"
 			}
+		},
+		"PROFILE": {
+			"PHOTOS": "Фотографии"
 		},
 		"SEARCH": {
 			"": ""

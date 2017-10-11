@@ -1,0 +1,37 @@
+{
+  "ENUMS": {
+    "appearance": "Внешность",
+    "breastSize": "Размер груди",
+    "breast": "Грудь",
+    "eyeColor": "Цвет глаз",
+    "hairColor": "Цвет волос",
+    "higherEducation": "Высшее образование",
+    "hobbies": "Хобби",
+    "physique": "Телосложение",
+    "childrenExist": "Дети",
+    "registrationCityType": "Регистрация в городе",
+    "relationshipState": "Отношения",
+    "relationshipTypes": "Цели знакомства",
+    "sexualKinds": "Вид секса",
+    "sexualPeriodicity": "Периодичность в сексе",
+    "sexualPreference": "Ориентация",
+    "sexualRole": "Роль в сексе",
+    "type": "Пол",
+    "zodiacsign": "Знак зодиака",
+    "city": "Выберите город",
+    "datepicker": {
+      "day": "День",
+      "month": "Месяц",
+      "year": "Год"
+    },
+    "birthdate": "День рождения",
+    "name": "Имя",
+    "aboutMe": "О себе",
+    "addPhone": "Подключение анонимной телефонной связи",
+    "height": "Рост",
+    "weight": "Вес",
+    "interests": "Интересы",
+    "internationalLanguages": "Иностранные языки",
+    "education": "Образование"
+  }
+}

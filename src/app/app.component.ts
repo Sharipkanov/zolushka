@@ -49,6 +49,6 @@ export class AppComponent {
 
   constructor(private _popupsService: PopupsService, translate: TranslateService) {
     translate.setDefaultLang('ru');
-    translate.use('ru');
+    translate.use('en');
   }
 }

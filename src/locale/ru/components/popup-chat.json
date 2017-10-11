@@ -22,10 +22,12 @@
         "INPUT_PLACEHOLDER": "Ваше сообщение",
         "NEW_ROW_INFO": "Для переноса строки нажмите Shift+Enter",
         "VIP_PRESENTS": "VIP подарки",
-        "SPECIAL_PRESENTS": "Особенные подарки",
-        "STANDARD_PRESENTS": "Стандартные подарки",
-        "EXCLUSIVE_PRESENTS": "Эксклюзивные подарки",
         "YEARS": "лет"
+      },
+      "PRESENTS": {
+        "SPECIAL": "Особенные подарки",
+        "STANDARD": "Стандартные подарки",
+        "EXCLUSIVE": "Эксклюзивные подарки"
       },
       "DIALOGS": {
         "DELETE_DIALOG": "Удалить диалог",

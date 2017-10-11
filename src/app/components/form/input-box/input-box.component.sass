@@ -61,5 +61,6 @@
       border-color: $colorRedLight
 
 .ng-invalid
-  input.ng-touched
-    border-color: $colorRedLight
+  &:not(.ng-pristine)
+    input.ng-dirty
+      border-color: $colorRedLight

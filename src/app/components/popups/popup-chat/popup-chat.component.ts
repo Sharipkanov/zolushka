@@ -205,12 +205,14 @@ export class PopupChatComponent implements OnInit, OnDestroy {
   sendMessage(e) {
     e.preventDefault();
     if (this.FMessage.valid) {
+
       // remove dialog from scope
       this.moveDialogToTop();
+
       if (!!this.dialog && !!this.dialog.token) {
-        this.renderNewMessage(this.FMessage.value);
+        const messageIndex = this.renderNewMessage(this.FMessage.value);
         this._dialogService.addMessage(this.FMessage.value, this.dialog.token).subscribe(response => {
-            console.log(response);
+            this.messages[messageIndex.messageGroupIndex].messageList[messageIndex.messageIndex] = response;
           },
           error => {
             console.log(error);
@@ -223,7 +225,8 @@ export class PopupChatComponent implements OnInit, OnDestroy {
           console.log(response);
         });
       }
-      this.FMessage.controls.message.setValue('');
+      this.FMessage.reset();
+      this.FMessage.controls.message.markAsPristine();
     }
   }
 
@@ -245,6 +248,7 @@ export class PopupChatComponent implements OnInit, OnDestroy {
       this.messagesScroll.directiveRef.scrollToTop(this.messagesScroll.directiveRef.elementRef.nativeElement.getElementsByClassName('ps-content')[0].clientHeight);
     }, 200);
 
+    return {messageGroupIndex: this.messages.length - 1, messageIndex: this.messages[this.messages.length - 1].messageList.length - 1};
   }
 
   moveDialogToTop() {

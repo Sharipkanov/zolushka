@@ -1,0 +1,42 @@
+{
+  "POPUPS": {
+    "CHAT": {
+      "FILTERS": {
+        "ALL": "All",
+        "CALLS": "Calls",
+        "ONLINE": "On-line",
+        "HIDE_DELETED": "Hide deleted",
+        "NEW": "New",
+        "FAVORITES": "Favorites",
+        "BLACKLIST": "Black list"
+      },
+      "FOLDERS": {
+        "ADD_FOLDER": "Add folder",
+        "MY_FOLDERS": "My folders",
+        "NO_FOLDERS": "You don't have folders"
+      },
+      "MESSAGES": {
+        "ALL_MESSAGES": "All messages",
+        "NO_MESSAGES": "No messages",
+        "TODAY": "Today",
+        "INPUT_PLACEHOLDER": "Type message",
+        "NEW_ROW_INFO": "To move the line, press Shift + Enter",
+        "VIP_PRESENTS": "VIP presents",
+        "YEARS": "years"
+      },
+      "PRESENTS": {
+        "SPECIAL": "Special presents",
+        "STANDARD": "Standard presents",
+        "EXCLUSIVE": "Exclusive presents"
+      },
+      "DIALOGS": {
+        "DELETE_DIALOG": "Delete dialog",
+        "MOVE_TO_FOLDER": "Move to folder",
+        "ADD_TO_FAVORITES": "Add to favorites",
+        "REMOVE_FROM_FAVORITES": "Remove from favorites",
+        "ADD_TO_BLACKLIST": "Add to black list",
+        "REMOVE_FROM_BLACKLIST": "Remove from black list"
+      }
+    }
+  }
+}

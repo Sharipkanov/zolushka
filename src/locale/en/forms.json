@@ -1,0 +1,24 @@
+{
+  "FORMS": {
+    "INPUTS": {
+      "NAME": "Имя",
+      "PASSWORD": "Пароль",
+      "THINK_PASSWORD": "Придумайте пароль",
+      "EMAIL": "E-mail",
+      "FOLDER_NAME": "Название папки"
+    },
+    "SELECTBOX": {
+      "CITY": "Город",
+      "DAY": "День",
+      "MONTH": "Месяц",
+      "YEAR": "Год рождения"
+    },
+    "RANGE_INPUTS": {
+      "FROM": "от",
+      "TO": "до"
+    },
+    "FORM_CONTROL": {
+      "SELECT_ALL": "Выбрать всех"
+    }
+  }
+}
